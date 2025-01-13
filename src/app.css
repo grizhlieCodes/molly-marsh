@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+@import '../static/fonts.css';
+
+@theme {
+
+	/* ADDITIONAL COLORS */
+	--color-molly-dark-50: #ecf0ef;
+	--color-molly-dark-100: #cdd7d5;
+	--color-molly-dark-200: #aebebb;
+	--color-molly-dark-300: #8fa6a0;
+	--color-molly-dark-400: #6f8d86;
+	--color-molly-dark-500: #456b62;
+	--color-molly-dark-600: #3e5f57;
+	--color-molly-dark-700: #324d47;
+	--color-molly-dark-800: #263b36;
+	--color-molly-dark-900: #1b2a26;
+	--color-molly-dark-950: #0f1816;
+
+	--color-molly-50: #f0f9f7;
+	--color-molly-100: #d7eee8;
+	--color-molly-200: #bee3da;
+	--color-molly-300: #a4d8cc;
+	--color-molly-400: #8bcdbd;
+	--color-molly-500: #69beaa;
+	--color-molly-600: #5ea998;
+	--color-molly-700: #4c8a7b;
+	--color-molly-800: #3a6a5f;
+	--color-molly-900: #294a42;
+	--color-molly-950: #172a25;
+
+	/* FONT FAMILY */
+	--font-serif: 'Playfair Display', serif;
+	--font-sans: 'Sans Source 3', sans-serif;
+	--font-special: 'Lato', sans-serif;
+	--font-heading: var(--font-serif);
+	--font-body: var(--font-sans);
+	--font-nav: var(--font-special);
+	--font-btn: var(--font-special);
+
+	/* BREAKPOINTS */
+	
+}
