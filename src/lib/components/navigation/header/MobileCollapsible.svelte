@@ -32,7 +32,7 @@
 <Collapsible.Root
 	bind:open={isOpen}
 	class="flex w-full flex-col items-start justify-start border-b-1
-		border-b-emerald-800/30"
+		border-b-navLink-outline-primary-focus/30"
 >
 	<Collapsible.Trigger
 		class="collapsible-mobile-nav focus-within flex

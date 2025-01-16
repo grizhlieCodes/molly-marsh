@@ -12,6 +12,8 @@ export const themeStylingOptions: Type.ThemeOptions = {
 	duration-300 
 	text-button-primary-text-default 
 	hover:text-button-primary-text-hover 
+	fill-button-primary-text-default 
+	hover:fill-button-primary-text-hover 
 	bg-button-primary-surface-default 
 	border border--button-primary-border-default
 	group-focus-within:outline-2 group-focus-within:outline-button-primary-outline-focus`,
@@ -22,6 +24,8 @@ export const themeStylingOptions: Type.ThemeOptions = {
 	duration-300 
 	text-button-secondary-text-default 
 	hover:text-button-secondary-text-hover 
+	fill-button-secondary-text-default 
+	hover:fill-button-secondary-text-hover 
 	bg-button-secondary-surface-default 
 	border border--button-secondary-border-default
 	group-focus-within:outline-2 group-focus-within:outline-button-secondary-outline-focus`
