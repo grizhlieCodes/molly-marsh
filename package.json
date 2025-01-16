@@ -10,7 +10,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"sbsync": "rm -f ./src/lib/schemas/storyblok/sbTypes.d.ts ./src/lib/schemas/storyblok/components.320425.json && sleep 1 && storyblok pull-components --space 320425 --path ./src/lib/schemas/storyblok/ && sleep 4 &&storyblok-generate-ts source=./src/lib/schemas/storyblok/components.320425.json target=./src/lib/schemas/storyblok/sbTypes"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
@@ -23,6 +24,7 @@
 		"globals": "^15.0.0",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
+		"storyblok-generate-ts": "^2.1.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"sveltekit-superforms": "^2.22.1",

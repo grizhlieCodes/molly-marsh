@@ -2,8 +2,21 @@
 @import '../static/fonts.css';
 
 @theme {
+	/* BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS -
+	BREAKPOINTS */
 
-	/* ADDITIONAL COLORS */
+	--breakpoint-mm: 25rem;
+	--breakpoint-lm: 31rem;
+	--breakpoint-sm: 40rem;
+	--breakpoint-md: 48rem;
+	--breakpoint-lt: 53rem;
+	--breakpoint-lg: 64rem;
+	--breakpoint-vsd: 70rem;
+	--breakpoint-sd: 75rem;
+	--breakpoint-xl: 80rem;
+	--breakpoint-2xl: 96rem;
+
+	/* ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS */
 	--color-molly-dark-50: #ecf0ef;
 	--color-molly-dark-100: #cdd7d5;
 	--color-molly-dark-200: #aebebb;
@@ -28,6 +41,128 @@
 	--color-molly-900: #294a42;
 	--color-molly-950: #172a25;
 
+	/* --radius-*: initial; */
+
+	/* SEMANTIC COLORS - SEMANTIC COLORS - SEMANTIC COLORS - SEMANTIC COLORS - SEMANTIC COLORS */
+
+	/* BACKGROUND (LIGHT MODE ONLY FOR NOW) */
+	--color-surface-none: var(--color-transparent);
+	--color-surface-default: var(--color-white);
+	--color-surface-primary-50: var(--color-molly-50);
+	--color-surface-primary-100: var(--color-molly-100);
+	--color-surface-primary-200: var(--color-molly-200);
+	--color-surface-primary-300: var(--color-molly-300);
+	--color-surface-primary-400: var(--color-molly-400);
+	--color-surface-primary-500: var(--color-molly-500);
+	--color-surface-primary-600: var(--color-molly-600);
+	--color-surface-primary-700: var(--color-molly-700);
+	--color-surface-primary-800: var(--color-molly-800);
+	--color-surface-primary-900: var(--color-molly-900);
+	--color-surface-primary-950: var(--color-molly-950);
+
+	/* TEXT */
+	/* BODY --> Neutral */
+	--color-body-neutral-50: var(--color-zinc-50);
+	--color-body-neutral-100: var(--color-zinc-100);
+	--color-body-neutral-200: var(--color-zinc-200);
+	--color-body-neutral-300: var(--color-zinc-300);
+	--color-body-neutral-400: var(--color-zinc-400);
+	--color-body-neutral-500: var(--color-zinc-500);
+	--color-body-neutral-600: var(--color-zinc-600);
+	--color-body-neutral-700: var(--color-zinc-700);
+	--color-body-neutral-800: var(--color-zinc-800);
+	--color-body-neutral-900: var(--color-zinc-900);
+	--color-body-neutral-950: var(--color-zinc-950);
+
+	/* BODY --> Primary */
+	--color-body-primary-50: var(--color-molly-50);
+	--color-body-primary-100: var(--color-molly-100);
+	--color-body-primary-200: var(--color-molly-200);
+	--color-body-primary-300: var(--color-molly-300);
+	--color-body-primary-400: var(--color-molly-400);
+	--color-body-primary-500: var(--color-molly-500);
+	--color-body-primary-600: var(--color-molly-600);
+	--color-body-primary-700: var(--color-molly-700);
+	--color-body-primary-800: var(--color-molly-800);
+	--color-body-primary-900: var(--color-molly-900);
+	--color-body-primary-950: var(--color-molly-950);
+
+	/* HEADING */
+	/* Heading Neutral */
+	--color-heading-neutral-50: var(--color-zinc-50);
+	--color-heading-neutral-100: var(--color-zinc-100);
+	--color-heading-neutral-200: var(--color-zinc-200);
+	--color-heading-neutral-300: var(--color-zinc-300);
+	--color-heading-neutral-400: var(--color-zinc-400);
+	--color-heading-neutral-500: var(--color-zinc-500);
+	--color-heading-neutral-600: var(--color-zinc-600);
+	--color-heading-neutral-700: var(--color-zinc-700);
+	--color-heading-neutral-800: var(--color-zinc-800);
+	--color-heading-neutral-900: var(--color-zinc-900);
+	--color-heading-neutral-950: var(--color-zinc-950);
+
+	/* Heading Primary */
+	--color-heading-primary-50: var(--color-molly-50);
+	--color-heading-primary-100: var(--color-molly-100);
+	--color-heading-primary-200: var(--color-molly-200);
+	--color-heading-primary-300: var(--color-molly-300);
+	--color-heading-primary-400: var(--color-molly-400);
+	--color-heading-primary-500: var(--color-molly-500);
+	--color-heading-primary-600: var(--color-molly-600);
+	--color-heading-primary-700: var(--color-molly-700);
+	--color-heading-primary-800: var(--color-molly-800);
+	--color-heading-primary-900: var(--color-molly-900);
+	--color-heading-primary-950: var(--color-molly-950);
+
+	/* UI ELEMENTS */
+
+	/* Button */
+
+	/* For my hover-style button */
+	--color-button-primary-surface-default: var(--color-surface-primary-800);
+	--color-button-primary-surface-hover: var(--color-surface-primary-400);
+	--color-button-primary-border-default: var(--color-surface-primary-800);
+	--color-button-primary-border-hover: var(--color-surface-primary-800);
+
+	--color-button-primary-text-default: var(--color-body-primary-50);
+	--color-button-primary-text-hover: var(--color-body-primary-800);
+
+	--color-button-primary-outline-focus: var(--color-body-primary-950);
+
+	/* For a normal button: */
+	/* --color-button-primary-surface-default: var(--color-surface-primary-800);
+	--color-button-primary-surface-hover: var(--color-surface-primary-900);
+	--color-button-primary-border-default: var(--color-surface-primary-800);
+	--color-button-primary-border-hover: var(--color-surface-primary-900);
+	--color-button-primary-text-default: var(--color-body-primary-50);
+	--color-button-primary-text-hover: var(--color-body-primary-50); */
+
+	--color-button-secondary-surface-default: var(--color-surface-primary-200);
+	--color-button-secondary-surface-hover: var(--color-surface-primary-800);
+	--color-button-secondary-border-default: var(--color-surface-primary-300);
+	--color-button-secondary-border-hover: var(--color-surface-primary-400);
+	--color-button-secondary-text-default: var(--color-body-primary-800);
+	--color-button-secondary-text-hover: var(--color-body-primary-50);
+
+	/* CARD */
+
+	/* Navigation */
+	/* Header + Nav */
+	--color-header-surface-primary: var(--color-surface-primary-50);
+	--color-header-outline-primary: var(--color-surface-primary-100);
+
+
+	/* Navigation Links */
+	--color-navlink-text-primary: var(--color-body-primary-900);
+	--color-navlink-text-primary-hover: var(--color-body-primary-950);
+	--color-navLink-surface-primary-default: var(--color-transparent);
+	--color-navLink-surface-primary-hover: var(--color-surface-primary-200);
+	--color-navLink-outline-primary-focus: var(--color-surface-primary-700);
+
+	/* Nav Logo */
+	--color-logo-primary: var(--color-heading-primary-900);
+	/* Others...... */
+
 	/* FONT FAMILY */
 	--font-serif: 'Playfair Display', serif;
 	--font-sans: 'Sans Source 3', sans-serif;
@@ -36,7 +171,5 @@
 	--font-body: var(--font-sans);
 	--font-nav: var(--font-special);
 	--font-btn: var(--font-special);
-
-	/* BREAKPOINTS */
-	
+	--font-nav-logo: var(--font-serif);
 }

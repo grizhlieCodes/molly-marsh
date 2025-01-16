@@ -5,7 +5,7 @@ import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 
 //  01 - Layout
 import { default as page } from '$lib/components/layout/Page.svelte';
-import { default as text } from '$lib/components/ui/Text.svelte';
+import { default as text } from '$lib/components/ui/SimpleText.svelte';
 
 // COMPONENTS OBJECT
 const components = {
@@ -30,5 +30,5 @@ export async function useStoryblok(accessToken = '') {
 
 	// let storyblokApi = await useStoryblokApi();
 
-	console.log(storyblokApi);
+	// console.log(storyblokApi);
 }

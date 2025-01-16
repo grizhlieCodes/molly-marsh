@@ -21,7 +21,9 @@ export const textStyles: Styles = {
 
 // SECTION
 export const gridSpanOptions: Options = {
-	centeredSpan: 'max-w-[70rem]',
+	centeredSpan1: 'max-w-[70rem]',
+	centeredSpan2: 'max-w-[80rem]',
+	centeredSpan3: 'max-w-[90rem]',
 	fullSpan: 'max-w-none'
 };
 
@@ -39,11 +41,15 @@ export const gridSpanOptions: Options = {
  * @type {Options}
  */
 
-export const justifyItemsOptions: Options = {
-	start: 'justify-items-start',
-	end: 'justify-items-end',
-	center: 'justify-items-center',
-	stretch: 'justify-items-stretch'
+export const justifyContentOptions: Options = {
+	normal: 'justify-normal',
+	start: 'justify-start',
+	end: 'justify-end',
+	center: 'justify-center',
+	stretch: 'justify-stretch',
+	between: 'justify-between',
+	around: 'justify-around',
+	evenly: 'justify-evenly'
 };
 
 export const alignItemsOptions: Options = {
@@ -78,10 +84,17 @@ export const gapOptions: Options = {
 	'0': 'gap-0'
 };
 
+export const overflowOptions: Options = {
+	hidden: 'overflow-hidden',
+	scroll: 'overflow-scroll',
+	auto: 'overflow-auto',
+	visible: 'overflow-visible'
+};
+
 // ======= STYLE =======
 export const backgroundOptions: Options = {
 	none: 'bg-transparent',
-	green: 'bg-emerald-950/30',
-	dark: 'bg-blue-950/30',
-	slate: 'bg-slate-200'
+	default: 'bg-bg-default',
+	primaryLight: 'bg-bg-primary-light',
+	primaryDark: 'bg-bg-primary-dark'
 };

@@ -3,8 +3,6 @@
 	let { blok }: { blok: any } = $props();
 </script>
 
-<div use:storyblokEditable={blok}>
-	{#if blok}
-		<p class="font-serif text-4xl">{blok.text}</p>
-	{/if}
-</div>
+{#if blok}
+	<span use:storyblokEditable={blok} class="">{blok.text}</span>
+{/if}

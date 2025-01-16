@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ url, params, parent }) => {
 	const { storyblokApi } = await parent();
 
 	const dataStory = await storyblokApi.get(`cdn/stories/home`, {
-		version: 'published',
+		version: 'draft',
 		resolve_links: 'url'
 	});
 

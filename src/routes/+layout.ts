@@ -7,17 +7,37 @@ import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 
 //  01 - Layout
 import { default as page } from '$lib/components/layout/Page.svelte';
+import { default as section } from '$lib/components/layout/section/Section.svelte';
+import { default as container } from '$lib/components/layout/container/Container.svelte';
 
 // 02 - UI
-import { default as text } from '$lib/components/ui/Text.svelte';
+import { default as simple_text } from '$lib/components/ui/SimpleText.svelte';
+import { default as icon } from '$lib/components/ui/Icon.svelte';
+
+// 03 - UI: Interactive
+import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
+
+// 04 - Navigation -> Turns out we don't need to import this into storyblok..?
+// mostly because we are not using it in a page I guess. So it's just data we
+// are grabbing.
+// import { default as header } from '$lib/components/navigation/header/Header.svelte';
+// import { default as nav_link } from '$lib/components/navigation/header/Link.svelte';
 
 export const load: LayoutServerLoad = async ({ url }) => {
 	storyblokInit({
 		accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN,
 		use: [apiPlugin],
 		components: {
+			// Layout
 			page,
-			text
+			section,
+			container,
+			// UI
+			simple_text,
+			icon,
+			// UI: Interactive
+			button
+			// Navigation
 		},
 		apiOptions: {
 			https: true
@@ -26,9 +46,16 @@ export const load: LayoutServerLoad = async ({ url }) => {
 
 	let storyblokApi = await useStoryblokApi();
 
+	const navData = await storyblokApi.get('cdn/stories/_navigation', {
+		version: 'published'
+	});
+
+	// console.log(navData?.data?.story?.content);
+
 	return {
 		url: url.pathname,
-		storyblokApi: storyblokApi
+		storyblokApi: storyblokApi,
+		navData: navData?.data?.story?.content
 	};
 };
 
