@@ -12,6 +12,7 @@ import { default as container } from '$lib/components/layout/container/Container
 
 // 02 - UI
 import { default as simple_text } from '$lib/components/ui/SimpleText.svelte';
+import { default as text } from '$lib/components/ui/text/Text.svelte';
 import { default as icon } from '$lib/components/ui/Icon.svelte';
 
 // 03 - UI: Interactive
@@ -34,6 +35,7 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			container,
 			// UI
 			simple_text,
+			text,
 			icon,
 			// UI: Interactive
 			button

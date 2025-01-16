@@ -1637,7 +1637,7 @@
       "display_name": "Navigation Header Link",
       "description": "This link should only be used in the Header component, not Footer.",
       "created_at": "2025-01-15T17:08:56.629Z",
-      "updated_at": "2025-01-16T09:12:46.988Z",
+      "updated_at": "2025-01-16T09:15:33.719Z",
       "id": 6801257,
       "schema": {
         "main_link": {
@@ -1693,7 +1693,8 @@
           "type": "section",
           "pos": 5,
           "keys": [
-            "sub_links"
+            "sub_links",
+            "sub_link_type"
           ],
           "id": "h0h0LgQ0ScCTuzO36oc6pw"
         },
@@ -2495,7 +2496,7 @@
       "display_name": "Simple Text",
       "description": "Text with no styling attached to it. Simple string.",
       "created_at": "2025-01-13T06:32:41.195Z",
-      "updated_at": "2025-01-15T18:07:31.724Z",
+      "updated_at": "2025-01-16T18:18:07.782Z",
       "id": 6784165,
       "schema": {
         "text": {
@@ -2504,7 +2505,7 @@
           "id": "3XRGBojGRJOZXh-eeAtmrA"
         }
       },
-      "image": "//a.storyblok.com/f/320425/x/4f229df688/text.png",
+      "image": "//a.storyblok.com/f/320425/x/603eeb9ade/simple-text.png",
       "preview_field": "text",
       "is_root": false,
       "preview_tmpl": null,
@@ -2515,6 +2516,427 @@
       "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
       "color": "#4656ae",
       "icon": "block-keyboard",
+      "internal_tags_list": [
+        {
+          "id": 56293,
+          "name": "ui"
+        }
+      ],
+      "internal_tag_ids": [
+        "56293"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "02 - UI"
+    },
+    {
+      "name": "text",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-16T15:15:02.349Z",
+      "updated_at": "2025-01-16T19:00:24.808Z",
+      "id": 6808303,
+      "schema": {
+        "Content": {
+          "type": "section",
+          "pos": 0,
+          "keys": [
+            "content",
+            "text_id",
+            "text_type"
+          ],
+          "id": "X5ECsAEjR1CTfjCVHMAgGg"
+        },
+        "tab-b7637c37-226d-4687-9fa4-3c7d06486b03": {
+          "display_name": "Rich Text",
+          "keys": [
+            "rich_text"
+          ],
+          "pos": 0,
+          "type": "tab",
+          "id": "t2N8NyJtRoefpDx9BkhrAw"
+        },
+        "content": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "tooltip": true,
+          "description": "Simply write what you want to be shown or read by a screen-reader. (There is an option to select \"Screen Reader\" which means this won't be shown to people who can see the website, but it will be read to individuals using screen readers.)",
+          "id": "Fsacr6bCRzy84jmAV0xJ_w"
+        },
+        "text_id": {
+          "type": "text",
+          "pos": 2,
+          "required": false,
+          "description": "This is useful to fill when this is the heading for a section.\nSections use the {aria-labelledby} html property. We can essentially write:\naria-labelledby=\"about-section-heading\"\n\nAnd this id can equal that. A blind person will find this to be a great piece of information.",
+          "tooltip": true,
+          "id": "cbpni5PMR4yUxSQz525vsg"
+        },
+        "text_type": {
+          "type": "option",
+          "pos": 3,
+          "use_uuid": true,
+          "required": true,
+          "description": "Select what element this is. If it's a heading, select Heading {heading_number}. Paragraph for paragraphs, etc...",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "6d67e735-7af1-4471-86d1-a64dc3a32a7c",
+              "name": "Heading 1",
+              "value": "h1"
+            },
+            {
+              "_uid": "4958d6b2-cc5f-4cc8-9ab2-4569fef95b5f",
+              "value": "h2",
+              "name": "Heading 2"
+            },
+            {
+              "_uid": "1171d0e3-ff2b-419e-ac3f-5c20b08ce81e",
+              "value": "h3",
+              "name": "Heading 3"
+            },
+            {
+              "_uid": "1aa764f9-732b-4223-a434-bc83e2e028e6",
+              "value": "h4",
+              "name": "Heading 4"
+            },
+            {
+              "_uid": "d64aadd0-1cda-4b41-9a09-7d383aa53916",
+              "value": "h6",
+              "name": "Heading 6"
+            },
+            {
+              "_uid": "612dbad4-5fd1-4c0d-ba8b-757aa7eeac02",
+              "value": "h7",
+              "name": "Heading 7"
+            },
+            {
+              "_uid": "657fdff1-2315-436d-b023-a7f02014ff8c",
+              "value": "paraXs",
+              "name": "Paragraph - V Small"
+            },
+            {
+              "_uid": "a681a707-7782-4a67-b701-d15c771d5363",
+              "value": "paraSm",
+              "name": "Paragraph: Small"
+            },
+            {
+              "_uid": "fa296a08-532e-47c4-9abe-0500c78217ca",
+              "value": "paraBase",
+              "name": "Paragraph: Base"
+            },
+            {
+              "_uid": "181ef3d3-09d4-4d58-ae03-ec6ce9e3a9b1",
+              "value": "paraLg",
+              "name": "Paragraph: Large"
+            },
+            {
+              "_uid": "2a3ae447-4b04-4607-b048-775c2216d2bf",
+              "value": "paraXl",
+              "name": "Paragraph: xLarge"
+            },
+            {
+              "_uid": "fd3da126-52e8-487f-a6e2-22731b7886c6",
+              "value": "overline",
+              "name": "Overline"
+            },
+            {
+              "_uid": "adec5859-bee3-48e0-b377-9ef04b1e448b",
+              "value": "quote",
+              "name": "Quote"
+            },
+            {
+              "_uid": "7b0408e1-15bb-4605-9fb9-2f386db6dfea",
+              "value": "sr",
+              "name": "Screen Reader Only"
+            }
+          ],
+          "exclude_empty_option": true,
+          "id": "H1koUR5dSJ6k_tTj5s3Erg",
+          "default_value": "paraBase"
+        },
+        "Styling": {
+          "type": "section",
+          "pos": 4,
+          "keys": [
+            "text_style",
+            "text_align",
+            "text_color_overwrite",
+            "max_width",
+            "customCss"
+          ],
+          "id": "BvnYGYbOTSuoJ1UTt6yHiQ"
+        },
+        "text_style": {
+          "type": "option",
+          "pos": 5,
+          "use_uuid": true,
+          "required": true,
+          "description": "Our design system gives specific colors, fonts and styles to everything. Choose wisely...",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "4fa92ce0-f76f-4e01-ac2d-8f3a0dce60a4",
+              "name": "Heading 1",
+              "value": "h1"
+            },
+            {
+              "_uid": "b87a7dbd-bd38-4e4f-b269-2ab2c0c70062",
+              "value": "h2",
+              "name": "Heading 2"
+            },
+            {
+              "_uid": "72d35518-28e3-4dd6-a9da-be7aa38bf9c7",
+              "value": "h3",
+              "name": "Heading 3"
+            },
+            {
+              "_uid": "2a0b6fcb-7544-47b0-b5cb-90a5dfdb4c5b",
+              "value": "h4",
+              "name": "Heading 4"
+            },
+            {
+              "_uid": "4725acba-b071-4c77-ab81-e88a61314fd1",
+              "value": "h6",
+              "name": "Heading 6"
+            },
+            {
+              "_uid": "c6727e5b-13dd-4583-8314-f1d159e51618",
+              "value": "h7",
+              "name": "Heading 7"
+            },
+            {
+              "_uid": "1250dc3c-3d17-4e00-9f82-c70f43cfab85",
+              "value": "paraXs",
+              "name": "Paragraph - V Small"
+            },
+            {
+              "_uid": "96209feb-7355-494f-a187-26fdb55c4693",
+              "value": "paraSm",
+              "name": "Paragraph: Small"
+            },
+            {
+              "_uid": "a38cd68a-8766-4545-a1f3-6f3868b8cb24",
+              "value": "paraBase",
+              "name": "Paragraph: Base"
+            },
+            {
+              "_uid": "e16aebf4-c59e-4422-899b-bde7f3bf55ac",
+              "value": "paraLg",
+              "name": "Paragraph: Large"
+            },
+            {
+              "_uid": "10ac8e08-7640-46ad-96fe-58020e2febce",
+              "value": "paraXl",
+              "name": "Paragraph: xLarge"
+            },
+            {
+              "_uid": "41d9bd03-e962-4939-973c-bd342f759b96",
+              "value": "overline",
+              "name": "Overline"
+            },
+            {
+              "_uid": "e8d979d4-7ac5-4708-b7f8-69d8b9947e4d",
+              "value": "quote",
+              "name": "Quote"
+            },
+            {
+              "_uid": "aa87f454-8039-409a-b8e3-f9de84bb5bea",
+              "value": "sr",
+              "name": "Screen Reader Only"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "paraBase",
+          "id": "WQrMFaIDSZ6KxfsuWBatgg"
+        },
+        "text_align": {
+          "type": "option",
+          "pos": 6,
+          "use_uuid": true,
+          "description": "Choose how to align your text (center, left, right, etc).",
+          "required": true,
+          "tooltip": true,
+          "exclude_empty_option": true,
+          "options": [
+            {
+              "_uid": "45a5c529-ccff-4048-8cd7-af863abfc35e",
+              "name": "Left",
+              "value": "left"
+            },
+            {
+              "_uid": "a5b2b1a4-3c14-4504-b553-9223926ecdf1",
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "_uid": "c1c35d5f-7d38-47ca-9822-9137080e3230",
+              "value": "right",
+              "name": "Right"
+            },
+            {
+              "_uid": "d5ffe2c0-9053-4d18-8097-e66900ccd888",
+              "value": "justify",
+              "name": "Justify"
+            },
+            {
+              "_uid": "46463759-ef2a-4fa8-b499-62308d613d11",
+              "value": "inherit",
+              "name": "Inherit"
+            }
+          ],
+          "default_value": "inherit",
+          "id": "xa_kECQ9SCqjfjoeSJ0QSw"
+        },
+        "text_color_overwrite": {
+          "type": "option",
+          "pos": 7,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "360f5be1-2dca-4ec8-9888-42d82f4da766",
+              "name": "Primary Dark",
+              "value": "primaryDark"
+            },
+            {
+              "_uid": "dbd5d55f-86d7-4410-af29-fba99c31415f",
+              "value": "primaryDefault",
+              "name": "Primary Default"
+            },
+            {
+              "_uid": "97d62afa-da26-46ae-91d0-be720199e71e",
+              "value": "primaryMedium",
+              "name": "Primary Medium"
+            },
+            {
+              "_uid": "699ff673-08d7-4059-9e14-0d94c9f3bcf5",
+              "value": "primaryLight",
+              "name": "Primary Light"
+            },
+            {
+              "_uid": "b13d804f-061b-47ec-b47f-8db66920af42",
+              "value": "secondaryDark",
+              "name": "Secondary Dark"
+            },
+            {
+              "_uid": "65fc3d58-a13f-4b67-ac57-0b37ca9e0ba4",
+              "value": "secondaryDefault",
+              "name": "Secondary Default"
+            },
+            {
+              "_uid": "e2f90b0e-b3cb-4e3b-8a42-284248eed200",
+              "value": "secondaryMedium",
+              "name": "Secondary Medium"
+            },
+            {
+              "_uid": "86210112-5beb-441e-a924-0b9dc126ab04",
+              "value": "secondaryLight",
+              "name": "Secondary Light"
+            },
+            {
+              "_uid": "a6d9332b-504a-43a8-98ab-ce6482ee34e3",
+              "value": "redDark",
+              "name": "Red Dark"
+            },
+            {
+              "_uid": "74cf48dc-5b78-49ce-b667-e25c2619e71e",
+              "value": "redMid",
+              "name": "Red Medium"
+            },
+            {
+              "_uid": "5cbecd57-466f-4bf6-9ddc-278d7524a448",
+              "value": "redLight",
+              "name": "Red Light"
+            },
+            {
+              "_uid": "e17beac4-31e7-4c24-943c-030b123c1621",
+              "value": "black",
+              "name": "Black"
+            }
+          ],
+          "exclude_empty_option": false,
+          "tooltip": true,
+          "id": "IAHFa7w9QkubOWemsYfK9Q"
+        },
+        "max_width": {
+          "type": "custom",
+          "pos": 8,
+          "use_uuid": true,
+          "tooltip": true,
+          "description": "You can select a maximum width for this text.\nBe mindful it will impact all screen sizes.",
+          "source": "internal",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": ""
+            },
+            {
+              "name": "defaultValue",
+              "value": ""
+            },
+            {
+              "name": "minValue",
+              "value": ""
+            },
+            {
+              "name": "maxValue",
+              "value": ""
+            },
+            {
+              "name": "stepSize",
+              "value": ""
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": ""
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": ""
+            },
+            {
+              "name": "style",
+              "value": ""
+            },
+            {
+              "name": "unit",
+              "value": ""
+            }
+          ],
+          "id": "CZSLQ0AOQIGKRdX_P3-FyA",
+          "datasource_slug": "size-params"
+        },
+        "rich_text": {
+          "type": "richtext",
+          "pos": 10,
+          "tooltip": true,
+          "description": "You have the option of using this rich text. Be mindful it will overwrite any other text you have in the text_content. \n\nIf you experience any bugs with this please contact Rafal.",
+          "customize_toolbar": false,
+          "restrict_type": "",
+          "restrict_components": false,
+          "allow_target_blank": true,
+          "allow_custom_attributes": true,
+          "id": "8HVEmVy2QlC5DjE_yATdVQ"
+        },
+        "customCss": {
+          "type": "textarea",
+          "pos": 11,
+          "id": "sag5KaVRTI2aEiccgSaRxQ",
+          "description": "Optional custom CSS field for inline CSS.\nKeep in mind you can add media queries this way.",
+          "tooltip": true
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/d28d5c14bd/text.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "text",
+      "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
+      "color": "#4656ae",
+      "icon": "block-@",
       "internal_tags_list": [
         {
           "id": 56293,
