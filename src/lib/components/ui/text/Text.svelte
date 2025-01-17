@@ -22,7 +22,9 @@
 
 	import type { TextStoryblok } from './textTypes';
 	import * as ops from './textOptions';
-	import { storyblokEditable } from '@storyblok/svelte';
+	import { storyblokEditable, renderRichText, RichTextSchema } from '@storyblok/svelte';
+	import cloneDeep from 'clone-deep';
+	// const storyblokScheme =
 
 	let { blok }: { blok: TextStoryblok } = $props();
 
@@ -37,6 +39,7 @@
 
 	$effect(() => {
 		console.log(blok);
+		console.log('STORYBLOK RICH TEXT SCHEMA =================== ', RichTextSchema);
 	});
 </script>
 

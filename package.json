@@ -38,6 +38,7 @@
 		"@tailwindcss/vite": "^4.0.0-beta.9",
 		"@vitejs/plugin-basic-ssl": "^1.2.0",
 		"bits-ui": "^0.22.0",
+		"clone-deep": "^4.0.1",
 		"clsx": "^2.1.1",
 		"lucide-svelte": "^0.469.0",
 		"nodemailer": "^6.9.16",
