@@ -20,18 +20,18 @@ export const textStyles: Type.TextStyleOptions = {
 };
 
 export const textColorOverwrites: Type.TextColorOverwriteOptions = {
-	primaryDark: 'text-body-primary-900',
-	primaryDefault: 'text-body-primary-800',
-	primaryMedium: 'text-body-primary-600',
-	primaryLight: 'text-body-primary-300',
-	secondaryDark: 'text-body-secondary-900',
-	secondaryDefault: 'text-body-secondary-800',
-	secondaryMedium: 'text-body-secondary-600',
-	secondaryLight: 'text-body-secondary-300',
-	redDark: 'text-red-900',
-	redMid: 'text-red-600',
-	redLight: 'text-red-400',
-	black: 'text-black'
+	primaryDark: '!text-body-primary-900',
+	primaryDefault: '!text-body-primary-800',
+	primaryMedium: '!text-body-primary-600',
+	primaryLight: '!text-body-primary-300',
+	secondaryDark: '!text-body-secondary-900',
+	secondaryDefault: '!text-body-secondary-800',
+	secondaryMedium: '!text-body-secondary-600',
+	secondaryLight: '!text-body-secondary-300',
+	redDark: '!text-red-900',
+	redMid: '!text-red-600',
+	redLight: '!text-red-400',
+	black: '!text-black'
 };
 
 export const textAlignOptions: Type.TextAlignOptions = {
