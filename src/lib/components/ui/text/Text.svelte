@@ -24,7 +24,7 @@
 	import * as ops from './textOptions';
 	import { storyblokEditable, renderRichText, RichTextSchema } from '@storyblok/svelte';
 	import cloneDeep from 'clone-deep';
-	// const storyblokScheme =
+	const storyblokScheme = cloneDeep(RichTextSchema);
 
 	let { blok }: { blok: TextStoryblok } = $props();
 
