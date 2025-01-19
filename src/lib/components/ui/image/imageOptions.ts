@@ -102,6 +102,29 @@ export const borderRadiusOptions: Type.BorderRadiusOptions = {
 	'8': 'rounded-full' // Fully rounded (creates circles for square elements)
 };
 
+export const beforeBorderRadiusOptions: Type.BorderRadiusOptions = {
+	'0': 'before:rounded-none', // No border radius
+	'1': 'before:rounded-sm', // Small border radius
+	'2': 'before:rounded', // Default border radius
+	'3': 'before:rounded-md', // Medium border radius
+	'4': 'before:rounded-lg', // Large border radius
+	'5': 'before:rounded-xl', // Extra large border radius
+	'6': 'before:rounded-2xl', // 2x extra large border radius
+	'7': 'before:rounded-3xl', // 3x extra large border radius
+	'8': 'before:rounded-full' // Fully rounded (creates circles for square elements)
+};
+export const afterBorderRadiusOptions: Type.BorderRadiusOptions = {
+	'0': 'after:rounded-none', // No border radius
+	'1': 'after:rounded-sm', // Small border radius
+	'2': 'after:rounded', // Default border radius
+	'3': 'after:rounded-md', // Medium border radius
+	'4': 'after:rounded-lg', // Large border radius
+	'5': 'after:rounded-xl', // Extra large border radius
+	'6': 'after:rounded-2xl', // 2x extra large border radius
+	'7': 'after:rounded-3xl', // 3x extra large border radius
+	'8': 'after:rounded-full' // Fully rounded (creates circles for square elements)
+};
+
 // New additions, never used these!
 
 // FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS - FILTER OPTIONS -
@@ -163,4 +186,11 @@ export const contrastFilterOptions: Type.ContrastFilterOptions = {
 	'6': 'contrast-200'
 };
 
-// END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER OPTS -
+// END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER OPTS - END OF FILTER
+// OPTS - END OF FILTER OPTS - END OF FILTER OPTS -
+
+export const customDecorationOptions: Type.CustomDecorationOptions = {
+	diagonalBackdrops: ` before:absolute before:bg-surface-primary-100 before:inset-0 before:-translate-x-[10px] before:-translate-y-[10px] before:-z-1
+						after:absolute after:bg-orange-100 after:inset-0 after:translate-x-[10px] after:translate-y-[10px] after:-z-1`,
+	none: ''
+};

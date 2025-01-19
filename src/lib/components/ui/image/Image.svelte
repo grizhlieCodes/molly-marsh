@@ -5,6 +5,10 @@
 
 	let { blok }: { blok: ImageStoryblok } = $props();
 
+	let borderRadius = $state(ops.borderRadiusOptions[blok.border_radius.value] ?? ops.borderRadiusOptions[0]);
+	// let borderRadiusBefore = $state(ops.beforeBorderRadiusOptions[blok.border_radius.value] ?? ops.beforeBorderRadiusOptions[0]);
+	// let borderRadiusAfter = $state(ops.afterBorderRadiusOptions[blok.border_radius.value] ?? ops.afterBorderRadiusOptions[0]);
+
 	let IMAGE_BASE_STYLES = `h-full w-full object-cover`;
 	let imageStylesObj = $state({
 		objectPosition: ops.objectPositionOptions[blok.object_position] ?? ops.objectPositionOptions.center,
@@ -16,14 +20,13 @@
 		saturateFilter: ops.saturateFilterOptions[blok.saturate_filter.value] ?? ops.saturateFilterOptions[0],
 		contrastFilter: ops.contrastFilterOptions[blok.contrast_filter.value] ?? ops.contrastFilterOptions[0]
 	});
-	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES}`);
+	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius}`);
 
-	let CONTAINER_BASE_STYLES = `h-full w-full overflow-hidden relative`;
+	let CONTAINER_BASE_STYLES = `h-full w-full relative`;
 	let containerStylesObj = $state({
 		aspectRatio: ops.aspectRatioOptions[blok.aspect_ratio] ?? ops.aspectRatioOptions['1:1'],
 		maxWidth: ops.maxWidthOptions[blok.max_width] ?? ops.maxWidthOptions.none,
-		maxHeight: ops.maxHeightOptions[blok.max_height] ?? ops.maxHeightOptions.none,
-		borderRadius: ops.borderRadiusOptions[blok.border_radius.value] ?? ops.borderRadiusOptions[0]
+		maxHeight: ops.maxHeightOptions[blok.max_height] ?? ops.maxHeightOptions.none
 	});
 	let containerStyles = $state(`${Object.values(containerStylesObj).join(' ')} ${CONTAINER_BASE_STYLES}`);
 
@@ -35,23 +38,23 @@
 	let image = $state(blok.image);
 	let isLoading = $state(true);
 
+	let showCustomDecoration = $state(blok.custom_decoration && blok.custom_decoration.length > 0);
+	let customDecorationStyling = $state(
+		showCustomDecoration
+			? `${ops.customDecorationOptions[blok.custom_decoration]} ${ops.beforeBorderRadiusOptions[blok.border_radius.value] ?? ops.beforeBorderRadiusOptions[0]} ${ops.afterBorderRadiusOptions[blok.border_radius.value] ?? ops.afterBorderRadiusOptions[0]}`
+			: undefined
+	);
 
 	// TODO
-		// Add Figcaption
-		// Add Focal point
-		// Add backgroundDeco (Optional)
-	
-	
-
+	// Add Figcaption
+	// Add Focal point
 </script>
 
-<div style:min-height={minHeight} class="{containerStyles} before:absolute
-before:inset-0  before:-translate-x-[5%] before:-translate-y-[5%]"
-use:storyblokEditable={blok} >
+<div style:min-height={minHeight} class="{containerStyles} {customDecorationStyling}" use:storyblokEditable={blok}>
 	<picture class="h-full w-full">
 		<!-- Low Quality Placeholder -->
 		{#if isLoading}
-			<img src="{blok.image.filename}/m/300x0" class="blur-lg h-full w-full object-cover" role="presentation" alt={undefined} />
+			<img src="{blok.image.filename}/m/300x0" class="h-full w-full object-cover blur-lg" role="presentation" alt={undefined} />
 		{/if}
 		<!-- Main Image -->
 		{#each imageSizes as { width, media }}

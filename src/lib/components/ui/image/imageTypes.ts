@@ -3,6 +3,7 @@ import type * as sbType from '$lib/schemas/storyblok/sbTypes';
 export interface ImageStoryblok {
 	image?: AssetStoryblok;
 	figcaption?: string;
+	custom_decoration: 'none' | 'diagonalBackdrops';
 	decorative_image?: boolean;
 	// dimensions_and_display?: any;
 	aspect_ratio: '1:1' | '1.59:1' | '3:2' | '4:3' | '2:3' | '3:4' | '16:9' | '9:16' | 'none';
@@ -12,9 +13,9 @@ export interface ImageStoryblok {
 	mix_blendmode: 'normal' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'colorDodge' | 'colorBurn' | 'hardLight' | 'softLight' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity';
 	// data?: any;
 	image_quality: 'original' | 'large' | 'medium' | 'small';
-    min_height_unit: 'rem' | 'em' | 'px' | 'vh' | '%' | 'none';
+	min_height_unit: 'rem' | 'em' | 'px' | 'vh' | '%' | 'none';
 
-    min_height: {
+	min_height: {
 		plugin: 'storyblok-slider';
 		value: number;
 	};
@@ -111,3 +112,6 @@ export type SaturateFilterOptions = Record<SaturateFilterValue, string>;
 // Contrast Filter (using Tailwind's original values)
 export type ContrastFilterValue = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 export type ContrastFilterOptions = Record<ContrastFilterValue, string>;
+
+export type CustomDecorationValue = 'none' | 'diagonalBackdrops';
+export type CustomDecorationOptions = Record<CustomDecorationValue, string>;
