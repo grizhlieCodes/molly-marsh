@@ -9,11 +9,14 @@ import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 import { default as page } from '$lib/components/layout/Page.svelte';
 import { default as section } from '$lib/components/layout/section/Section.svelte';
 import { default as container } from '$lib/components/layout/container/Container.svelte';
+import { default as custom_hero } from '$lib/components/layout/hero/CustomHero.svelte';
+
 
 // 02 - UI
 import { default as simple_text } from '$lib/components/ui/SimpleText.svelte';
 import { default as text } from '$lib/components/ui/text/Text.svelte';
 import { default as icon } from '$lib/components/ui/Icon.svelte';
+import { default as image } from '$lib/components/ui/image/Image.svelte';
 
 // 03 - UI: Interactive
 import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
@@ -33,10 +36,12 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			page,
 			section,
 			container,
+			custom_hero,
 			// UI
 			simple_text,
 			text,
 			icon,
+			image,
 			// UI: Interactive
 			button
 			// Navigation
