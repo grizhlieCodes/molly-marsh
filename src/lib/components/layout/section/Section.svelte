@@ -24,14 +24,7 @@
 	let styling = $derived(`${BASE_CLASSES} ${Object.values(styles).join(' ')}`);
 </script>
 
-<svelte:element
-	this={blok.type}
-	use:storyblokEditable={blok}
-	aria-labelledby={blok.section_label}
-	id={blok.section_id}
-	style={blok.customStyling}
-	class={styling}
->
+<svelte:element this={blok.type} use:storyblokEditable={blok} aria-labelledby={blok.section_labelledby} id={blok.section_id} style={blok.customStyling} class={styling}>
 	{#if blok.blocks}
 		{#each blok.blocks as blokk}
 			<StoryblokComponent blok={blokk}></StoryblokComponent>

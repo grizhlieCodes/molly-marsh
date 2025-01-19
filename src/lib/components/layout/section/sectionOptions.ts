@@ -1,7 +1,3 @@
-interface Options {
-	[key: string]: string;
-}
-
 import type * as Type from './sectionTypes';
 
 export const gridSpanOptions: Type.GridSpanOptions = {

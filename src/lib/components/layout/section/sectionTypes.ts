@@ -1,9 +1,9 @@
 export interface SectionStoryblok {
 	metaData?: any;
 	section_id: string;
-	section_label: string;
+	section_labelledby: string;
 	type: 'section' | 'article';
-	blocks: (ContainerStoryblok | PageStoryblok | SectionStoryblok | TextStoryblok)[];
+	blocks?: (ContainerStoryblok | PageStoryblok | SectionStoryblok | TextStoryblok)[];
 	layout?: any;
 	grid_span: 'fullSpan' | 'centeredSpan1' | 'centeredSpan2' | 'centeredSpan3' | 'centeredSpan4' | 'centeredSpan5' | 'centeredSpan6';
 	justify_content: 'normal' | 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch';
