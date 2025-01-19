@@ -1,3 +1,15 @@
+import type { ButtonStoryblok } from '$lib/components/ui-interactive/button/buttonTypes';
+
+export interface HeaderStoryblok {
+	fixed_to_top?: boolean;
+	logo: NavLogoStoryblok[];
+	nav_links: NavLinkStoryblok[];
+	button?: ButtonStoryblok[];
+	_uid: string;
+	component: 'header';
+	[k: string]: any;
+}
+
 export interface Link {
 	url: string;
 	label: string;
@@ -43,17 +55,17 @@ export type MultilinkStoryblok =
 // }
 
 export interface NavLinkStoryblok {
-  main_link?: any; // group
-  url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
-  link_label: string;
-  icon?: IconStoryblok[];
-  link_description?: string;
-  sub_link_data?: any; //group
-  sub_links?: NavLinkStoryblok[];
-  sub_link_type?: "defaultLink" | "mobileMainLink";
-  _uid: string;
-  component: "nav_link";
-  [k: string]: any;
+	main_link?: any; // group
+	url: Exclude<MultilinkStoryblok, { linktype?: 'email' } | { linktype?: 'asset' }>;
+	link_label: string;
+	icon?: IconStoryblok[];
+	link_description?: string;
+	sub_link_data?: any; //group
+	sub_links?: NavLinkStoryblok[];
+	sub_link_type?: 'defaultLink' | 'mobileMainLink';
+	_uid: string;
+	component: 'nav_link';
+	[k: string]: any;
 }
 
 export interface AssetStoryblok {

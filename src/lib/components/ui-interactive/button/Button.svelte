@@ -7,7 +7,7 @@
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
 
 	let { blok }: { blok: ButtonStoryblok } = $props();
-	$effect(() => console.log(page.url.pathname, blok));
+	// $effect(() => console.log(page.url.pathname, blok));
 
 	let buttonStyles = $state({
 		sizeStyling: opts.sizeStylingOptions[blok.button_size.value],

@@ -5,7 +5,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-01-15T17:48:20.663Z",
-      "updated_at": "2025-01-15T18:22:55.674Z",
+      "updated_at": "2025-01-18T07:34:09.731Z",
       "id": 6801483,
       "schema": {
         "meta_data": {
@@ -200,7 +200,7 @@
       "preset_id": null,
       "real_name": "button",
       "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
-      "color": "#913f0f",
+      "color": "#ef6252",
       "icon": "block-arrow-pointer",
       "internal_tags_list": [
         {
@@ -1372,12 +1372,19 @@
       "display_name": "Header & Nav",
       "description": "Header & Navigation for the website",
       "created_at": "2025-01-15T16:50:03.999Z",
-      "updated_at": "2025-01-16T05:47:04.329Z",
+      "updated_at": "2025-01-19T07:20:42.447Z",
       "id": 6801246,
       "schema": {
+        "fixed_to_top": {
+          "type": "boolean",
+          "pos": 0,
+          "tooltip": true,
+          "description": "Toggle this on if you want the navigation to always be visible on the top of your website. Else, leave it off and the user can scroll back up to access navigation.\n\nBoth behaviours are quite normal is it's a matter of personal preference.",
+          "id": "4JeOK1oQQsCr_f1EKJy0BQ"
+        },
         "logo": {
           "type": "bloks",
-          "pos": 0,
+          "pos": 1,
           "display_name": "Logo",
           "required": true,
           "description": "Please create the logo for your website. You will have a single element as a choice, click on it and fill it in.",
@@ -1393,7 +1400,7 @@
         },
         "nav_links": {
           "type": "bloks",
-          "pos": 1,
+          "pos": 2,
           "required": true,
           "description": "These are the links your users will see on the top of your website.\n\nThis does NOT include the logo or Call to Action button in the top-navigation, just the centre links.",
           "tooltip": true,
@@ -1406,7 +1413,7 @@
         },
         "button": {
           "type": "bloks",
-          "pos": 2,
+          "pos": 3,
           "display_name": "Button",
           "tooltip": true,
           "required": false,
@@ -1620,6 +1627,1018 @@
       "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
       "color": "#4656ae",
       "icon": "block-shield",
+      "internal_tags_list": [
+        {
+          "id": 56293,
+          "name": "ui"
+        }
+      ],
+      "internal_tag_ids": [
+        "56293"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "02 - UI"
+    },
+    {
+      "name": "image",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-18T07:28:41.307Z",
+      "updated_at": "2025-01-18T09:46:04.764Z",
+      "id": 6815030,
+      "schema": {
+        "image": {
+          "type": "asset",
+          "pos": 0,
+          "id": "-AJJCxe7RtWHxnSyqQArSQ"
+        },
+        "figcaption": {
+          "type": "text",
+          "pos": 1,
+          "description": "You can add a figcaption to the bottom of your image if you want to provide additional context for it.",
+          "tooltip": true,
+          "id": "o2BS78QlSiWdNdGRg94dBg"
+        },
+        "decorative_image": {
+          "type": "boolean",
+          "pos": 2,
+          "description": "If this image does not add any context to the surrounding text, toggle this \"on\" / \"true\". Then screen readers will be able to ignore this image and won't even mention it to anyone with visual impairments.",
+          "tooltip": true,
+          "id": "r-La9NEiTya6D09RHSQVSA"
+        },
+        "dimensions_and_display": {
+          "type": "section",
+          "pos": 3,
+          "keys": [
+            "aspect_ratio",
+            "max_width",
+            "max_height",
+            "object_position",
+            "mix_blendmode",
+            "border_radius",
+            "min_height",
+            "min_height_unit"
+          ],
+          "id": "Jgf2zSdoRjiZJgy-EEKpcw"
+        },
+        "aspect_ratio": {
+          "type": "option",
+          "pos": 4,
+          "use_uuid": true,
+          "display_name": "Aspect Ratio",
+          "id": "LaWQ6I8KTPuBkWlJ5HECdQ",
+          "description": "Force an aspect ratio on your image.\nTips: \nLandscape = 16:9\nVertical = 9:16\nSquare = 1:1",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "b22abd5d-7c2e-4a34-9c4b-6ced05042c27",
+              "name": "1:1",
+              "value": "1:1"
+            },
+            {
+              "_uid": "a051a62d-a010-4ffb-96c8-dd8071e34309",
+              "value": "1.59:1",
+              "name": "1.59:1"
+            },
+            {
+              "_uid": "4a0580e7-3ff1-4bf1-8fc5-1146165d49ba",
+              "value": "3:2",
+              "name": "3:2"
+            },
+            {
+              "_uid": "76f46a13-0937-46cd-83e6-cda2f3261f7f",
+              "value": "4:3",
+              "name": "4:3"
+            },
+            {
+              "_uid": "687b3698-7477-418a-82ed-ad20466cf216",
+              "value": "2:3",
+              "name": "2:3"
+            },
+            {
+              "_uid": "7f0fa98e-3d8d-44d4-8343-8a96c96781eb",
+              "value": "3:4",
+              "name": "3:4"
+            },
+            {
+              "_uid": "22c3d19d-9e73-46f3-8aea-ca9622163030",
+              "value": "16:9",
+              "name": "16:9"
+            },
+            {
+              "_uid": "c0aa6e17-149d-4ad8-baf3-4602b12f1d7b",
+              "value": "9:16",
+              "name": "9:16"
+            },
+            {
+              "_uid": "ac6dab7f-3ddc-428e-b303-c1918976377b",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "none",
+          "required": true
+        },
+        "max_width": {
+          "type": "option",
+          "pos": 5,
+          "use_uuid": true,
+          "description": "Decide whether you need the image to have a maximum width.",
+          "tooltip": true,
+          "id": "xKxDF2WyTA65Isviv4gJuQ",
+          "options": [
+            {
+              "_uid": "1945c98c-3bb3-48c3-9120-cb1a3f8f8fdf",
+              "name": "Screen Width",
+              "value": "screen"
+            },
+            {
+              "_uid": "64d3ef89-8ce1-4a73-9aaa-8328f39bc44e",
+              "value": "100%",
+              "name": "100%"
+            },
+            {
+              "_uid": "2ebe344b-eed5-43a2-b922-0c22db162c3d",
+              "value": "75%",
+              "name": "75%"
+            },
+            {
+              "_uid": "4c658c93-2927-43e0-a73d-5f72673b647c",
+              "value": "50%",
+              "name": "50%"
+            },
+            {
+              "_uid": "ec1190b5-fe68-4f94-9c05-e9da87465bab",
+              "value": "25%",
+              "name": "25%"
+            },
+            {
+              "_uid": "518a5e0a-d461-4910-81d7-a6d5b1b3ae33",
+              "value": "large",
+              "name": "Large"
+            },
+            {
+              "_uid": "e5c060f1-3bfa-4cf6-82ed-e016965d6083",
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "_uid": "59d62647-bf4c-4de3-b4da-d639b2e88284",
+              "value": "normal",
+              "name": "Normal"
+            },
+            {
+              "_uid": "9b152de7-47ae-48a5-ae8a-f22ad861c616",
+              "value": "small",
+              "name": "Small"
+            },
+            {
+              "_uid": "3f8c3f95-e79f-4a02-a59b-8031531d17cb",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "none",
+          "required": true
+        },
+        "max_height": {
+          "type": "option",
+          "pos": 6,
+          "use_uuid": true,
+          "description": "Decide whether you need the image to have a maximum height.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "07a7ec39-35d4-4f50-99c3-6a5f4c240979",
+              "name": "Screen Width",
+              "value": "screen"
+            },
+            {
+              "_uid": "0552221e-4435-4ba5-b418-d0339d814801",
+              "value": "100%",
+              "name": "100%"
+            },
+            {
+              "_uid": "84564dfb-b899-49fe-b541-8aabb60b8787",
+              "value": "75%",
+              "name": "75%"
+            },
+            {
+              "_uid": "f3a08d5f-5458-4d8b-8b34-be4a11a0d2a9",
+              "value": "50%",
+              "name": "50%"
+            },
+            {
+              "_uid": "3b2c64ab-af35-4b6f-b094-604ab3a7f2d4",
+              "value": "25%",
+              "name": "25%"
+            },
+            {
+              "_uid": "2c75d7df-ecf3-4768-bd9a-b5cb89b45207",
+              "value": "large",
+              "name": "Large"
+            },
+            {
+              "_uid": "d2e141a7-2400-4690-9b9f-971dbd69265b",
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "_uid": "cfda6aef-13e3-40c5-a6d8-8f93f959b7a9",
+              "value": "normal",
+              "name": "Normal"
+            },
+            {
+              "_uid": "c9d78e1c-3c49-4e43-867f-eea6eabb3c09",
+              "value": "small",
+              "name": "Small"
+            },
+            {
+              "_uid": "2ab9d8bb-a2d6-4c93-b2fa-0b8110706bfb",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "none",
+          "id": "i3rTbv1mQ665dHRTcubjMQ",
+          "required": true
+        },
+        "min_height": {
+          "type": "custom",
+          "pos": 7,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,250,500,750,1000,1250,1500,1750,2000]]",
+              "_uid": "b1beec31-5ca1-4960-98e7-07ce8bbcc511"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "665fbd4e-47ed-4839-a608-436453db1c0b"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "ecbbe331-99e7-4718-980e-4ffca0814680"
+            },
+            {
+              "name": "maxValue",
+              "value": "2000",
+              "_uid": "197530fb-e7ce-418a-8ce3-baa0cc359984"
+            },
+            {
+              "name": "stepSize",
+              "value": "25",
+              "_uid": "8670cfeb-9080-454d-ac0d-dfb408246cdd"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "eae3f296-5f52-4c78-9863-7e763b7a20d7"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "1e4c02d0-a8c8-4cc1-97f5-a46018a15008"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "e9e92711-03b6-4321-a644-77e1065b6809"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "b760b2f8-2ba3-4221-a485-60e733659d66"
+            }
+          ],
+          "tooltip": true,
+          "description": "Select a minimum height of your image. Also remember to select the unit, else it will default to pixels (px).",
+          "id": "wzaE-bYvRiyLZL0ZXxgSsw"
+        },
+        "min_height_unit": {
+          "type": "option",
+          "pos": 8,
+          "use_uuid": true,
+          "description": "If you have selected a 'min_height', please select what unit corresponds with it.",
+          "required": true,
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "50e4192a-492e-4b03-b2f7-88e96a4a9b34",
+              "name": "REM Units",
+              "value": "rem"
+            },
+            {
+              "_uid": "ab5ef29e-18a1-4b56-88f6-d124084f22f4",
+              "value": "em",
+              "name": "EM Units"
+            },
+            {
+              "_uid": "6abd11e8-daf0-4211-9750-8c5f0910ce4d",
+              "value": "px",
+              "name": "Pixels"
+            },
+            {
+              "_uid": "e6ea1491-d56a-450e-b11d-5d6c86b94bff",
+              "value": "vh",
+              "name": "Screen Height"
+            },
+            {
+              "_uid": "3c549574-76f4-42ca-ac2d-1f301d885a0f",
+              "value": "%",
+              "name": "Percentage"
+            },
+            {
+              "_uid": "9ace7041-5a96-4e23-801f-a959f8de40e6",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "default_value": "px",
+          "exclude_empty_option": true,
+          "id": "kZ4VC_wNRuO9jN-2rXQ9pA"
+        },
+        "object_position": {
+          "type": "option",
+          "pos": 9,
+          "use_uuid": true,
+          "description": "Sometimes the container the image in is smaller than the image itself, and the effect is that the image is 'cut-off' at a certain point. With this option you can choose how to best position the image. If you need a more custom size, please use 'focal_point'.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "30bd9778-291a-4dba-92c4-726302a86df1",
+              "value": "top",
+              "name": "Top"
+            },
+            {
+              "_uid": "acab80ba-5ef5-4869-8b62-d11f7ec1b37c",
+              "value": "bottom",
+              "name": "Bottom"
+            },
+            {
+              "_uid": "7942138a-3031-4082-b097-0bdb01a37361",
+              "name": "Left",
+              "value": "left"
+            },
+            {
+              "_uid": "35344d7e-95b0-4c22-9c7b-ef99c3218ff9",
+              "value": "right",
+              "name": "Right"
+            },
+            {
+              "_uid": "22294895-6262-46f1-a021-d01caeda78ec",
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "_uid": "b4586fe8-3e95-462d-b8f3-aa0eba8395ff",
+              "value": "leftTop",
+              "name": "Left-Top"
+            },
+            {
+              "_uid": "9f31c268-6df8-4976-9f8e-b187f77ac73d",
+              "value": "leftBottom",
+              "name": "Left-Bottom"
+            },
+            {
+              "_uid": "0e34ded5-ca77-47af-a225-729ddf349902",
+              "value": "rightTop",
+              "name": "Right-Top"
+            },
+            {
+              "_uid": "47348616-89f4-4d01-9a21-558ac05894d7",
+              "value": "rightBottom",
+              "name": "Right-Bottom"
+            },
+            {
+              "_uid": "5382dacc-e5f9-4726-9b9a-81b4f778736f",
+              "value": "top20",
+              "name": "Top-20"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "center",
+          "id": "RAVU9M7pSoy_o3N4UmGxMg",
+          "required": true
+        },
+        "mix_blendmode": {
+          "type": "option",
+          "pos": 10,
+          "use_uuid": true,
+          "tooltip": true,
+          "description": "Choose how this image should blend with the background.\n\n",
+          "options": [
+            {
+              "_uid": "61145e89-0e94-49a2-9ef4-488b89ee0d06",
+              "name": "Normal",
+              "value": "normal"
+            },
+            {
+              "_uid": "33d206eb-2030-4127-81d4-2158968d30f4",
+              "value": "multiply",
+              "name": "Multiply"
+            },
+            {
+              "_uid": "fd0c5467-474f-4e00-aa2d-44fb00cb46dd",
+              "value": "screen",
+              "name": "Screen"
+            },
+            {
+              "_uid": "64c2875b-ec31-4dd1-817d-e93c56c2350c",
+              "value": "overlay",
+              "name": "Overlay"
+            },
+            {
+              "_uid": "a0f8c1c8-d7dc-46ee-aefb-0a29993168d4",
+              "value": "darken",
+              "name": "Darken"
+            },
+            {
+              "_uid": "96ee516f-3aea-4fcb-9f29-c2dca21dae37",
+              "value": "lighten",
+              "name": "Lighten"
+            },
+            {
+              "_uid": "7de05436-e645-4f73-a4d5-6726aeabd6e5",
+              "value": "colorDodge",
+              "name": "Color Dodge"
+            },
+            {
+              "_uid": "2448fdb6-8d75-462b-bf28-b9e827704853",
+              "value": "colorBurn",
+              "name": "Color Burn"
+            },
+            {
+              "_uid": "2e6db94d-4fae-4e2a-b862-58d1c51144b8",
+              "value": "hardLight",
+              "name": "Hard Light"
+            },
+            {
+              "_uid": "9114efae-5f34-41f5-a49e-74ea37fa8e6c",
+              "value": "softLight",
+              "name": "Soft Light"
+            },
+            {
+              "_uid": "11821a48-4ae8-4399-856c-5d91e97010fa",
+              "value": "difference",
+              "name": "Difference"
+            },
+            {
+              "_uid": "43ee54f6-306e-4a6f-a3e1-8adb65dcce50",
+              "value": "exclusion",
+              "name": "Exclusion"
+            },
+            {
+              "_uid": "093dd96a-fbd9-44a6-a7d6-e6bdbf4c4aee",
+              "value": "hue",
+              "name": "Hue"
+            },
+            {
+              "_uid": "f24cbdb4-27e2-4718-bb94-f54194c933aa",
+              "value": "saturation",
+              "name": "Saturation"
+            },
+            {
+              "_uid": "5192cd95-c807-43e6-b28d-f23b15f39617",
+              "value": "color",
+              "name": "Color"
+            },
+            {
+              "_uid": "2a558960-ec40-49ba-a574-c9d6ef990496",
+              "value": "luminosity",
+              "name": "Luminosity"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "normal",
+          "id": "8y3z91izSAac3vyh3LZrBw",
+          "required": true
+        },
+        "border_radius": {
+          "type": "custom",
+          "pos": 11,
+          "description": "Border radius controls how sharp or curved the edges of the link are.",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0, 1, 2, 3, 4, 5, 6, 7, 8]",
+              "_uid": "4c0c3166-645e-4ca4-84bf-da2adbe1710d"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "8ee9fa30-a978-4e59-a949-41d7999a2144"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "09611bfd-9c26-4301-9ebf-7fbcce6e82d2"
+            },
+            {
+              "name": "maxValue",
+              "value": "8",
+              "_uid": "4aca7c72-dfad-4348-8c1c-06e08ca4d662"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "e61a682e-7553-4717-bdf6-f9bb9aa3c076"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "2dc7edcf-e4f0-4d9b-bd9d-c3c1856f2d64"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "e78d1322-e2d6-4e2d-b2e5-ad65e482e97c"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "5e3dc392-230a-4045-ad18-a31d68bfa99e"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "019eccc0-460e-4e75-8d1e-66158f22ef96"
+            }
+          ],
+          "id": "BHq9LajATqucTMIVuhLMtw"
+        },
+        "data": {
+          "type": "section",
+          "pos": 12,
+          "id": "L3yWfrGnSEqCrPcFTbzRZQ",
+          "keys": [
+            "image_quality",
+            "base_width"
+          ]
+        },
+        "image_quality": {
+          "type": "option",
+          "pos": 13,
+          "use_uuid": true,
+          "tooltip": true,
+          "description": "This determines the quality of the images that are downloaded by controlling the requested-resolution from Storyblok's image service. If you need a small image, test the smaller sizes. If you need more sizes added, please request them.",
+          "options": [
+            {
+              "_uid": "407c5071-2713-4da1-b608-90ef105b177b",
+              "name": "Original",
+              "value": "original"
+            },
+            {
+              "_uid": "33f652a0-c5d1-4640-a8d4-971fb91790fc",
+              "value": "large",
+              "name": "Large"
+            },
+            {
+              "_uid": "487cc959-7d19-4f22-b5cc-51835870e8e3",
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "_uid": "94c83a9c-9675-4a85-869e-b056608249ba",
+              "value": "small",
+              "name": "Small"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "large",
+          "id": "flJG04CgTQ6PFSHnrYksUQ",
+          "required": true
+        },
+        "base_width": {
+          "type": "custom",
+          "pos": 14,
+          "use_uuid": true,
+          "description": "This is the mobile image width that is downloaded. The default is set to 500px, it will look presentable until the next breakpoint.",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,500,1000,1500,2000,2500,3000]]",
+              "_uid": "5317ca58-3a72-4d84-b6a5-6f51d42390dc"
+            },
+            {
+              "name": "defaultValue",
+              "value": "500",
+              "_uid": "3fadd119-2f41-4c84-9275-ac48ff313435"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "36748d9e-6099-4755-9921-665ef9681cf2"
+            },
+            {
+              "name": "maxValue",
+              "value": "3000",
+              "_uid": "99f96bb5-2a0f-46db-b1c5-a0bbe96eb497"
+            },
+            {
+              "name": "stepSize",
+              "value": "100",
+              "_uid": "7ad3e108-04a6-435a-8dcd-37c5138670ce"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "472fed3b-4635-478b-ab0a-5b8ca0cc61c5"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "263b855a-d75d-4038-9ba5-38c40b9bfbdd"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "6fdc79d8-bb16-4a92-8185-8909edaa5591"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "895e9a6a-4619-4006-bcfe-70ea1cbc85df"
+            }
+          ],
+          "id": "J1TbIxKMQfyUcjJ6yrf86w"
+        },
+        "blur_filter": {
+          "type": "custom",
+          "pos": 15,
+          "use_uuid": true,
+          "translatable": false,
+          "description": "Blur your image.",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,1,2,3,4,5,6,7]",
+              "_uid": "c04f7c3a-0c76-42e0-99af-3ccdd3129db7"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "0fdb0c0d-2a01-41b6-be4e-91c9cbd73d33"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "36291507-9300-4f6f-8982-6eb906c4ee1c"
+            },
+            {
+              "name": "maxValue",
+              "value": "7",
+              "_uid": "92d1b02f-2003-421a-9453-913bdd4b9d71"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "4ddee932-c552-4f10-a96f-a8dfb19a7719"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "a914a567-f322-482a-a2f9-51f83051f39a"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "a8dd31ae-d4c4-4cde-93e6-d9a45240a8a8"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "92cc6a54-0edc-4d0f-af38-77d25baf932e"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "75b5e78c-83ea-4107-80de-f22664127e36"
+            }
+          ],
+          "id": "MY3MM-muSKCh3uO5B5LLkg",
+          "display_name": "Blur Filter"
+        },
+        "sepia_filter": {
+          "type": "custom",
+          "pos": 16,
+          "description": "Add a sepia filter to your image. Sepia is essentially a warm color overtone over your image.",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,20,40,60,80,100]",
+              "_uid": "0c51db8e-2cee-4c74-a907-adab65988bc3"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "f5122d0d-335d-4a4b-8e18-7fd38630ec08"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "628364a8-aad6-487f-8d92-f29407b30935"
+            },
+            {
+              "name": "maxValue",
+              "value": "100",
+              "_uid": "a6a6f340-fe8c-4cba-944d-6359b420bab0"
+            },
+            {
+              "name": "stepSize",
+              "value": "20",
+              "_uid": "fac23008-207c-46ac-b045-1d69f162d3e1"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "3e5a50cb-5db4-43c7-ab47-862c050f1980"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "3b7781d1-2b74-47db-a6e2-1795674bd4bb"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "ffbedbb5-5ad2-4d97-80b8-5826cb2c93df"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "3d9ecf81-5432-44f4-907d-053d41627195"
+            }
+          ],
+          "id": "1SybpGqkRNWxjaO6F1l0Uw",
+          "display_name": "Sepia Filter"
+        },
+        "invert_filter": {
+          "type": "custom",
+          "pos": 17,
+          "tooltip": true,
+          "description": "Invert the colors of this image.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,20,40,60,80,100]",
+              "_uid": "74dc4e66-647d-4bed-8cc5-5fb4b452fef8"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "2f95c0ba-9b5b-4e47-b34f-79024b150164"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "1556f303-e543-4e7d-81dd-b9e5ad6599a4"
+            },
+            {
+              "name": "maxValue",
+              "value": "100",
+              "_uid": "5754c219-21fc-44d4-9b97-21535663d510"
+            },
+            {
+              "name": "stepSize",
+              "value": "20",
+              "_uid": "48f197e5-b9db-40ce-872b-c1c4601eda32"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "d3aa3875-619b-468a-b499-8662c2d18677"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "1a385266-2810-4290-8481-5c921b39f9fc"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "dfecd1db-96d5-4dd6-8800-85a90a979b4a"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "fd0f8715-5f56-4192-bf30-ce19ee3542d5"
+            }
+          ],
+          "id": "EKSmRx-TSc2d5yxD0751CA"
+        },
+        "grayscale_filter": {
+          "type": "custom",
+          "pos": 18,
+          "id": "Q1XE5VtcSKuva0LjkwgtHw",
+          "tooltip": true,
+          "description": "Remove color from your image.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,20,40,60,80,100]",
+              "_uid": "74018103-ee66-4dc3-a8e1-f7f4465a5b42"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "7ac4c6ce-eaf0-4f6c-8e20-0bac4632dfa1"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "58b4c7ee-b551-4a3b-abe4-62c7c3a6b9e2"
+            },
+            {
+              "name": "maxValue",
+              "value": "100",
+              "_uid": "588dc9d1-1db5-4307-b680-38b5f00cefb4"
+            },
+            {
+              "name": "stepSize",
+              "value": "20",
+              "_uid": "7f2d5d54-f55a-4a4a-ac0a-6fdfefa75672"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "069cf75c-fa09-457c-99fc-6bf63006bb13"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "b3945f6f-e064-4ba4-9962-987dd90456a0"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "e61ebcd4-2b36-420b-9ee2-dfbdcdb71057"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "778c7324-c0da-4ca8-a286-42f0742d6f0b"
+            }
+          ],
+          "display_name": "Grayscale Filter"
+        },
+        "tab-be9a2335-bd13-4427-bb2b-01975cdb3359": {
+          "display_name": "Filters",
+          "keys": [
+            "Blur",
+            "grayscale",
+            "blur",
+            "sepia",
+            "blur_filter",
+            "grayscale_filter",
+            "sepia_filter",
+            "invert_filter",
+            "saturate_filter",
+            "contrast_filter"
+          ],
+          "pos": 19,
+          "type": "tab",
+          "id": "vpojNb0TRCe7KwGXXNszWQ"
+        },
+        "saturate_filter": {
+          "type": "custom",
+          "pos": 20,
+          "tooltip": true,
+          "description": "Saturates or de-saturates an image.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,50,100,150,200]",
+              "_uid": "eb29281f-fb25-475a-a435-823f50141558"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "0e2a85bb-e240-41c0-925b-45b78e67ea80"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "2796c68c-19d8-4e89-9c90-6588ba5dfa3b"
+            },
+            {
+              "name": "maxValue",
+              "value": "200",
+              "_uid": "69bea8b7-a7d7-48e4-a3bc-ac9a12fc98f2"
+            },
+            {
+              "name": "stepSize",
+              "value": "50",
+              "_uid": "d2c9d46c-f6d6-4722-98a0-9b975252fdbf"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "fd38ff0e-b3ae-461c-b310-83762df78533"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "9abefc8f-9bb5-409b-9eec-9275924c5b4e"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "a0db5b08-a6d2-42ee-9d96-297293896f88"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "a2dc73fe-56bd-4d3a-9789-0bc2ce080e55"
+            }
+          ],
+          "id": "Z8b9-E4gQ0Sn5DujolV6-g"
+        },
+        "contrast_filter": {
+          "type": "custom",
+          "pos": 21,
+          "translatable": false,
+          "tooltip": true,
+          "description": "Increase the contrast of your image.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,1,2,3,4,5,6,7]",
+              "_uid": "47cb1f2e-02f2-4bac-a02a-16c5f1800632"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "457b1206-1efa-4e95-accb-9f12e4ea4803"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "d39183c2-5e42-4828-a265-e2b4eff8e010"
+            },
+            {
+              "name": "maxValue",
+              "value": "6",
+              "_uid": "12fc13c3-daad-488b-9e74-aa7f6f74d7dd"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "68858bbb-70cf-41ec-b1e4-f415ce714436"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "a00dca15-cebd-4fb3-be5f-28ced5b09b3c"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "030096a7-bb27-468c-a38b-a14237144573"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "991990af-8908-4b39-bc3f-d1496088987a"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "55512350-009a-41d3-94e7-62d0503de8ed"
+            }
+          ],
+          "id": "q6TO-eusTSuD8ufzebB8uw"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/53565000ba/image.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "image",
+      "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
+      "color": "#4656ae",
+      "icon": "block-image",
       "internal_tags_list": [
         {
           "id": 56293,
@@ -2533,7 +3552,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-01-16T15:15:02.349Z",
-      "updated_at": "2025-01-16T19:00:24.808Z",
+      "updated_at": "2025-01-18T08:12:13.902Z",
       "id": 6808303,
       "schema": {
         "Content": {
@@ -2551,13 +3570,13 @@
           "keys": [
             "rich_text"
           ],
-          "pos": 0,
+          "pos": 1,
           "type": "tab",
           "id": "t2N8NyJtRoefpDx9BkhrAw"
         },
         "content": {
           "type": "text",
-          "pos": 1,
+          "pos": 2,
           "required": true,
           "tooltip": true,
           "description": "Simply write what you want to be shown or read by a screen-reader. (There is an option to select \"Screen Reader\" which means this won't be shown to people who can see the website, but it will be read to individuals using screen readers.)",
@@ -2565,7 +3584,7 @@
         },
         "text_id": {
           "type": "text",
-          "pos": 2,
+          "pos": 3,
           "required": false,
           "description": "This is useful to fill when this is the heading for a section.\nSections use the {aria-labelledby} html property. We can essentially write:\naria-labelledby=\"about-section-heading\"\n\nAnd this id can equal that. A blind person will find this to be a great piece of information.",
           "tooltip": true,
@@ -2573,7 +3592,7 @@
         },
         "text_type": {
           "type": "option",
-          "pos": 3,
+          "pos": 4,
           "use_uuid": true,
           "required": true,
           "description": "Select what element this is. If it's a heading, select Heading {heading_number}. Paragraph for paragraphs, etc...",
@@ -2611,38 +3630,28 @@
             },
             {
               "_uid": "657fdff1-2315-436d-b023-a7f02014ff8c",
-              "value": "paraXs",
-              "name": "Paragraph - V Small"
+              "value": "p",
+              "name": "Paragraph"
             },
             {
-              "_uid": "a681a707-7782-4a67-b701-d15c771d5363",
-              "value": "paraSm",
-              "name": "Paragraph: Small"
-            },
-            {
-              "_uid": "fa296a08-532e-47c4-9abe-0500c78217ca",
-              "value": "paraBase",
-              "name": "Paragraph: Base"
-            },
-            {
-              "_uid": "181ef3d3-09d4-4d58-ae03-ec6ce9e3a9b1",
-              "value": "paraLg",
-              "name": "Paragraph: Large"
-            },
-            {
-              "_uid": "2a3ae447-4b04-4607-b048-775c2216d2bf",
-              "value": "paraXl",
-              "name": "Paragraph: xLarge"
+              "_uid": "5ca81cab-0166-4b16-8ba8-5c7567c9f524",
+              "value": "span",
+              "name": "Span"
             },
             {
               "_uid": "fd3da126-52e8-487f-a6e2-22731b7886c6",
-              "value": "overline",
+              "value": "span",
               "name": "Overline"
             },
             {
               "_uid": "adec5859-bee3-48e0-b377-9ef04b1e448b",
-              "value": "quote",
+              "value": "blockquote",
               "name": "Quote"
+            },
+            {
+              "_uid": "bf6cead8-1419-4337-8da0-f812b25147dc",
+              "value": "cite",
+              "name": "Quote Citation"
             },
             {
               "_uid": "7b0408e1-15bb-4605-9fb9-2f386db6dfea",
@@ -2656,19 +3665,20 @@
         },
         "Styling": {
           "type": "section",
-          "pos": 4,
+          "pos": 5,
           "keys": [
             "text_style",
             "text_align",
             "text_color_overwrite",
             "max_width",
-            "customCss"
+            "customCss",
+            "custom_css"
           ],
           "id": "BvnYGYbOTSuoJ1UTt6yHiQ"
         },
         "text_style": {
           "type": "option",
-          "pos": 5,
+          "pos": 6,
           "use_uuid": true,
           "required": true,
           "description": "Our design system gives specific colors, fonts and styles to everything. Choose wisely...",
@@ -2751,7 +3761,7 @@
         },
         "text_align": {
           "type": "option",
-          "pos": 6,
+          "pos": 7,
           "use_uuid": true,
           "description": "Choose how to align your text (center, left, right, etc).",
           "required": true,
@@ -2789,7 +3799,7 @@
         },
         "text_color_overwrite": {
           "type": "option",
-          "pos": 7,
+          "pos": 8,
           "use_uuid": true,
           "options": [
             {
@@ -2859,7 +3869,7 @@
         },
         "max_width": {
           "type": "custom",
-          "pos": 8,
+          "pos": 9,
           "use_uuid": true,
           "tooltip": true,
           "description": "You can select a maximum width for this text.\nBe mindful it will impact all screen sizes.",
@@ -2904,7 +3914,7 @@
             }
           ],
           "id": "CZSLQ0AOQIGKRdX_P3-FyA",
-          "datasource_slug": "size-params"
+          "datasource_slug": "size-params-20"
         },
         "rich_text": {
           "type": "richtext",
@@ -2918,7 +3928,7 @@
           "allow_custom_attributes": true,
           "id": "8HVEmVy2QlC5DjE_yATdVQ"
         },
-        "customCss": {
+        "custom_css": {
           "type": "textarea",
           "pos": 11,
           "id": "sag5KaVRTI2aEiccgSaRxQ",

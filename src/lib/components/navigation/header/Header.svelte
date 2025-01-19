@@ -6,67 +6,53 @@
 	import { fly } from 'svelte/transition';
 	import Logo from './Logo.svelte';
 	import Button from '$lib/components/ui-interactive/button/Button.svelte';
+	import type { HeaderStoryblok } from './headerTypes';
 
-	let { blok }: { blok: any } = $props(); // Storyblok
-	$effect(() => console.log(blok.button[0]));
-
+	let { blok }: { blok: HeaderStoryblok } = $props();
 	let mobileMenuActive = $state(false);
+	let isFixed = $state(blok.fixed_to_top ? true : false);
 
 	const toggleMobileMenuActive = () => {
 		mobileMenuActive = !mobileMenuActive;
 	};
 
-	// Options I can think of:
-	// Fixed or not fixed? Where does this come from?
-	// If not fixed " fixed / '' "
-	// Links + Sublinks of course. [{},{}]
-	// Logo Text (Molly Marsh)
+	// $inspect(blok)
 
-	let HEADER_BASE_STYLING = `
-	
-	
-	`;
+	// STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - 
+
+	const HEADER_BASE_STYLES = `z-30 flex w-full justify-center transition-all md:px-6 md:pt-5`;
+	let HEADER_FIXED_STYLES = $state(isFixed ? `fixed top-0 left-0 ` : '');
+	let HEADER_STYLES = $state(`${HEADER_BASE_STYLES} ${HEADER_FIXED_STYLES}`);
+
+	const NAV_BASE_STYLES = `bg-header-surface-primary grid w-full grid-cols-1 grid-rows-[1fr_max-content]
+	items-center justify-between transition-all md:flex md:max-w-[60rem] md:flex-row md:rounded-full md:px-6`;
+
+	const LOGO_BURGER_CONTAINER_STYLES = `flex min-h-[6.25rem] w-full flex-row items-center justify-between px-5
+			transition-all md:min-h-20 md:w-max md:px-0`;
 </script>
 
-<!-- class="
-lt:-translate-x-1/2 lt:left-1/2 lt:max-w-[60rem]
-bg-header-surface-primary border-header-outline-primary/50 lt:top-10 lt:rounded-full fixed
-top-0 left-0 z-[999] flex w-full justify-center
-border backdrop-blur-[35px] backdrop-filter transition-all" -->
-
-<!-- 
-
-lt:flex lt:items-center lt:justify-between lt:justify-items-center
-				lt:gap-2 lt:px-6 grid {mobileMenuActive ? 'gap-6' : ''}  grid-rows-[1fr_max-content]
-				flex-row py-6 lt:py-2 transition-all
-
--->
-
-<header
-	id="header"
-	class="fixed top-0 left-0 z-30 flex w-full justify-center
- transition-all md:px-6 md:pt-5"
->
-	<div
-		class="bg-header-surface-primary grid w-full grid-cols-1 grid-rows-[1fr_max-content]
-	items-center justify-between transition-all md:flex md:max-w-[60rem]
-		 md:flex-row md:px-6 md:rounded-full
-		"
-	>
-		<div
-			in:fly={{ x: -30, duration: 200 }}
-			class="flex min-h-[6.25rem] md:min-h-20 w-full flex-row items-center justify-between
-			px-5 transition-all md:w-max md:px-0
-		"
-		>
-			<Logo blok={blok.logo}></Logo>
+<header id="header" class={HEADER_STYLES}>
+	<div class={NAV_BASE_STYLES}>
+		<!-- This may looks weird. We store logo and burger menu for mobile
+		due to how we structured HTML/CSS.-->
+		<div in:fly={{ x: -30, duration: 200 }} class={LOGO_BURGER_CONTAINER_STYLES}>
+			{#if blok.logo && blok.logo.length > 0}
+				<Logo blok={blok.logo[0]}></Logo>
+			{/if}
 			<BurgerMenu {mobileMenuActive} {toggleMobileMenuActive}></BurgerMenu>
 		</div>
 
-		<MobileNav {mobileMenuActive} links={blok.nav_links} {toggleMobileMenuActive}></MobileNav>
-		<TabletDesktopNav links={blok.nav_links}></TabletDesktopNav>
+		<!-- All navigation links are in those 2 components -->
+		{#if blok.nav_links && blok.nav_links.length > 0}
+			<MobileNav {mobileMenuActive} links={blok.nav_links} {toggleMobileMenuActive}></MobileNav>
+			<TabletDesktopNav links={blok.nav_links}></TabletDesktopNav>
+		{/if}
+
+		<!-- Optional button -->
 		<div class="hidden lg:block">
-			<Button blok={blok.button[0]}></Button>
+			{#if blok.button && blok.button.length > 0}
+				<Button blok={blok.button[0]}></Button>
+			{/if}
 		</div>
 	</div>
 </header>

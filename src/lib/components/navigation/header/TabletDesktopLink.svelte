@@ -27,7 +27,7 @@
 		}, 0);
 	};
 
-	$effect(() => console.log('TabletDesktopLink ==================', link));
+	// $effect(() => console.log('TabletDesktopLink ==================', link));
 </script>
 
 <li class="tablet-desktop-link group relative" onmouseover={() => (ariaExpanded = true)} onmouseleave={() => (ariaExpanded = false)} onfocus={() => (ariaExpanded = true)} onblur={handleBlur}>

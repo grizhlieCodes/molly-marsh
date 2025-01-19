@@ -45,6 +45,7 @@ export interface ContainerStoryblok {
     | ContainerStoryblok
     | HeaderStoryblok
     | IconStoryblok
+    | ImageStoryblok
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
@@ -92,6 +93,7 @@ export interface ContainerStoryblok {
 }
 
 export interface HeaderStoryblok {
+  fixed_to_top?: boolean;
   logo: NavLogoStoryblok[];
   nav_links: NavLinkStoryblok[];
   button?: ButtonStoryblok[];
@@ -137,20 +139,6 @@ export interface IconStoryblok {
   [k: string]: any;
 }
 
-export interface NavLinkStoryblok {
-  main_link?: any;
-  url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
-  link_label: string;
-  icon?: IconStoryblok[];
-  link_description?: string;
-  sub_link_data?: any;
-  sub_links?: NavLinkStoryblok[];
-  sub_link_type?: "defaultLink" | "mobileMainLink";
-  _uid: string;
-  component: "nav_link";
-  [k: string]: any;
-}
-
 export interface AssetStoryblok {
   _uid?: string;
   id: number;
@@ -169,6 +157,64 @@ export interface AssetStoryblok {
   [k: string]: any;
 }
 
+export interface ImageStoryblok {
+  image?: AssetStoryblok;
+  figcaption?: string;
+  decorative_image?: boolean;
+  dimensions_and_display?: any;
+  aspect_ratio: "1:1" | "1.59:1" | "3:2" | "4:3" | "2:3" | "3:4" | "16:9" | "9:16" | "none";
+  max_width: "screen" | "100%" | "75%" | "50%" | "25%" | "large" | "medium" | "normal" | "small" | "none";
+  max_height: "screen" | "100%" | "75%" | "50%" | "25%" | "large" | "medium" | "normal" | "small" | "none";
+  min_height_unit: "rem" | "em" | "px" | "vh" | "%" | "none";
+  object_position:
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "center"
+    | "leftTop"
+    | "leftBottom"
+    | "rightTop"
+    | "rightBottom"
+    | "top20";
+  mix_blendmode:
+    | "normal"
+    | "multiply"
+    | "screen"
+    | "overlay"
+    | "darken"
+    | "lighten"
+    | "colorDodge"
+    | "colorBurn"
+    | "hardLight"
+    | "softLight"
+    | "difference"
+    | "exclusion"
+    | "hue"
+    | "saturation"
+    | "color"
+    | "luminosity";
+  data?: any;
+  image_quality: "original" | "large" | "medium" | "small";
+  _uid: string;
+  component: "image";
+  [k: string]: any;
+}
+
+export interface NavLinkStoryblok {
+  main_link?: any;
+  url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
+  link_label: string;
+  icon?: IconStoryblok[];
+  link_description?: string;
+  sub_link_data?: any;
+  sub_links?: NavLinkStoryblok[];
+  sub_link_type?: "defaultLink" | "mobileMainLink";
+  _uid: string;
+  component: "nav_link";
+  [k: string]: any;
+}
+
 export interface NavLogoStoryblok {
   url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
   logo_image?: AssetStoryblok;
@@ -184,6 +230,7 @@ export interface PageStoryblok {
     | ContainerStoryblok
     | HeaderStoryblok
     | IconStoryblok
+    | ImageStoryblok
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
@@ -209,6 +256,7 @@ export interface SectionStoryblok {
     | ContainerStoryblok
     | HeaderStoryblok
     | IconStoryblok
+    | ImageStoryblok
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
@@ -270,21 +318,7 @@ export interface TextStoryblok {
   Content?: any;
   content: string;
   text_id?: string;
-  text_type:
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h6"
-    | "h7"
-    | "paraXs"
-    | "paraSm"
-    | "paraBase"
-    | "paraLg"
-    | "paraXl"
-    | "overline"
-    | "quote"
-    | "sr";
+  text_type: "h1" | "h2" | "h3" | "h4" | "h6" | "h7" | "p" | "span" | "blockquote" | "cite" | "sr";
   Styling?: any;
   text_style:
     | "h1"
@@ -317,7 +351,7 @@ export interface TextStoryblok {
     | "redLight"
     | "black";
   rich_text?: RichtextStoryblok;
-  customCss?: string;
+  custom_css?: string;
   _uid: string;
   component: "text";
   [k: string]: any;

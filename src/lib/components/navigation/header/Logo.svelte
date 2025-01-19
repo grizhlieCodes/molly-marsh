@@ -3,7 +3,7 @@
 	import type { NavLogoStoryblok } from './headerTypes';
 	import { gapOptions } from './headerOptions';
 	let { blok }: { blok: NavLogoStoryblok } = $props();
-	let logo = $derived(blok[0]);
+	let logo = $derived(blok);
 	let gap = $state(blok.gap ?? gapOptions[blok.gap]);
 </script>
 
@@ -17,7 +17,7 @@
 			<img src="{logo.logo_image.filename}/m/300x0" alt={logo.logo_image.alt ?? 'logo'} />
 		{/if}
 		{#if logo.logo_text && logo?.logo_text.length > 0}
-			<span class="font-nav-logo text-logo-primary text-xl md:text-2xl -translate-y-0.5">{logo.logo_text}</span>
+			<span class="font-nav-logo text-logo-primary -translate-y-0.5 text-xl md:text-2xl">{logo.logo_text}</span>
 		{/if}
 	</a>
 </div>
