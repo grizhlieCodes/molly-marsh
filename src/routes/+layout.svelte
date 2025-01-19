@@ -16,12 +16,19 @@
 
 <DraggingStore></DraggingStore>
 
-<Header blok={data.navData}></Header>
+<div class="grid grid-cols-1
+grid-rows-[minmax(100px,max-content)_1fr_max-content] min-h-[150vh]">
+	<Header blok={data.navData}></Header>
 
-<div>
-	{#if data.url && data.storyblokApi}
-		<PageTransition url={data.url}>
-			{@render children()}
-		</PageTransition>
-	{/if}
+	<div class="row-start-2">
+		{#if data.url && data.storyblokApi}
+			<PageTransition url={data.url}>
+				{@render children()}
+			</PageTransition>
+		{/if}
+	</div>
+
+	<div class="w-full bg-surface-primary-800 min-h-72 row-start-3">
+
+	</div>
 </div>
