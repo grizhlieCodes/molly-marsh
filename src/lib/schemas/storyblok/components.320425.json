@@ -1368,6 +1368,149 @@
       "component_group_name": "01 - Layout"
     },
     {
+      "name": "custom_hero",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-19T14:45:20.578Z",
+      "updated_at": "2025-01-19T15:58:51.271Z",
+      "id": 6816913,
+      "schema": {
+        "must_haves": {
+          "type": "section",
+          "pos": 0,
+          "id": "TuHNVaVnRq-Gr5dp8F9ebw",
+          "keys": [
+            "hero_section_style",
+            "section_id",
+            "hero_heading",
+            "hero_image",
+            "hero_description",
+            "hero_cta"
+          ]
+        },
+        "hero_section_style": {
+          "type": "option",
+          "pos": 1,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "1ff0536e-e40f-42d1-b81d-38007372ad5f",
+              "name": "Fancy Column",
+              "value": "fancyColumn"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "fancyColumn",
+          "required": true,
+          "description": "This determines the style of the hero section. Please refer back to the CTS System in Figma if you're unsure of which section is which.",
+          "tooltip": true,
+          "id": "Je8NUc2PSQSnpIdXzPMu-g"
+        },
+        "section_id": {
+          "type": "text",
+          "pos": 2,
+          "id": "C0tsbvv2SnmiTv66GetZfg"
+        },
+        "section": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "tooltip": true,
+          "description": "Simply input the core ID, label and those sort of properties. The rest can be ignored as we will not be using the section component, just some data from the blok.",
+          "maximum": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "section"
+          ],
+          "id": "K8IHbloHTSCsigcYdw9W5Q"
+        },
+        "hero_heading": {
+          "type": "bloks",
+          "pos": 4,
+          "required": true,
+          "description": "Please select the Text component and create your heading with its preferred styling. ",
+          "tooltip": true,
+          "minimum": 1,
+          "maximum": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "id": "Q56BwOEXT_ODsdGxBYW-Qg",
+          "display_name": "Hero Heading"
+        },
+        "hero_image": {
+          "type": "bloks",
+          "pos": 5,
+          "required": true,
+          "description": "Select the Image component and provide your preferred image. It will be best if it's not styled too much as that may impact the hero section in unplanned ways.",
+          "tooltip": true,
+          "minimum": 1,
+          "maximum": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "image"
+          ],
+          "id": "0ZwAoddyQduFrlMEFQNDew"
+        },
+        "hero_description": {
+          "type": "bloks",
+          "pos": 6,
+          "required": true,
+          "description": "Please provide the description. This will often be \"how I can get you what I promised in my heading\". So briefly explain how you deliver the result you wish to deliver.",
+          "tooltip": true,
+          "minimum": 1,
+          "maximum": 1,
+          "default_value": "",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "id": "Bc4W-w9JS1in23gt8d-6vQ"
+        },
+        "hero_cta": {
+          "type": "bloks",
+          "pos": 7,
+          "maximum": 2,
+          "required": false,
+          "tooltip": true,
+          "description": "Select any buttons if you need them as CTAs (calls to action) for the hero section. It's advisable to use at least 1 CTA and a maximum of 2.",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "button"
+          ],
+          "id": "g7lbPSOYRoavo3MPvrBExA"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/fc9f3ba12b/hero.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "custom_hero",
+      "component_group_uuid": "026b46c7-0a4e-4b98-a71b-585c5a2b9771",
+      "color": "#3ea6a6",
+      "icon": "block-text-img-r",
+      "internal_tags_list": [
+        {
+          "id": 56285,
+          "name": "layout"
+        }
+      ],
+      "internal_tag_ids": [
+        "56285"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "01 - Layout"
+    },
+    {
       "name": "header",
       "display_name": "Header & Nav",
       "description": "Header & Navigation for the website",
@@ -1644,7 +1787,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-01-18T07:28:41.307Z",
-      "updated_at": "2025-01-18T09:46:04.764Z",
+      "updated_at": "2025-01-19T15:54:35.550Z",
       "id": 6815030,
       "schema": {
         "image": {
@@ -1659,16 +1802,40 @@
           "tooltip": true,
           "id": "o2BS78QlSiWdNdGRg94dBg"
         },
+        "custom_decoration": {
+          "type": "option",
+          "pos": 2,
+          "description": "Add custom decoration around the image with ::before & ::after pseudo elements.",
+          "tooltip": true,
+          "id": "TNP-5FmHS7qRSkDnOqeEJw",
+          "inline_label": false,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "48281ccf-003b-4c33-91ba-fc6e83c1a773",
+              "name": "Diagonal Backdrops",
+              "value": "diagonalBackdrops"
+            },
+            {
+              "_uid": "89190b27-34b1-46f2-b17f-c8d6a95d0250",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "required": true,
+          "exclude_empty_option": true,
+          "default_value": "none"
+        },
         "decorative_image": {
           "type": "boolean",
-          "pos": 2,
+          "pos": 3,
           "description": "If this image does not add any context to the surrounding text, toggle this \"on\" / \"true\". Then screen readers will be able to ignore this image and won't even mention it to anyone with visual impairments.",
           "tooltip": true,
           "id": "r-La9NEiTya6D09RHSQVSA"
         },
         "dimensions_and_display": {
           "type": "section",
-          "pos": 3,
+          "pos": 4,
           "keys": [
             "aspect_ratio",
             "max_width",
@@ -1683,7 +1850,7 @@
         },
         "aspect_ratio": {
           "type": "option",
-          "pos": 4,
+          "pos": 5,
           "use_uuid": true,
           "display_name": "Aspect Ratio",
           "id": "LaWQ6I8KTPuBkWlJ5HECdQ",
@@ -1742,7 +1909,7 @@
         },
         "max_width": {
           "type": "option",
-          "pos": 5,
+          "pos": 6,
           "use_uuid": true,
           "description": "Decide whether you need the image to have a maximum width.",
           "tooltip": true,
@@ -1805,7 +1972,7 @@
         },
         "max_height": {
           "type": "option",
-          "pos": 6,
+          "pos": 7,
           "use_uuid": true,
           "description": "Decide whether you need the image to have a maximum height.",
           "tooltip": true,
@@ -1868,7 +2035,7 @@
         },
         "min_height": {
           "type": "custom",
-          "pos": 7,
+          "pos": 8,
           "field_type": "storyblok-slider",
           "options": [
             {
@@ -1923,7 +2090,7 @@
         },
         "min_height_unit": {
           "type": "option",
-          "pos": 8,
+          "pos": 9,
           "use_uuid": true,
           "description": "If you have selected a 'min_height', please select what unit corresponds with it.",
           "required": true,
@@ -1966,7 +2133,7 @@
         },
         "object_position": {
           "type": "option",
-          "pos": 9,
+          "pos": 10,
           "use_uuid": true,
           "description": "Sometimes the container the image in is smaller than the image itself, and the effect is that the image is 'cut-off' at a certain point. With this option you can choose how to best position the image. If you need a more custom size, please use 'focal_point'.",
           "tooltip": true,
@@ -2029,7 +2196,7 @@
         },
         "mix_blendmode": {
           "type": "option",
-          "pos": 10,
+          "pos": 11,
           "use_uuid": true,
           "tooltip": true,
           "description": "Choose how this image should blend with the background.\n\n",
@@ -2122,7 +2289,7 @@
         },
         "border_radius": {
           "type": "custom",
-          "pos": 11,
+          "pos": 12,
           "description": "Border radius controls how sharp or curved the edges of the link are.",
           "tooltip": true,
           "field_type": "storyblok-slider",
@@ -2177,7 +2344,7 @@
         },
         "data": {
           "type": "section",
-          "pos": 12,
+          "pos": 13,
           "id": "L3yWfrGnSEqCrPcFTbzRZQ",
           "keys": [
             "image_quality",
@@ -2186,7 +2353,7 @@
         },
         "image_quality": {
           "type": "option",
-          "pos": 13,
+          "pos": 14,
           "use_uuid": true,
           "tooltip": true,
           "description": "This determines the quality of the images that are downloaded by controlling the requested-resolution from Storyblok's image service. If you need a small image, test the smaller sizes. If you need more sizes added, please request them.",
@@ -2219,7 +2386,7 @@
         },
         "base_width": {
           "type": "custom",
-          "pos": 14,
+          "pos": 15,
           "use_uuid": true,
           "description": "This is the mobile image width that is downloaded. The default is set to 500px, it will look presentable until the next breakpoint.",
           "tooltip": true,
@@ -2275,7 +2442,7 @@
         },
         "blur_filter": {
           "type": "custom",
-          "pos": 15,
+          "pos": 16,
           "use_uuid": true,
           "translatable": false,
           "description": "Blur your image.",
@@ -2333,7 +2500,7 @@
         },
         "sepia_filter": {
           "type": "custom",
-          "pos": 16,
+          "pos": 17,
           "description": "Add a sepia filter to your image. Sepia is essentially a warm color overtone over your image.",
           "tooltip": true,
           "field_type": "storyblok-slider",
@@ -2389,7 +2556,7 @@
         },
         "invert_filter": {
           "type": "custom",
-          "pos": 17,
+          "pos": 18,
           "tooltip": true,
           "description": "Invert the colors of this image.",
           "field_type": "storyblok-slider",
@@ -2444,7 +2611,7 @@
         },
         "grayscale_filter": {
           "type": "custom",
-          "pos": 18,
+          "pos": 19,
           "id": "Q1XE5VtcSKuva0LjkwgtHw",
           "tooltip": true,
           "description": "Remove color from your image.",
@@ -2512,13 +2679,13 @@
             "saturate_filter",
             "contrast_filter"
           ],
-          "pos": 19,
+          "pos": 20,
           "type": "tab",
           "id": "vpojNb0TRCe7KwGXXNszWQ"
         },
         "saturate_filter": {
           "type": "custom",
-          "pos": 20,
+          "pos": 21,
           "tooltip": true,
           "description": "Saturates or de-saturates an image.",
           "field_type": "storyblok-slider",
@@ -2573,7 +2740,7 @@
         },
         "contrast_filter": {
           "type": "custom",
-          "pos": 21,
+          "pos": 22,
           "translatable": false,
           "tooltip": true,
           "description": "Increase the contrast of your image.",
@@ -2971,7 +3138,7 @@
       "display_name": "Section",
       "description": null,
       "created_at": "2025-01-13T13:41:02.531Z",
-      "updated_at": "2025-01-15T10:13:45.990Z",
+      "updated_at": "2025-01-19T16:12:48.531Z",
       "id": 6788478,
       "schema": {
         "metaData": {
@@ -2993,14 +3160,6 @@
           "description": "The id by which this section can be referenced to in code.\nIf one word, simply input the name in lower caps.\nIf multiple words follow the kebab-format like so:\nsection-id-like-this",
           "tooltip": true,
           "regex": "^[a-z-]+$"
-        },
-        "section_label": {
-          "type": "text",
-          "pos": 2,
-          "id": "cpz3TU5gQsK-_6_FdymaNA",
-          "required": true,
-          "description": "A short sentence-long description of what this section is about. If the section is the 'benefits' section it could be: \"A list of benefits my service offers you.\"",
-          "tooltip": true
         },
         "type": {
           "type": "option",
@@ -3030,7 +3189,7 @@
           "type": "bloks",
           "pos": 4,
           "id": "-KiGMPIyR1ygx5wwqvU7dg",
-          "required": true
+          "required": false
         },
         "layout": {
           "type": "section",
@@ -3485,6 +3644,14 @@
           "description": "You can add custom CSS styling here. Ensure it's written as in-line css and every css property/value you add comes with an \" !important \" value as well.",
           "tooltip": true,
           "display_name": "Custom Inline CSS"
+        },
+        "section_labelledby": {
+          "type": "text",
+          "pos": 2,
+          "id": "cpz3TU5gQsK-_6_FdymaNA",
+          "required": true,
+          "description": "A short sentence-long description of what this section is about. If the section is the 'benefits' section it could be: \"A list of benefits my service offers you.\"",
+          "tooltip": true
         }
       },
       "image": "//a.storyblok.com/f/320425/x/c87b8137e7/section.png",
