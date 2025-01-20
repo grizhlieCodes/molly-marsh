@@ -22,6 +22,8 @@
 	});
 	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius}`);
 
+	$effect(() => console.log(imageStylesObj.objectPosition));
+
 	let CONTAINER_BASE_STYLES = `h-full w-full relative`;
 	let containerStylesObj = $state({
 		aspectRatio: ops.aspectRatioOptions[blok.aspect_ratio] ?? ops.aspectRatioOptions['1:1'],
@@ -54,16 +56,22 @@
 	<picture class="h-full w-full">
 		<!-- Low Quality Placeholder -->
 		{#if isLoading}
-			<img src="{blok.image.filename}/m/300x0" class="h-full w-full object-cover blur-lg" role="presentation" alt={undefined} />
+			<img
+				src="{blok.image.filename}/m/300x0"
+				class="h-full w-full
+			border border-red-500 object-cover blur-lg"
+				role="presentation"
+				alt={undefined}
+			/>
 		{/if}
 		<!-- Main Image -->
 		{#each imageSizes as { width, media }}
 			<source {media} srcset="{blok.image.filename}/m/{width}x0" type="image/webp" />
 		{/each}
 		<img
-			src="{image.filename}/m/{baseImageWidth}x0"
+			src="{blok.image.filename}/m/{baseImageWidth}x0"
 			alt={decorativeImg ? '' : blok.image.alt}
-			class={imageStyles}
+			class="{imageStyles}"
 			loading="lazy"
 			role={decorativeImg ? 'presentation' : undefined}
 			onload={() => {
@@ -73,10 +81,10 @@
 	</picture>
 </div>
 
-<style>
-	:global {
+<!-- <style> -->
+	<!-- /* :global {
 		.object-position-top-20 {
 			object-position: 50% 40%;
 		}
-	}
-</style>
+	} */ -->
+<!-- </style> -->

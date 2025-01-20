@@ -49,7 +49,7 @@
 		{/if}
 
 		<!-- Optional button -->
-		<div class="hidden lg:block">
+		<div class="hidden lt:block">
 			{#if blok.button && blok.button.length > 0}
 				<Button blok={blok.button[0]}></Button>
 			{/if}
