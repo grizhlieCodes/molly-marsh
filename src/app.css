@@ -5,16 +5,16 @@
 	/* BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS -
 	BREAKPOINTS */
 
-	--breakpoint-mm: 25rem;
-	--breakpoint-lm: 31rem;
-	--breakpoint-sm: 40rem;
-	--breakpoint-md: 48rem;
-	--breakpoint-lt: 53rem;
-	--breakpoint-lg: 64rem;
-	--breakpoint-vsd: 70rem;
-	--breakpoint-sd: 75rem;
-	--breakpoint-xl: 80rem;
-	--breakpoint-2xl: 96rem;
+	--breakpoint-mm: 25rem;    /* 400px */
+	--breakpoint-lm: 31rem;    /* 496px */
+	--breakpoint-sm: 40rem;    /* 640px */
+	--breakpoint-md: 48rem;    /* 768px */
+	--breakpoint-lt: 53rem;    /* 848px */
+	--breakpoint-lg: 64rem;    /* 1024px */
+	--breakpoint-vsd: 70rem;   /* 1120px */
+	--breakpoint-sd: 75rem;    /* 1200px */
+	--breakpoint-xl: 80rem;    /* 1280px */
+	--breakpoint-2xl: 96rem;   /* 1536px */
 
 	/* ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS */
 	--color-molly-dark-50: #ecf0ef;
