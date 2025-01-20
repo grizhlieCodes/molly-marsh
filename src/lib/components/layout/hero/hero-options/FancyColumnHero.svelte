@@ -2,17 +2,18 @@
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
 
 	let { blok }: { blok: any } = $props();
-	$inspect(blok);
+	let { section_id, section_labelledby } = $state(blok.section[0]);
 </script>
 
-<section id={blok?.hero_id} class="mx-auto w-[90vw]">
-	<div class="fancy-column-hero__heading">
+<section id={section_id} aria-labelledby={section_labelledby} class="mx-auto
+flex flex-col items-center gap-10 px-6 py-12 w-full max-w-4xl">
+	<div class="fancy-column-hero__heading w-full">
 		<StoryblokComponent blok={blok.hero_heading[0]}></StoryblokComponent>
 	</div>
-	<div class="fancy-column-hero__image">
+	<div class="fancy-column-hero__image aspect-square w-full">
 		<StoryblokComponent blok={blok.hero_image[0]}></StoryblokComponent>
 	</div>
-	<div class="fancy-column-hero__text">
+	<div class="fancy-column-hero__text w-full max-w-3xl">
 		<StoryblokComponent blok={blok.hero_description[0]}></StoryblokComponent>
 	</div>
 	<div class="fancy-column-hero__button">
@@ -23,3 +24,29 @@
 		{/if}
 	</div>
 </section>
+
+<style lang="postcss">
+	:global {
+		@media only screen and (max-width: 460px) {
+			.fancy-column-hero__image img {
+				aspect-ratio: 
+				object-fit: cover;
+				object-position: 60% 40%;
+			}
+		}
+		@media only screen and (min-width: 460px) {
+			.fancy-column-hero__image {
+				aspect-ratio: 2 / 1;
+			}
+			.fancy-column-hero__image img {
+			}
+		}
+		@media only screen and (min-width: 768px) {
+			.fancy-column-hero__image {
+				aspect-ratio: 413 / 144;
+			}
+			.fancy-column-hero__image img {
+			}
+		}
+	}
+</style>
