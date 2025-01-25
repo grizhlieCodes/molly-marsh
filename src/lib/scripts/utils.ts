@@ -1,3 +1,10 @@
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
+
 /**
  * Finds the index of the largest number in an array
  * @param {number[]} arr - Array of numbers to search
@@ -131,9 +138,7 @@ const addMonthsToYears = (notesArray, targetArray) => {
 		const noteYear = noteDate.getFullYear();
 		const targetYearIndex = targetArray.findIndex((target) => target.year === noteYear);
 		const noteMonthName = months[noteDate.getMonth()];
-		const targetMonthIndex = targetArray[targetYearIndex].months.findIndex(
-			(month) => month.month === noteMonthName
-		);
+		const targetMonthIndex = targetArray[targetYearIndex].months.findIndex((month) => month.month === noteMonthName);
 
 		const noteDay = noteDate.getDate();
 		const suffix = addDaySuffix(noteDay);
