@@ -22,9 +22,9 @@
 	});
 	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius}`);
 
-	$effect(() => console.log(imageStylesObj.objectPosition));
+	// $effect(() => console.log(imageStylesObj.objectPosition));
 
-	let CONTAINER_BASE_STYLES = `h-full w-full relative`;
+	let CONTAINER_BASE_STYLES = `relative h-full w-full`;
 	let containerStylesObj = $state({
 		aspectRatio: ops.aspectRatioOptions[blok.aspect_ratio] ?? ops.aspectRatioOptions['1:1'],
 		maxWidth: ops.maxWidthOptions[blok.max_width] ?? ops.maxWidthOptions.none,
@@ -52,7 +52,8 @@
 	// Add Focal point
 </script>
 
-<div style:min-height={minHeight} class="{containerStyles} {customDecorationStyling}" use:storyblokEditable={blok}>
+<div style:min-height={minHeight} class="{containerStyles}
+{customDecorationStyling} z-5" use:storyblokEditable={blok}>
 	<picture class="h-full w-full">
 		<!-- Low Quality Placeholder -->
 		{#if isLoading}
@@ -71,7 +72,7 @@
 		<img
 			src="{blok.image.filename}/m/{baseImageWidth}x0"
 			alt={decorativeImg ? '' : blok.image.alt}
-			class="{imageStyles}"
+			class={imageStyles}
 			loading="lazy"
 			role={decorativeImg ? 'presentation' : undefined}
 			onload={() => {
@@ -82,7 +83,7 @@
 </div>
 
 <!-- <style> -->
-	<!-- /* :global {
+<!-- /* :global {
 		.object-position-top-20 {
 			object-position: 50% 40%;
 		}

@@ -6,7 +6,7 @@
 </script>
 
 <nav class="md:block hidden">
-	<ul class="lt:gap-4 flex">
+	<ul class=" flex">
 		{#each links as link}
 			{@const linkEqualsCurrentPage = link.url.url === page.url.pathname}
 			<TabletDesktopLink {link} {linkEqualsCurrentPage} />

@@ -5,12 +5,16 @@
 	let { section_id, section_labelledby } = $state(blok.section[0]);
 </script>
 
-<section id={section_id} aria-labelledby={section_labelledby} class="mx-auto
-flex flex-col items-center gap-10 px-6 py-12 w-full max-w-4xl">
+<section
+	id={section_id}
+	aria-labelledby={section_labelledby}
+	class="mx-auto
+flex w-full max-w-4xl flex-col items-center gap-10 px-6 py-12"
+>
 	<div class="fancy-column-hero__heading w-full">
 		<StoryblokComponent blok={blok.hero_heading[0]}></StoryblokComponent>
 	</div>
-	<div class="fancy-column-hero__image aspect-square w-full">
+	<div class="fancy-column-hero__image aspect-3/2 w-full">
 		<StoryblokComponent blok={blok.hero_image[0]}></StoryblokComponent>
 	</div>
 	<div class="fancy-column-hero__text w-full max-w-3xl">

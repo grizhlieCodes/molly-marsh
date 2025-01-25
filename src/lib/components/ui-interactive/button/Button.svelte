@@ -18,18 +18,12 @@
 
 	let target = $state(opts.targetOptions[blok.target]);
 
-	let BASE_CLASSES = 'flex justify-center items-center duration-300 transition-all relative overflow-hidden z-10 rounded-full font-sans min-w-max cursor-pointer outline-offset-2';
+	let BASE_CLASSES = 'flex justify-center items-center duration-300 transition-all relative overflow-hidden z-10 rounded-full font-sans cursor-pointer outline-offset-2';
 
 	let buttonStyling = $derived(`${BASE_CLASSES} ${Object.values(buttonStyles).join(' ')}`);
 </script>
 
-<div
-	use:storyblokEditable={blok}
-	use:buttonHoverManager
-	class="button-link-container h-max {containerWidthStyling}
-group {blok.button_theme}"
-	style="--before-width: 0px;"
->
+<div use:storyblokEditable={blok} use:buttonHoverManager class="button-link-container h-max {containerWidthStyling} group {blok.button_theme}" style="--before-width: 0px;">
 	<Button.Root {target} href={blok.url.url} data-sveltekit-preload-code="" class={buttonStyling} data-element="button-link" aria-label={blok.label}>
 		{#if blok.content && blok.content.length > 0}
 			{#each blok.content as blokk}

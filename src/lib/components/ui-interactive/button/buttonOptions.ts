@@ -38,7 +38,7 @@ export const themeStylingOptions: Type.ThemeOptions = {
 // };
 export const widthStylingOptions: Type.WidthOptions = {
 	full: 'w-full',
-	max: 'w-max'
+	max: 'w-full max-w-max'
 };
 
 export const targetOptions: Type.TargetOptions = {
