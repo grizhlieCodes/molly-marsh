@@ -27,23 +27,20 @@
 		paddingX: ops.xPaddingOptions[blok.horizontal_padding.value] ?? ops.xPaddingOptions[0],
 		bg: ops.backgroundOptions[blok.background_color] ?? ops.xPaddingOptions[0],
 		overflow: ops.overflowOptions[blok.overflow] ?? ops.overflowOptions.visible,
-		borderRadius: ops.borderRadiusOptions[blok.border_radius.value] ?? ops.borderRadiusOptions[0]
+		borderRadius: ops.borderRadiusOptions[blok.border_radius.value] ?? ops.borderRadiusOptions[0],
+		borderColor: ops.borderColorOptions[blok.border_color] ?? ops.borderColorOptions.none,
+		borderThickness: ops.borderThicknessOptions[blok.border_thickness.value] ?? ops.borderThicknessOptions[0]
 	});
 	let minimum_height = $state(blok.min_height.value !== 0 ? `${blok.min_height.value}${blok.min_height_unit}` : undefined);
 	let minimum_width = $state(blok.min_width.value !== 0 ? `${blok.min_width.value}${blok.min_width_unit}` : undefined);
 
 	// All styling string
 	let styling = $derived(`${BASE_CLASSES} ${Object.values(styles).join(' ')} ${blok.container_class}`);
+
+	// $effect(() => console.log(minimum_width, minimum_height));
 </script>
 
-<div
-	id={blok.container_id}
-	use:storyblokEditable={blok}
-	class={styling}
-	style:min-height={minimum_height}
-	style:min-width={minimum_width}
-	style={blok.customStyling}
->
+<div id={blok.container_id} use:storyblokEditable={blok} class={styling} style:min-height={minimum_height} style:min-width={minimum_width} style={blok.customStyling}>
 	{#each blok.blocks as blokk}
 		<StoryblokComponent blok={blokk} />
 	{/each}

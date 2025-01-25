@@ -51,20 +51,25 @@ export interface ContainerStoryblok {
 		plugin: 'storyblok-slider';
 		value: number; // 0 - 1000
 	};
-	min_width_unit?: '' | 'rem' | 'em' | 'px' | 'viewWidth' | 'perc' | 'none';
+	min_width_unit?: '' | 'rem' | 'em' | 'px' | 'vw' | '%' | 'none';
 	min_height: {
 		plugin: 'storyblok-slider';
 		value: number; // 0 - 100
 	};
-	min_height_unit?: '' | 'rem' | 'em' | 'px' | 'viewHeight' | 'perc' | 'none';
+	min_height_unit?: '' | 'rem' | 'em' | 'px' | 'vh' | '%' | 'none';
 
 	styling?: any;
-	background_color: 'none' | 'default' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950';
+	background_color: 'none' | 'default' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950' | 'secondary-50' | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'secondary-800' | 'secondary-900' | 'secondary-950';
+	border_color: 'none' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950' | 'secondary-50' | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'secondary-800' | 'secondary-900' | 'secondary-950';
 	overflow: 'auto' | 'hidden' | 'scroll' | 'visible';
 	customStyling?: string;
 	border_radius: {
 		plugin: 'storyblok-slider';
 		value: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+	};
+	border_thickness: {
+		plugin: 'storyblok-slider';
+		value: 0 | 1 | 2 | 3 | 4;
 	};
 
 	_uid: string;
@@ -100,9 +105,16 @@ export type AlignSelfOptions = Record<AlignSelfType, string>;
 export type HeightType = '' | 'full' | 'max' | 'unset';
 export type HeightOptions = Record<HeightType, string>;
 
-// Background options
-export type BackgroundType = 'none' | 'default' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950';
+// Background types
+export type BackgroundType = 'none' | 'default' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950' | 'secondary-50' | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'secondary-800' | 'secondary-900' | 'secondary-950';
 export type BackgroundOptions = Record<BackgroundType, string>;
+
+// Border types
+export type BorderType = 'none' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950' | 'secondary-50' | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'secondary-800' | 'secondary-900' | 'secondary-950';
+export type BorderOptions = Record<BorderType, string>;
+
+export type BorderThickness = '0' | '1' | '2' | '3' | '4';
+export type BorderThicknessOptions = Record<BorderThickness, string>;
 
 // Overflow options
 export type OverflowType = 'hidden' | 'scroll' | 'auto' | 'visible';
