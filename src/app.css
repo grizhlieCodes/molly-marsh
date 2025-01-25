@@ -1,20 +1,23 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @import '../static/fonts.css';
+
+
 
 @theme {
 	/* BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS -
 	BREAKPOINTS */
 
-	--breakpoint-mm: 25rem;    /* 400px */
-	--breakpoint-lm: 31rem;    /* 496px */
-	--breakpoint-sm: 40rem;    /* 640px */
-	--breakpoint-md: 48rem;    /* 768px */
-	--breakpoint-lt: 53rem;    /* 848px */
-	--breakpoint-lg: 64rem;    /* 1024px */
-	--breakpoint-vsd: 70rem;   /* 1120px */
-	--breakpoint-sd: 75rem;    /* 1200px */
-	--breakpoint-xl: 80rem;    /* 1280px */
-	--breakpoint-2xl: 96rem;   /* 1536px */
+	--breakpoint-mm: 25rem; /* 400px */
+	--breakpoint-lm: 31rem; /* 496px */
+	--breakpoint-sm: 40rem; /* 640px */
+	--breakpoint-md: 48rem; /* 768px */
+	--breakpoint-lt: 53rem; /* 848px */
+	--breakpoint-lg: 64rem; /* 1024px */
+	--breakpoint-vsd: 70rem; /* 1120px */
+	--breakpoint-sd: 75rem; /* 1200px */
+	--breakpoint-xl: 80rem; /* 1280px */
+	--breakpoint-2xl: 96rem; /* 1536px */
 
 	/* ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS - ADDITIONAL COLORS */
 	--color-molly-dark-50: #ecf0ef;
@@ -150,7 +153,6 @@
 	/* Header + Nav */
 	--color-header-surface-primary: var(--color-surface-primary-50);
 	--color-header-outline-primary: var(--color-surface-primary-100);
-
 
 	/* Navigation Links */
 	--color-navlink-text-primary: var(--color-body-primary-900);
