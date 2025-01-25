@@ -9,14 +9,16 @@ import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 import { default as page } from '$lib/components/layout/Page.svelte';
 import { default as section } from '$lib/components/layout/section/Section.svelte';
 import { default as container } from '$lib/components/layout/container/Container.svelte';
+import { default as container_two } from '$lib/components/layout/container-two/ContainerTwo.svelte';
 import { default as custom_hero } from '$lib/components/layout/hero/CustomHero.svelte';
-
 
 // 02 - UI
 import { default as simple_text } from '$lib/components/ui/SimpleText.svelte';
 import { default as text } from '$lib/components/ui/text/Text.svelte';
+import { default as embed_text } from '$lib/components/ui/text/EmbedText.svelte';
 import { default as icon } from '$lib/components/ui/Icon.svelte';
 import { default as image } from '$lib/components/ui/image/Image.svelte';
+import { default as svg_divider } from '$lib/components/ui/svg-divider/SvgDivider.svelte';
 
 // 03 - UI: Interactive
 import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
@@ -29,19 +31,22 @@ import { default as button } from '$lib/components/ui-interactive/button/Button.
 
 export const load: LayoutServerLoad = async ({ url }) => {
 	storyblokInit({
-		accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN,
+		accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // this is actually a preview token, ignore
 		use: [apiPlugin],
 		components: {
 			// Layout
 			page,
 			section,
 			container,
+			container_two,
 			custom_hero,
 			// UI
 			simple_text,
 			text,
+			embed_text,
 			icon,
 			image,
+			svg_divider,
 			// UI: Interactive
 			button
 			// Navigation
@@ -65,10 +70,3 @@ export const load: LayoutServerLoad = async ({ url }) => {
 		navData: navData?.data?.story?.content
 	};
 };
-
-// // Basic version
-// export const load: LayoutServerLoad = async ({ url }) => {
-// 	return {
-// 		url: url.pathname
-// 	};
-// };
