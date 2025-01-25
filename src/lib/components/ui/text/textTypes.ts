@@ -1,11 +1,11 @@
 export interface TextStoryblok {
 	// Content?: any;
-	content: string;
+	content?: string;
 	text_id?: string;
-	text_type: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h7' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr';
+	text_type: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h7' | 'p' | 'span' | 'overline' | 'quote' | 'sr';
 	// Styling?: any;
-    custom_css?: string;
-	text_style: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h7' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
+	custom_css?: string;
+	text_style: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
 
 	text_align: 'left' | 'center' | 'right' | 'inherit';
 	text_color_overwrite?: '' | 'primaryDark' | 'primaryDefault' | 'primaryMedium' | 'primaryLight' | 'secondaryDark' | 'secondaryDefault' | 'secondaryMedium' | 'secondaryLight' | 'redDark' | 'redMid' | 'redLight' | 'black';
@@ -14,6 +14,16 @@ export interface TextStoryblok {
 	max_width: {
 		plugin: 'storyblok-slider';
 		value: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+	};
+
+	font_weight_set: {
+		plugin: 'storyblok-slider';
+		value: 0 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+	};
+
+	font_weight_variable: {
+		plugin: 'storyblok-slider';
+		value: number;
 	};
 
 	_uid: string;
@@ -44,7 +54,7 @@ export interface Styles {
 }
 
 // Text type options
-export type TextTypeValue = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h7' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
+export type TextTypeValue = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
 export type TextTypeOptions = Record<TextTypeValue, string>;
 
 // Text style options (same as TextTypeValue)
@@ -62,3 +72,7 @@ export type TextColorOverwriteOptions = Record<TextColorOverwriteValues, string>
 // Max width options (similar to SpacingKey)
 export type TextMaxWidthValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
 export type TextMaxWidthOptions = Record<TextMaxWidthValue, string>;
+
+export type FontWeightSet = {
+	[K in 0 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900]: string;
+};

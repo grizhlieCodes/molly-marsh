@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { cn } from '$lib/scripts/utils';
 	import type { TextStoryblok } from './textTypes';
 	import * as ops from './textOptions';
-	import { storyblokEditable, renderRichText, RichTextSchema } from '@storyblok/svelte';
+	import { storyblokEditable, renderRichText, RichTextSchema, StoryblokComponent } from '@storyblok/svelte';
 
 	let { blok }: { blok: TextStoryblok } = $props();
 
@@ -17,6 +18,13 @@
 		}
 	};
 
+	// Font Weight
+	// 2 options
+	// Set Font Weight
+	// 100-900
+	// Variable Font Weight
+	// 1-900
+
 	const renderedContent = $derived(renderRichText(blok.rich_text, { schema: customStoryblokRichTextSchema }));
 	let renderHTML = $derived(renderedContent !== '');
 
@@ -27,14 +35,51 @@
 		textColOverwrite: blok.text_color_overwrite && blok.text_color_overwrite.length > 0 ? ops.textColorOverwrites[blok.text_color_overwrite] : ''
 	});
 
-	let classStyling = $state(`${Object.values(stylesObject).join(' ')} `);
 	let style = $state(blok.custom_css);
+
+	let mode = $state(blok?.mode ? blok?.mode : 'text');
+
+	$inspect(blok);
+	let useVariableFontWeight = $state(blok.font_weight_variable.value > 0 ? true : false);
+	let variableFontWeight = $state(useVariableFontWeight ? `${blok.font_weight_variable.value}` : undefined);
+	let customSetFontWeight = $state(!useVariableFontWeight && blok.font_weight_set && blok.font_weight_set.value > 0 ? ops.fontWeightSetOptions[blok.font_weight_set.value] : '');
+
+	let classStyling = $state(cn(Object.values(stylesObject).join(' '), customSetFontWeight));
+	// let forceBreaks = $state(true ? 'force-breaks' : undefined) // Only used
+	// for headings perhaps -> but then we lose the remaining styling, which sucks
 </script>
 
-<svelte:element this={blok.text_type} class={classStyling} id={blok.text_id} use:storyblokEditable={blok} {style}>
-	{#if renderHTML}
-		{@html renderedContent}
-	{:else}
-		{blok.content}
+<svelte:element this={blok.text_type} class={classStyling} id={blok.text_id} use:storyblokEditable={blok} {style} style:font-weight={variableFontWeight}>
+	{#if mode === 'text' || blok.multi_line_bloks.length === 0}
+		{#if renderHTML}
+			<div class="custom-prose">
+				{@html renderedContent}
+			</div>
+		{:else}
+			{blok.content}
+		{/if}
+	{:else if mode === 'multi-line' && blok.multi_line_bloks && blok.multi_line_bloks.length > 0}
+		{#each blok.multi_line_bloks as blokk, index}
+			{@const space = blokk.mode === 'inline' ? 'inline' : 'block'}
+			{@const lastItemInArray = index - 1 === blok.multi_line_bloks.length}
+			<StoryblokComponent blok={blokk}></StoryblokComponent>
+			{#if space === 'inline' && !lastItemInArray}
+				&nbsp;
+			{/if}
+		{/each}
 	{/if}
 </svelte:element>
+
+<style>
+	:global {
+		.custom-prose {
+			& ul {
+				padding-left: 1.5rem;
+			}
+			& li {
+				list-style-type: disc;
+				list-style-position: outside;
+			}
+		}
+	}
+</style>
