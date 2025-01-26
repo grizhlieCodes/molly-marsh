@@ -8,6 +8,7 @@
 	// If we're dragging, set so. Useful for some functionality.
 	import DraggingStore from '$lib/svelte/utils/DraggingStore.svelte';
 	import Header from '$lib/components/navigation/header/Header.svelte';
+	import Footer from '$lib/components/navigation/footer/Footer.svelte';
 
 	// $effect(() => {
 	// 	console.log('Effect: ', data);
@@ -16,11 +17,13 @@
 
 <DraggingStore></DraggingStore>
 
-<div class="grid grid-cols-1
-grid-rows-[minmax(100px,max-content)_1fr_max-content] min-h-[150vh]">
+<div
+	class="grid min-h-screen
+grid-cols-1 grid-rows-[minmax(100px,max-content)_1fr_max-content]"
+>
 	<Header blok={data.navData}></Header>
 
-	<div class="row-start-2">
+	<div class="row-start-2 h-full w-full">
 		{#if data.url && data.storyblokApi}
 			<PageTransition url={data.url}>
 				{@render children()}
@@ -28,7 +31,5 @@ grid-rows-[minmax(100px,max-content)_1fr_max-content] min-h-[150vh]">
 		{/if}
 	</div>
 
-	<div class="w-full bg-surface-primary-800 min-h-72 row-start-3">
-
-	</div>
+	<Footer blok={data.navData}></Footer>
 </div>
