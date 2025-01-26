@@ -41,7 +41,8 @@ export const textStyles: Type.TextStyleOptions = {
 	overline: 'font-heading font-normal text-base md:text-lg lg:text-xl text-body-neutral-300 tracking-[4px] md:tracking-[6px] lg:tracking-[10px]',
 	quote: 'font-heading font-normal text-4xl md:text-5xl lg:text-6xl text-body-neutral-600',
 	sr: 'sr-only',
-	internal_error: 'text-lg underline text-red-500'
+	internal_error: 'text-lg underline text-red-500',
+	navLink: 'font-nav font-medium text-lg lg:text-xl leading-7 text-body-neutral-600'
 };
 export const textColorOverwrites: Type.TextColorOverwriteOptions = {
 	primaryDark: '!text-body-primary-900',

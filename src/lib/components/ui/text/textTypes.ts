@@ -5,7 +5,7 @@ export interface TextStoryblok {
 	text_type: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h7' | 'p' | 'span' | 'overline' | 'quote' | 'sr';
 	// Styling?: any;
 	custom_css?: string;
-	text_style: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
+	text_style: 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error' | 'navLink';
 
 	text_align: 'left' | 'center' | 'right' | 'inherit';
 	text_color_overwrite?: '' | 'primaryDark' | 'primaryDefault' | 'primaryMedium' | 'primaryLight' | 'secondaryDark' | 'secondaryDefault' | 'secondaryMedium' | 'secondaryLight' | 'redDark' | 'redMid' | 'redLight' | 'black';
@@ -54,7 +54,7 @@ export interface Styles {
 }
 
 // Text type options
-export type TextTypeValue = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error';
+export type TextTypeValue = 'h1' | 'h2' | 'h3' | 'h4' | 'h6' | 'h8' | 'h9' | 'h10' | 'h11' | 'h12' | 'paraXs' | 'paraSm' | 'paraBase' | 'paraLg' | 'paraXl' | 'overline' | 'quote' | 'sr' | 'internal_error' | 'navLink';
 export type TextTypeOptions = Record<TextTypeValue, string>;
 
 // Text style options (same as TextTypeValue)
