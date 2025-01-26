@@ -2,8 +2,6 @@
 @plugin "@tailwindcss/typography";
 @import '../static/fonts.css';
 
-
-
 @theme {
 	/* BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS - BREAKPOINTS -
 	BREAKPOINTS */
@@ -76,6 +74,19 @@
 	--color-body-neutral-800: var(--color-zinc-800);
 	--color-body-neutral-900: var(--color-zinc-900);
 	--color-body-neutral-950: var(--color-zinc-950);
+
+	/* BACKGROUND (SECONDARY) */
+	--color-surface-secondary-50: var(--color-body-neutral-50);
+	--color-surface-secondary-100: var(--color-body-neutral-100);
+	--color-surface-secondary-200: var(--color-body-neutral-200);
+	--color-surface-secondary-300: var(--color-body-neutral-300);
+	--color-surface-secondary-400: var(--color-body-neutral-400);
+	--color-surface-secondary-500: var(--color-body-neutral-500);
+	--color-surface-secondary-600: var(--color-body-neutral-600);
+	--color-surface-secondary-700: var(--color-body-neutral-700);
+	--color-surface-secondary-800: var(--color-body-neutral-800);
+	--color-surface-secondary-900: var(--color-body-neutral-900);
+	--color-surface-secondary-950: var(--color-body-neutral-950);
 
 	/* BODY --> Primary */
 	--color-body-primary-50: var(--color-molly-50);

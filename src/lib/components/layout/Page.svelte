@@ -21,7 +21,7 @@
 <main
 	aria-label={blok.mainAriaLabel}
 	id="{page.route.id === '/' && page.route.id ? 'home' : page.route}-main"
-	class=" w-full"
+	class=" w-full h-full"
 	style:position={blok.pagePosition}
 	use:storyblokEditable={blok}
 >
