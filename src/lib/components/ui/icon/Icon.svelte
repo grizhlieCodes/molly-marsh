@@ -6,6 +6,7 @@
 	import { storyblokEditable } from '@storyblok/svelte';
 
 	let { blok }: { blok: any } = $props();
+	import * as ops from './iconOptions';
 
 	// export let blok: { icon: keyof typeof paths };
 
@@ -48,16 +49,14 @@
 	};
 
 	let path = $state(paths[blok.icon]);
-	let combinedClasses = $state(`${width} ${height}`);
+	let strokeCol = $state(blok.icon_stroke && blok.icon_stroke !== 'none' ? ops.strokeColorOptions[blok.icon_stroke] : ops.strokeColorOptions.none);
+	let fillCol = $state(blok.icon_fill && blok.icon_fill !== 'none' ? ops.fillColorOptions[blok.icon_fill] : ops.fillColorOptions.none);
+	let combinedClasses = $state(`${width} ${height} ${strokeCol} ${fillCol}`);
 </script>
 
 {#if blok.icon !== '' && blok.icon}
 	<div use:storyblokEditable={blok} style={blok.custom_css}>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			class="{combinedClasses} fill-inherit stroke-inherit transition-colors duration-200"
-			viewBox={viewbox}
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" class="{combinedClasses} fill-inherit stroke-inherit transition-colors duration-200" viewBox={viewbox}>
 			{@html path}
 		</svg>
 	</div>
