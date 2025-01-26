@@ -218,1429 +218,8 @@
       "name": "container",
       "display_name": "Container",
       "description": "Container is essentially a powerful div with lots of layout functionality.",
-      "created_at": "2025-01-14T07:34:43.734Z",
-      "updated_at": "2025-01-21T09:58:48.465Z",
-      "id": 6791410,
-      "schema": {
-        "metaData": {
-          "type": "section",
-          "pos": 0,
-          "keys": [
-            "section_id",
-            "blocks",
-            "container_id",
-            "container_class",
-            "storyblok_name"
-          ],
-          "id": "gLJVvmv7TJmCr8GAtWvEFw"
-        },
-        "storyblok_name": {
-          "type": "text",
-          "pos": 1,
-          "required": false,
-          "description": "This is how you will be able to recognise what this container \"contains\" when looking in the visual editor. So just 1-2 descriptive words to help you understand that this container represents.",
-          "tooltip": true,
-          "id": "MWDtLgelT9ec-avTahmPZQ"
-        },
-        "blocks": {
-          "type": "bloks",
-          "pos": 2,
-          "id": "-KiGMPIyR1ygx5wwqvU7dg",
-          "required": true,
-          "description": "Fill this with the content you wish to populate the container with.",
-          "tooltip": true
-        },
-        "container_id": {
-          "type": "text",
-          "pos": 3,
-          "id": "voEFo39mT-i-Txa-k6_AaQ",
-          "required": false,
-          "description": "The id by which this container can be referenced to in code.\nIf one word, simply input the name in lower caps.\nIf multiple words follow the kebab-format like so:\nsection-id-like-this",
-          "tooltip": true,
-          "regex": "^[a-z-]*$",
-          "display_name": "Container ID"
-        },
-        "container_class": {
-          "type": "text",
-          "pos": 4,
-          "display_name": "Container Class",
-          "regex": "^(?!-)(?!.*--)(?!^[0-9])[A-Za-z0-9-_]*(?<!-)$",
-          "description": "Same as id, this can be used for DOM manipulation or other means. ",
-          "tooltip": true,
-          "id": "yt6zGOhdTguzHM2pKN0T0g"
-        },
-        "layout": {
-          "type": "section",
-          "pos": 5,
-          "id": "yxuqtB6eTSK0Re_uXmmo_Q",
-          "keys": [
-            "justify_items",
-            "align_items",
-            "gap",
-            "justify_content",
-            "content_direction",
-            "wrap_content"
-          ]
-        },
-        "content_direction": {
-          "type": "option",
-          "pos": 6,
-          "use_uuid": true,
-          "description": "This dictates the direction of your content. \nRow = Left to Right, Single column on mobile.\nOnly Row = Left to Right\nColumn = Top to Bottom",
-          "required": true,
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "35b7f591-32f2-4d67-a7e9-8eccda52d0e8",
-              "name": "Row",
-              "value": "row"
-            },
-            {
-              "_uid": "9e0e21b7-c59f-410c-96a6-257ad8ab0c72",
-              "value": "onlyRow",
-              "name": "Only Row"
-            },
-            {
-              "_uid": "c8dc0e8e-5e5b-4e78-920e-1a86cbc4410e",
-              "value": "column",
-              "name": "Column"
-            },
-            {
-              "_uid": "ea6a8bc9-6ddf-449f-b7ef-fc47e3774e89",
-              "value": "rowReversed",
-              "name": "Row Reversed"
-            },
-            {
-              "_uid": "58a348c7-570b-4af4-9628-78ebae82f0d9",
-              "value": "columnReversed",
-              "name": "Column Reversed"
-            }
-          ],
-          "default_value": "column",
-          "display_name": "Content Direction",
-          "id": "1DOX5WvhT6y0dHfH78ID4g",
-          "exclude_empty_option": true
-        },
-        "justify_content": {
-          "type": "option",
-          "pos": 7,
-          "use_uuid": true,
-          "display_name": "Justify Content",
-          "id": "7gACCItqQ6eF55Ri3F7YDQ",
-          "required": true,
-          "description": "Control how the items in this section are positioned along the section's main axis.",
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "1e7023c7-d2cb-4a81-bc29-6d91b6a2bf4a",
-              "value": "start",
-              "name": "Start"
-            },
-            {
-              "_uid": "6862990b-7395-4cfc-ac63-23dcb834e27c",
-              "value": "center",
-              "name": "Center"
-            },
-            {
-              "_uid": "e7983c46-980b-4425-b099-a2c680c4b9e3",
-              "value": "end",
-              "name": "End"
-            },
-            {
-              "_uid": "105e8b07-d816-493b-afad-6c7ca3b2a499",
-              "value": "stretch",
-              "name": "Stretch"
-            },
-            {
-              "_uid": "d114bdf4-35e3-4da1-8cd5-90920bd1d7c3",
-              "value": "between",
-              "name": "Between"
-            },
-            {
-              "_uid": "e69b9834-b50e-4c24-8fff-74fbd567949d",
-              "value": "around",
-              "name": "Around"
-            },
-            {
-              "_uid": "f256b4c4-829d-4f5b-985f-87cbd0cead24",
-              "value": "evenly",
-              "name": "Evenly"
-            },
-            {
-              "_uid": "7c56c8e5-6b8d-45c5-9283-44a3d2cee996",
-              "name": "Normal",
-              "value": "normal"
-            }
-          ],
-          "default_value": "center",
-          "exclude_empty_option": true
-        },
-        "align_items": {
-          "type": "option",
-          "pos": 8,
-          "use_uuid": true,
-          "id": "ubeAW1eyRTyZM8dfI0uNjg",
-          "description": "This defines how your content aligns across the secondary axis. If you have 2 items inside this container, and your content direction is a \"row\", this can choose whether both are aligned to the top, bottom, stretching across the entire container, etc. \nExperiment and see how it works.",
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "3e5d2564-5cc4-43e2-9f95-66ef2640b0d4",
-              "name": "Start",
-              "value": "start"
-            },
-            {
-              "_uid": "ef2b812f-d255-4346-9922-43e24f54eb76",
-              "value": "end",
-              "name": "End"
-            },
-            {
-              "_uid": "01bd194d-5196-4f0e-8d8f-cbef51b85453",
-              "value": "center",
-              "name": "Center"
-            },
-            {
-              "_uid": "534a3650-cc59-477e-a185-0ec3fe048285",
-              "value": "baseline",
-              "name": "Baseline"
-            },
-            {
-              "_uid": "aa7e193c-3a6a-46ba-8667-6f562a14e7ae",
-              "value": "stretch",
-              "name": "Stretch"
-            }
-          ],
-          "default_value": "stretch",
-          "required": true,
-          "exclude_empty_option": true
-        },
-        "wrap_content": {
-          "type": "option",
-          "pos": 9,
-          "use_uuid": true,
-          "required": true,
-          "display_name": "Wrap Content",
-          "description": "This allows the direct-child elements to wrap themselves around the column/row.",
-          "options": [
-            {
-              "_uid": "889ec24d-c300-4e4d-a29b-d750f24da936",
-              "name": "Wrap",
-              "value": "wrap"
-            },
-            {
-              "_uid": "c07dd1dd-02dd-4fbe-87ac-b1de6610f9a1",
-              "value": "noWrap",
-              "name": "No Wrap"
-            }
-          ],
-          "default_value": "noWrap",
-          "id": "ksRNfxXnQmWCi5ALlVQOyA",
-          "tooltip": true,
-          "exclude_empty_option": true
-        },
-        "gap": {
-          "type": "custom",
-          "pos": 10,
-          "id": "3CbPj7tqTSef0EUm5ZYFrw",
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "06a06b95-6f88-41b7-b23b-458917fb8244"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "0ed4da73-07f6-4fc5-a878-c10494402902"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "126a1b54-bd0f-4d6f-a635-efcad0b8d974"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "8429f84a-d19c-493b-ba09-25a9a16f8b93"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "10d2155b-471d-4494-a1ec-5ea710f932a5"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "7e25c5b8-b46b-4557-9031-4b79d97e8444"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "c728ac5e-961c-456f-a05a-7712340c0000"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "5b456c93-1f00-4b03-80a2-a744e72ebf0a"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "0c5d3ab6-1896-45d3-ae2b-e87bb342e0e5"
-            }
-          ],
-          "description": "This is the gap between the elements (bloks) within this section. So the amount of space between 'items' you add. ",
-          "tooltip": true,
-          "display_name": "Content Gap"
-        },
-        "child_layout": {
-          "type": "section",
-          "pos": 11,
-          "display_name": "Child Layout",
-          "id": "ccolXsG5QsyHrfc2cODvGA",
-          "keys": [
-            "flex",
-            "align_self"
-          ]
-        },
-        "flex": {
-          "type": "option",
-          "pos": 12,
-          "use_uuid": true,
-          "required": true,
-          "description": "This is a flex-child property. You can set the \nFlex Grow + Flex Shrink + Flex Basis with this single property.\nDefault     =  1 1 0%\nFlex Auto  = 1 1 auto\nFlex Initial = 0 1 auto\nFlex None = none",
-          "tooltip": true,
-          "id": "SARuKkGoSpWjM_SzHkpPYQ",
-          "options": [
-            {
-              "_uid": "b02994bf-e902-475d-8829-c9e01b87e2bc",
-              "name": "Default",
-              "value": "default"
-            },
-            {
-              "_uid": "a9954a98-2fd9-4793-ab05-5f8a3839795b",
-              "value": "flexAuto",
-              "name": "Flex Auto"
-            },
-            {
-              "_uid": "c06ac58a-58fa-430a-9548-f874998d66cf",
-              "value": "flexInitial",
-              "name": "Flex Initial"
-            },
-            {
-              "_uid": "de97086d-28a2-4550-ae86-6c50a614b1d7",
-              "value": "flexNone",
-              "name": "None"
-            }
-          ],
-          "default_value": "flexAuto",
-          "exclude_empty_option": true
-        },
-        "align_self": {
-          "type": "option",
-          "pos": 13,
-          "use_uuid": true,
-          "description": "Override for the flex parent's align-items value. We can align the flex-child-item on the cross-axis.",
-          "required": true,
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "37b998e9-f50c-48be-a9eb-77dba2862967",
-              "name": "Self Auto",
-              "value": "selfAuto"
-            },
-            {
-              "_uid": "db062d90-f659-4e78-b48b-4b483a6fdf82",
-              "value": "selfStart",
-              "name": "Self Start"
-            },
-            {
-              "_uid": "e7ecdb8b-9ac2-4156-868a-216e675d22ce",
-              "value": "selfEnd",
-              "name": "Self End"
-            },
-            {
-              "_uid": "4895bb93-e1f2-4eba-b7ab-5d0b11d9dcd8",
-              "value": "selfCenter",
-              "name": "Self Center"
-            },
-            {
-              "_uid": "df9f3978-cc0d-437d-8fd3-0dc7d35fab00",
-              "value": "selfStretch",
-              "name": "Self Stretch"
-            },
-            {
-              "_uid": "a3db621c-1d7d-4dfe-9cc4-171da3fc4095",
-              "value": "selfBaseline",
-              "name": "Self Baseline"
-            }
-          ],
-          "default_value": "selfAuto",
-          "exclude_empty_option": true,
-          "id": "pqRFMg2kR3mN4CNe4_dBFg"
-        },
-        "external_spacing": {
-          "type": "section",
-          "pos": 14,
-          "id": "TL_AHPnKQmqLHoNQc7xJKg",
-          "keys": [
-            "margin_top",
-            "margin_bottom"
-          ]
-        },
-        "margin_top": {
-          "type": "custom",
-          "pos": 15,
-          "use_uuid": true,
-          "description": "This pushes other content away on top of this container.",
-          "tooltip": true,
-          "display_name": "Margin Top",
-          "id": "Bpq3TqQ7SSC0mUlqRydFFw",
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "72c279bf-f7ba-4ddd-b463-3931d2282b0d"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "4412f3ea-8f0d-4f1e-878f-e19f441872c4"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "ac4fe7ad-d8aa-4bbe-9512-7f665b0919f4"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "98bd5181-be93-4ae7-bd13-8ce69a37bb64"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "0b7d0aab-7fb0-4b47-aeac-ecdc845cbde5"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "642e17f0-4d84-484d-8612-8c594f774ae9"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "62413371-dd7f-47e8-bfc1-f2f116d67609"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "a61d8e11-9ff7-48f1-9174-affd97fc7309"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "9f783210-8f19-44e8-ba5a-5b390d5229c9"
-            }
-          ]
-        },
-        "margin_bottom": {
-          "type": "custom",
-          "pos": 16,
-          "use_uuid": true,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "6096b714-0ad7-4ed7-b2b9-0b5d9e5e0cbd"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "7989bdd3-5d69-44ef-81fb-10d4c6805ce2"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "af863471-1396-4995-a611-eb8e3f57f005"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "afeb7099-90ab-45fa-b442-d03b48eb4bfd"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "a12da392-8897-40fb-b2ab-87d2ce9714c1"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "b0f06051-c04b-4e3c-8a89-428e550fb38e"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "93f3eb67-04dd-4573-ae0b-3dd2c5c1b724"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "d04c0a37-cc15-4be9-a7b0-f77a2b018d0e"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "91cfbdec-3c5b-4793-94f7-9841c9dacac0"
-            }
-          ],
-          "description": "This pushes other content away on the bottom of this container.",
-          "tooltip": true,
-          "display_name": "Margin Bottom",
-          "id": "6TNXjrYFSjetw6pkxDPy9w"
-        },
-        "dimensions": {
-          "type": "section",
-          "pos": 17,
-          "keys": [
-            "max_width",
-            "height"
-          ],
-          "id": "f3QJHiihTWmTSIanmpm2-g"
-        },
-        "max_width": {
-          "type": "custom",
-          "pos": 18,
-          "id": "oahmkNucTDWi6tJZqShn7Q",
-          "description": "Choose the maximum width of this container. \n0 = No Max Width + Width Full\n1-19 = Various sizes based on Tailwind's system\n20 = Max width is 'max-content'",
-          "tooltip": true,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "37bb619b-8642-4124-bcf9-29a8ba9d4a75"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "d84c481f-0bcc-4856-b356-e79ab9cc4754"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "5b439e18-460e-4bf3-a5b8-b8a773803dde"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "f076c63b-ef94-448f-8abe-77b40455abc4"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "01a3cae6-23b7-4974-b4f2-71288b24c683"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "cd3d13f6-ce9e-4035-a798-0bbec6552c8d"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "527a5bcc-6715-4b0b-8f43-68c904dc4aaa"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "bbb4d175-49b4-4bf6-8312-4ecc461ca427"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "fa128fbd-5199-49a6-a592-dea02b46534f"
-            }
-          ]
-        },
-        "height": {
-          "type": "option",
-          "pos": 19,
-          "use_uuid": true,
-          "description": "Simple way to manipulate the height of our element based on its content or based on its parent's height.",
-          "required": true,
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "fd67c57e-e951-43f7-b915-165401383847",
-              "name": "Full",
-              "value": "full"
-            },
-            {
-              "_uid": "8fa94c9d-62a1-4861-a157-41a2494feda8",
-              "value": "max",
-              "name": "Max"
-            },
-            {
-              "_uid": "d72f41e4-c9f1-470b-9481-e3badf65e764",
-              "value": "unset",
-              "name": "Unset"
-            }
-          ],
-          "default_value": "unset",
-          "id": "5-Gd4hYRSDC4_JiUFH1YMA",
-          "exclude_empty_option": true
-        },
-        "padding": {
-          "type": "section",
-          "pos": 20,
-          "keys": [
-            "vertical_padding",
-            "horizontal_padding",
-            "padding_all",
-            "all_padding"
-          ],
-          "id": "zxDjw1nIQquUDSoso2RjvQ",
-          "display_name": "Padding"
-        },
-        "all_padding": {
-          "type": "custom",
-          "pos": 21,
-          "display_name": "All Padding",
-          "tooltip": true,
-          "description": "Padding is the space within the container that pushes the content inwards. If you have a background for example, you will see space within the container that surrounds your content.",
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "38f8f463-71e8-44c4-9117-b6ddf1dba0d8"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "1321d0eb-3b76-4e23-8d65-8ca93572a1a6"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "b6e3111b-0bd2-4f20-a7ef-815e3e7b73b7"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "9faac5fb-9c7a-400f-ba0f-29ef99da4bda"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "08bca96b-8612-4cfd-97ad-a3a87afeb539"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "42809899-0a32-4ddc-9be8-9aa41266ff57"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "851228f1-1385-4dd8-a683-3e0f7de1bb96"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "ada7e0ac-09fc-4563-84aa-75fb1d5f58cc"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "a18eaf03-fcb4-46ec-8963-61ec96a9a1b9"
-            }
-          ],
-          "id": "pLNUaktmTFKwElehjuiM0w"
-        },
-        "vertical_padding": {
-          "type": "custom",
-          "pos": 22,
-          "id": "0ZarZAk6QoSFmn4AloO8TQ",
-          "description": "Vertical Padding controls the \"empty space\" in the top and bottom parts of a section. \nDefault: 6",
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "ae7340a3-3dc0-427d-b3ee-aeb6dea3a270"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "09219d3f-7e57-40aa-9687-5bdc3da6be9a"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "5f53bbf9-409e-41b2-a971-4fecf5c72f2c"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "abb4328a-face-4b53-9f41-7b567816d32a"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "e473bf8b-0f93-419a-b86b-5ab6bdfb9418"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "e8f6139b-f4f0-4090-ae9e-96ed40f026ef"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "aa52174f-fbb6-4569-8af9-b3048916b1b5"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "5468a881-46e5-41b5-aa60-d023040afb20"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "40c8ac06-63e8-4df4-85a6-fe103227ec7e"
-            }
-          ],
-          "tooltip": true
-        },
-        "horizontal_padding": {
-          "type": "custom",
-          "pos": 23,
-          "id": "zgPBcG5KS0O0s3zYswZ_Cw",
-          "description": "Horizontal Padding controls the \"empty space\" on the left and right parts of a section. \nDefault: 2",
-          "tooltip": true,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
-              "_uid": "6f722f4d-7fad-4311-9070-8db1d092f30e"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "6d410325-5924-43c5-9947-534fd2966f35"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "57d10f2e-58e4-426a-b1d2-14e63b33469c"
-            },
-            {
-              "name": "maxValue",
-              "value": "20",
-              "_uid": "f1475a2f-a4cf-4da7-ba8e-217de727d6a6"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "df9e30d5-ec2b-4bdb-bb2a-594b5d50f6b6"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "d9f84f2c-4761-4c7d-8ed4-06e0cf7195cc"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "2319d54f-1210-4ebf-b25e-07e524bee1a3"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "b7732147-2754-483e-963a-fa5fc1dddfa6"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "a2049a13-ccb5-4fa1-8378-908c37966f47"
-            }
-          ]
-        },
-        "dimension_overwrites": {
-          "type": "section",
-          "pos": 24,
-          "id": "TAXUaiBFRo2uRwKYb2c_EA",
-          "keys": [
-            "min_height",
-            "min_height_unit",
-            "min_width",
-            "min_width_unit"
-          ]
-        },
-        "min_height": {
-          "type": "custom",
-          "pos": 25,
-          "description": "You may require a minimum height of an element. Make sure to also select the 'minHeightUnit' option.",
-          "display_name": "Min Height",
-          "tooltip": true,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,250,500,750,1000]",
-              "_uid": "18e87c7d-81e2-4af7-b41a-e827c4c874ce"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "e0966d3b-e2df-423a-ad38-ac2492962ebe"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "66340789-a7f5-4e84-a856-97487bb3e572"
-            },
-            {
-              "name": "maxValue",
-              "value": "1000",
-              "_uid": "2209a3f5-5358-40b5-a29e-a483149c5c9d"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "e42a0e27-40de-4458-8c3a-d3f3d0e4db77"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "a732cb41-7887-4ccb-9e3e-ded57ede6e74"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "eaa285f2-a86d-4dff-8dcd-2cd54d790e80"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "1c9bc2f4-a5b2-43a7-b4a2-481be7be2f76"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "d2c1b76d-1ca4-4b30-91e2-9c82a0c82d1f"
-            }
-          ],
-          "id": "vFbOt5TEQFiSOqOfZCfgXA"
-        },
-        "min_height_unit": {
-          "type": "option",
-          "pos": 26,
-          "use_uuid": true,
-          "description": "This allows us to have more control over the minHeight, by being able to select units like 'vh', 'px' or 'rem' units, we can manipulate the container freely.",
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "f5ab0f86-5c99-4ad7-a1cc-8975c1c6ca89",
-              "name": "REM Units",
-              "value": "rem"
-            },
-            {
-              "_uid": "a80fe18b-7746-4bb7-8bc2-14d730549350",
-              "value": "em",
-              "name": "EM Units"
-            },
-            {
-              "_uid": "7ad6139b-02ad-4ccc-8f58-91fb7d28a242",
-              "value": "px",
-              "name": "Pixels"
-            },
-            {
-              "_uid": "87ffec8c-0da3-4df9-a571-d63cf1db4bdb",
-              "value": "vh",
-              "name": "Screen Height"
-            },
-            {
-              "_uid": "1f63e79d-f529-4c21-b518-4a5def387d18",
-              "value": "%",
-              "name": "Percentage"
-            }
-          ],
-          "default_value": "",
-          "exclude_empty_option": false,
-          "id": "eyVV3myvTcaRKbVZaIlYDg"
-        },
-        "min_width": {
-          "type": "custom",
-          "pos": 27,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,25,50,75,100]",
-              "_uid": "bc3fb13c-b6e8-4206-9686-efab9449cf8e"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "ad1870f1-3e3d-4c0f-8e2a-67c5bb985717"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "05008ee5-e37f-47ca-b552-c202e339d393"
-            },
-            {
-              "name": "maxValue",
-              "value": "100",
-              "_uid": "cf557478-a6db-4f29-8f4c-13ddb72d0d5f"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "27cc8e2c-cb0e-434e-a8cc-e413f5795f40"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "831d079a-f46e-4f5b-863a-41e852cbcaf0"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "685495c3-e4dc-4b25-90ad-f6205ccf2ba3"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "7f22baac-85af-4ec0-b0bf-b9fe08b5c97b"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "67f508b6-3d2f-454c-8b3d-307f212196cf"
-            }
-          ],
-          "description": "You may require a minimum width of an element. Make sure to also select the 'minWidthUnit' option.",
-          "id": "IGZBP8eLT1iua8ZD9hWigg"
-        },
-        "min_width_unit": {
-          "type": "option",
-          "pos": 28,
-          "use_uuid": true,
-          "description": "This allows us to have more control over the minWidth, by being able to select units like 'vw', 'px' or 'rem' units, we can manipulate the container freely.",
-          "tooltip": true,
-          "options": [
-            {
-              "_uid": "044fa6a3-6446-4c5b-b3c8-c7955f0300af",
-              "name": "REM Units",
-              "value": "rem"
-            },
-            {
-              "_uid": "afb1a7bb-f85e-47dd-ae29-c42bbfbb8c22",
-              "value": "em",
-              "name": "EM Units"
-            },
-            {
-              "_uid": "9bb6d575-78b8-45f5-bdac-e0b50403aed1",
-              "value": "px",
-              "name": "Pixels"
-            },
-            {
-              "_uid": "0bce896b-b3c4-44cd-ad75-66a262e0d195",
-              "value": "vw",
-              "name": "Screen Width"
-            },
-            {
-              "_uid": "86c3fb32-8cd7-469c-8d3f-b84c3cc2ff76",
-              "value": "%",
-              "name": "Percentage"
-            },
-            {
-              "_uid": "44e43019-b539-454d-be8e-3290689edfd7",
-              "value": "none",
-              "name": "None"
-            }
-          ],
-          "default_value": "none",
-          "id": "aNfPzXKEQFSku4wDwBF4gA"
-        },
-        "customStyling": {
-          "type": "textarea",
-          "pos": 29,
-          "id": "3XkzLs65QWWrL0fVRRCBwg",
-          "description": "You can add custom CSS styling here. Ensure it's written as in-line css and every css property/value you add comes with an \" !important \" value as well.",
-          "tooltip": true,
-          "display_name": "Custom Inline CSS"
-        },
-        "overflow": {
-          "type": "option",
-          "pos": 30,
-          "use_uuid": true,
-          "id": "Bf5m2GpiQIaRqVAXjMKP5w",
-          "required": true,
-          "description": "Select what happens when content overflows this section. In most cases the default option will be preferable.\nDefault: Visible",
-          "options": [
-            {
-              "_uid": "f497e42e-41c5-4e11-b74d-27419de5206b",
-              "name": "Auto",
-              "value": "auto"
-            },
-            {
-              "_uid": "98c779d7-cfc4-4173-94ea-839985743ac4",
-              "value": "hidden",
-              "name": "Hidden"
-            },
-            {
-              "_uid": "b5abd200-c7aa-4975-957c-27e2de8302db",
-              "value": "scroll",
-              "name": "Scroll"
-            },
-            {
-              "_uid": "bedd2021-b541-498a-83a6-fff1dc756ffb",
-              "value": "visible",
-              "name": "Visible"
-            }
-          ],
-          "default_value": "visible",
-          "exclude_empty_option": true
-        },
-        "background_color": {
-          "type": "option",
-          "pos": 31,
-          "use_uuid": true,
-          "id": "GEA1nSNeQvmfu0fmhmW1xA",
-          "options": [
-            {
-              "_uid": "df4d702f-bce4-4d2c-a9c4-c3414dc87cb7",
-              "name": "None",
-              "value": "none"
-            },
-            {
-              "_uid": "55f4efd8-9e87-4aba-baff-2c14fe762f3c",
-              "value": "default",
-              "name": "Default"
-            },
-            {
-              "_uid": "192bcf87-d34b-4be7-a3c7-bf1a18eaadb8",
-              "value": "primary-50",
-              "name": "Primary 50"
-            },
-            {
-              "_uid": "ffd3316e-45b2-47c6-8668-6b7bcc4cd0a1",
-              "value": "primary-100",
-              "name": "Primary 100"
-            },
-            {
-              "_uid": "0337e1b3-26b1-4280-afb2-75193543c7c3",
-              "value": "primary-200",
-              "name": "Primary 200"
-            },
-            {
-              "_uid": "7fc9cad1-e35b-4804-9a36-66cec3603b81",
-              "value": "primary-300",
-              "name": "Primary 300"
-            },
-            {
-              "_uid": "3601fbb3-0285-452f-a1a9-05c07cba9edc",
-              "value": "primary-400",
-              "name": "Primary 400"
-            },
-            {
-              "_uid": "c904c8cd-f1a1-4717-8730-28d0327d1095",
-              "value": "primary-500",
-              "name": "Primary 500"
-            },
-            {
-              "_uid": "34412d4f-0b29-4c58-895d-9712e72f49b5",
-              "value": "primary-600",
-              "name": "Primary 600"
-            },
-            {
-              "_uid": "585082b8-e3e6-4709-a291-66ce267eb086",
-              "value": "primary-700",
-              "name": "Primary 700"
-            },
-            {
-              "_uid": "04deec4b-d8d8-4a33-800c-bf52c8f301a4",
-              "value": "primary-800",
-              "name": "Primary 800"
-            },
-            {
-              "_uid": "e223ea30-df1e-45d2-83ff-a59d690a25fe",
-              "value": "primary-900",
-              "name": "Primary 900"
-            },
-            {
-              "_uid": "5f62c15b-ee72-4148-ae33-1d9ddf791b57",
-              "value": "primary-950",
-              "name": "Primary 950"
-            },
-            {
-              "_uid": "22b8b8e9-935a-46f4-8df9-3200c9b6c886",
-              "value": "secondary-50",
-              "name": "Secondary 50"
-            },
-            {
-              "_uid": "d282cd2d-dc0b-40ce-b84d-20931c36db4b",
-              "value": "secondary-100",
-              "name": "Secondary 100"
-            },
-            {
-              "_uid": "2be38cb3-e945-41de-8ba1-ed799f45f694",
-              "value": "secondary-200",
-              "name": "Secondary 200"
-            },
-            {
-              "_uid": "4986ad38-da58-4e43-8230-8c98d0e4bd46",
-              "value": "secondary-300",
-              "name": "Secondary 300"
-            },
-            {
-              "_uid": "00f7a977-5dd7-4dd4-ba12-cec649d629d1",
-              "value": "secondary-400",
-              "name": "Secondary 400"
-            },
-            {
-              "_uid": "7c725429-f336-4033-849a-81c44c3e1039",
-              "value": "secondary-500",
-              "name": "Secondary 500"
-            },
-            {
-              "_uid": "3ff83744-8a96-414c-abb9-f61b8c0b359d",
-              "value": "secondary-600",
-              "name": "Secondary 600"
-            },
-            {
-              "_uid": "36b5b562-5e27-4b2d-aeef-70828fe97c6e",
-              "value": "secondary-700",
-              "name": "Secondary 700"
-            },
-            {
-              "_uid": "d7f0e1a4-4a6f-4268-9277-24e6a163ca55",
-              "value": "secondary-800",
-              "name": "Secondary 800"
-            },
-            {
-              "_uid": "6781bacd-6de3-4360-9481-9ff1d8b567d5",
-              "value": "secondary-900",
-              "name": "Secondary 900"
-            },
-            {
-              "_uid": "1bc97f95-d025-46e7-8d67-79783b2afac0",
-              "value": "secondary-950",
-              "name": "Secondary 950"
-            }
-          ],
-          "default_value": "none",
-          "required": true,
-          "exclude_empty_option": true,
-          "description": "Select the background color of the container.",
-          "tooltip": true
-        },
-        "border": {
-          "type": "section",
-          "pos": 32,
-          "id": "zq_fXOCzS-mSmSrRfk7yag",
-          "keys": [
-            "border_radius",
-            "border_color",
-            "border_thickness"
-          ]
-        },
-        "border_radius": {
-          "type": "custom",
-          "pos": 33,
-          "display_name": "Border Radius",
-          "tooltip": true,
-          "description": "Border radius controls how sharp or curved the edges of the link are.",
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,2,4,6,8]",
-              "_uid": "66f50152-538b-45bc-8f6d-00b9bd2a7da1"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "c5829c82-0e36-482f-b3b4-26739cf7c389"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "d35cb673-8807-4f8b-9485-988a1cff0c96"
-            },
-            {
-              "name": "maxValue",
-              "value": "8",
-              "_uid": "33c123ea-ce76-4cf6-8f40-f91aed2dfa9f"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "1bc133db-8f7d-4f39-8ee5-8273d528631e"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "23fc7c6a-753e-4b03-a803-bb929e818fdc"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "621b7527-6ff6-4666-bbb1-03ea737bf002"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "42234c5d-d397-41aa-b452-1a2fe582871f"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "552081b4-b367-41c3-868a-ec9dabb289a0"
-            }
-          ],
-          "id": "RoXzkMyNSCu6h0WtWqeywA"
-        },
-        "border_color": {
-          "type": "option",
-          "pos": 34,
-          "use_uuid": true,
-          "required": true,
-          "description": "Please select what border color you wish to have.",
-          "tooltip": true,
-          "id": "0wMwZVmjQ-SjvRwlKJ6ckA",
-          "display_name": "Border Color",
-          "options": [
-            {
-              "_uid": "8881d1dc-2bcf-4ffd-ba50-c7e18e9870d9",
-              "name": "None",
-              "value": "none"
-            },
-            {
-              "_uid": "5c73747f-d97a-4cc0-a8ad-137e79ec2627",
-              "value": "primary-50",
-              "name": "Primary 50"
-            },
-            {
-              "_uid": "79c29f4e-5c5f-4aa7-8805-4f2666e97d76",
-              "value": "primary-100",
-              "name": "Primary 100"
-            },
-            {
-              "_uid": "3c30cf3c-fb0c-45c3-88a9-3cb900b5acbc",
-              "value": "primary-200",
-              "name": "Primary 200"
-            },
-            {
-              "_uid": "5f7e614d-5826-42ea-8dd6-dc9690d28ea3",
-              "value": "primary-300",
-              "name": "Primary 300"
-            },
-            {
-              "_uid": "10d40fc6-6dc5-4fe8-ae29-5b53e61a7bd9",
-              "value": "primary-400",
-              "name": "Primary 400"
-            },
-            {
-              "_uid": "8188a766-fb99-4fe2-8862-624750144a34",
-              "value": "primary-500",
-              "name": "Primary 500"
-            },
-            {
-              "_uid": "726c3113-44e3-46f9-9a64-cf35fda0218a",
-              "value": "primary-600",
-              "name": "Primary 600"
-            },
-            {
-              "_uid": "b465c5bf-2ffb-4df8-8e87-2f97ae425dcc",
-              "value": "primary-700",
-              "name": "Primary 700"
-            },
-            {
-              "_uid": "c3173ca2-d62a-4de6-bf9a-becb06e8f995",
-              "value": "primary-800",
-              "name": "Primary 800"
-            },
-            {
-              "_uid": "85dd6c6c-b96a-43b7-9161-88d54ccaf154",
-              "value": "primary-900",
-              "name": "Primary 900"
-            },
-            {
-              "_uid": "39f922ea-c3f8-406e-a7b7-b19bbaf65684",
-              "value": "primary-950",
-              "name": "Primary 950"
-            },
-            {
-              "_uid": "e9237b5a-3ad6-4afa-b29e-2fa5eb432113",
-              "value": "secondary-50",
-              "name": "Secondary 50"
-            },
-            {
-              "_uid": "6b26086d-1051-4f60-8ca1-741e7ed8d8c9",
-              "value": "secondary-100",
-              "name": "Secondary 100"
-            },
-            {
-              "_uid": "06cfd4b7-bec8-480f-94ec-524da4296319",
-              "value": "secondary-200",
-              "name": "Secondary 200"
-            },
-            {
-              "_uid": "3e075bd0-510b-4024-9715-1f7df1077e23",
-              "value": "secondary-300",
-              "name": "Secondary 300"
-            },
-            {
-              "_uid": "7bb37094-d3ea-46d4-8a27-30f101d147aa",
-              "value": "secondary-400",
-              "name": "Secondary 400"
-            },
-            {
-              "_uid": "d3d3eb84-c3a2-46d1-90a1-db354a7b758d",
-              "value": "secondary-500",
-              "name": "Secondary 500"
-            },
-            {
-              "_uid": "f1e51b9f-97a5-494d-9fbc-8b741b013202",
-              "value": "secondary-600",
-              "name": "Secondary 600"
-            },
-            {
-              "_uid": "131a8757-f666-4f2c-a42e-ba22056bb562",
-              "value": "secondary-700",
-              "name": "Secondary 700"
-            },
-            {
-              "_uid": "6a63a161-0a6c-420b-8c49-9b0d47166a5c",
-              "value": "secondary-800",
-              "name": "Secondary 800"
-            },
-            {
-              "_uid": "563a7d61-b045-41b0-a727-6d765aaafa8f",
-              "value": "secondary-900",
-              "name": "Secondary 900"
-            },
-            {
-              "_uid": "2394a82b-412b-4651-996b-aa4c5dcf145c",
-              "value": "secondary-950",
-              "name": "Secondary 950"
-            }
-          ],
-          "exclude_empty_option": true,
-          "default_value": "none"
-        },
-        "border_thickness": {
-          "type": "custom",
-          "pos": 35,
-          "translatable": false,
-          "description": "Select how thick your border is.",
-          "tooltip": true,
-          "field_type": "storyblok-slider",
-          "options": [
-            {
-              "name": "marks",
-              "value": "[0,1,2,3,4]",
-              "_uid": "e08d3657-8379-4030-aa68-f9ed7b01221e"
-            },
-            {
-              "name": "defaultValue",
-              "value": "0",
-              "_uid": "3801bcd6-6f37-4188-951a-09a1c3978630"
-            },
-            {
-              "name": "minValue",
-              "value": "0",
-              "_uid": "0e2d3270-5cfc-4bbe-a829-241e7cb4d836"
-            },
-            {
-              "name": "maxValue",
-              "value": "4",
-              "_uid": "664743d5-0ec9-4cb8-a90e-c45906354e18"
-            },
-            {
-              "name": "stepSize",
-              "value": "1",
-              "_uid": "d7531da4-77ad-4c3c-8b74-f261737d8a13"
-            },
-            {
-              "name": "minimumSignificantDigits",
-              "value": "",
-              "_uid": "4f80a681-84cb-4cb9-a165-9b930cc1d63c"
-            },
-            {
-              "name": "maximumSignificantDigits",
-              "value": "",
-              "_uid": "6eebd937-abd0-446e-85c1-70681a0ea81b"
-            },
-            {
-              "name": "style",
-              "value": "",
-              "_uid": "a3593da8-ae94-4982-a45d-e87216a9841f"
-            },
-            {
-              "name": "unit",
-              "value": "",
-              "_uid": "14f602f3-8aeb-4af1-add7-c62903c8f50b"
-            }
-          ],
-          "id": "TvJbPEbdS1CSYgEjGZNJaw"
-        },
-        "tab-2228e5f3-f14e-400f-8c5a-f61bf2a33d4d": {
-          "display_name": "Style",
-          "keys": [
-            "background_color",
-            "border_styling",
-            "overflow",
-            "customStyling",
-            "border_radius",
-            "border",
-            "border_thickness",
-            "border_color"
-          ],
-          "pos": 36,
-          "type": "tab",
-          "id": "Iijl8_FOQA-MWvYb8qM9TQ"
-        }
-      },
-      "image": "//a.storyblok.com/f/320425/x/0a3f0712e2/container.png",
-      "preview_field": "storyblok_name",
-      "is_root": false,
-      "preview_tmpl": null,
-      "is_nestable": true,
-      "all_presets": [],
-      "preset_id": null,
-      "real_name": "Container",
-      "component_group_uuid": "026b46c7-0a4e-4b98-a71b-585c5a2b9771",
-      "color": "#05807f",
-      "icon": "block-block",
-      "internal_tags_list": [
-        {
-          "id": 56285,
-          "name": "layout"
-        }
-      ],
-      "internal_tag_ids": [
-        "56285"
-      ],
-      "content_type_asset_preview": null,
-      "component_group_name": "01 - Layout"
-    },
-    {
-      "name": "container_two",
-      "display_name": "Container Two",
-      "description": "Container is essentially a powerful div with lots of layout functionality.",
       "created_at": "2025-01-21T13:24:45.259Z",
-      "updated_at": "2025-01-23T18:25:29.817Z",
+      "updated_at": "2025-01-25T07:01:57.624Z",
       "id": 6826884,
       "schema": {
         "layout_options_med_mob": {
@@ -5074,7 +3653,7 @@
               "name": "None"
             }
           ],
-          "default_value": "flexAuto",
+          "default_value": "default",
           "exclude_empty_option": true
         },
         "align_self_default": {
@@ -5319,17 +3898,17 @@
           "options": [
             {
               "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "value": "[-1,0,2,4,6,8,10,12,14,16,18,20]",
               "_uid": "6f722f4d-7fad-4311-9070-8db1d092f30e"
             },
             {
               "name": "defaultValue",
-              "value": "0",
+              "value": "-1",
               "_uid": "6d410325-5924-43c5-9947-534fd2966f35"
             },
             {
               "name": "minValue",
-              "value": "0",
+              "value": "-1",
               "_uid": "57d10f2e-58e4-426a-b1d2-14e63b33469c"
             },
             {
@@ -5373,17 +3952,17 @@
           "options": [
             {
               "name": "marks",
-              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "value": "[-1,0,2,4,6,8,10,12,14,16,18,20]",
               "_uid": "ae7340a3-3dc0-427d-b3ee-aeb6dea3a270"
             },
             {
               "name": "defaultValue",
-              "value": "0",
+              "value": "-1",
               "_uid": "09219d3f-7e57-40aa-9687-5bdc3da6be9a"
             },
             {
               "name": "minValue",
-              "value": "0",
+              "value": "-1",
               "_uid": "5f53bbf9-409e-41b2-a971-4fecf5c72f2c"
             },
             {
@@ -6231,7 +4810,7 @@
       "is_nestable": true,
       "all_presets": [],
       "preset_id": null,
-      "real_name": "Container Two",
+      "real_name": "Container",
       "component_group_uuid": "026b46c7-0a4e-4b98-a71b-585c5a2b9771",
       "color": "#05807f",
       "icon": "block-block",
@@ -6248,26 +4827,1434 @@
       "component_group_name": "01 - Layout"
     },
     {
+      "name": "container-legacy",
+      "display_name": "Container",
+      "description": "Container is essentially a powerful div with lots of layout functionality.",
+      "created_at": "2025-01-14T07:34:43.734Z",
+      "updated_at": "2025-01-25T06:37:15.952Z",
+      "id": 6791410,
+      "schema": {
+        "metaData": {
+          "type": "section",
+          "pos": 0,
+          "keys": [
+            "section_id",
+            "blocks",
+            "container_id",
+            "container_class",
+            "storyblok_name"
+          ],
+          "id": "gLJVvmv7TJmCr8GAtWvEFw"
+        },
+        "storyblok_name": {
+          "type": "text",
+          "pos": 1,
+          "required": false,
+          "description": "This is how you will be able to recognise what this container \"contains\" when looking in the visual editor. So just 1-2 descriptive words to help you understand that this container represents.",
+          "tooltip": true,
+          "id": "MWDtLgelT9ec-avTahmPZQ"
+        },
+        "blocks": {
+          "type": "bloks",
+          "pos": 2,
+          "id": "-KiGMPIyR1ygx5wwqvU7dg",
+          "required": true,
+          "description": "Fill this with the content you wish to populate the container with.",
+          "tooltip": true
+        },
+        "container_id": {
+          "type": "text",
+          "pos": 3,
+          "id": "voEFo39mT-i-Txa-k6_AaQ",
+          "required": false,
+          "description": "The id by which this container can be referenced to in code.\nIf one word, simply input the name in lower caps.\nIf multiple words follow the kebab-format like so:\nsection-id-like-this",
+          "tooltip": true,
+          "regex": "^[a-z-]*$",
+          "display_name": "Container ID"
+        },
+        "container_class": {
+          "type": "text",
+          "pos": 4,
+          "display_name": "Container Class",
+          "regex": "^(?!-)(?!.*--)(?!^[0-9])[A-Za-z0-9-_]*(?<!-)$",
+          "description": "Same as id, this can be used for DOM manipulation or other means. ",
+          "tooltip": true,
+          "id": "yt6zGOhdTguzHM2pKN0T0g"
+        },
+        "layout": {
+          "type": "section",
+          "pos": 5,
+          "id": "yxuqtB6eTSK0Re_uXmmo_Q",
+          "keys": [
+            "justify_items",
+            "align_items",
+            "gap",
+            "justify_content",
+            "content_direction",
+            "wrap_content"
+          ]
+        },
+        "content_direction": {
+          "type": "option",
+          "pos": 6,
+          "use_uuid": true,
+          "description": "This dictates the direction of your content. \nRow = Left to Right, Single column on mobile.\nOnly Row = Left to Right\nColumn = Top to Bottom",
+          "required": true,
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "35b7f591-32f2-4d67-a7e9-8eccda52d0e8",
+              "name": "Row",
+              "value": "row"
+            },
+            {
+              "_uid": "9e0e21b7-c59f-410c-96a6-257ad8ab0c72",
+              "value": "onlyRow",
+              "name": "Only Row"
+            },
+            {
+              "_uid": "c8dc0e8e-5e5b-4e78-920e-1a86cbc4410e",
+              "value": "column",
+              "name": "Column"
+            },
+            {
+              "_uid": "ea6a8bc9-6ddf-449f-b7ef-fc47e3774e89",
+              "value": "rowReversed",
+              "name": "Row Reversed"
+            },
+            {
+              "_uid": "58a348c7-570b-4af4-9628-78ebae82f0d9",
+              "value": "columnReversed",
+              "name": "Column Reversed"
+            }
+          ],
+          "default_value": "column",
+          "display_name": "Content Direction",
+          "id": "1DOX5WvhT6y0dHfH78ID4g",
+          "exclude_empty_option": true
+        },
+        "justify_content": {
+          "type": "option",
+          "pos": 7,
+          "use_uuid": true,
+          "display_name": "Justify Content",
+          "id": "7gACCItqQ6eF55Ri3F7YDQ",
+          "required": true,
+          "description": "Control how the items in this section are positioned along the section's main axis.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "1e7023c7-d2cb-4a81-bc29-6d91b6a2bf4a",
+              "value": "start",
+              "name": "Start"
+            },
+            {
+              "_uid": "6862990b-7395-4cfc-ac63-23dcb834e27c",
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "_uid": "e7983c46-980b-4425-b099-a2c680c4b9e3",
+              "value": "end",
+              "name": "End"
+            },
+            {
+              "_uid": "105e8b07-d816-493b-afad-6c7ca3b2a499",
+              "value": "stretch",
+              "name": "Stretch"
+            },
+            {
+              "_uid": "d114bdf4-35e3-4da1-8cd5-90920bd1d7c3",
+              "value": "between",
+              "name": "Between"
+            },
+            {
+              "_uid": "e69b9834-b50e-4c24-8fff-74fbd567949d",
+              "value": "around",
+              "name": "Around"
+            },
+            {
+              "_uid": "f256b4c4-829d-4f5b-985f-87cbd0cead24",
+              "value": "evenly",
+              "name": "Evenly"
+            },
+            {
+              "_uid": "7c56c8e5-6b8d-45c5-9283-44a3d2cee996",
+              "name": "Normal",
+              "value": "normal"
+            }
+          ],
+          "default_value": "center",
+          "exclude_empty_option": true
+        },
+        "align_items": {
+          "type": "option",
+          "pos": 8,
+          "use_uuid": true,
+          "id": "ubeAW1eyRTyZM8dfI0uNjg",
+          "description": "This defines how your content aligns across the secondary axis. If you have 2 items inside this container, and your content direction is a \"row\", this can choose whether both are aligned to the top, bottom, stretching across the entire container, etc. \nExperiment and see how it works.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "3e5d2564-5cc4-43e2-9f95-66ef2640b0d4",
+              "name": "Start",
+              "value": "start"
+            },
+            {
+              "_uid": "ef2b812f-d255-4346-9922-43e24f54eb76",
+              "value": "end",
+              "name": "End"
+            },
+            {
+              "_uid": "01bd194d-5196-4f0e-8d8f-cbef51b85453",
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "_uid": "534a3650-cc59-477e-a185-0ec3fe048285",
+              "value": "baseline",
+              "name": "Baseline"
+            },
+            {
+              "_uid": "aa7e193c-3a6a-46ba-8667-6f562a14e7ae",
+              "value": "stretch",
+              "name": "Stretch"
+            }
+          ],
+          "default_value": "stretch",
+          "required": true,
+          "exclude_empty_option": true
+        },
+        "wrap_content": {
+          "type": "option",
+          "pos": 9,
+          "use_uuid": true,
+          "required": true,
+          "display_name": "Wrap Content",
+          "description": "This allows the direct-child elements to wrap themselves around the column/row.",
+          "options": [
+            {
+              "_uid": "889ec24d-c300-4e4d-a29b-d750f24da936",
+              "name": "Wrap",
+              "value": "wrap"
+            },
+            {
+              "_uid": "c07dd1dd-02dd-4fbe-87ac-b1de6610f9a1",
+              "value": "noWrap",
+              "name": "No Wrap"
+            }
+          ],
+          "default_value": "noWrap",
+          "id": "ksRNfxXnQmWCi5ALlVQOyA",
+          "tooltip": true,
+          "exclude_empty_option": true
+        },
+        "gap": {
+          "type": "custom",
+          "pos": 10,
+          "id": "3CbPj7tqTSef0EUm5ZYFrw",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "06a06b95-6f88-41b7-b23b-458917fb8244"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "0ed4da73-07f6-4fc5-a878-c10494402902"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "126a1b54-bd0f-4d6f-a635-efcad0b8d974"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "8429f84a-d19c-493b-ba09-25a9a16f8b93"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "10d2155b-471d-4494-a1ec-5ea710f932a5"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "7e25c5b8-b46b-4557-9031-4b79d97e8444"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "c728ac5e-961c-456f-a05a-7712340c0000"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "5b456c93-1f00-4b03-80a2-a744e72ebf0a"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "0c5d3ab6-1896-45d3-ae2b-e87bb342e0e5"
+            }
+          ],
+          "description": "This is the gap between the elements (bloks) within this section. So the amount of space between 'items' you add. ",
+          "tooltip": true,
+          "display_name": "Content Gap"
+        },
+        "child_layout": {
+          "type": "section",
+          "pos": 11,
+          "display_name": "Child Layout",
+          "id": "ccolXsG5QsyHrfc2cODvGA",
+          "keys": [
+            "flex",
+            "align_self"
+          ]
+        },
+        "flex": {
+          "type": "option",
+          "pos": 12,
+          "use_uuid": true,
+          "required": true,
+          "description": "This is a flex-child property. You can set the \nFlex Grow + Flex Shrink + Flex Basis with this single property.\nDefault     =  1 1 0%\nFlex Auto  = 1 1 auto\nFlex Initial = 0 1 auto\nFlex None = none",
+          "tooltip": true,
+          "id": "SARuKkGoSpWjM_SzHkpPYQ",
+          "options": [
+            {
+              "_uid": "b02994bf-e902-475d-8829-c9e01b87e2bc",
+              "name": "Default",
+              "value": "default"
+            },
+            {
+              "_uid": "a9954a98-2fd9-4793-ab05-5f8a3839795b",
+              "value": "flexAuto",
+              "name": "Flex Auto"
+            },
+            {
+              "_uid": "c06ac58a-58fa-430a-9548-f874998d66cf",
+              "value": "flexInitial",
+              "name": "Flex Initial"
+            },
+            {
+              "_uid": "de97086d-28a2-4550-ae86-6c50a614b1d7",
+              "value": "flexNone",
+              "name": "None"
+            }
+          ],
+          "default_value": "flexAuto",
+          "exclude_empty_option": true
+        },
+        "align_self": {
+          "type": "option",
+          "pos": 13,
+          "use_uuid": true,
+          "description": "Override for the flex parent's align-items value. We can align the flex-child-item on the cross-axis.",
+          "required": true,
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "37b998e9-f50c-48be-a9eb-77dba2862967",
+              "name": "Self Auto",
+              "value": "selfAuto"
+            },
+            {
+              "_uid": "db062d90-f659-4e78-b48b-4b483a6fdf82",
+              "value": "selfStart",
+              "name": "Self Start"
+            },
+            {
+              "_uid": "e7ecdb8b-9ac2-4156-868a-216e675d22ce",
+              "value": "selfEnd",
+              "name": "Self End"
+            },
+            {
+              "_uid": "4895bb93-e1f2-4eba-b7ab-5d0b11d9dcd8",
+              "value": "selfCenter",
+              "name": "Self Center"
+            },
+            {
+              "_uid": "df9f3978-cc0d-437d-8fd3-0dc7d35fab00",
+              "value": "selfStretch",
+              "name": "Self Stretch"
+            },
+            {
+              "_uid": "a3db621c-1d7d-4dfe-9cc4-171da3fc4095",
+              "value": "selfBaseline",
+              "name": "Self Baseline"
+            }
+          ],
+          "default_value": "selfAuto",
+          "exclude_empty_option": true,
+          "id": "pqRFMg2kR3mN4CNe4_dBFg"
+        },
+        "external_spacing": {
+          "type": "section",
+          "pos": 14,
+          "id": "TL_AHPnKQmqLHoNQc7xJKg",
+          "keys": [
+            "margin_top",
+            "margin_bottom"
+          ]
+        },
+        "margin_top": {
+          "type": "custom",
+          "pos": 15,
+          "use_uuid": true,
+          "description": "This pushes other content away on top of this container.",
+          "tooltip": true,
+          "display_name": "Margin Top",
+          "id": "Bpq3TqQ7SSC0mUlqRydFFw",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "72c279bf-f7ba-4ddd-b463-3931d2282b0d"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "4412f3ea-8f0d-4f1e-878f-e19f441872c4"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "ac4fe7ad-d8aa-4bbe-9512-7f665b0919f4"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "98bd5181-be93-4ae7-bd13-8ce69a37bb64"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "0b7d0aab-7fb0-4b47-aeac-ecdc845cbde5"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "642e17f0-4d84-484d-8612-8c594f774ae9"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "62413371-dd7f-47e8-bfc1-f2f116d67609"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "a61d8e11-9ff7-48f1-9174-affd97fc7309"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "9f783210-8f19-44e8-ba5a-5b390d5229c9"
+            }
+          ]
+        },
+        "margin_bottom": {
+          "type": "custom",
+          "pos": 16,
+          "use_uuid": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "6096b714-0ad7-4ed7-b2b9-0b5d9e5e0cbd"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "7989bdd3-5d69-44ef-81fb-10d4c6805ce2"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "af863471-1396-4995-a611-eb8e3f57f005"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "afeb7099-90ab-45fa-b442-d03b48eb4bfd"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "a12da392-8897-40fb-b2ab-87d2ce9714c1"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "b0f06051-c04b-4e3c-8a89-428e550fb38e"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "93f3eb67-04dd-4573-ae0b-3dd2c5c1b724"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "d04c0a37-cc15-4be9-a7b0-f77a2b018d0e"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "91cfbdec-3c5b-4793-94f7-9841c9dacac0"
+            }
+          ],
+          "description": "This pushes other content away on the bottom of this container.",
+          "tooltip": true,
+          "display_name": "Margin Bottom",
+          "id": "6TNXjrYFSjetw6pkxDPy9w"
+        },
+        "dimensions": {
+          "type": "section",
+          "pos": 17,
+          "keys": [
+            "max_width",
+            "height"
+          ],
+          "id": "f3QJHiihTWmTSIanmpm2-g"
+        },
+        "max_width": {
+          "type": "custom",
+          "pos": 18,
+          "id": "oahmkNucTDWi6tJZqShn7Q",
+          "description": "Choose the maximum width of this container. \n0 = No Max Width + Width Full\n1-19 = Various sizes based on Tailwind's system\n20 = Max width is 'max-content'",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "37bb619b-8642-4124-bcf9-29a8ba9d4a75"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "d84c481f-0bcc-4856-b356-e79ab9cc4754"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "5b439e18-460e-4bf3-a5b8-b8a773803dde"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "f076c63b-ef94-448f-8abe-77b40455abc4"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "01a3cae6-23b7-4974-b4f2-71288b24c683"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "cd3d13f6-ce9e-4035-a798-0bbec6552c8d"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "527a5bcc-6715-4b0b-8f43-68c904dc4aaa"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "bbb4d175-49b4-4bf6-8312-4ecc461ca427"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "fa128fbd-5199-49a6-a592-dea02b46534f"
+            }
+          ]
+        },
+        "height": {
+          "type": "option",
+          "pos": 19,
+          "use_uuid": true,
+          "description": "Simple way to manipulate the height of our element based on its content or based on its parent's height.",
+          "required": true,
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "fd67c57e-e951-43f7-b915-165401383847",
+              "name": "Full",
+              "value": "full"
+            },
+            {
+              "_uid": "8fa94c9d-62a1-4861-a157-41a2494feda8",
+              "value": "max",
+              "name": "Max"
+            },
+            {
+              "_uid": "d72f41e4-c9f1-470b-9481-e3badf65e764",
+              "value": "unset",
+              "name": "Unset"
+            }
+          ],
+          "default_value": "unset",
+          "id": "5-Gd4hYRSDC4_JiUFH1YMA",
+          "exclude_empty_option": true
+        },
+        "padding": {
+          "type": "section",
+          "pos": 20,
+          "keys": [
+            "vertical_padding",
+            "horizontal_padding",
+            "padding_all",
+            "all_padding"
+          ],
+          "id": "zxDjw1nIQquUDSoso2RjvQ",
+          "display_name": "Padding"
+        },
+        "all_padding": {
+          "type": "custom",
+          "pos": 21,
+          "display_name": "All Padding",
+          "tooltip": true,
+          "description": "Padding is the space within the container that pushes the content inwards. If you have a background for example, you will see space within the container that surrounds your content.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "38f8f463-71e8-44c4-9117-b6ddf1dba0d8"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "1321d0eb-3b76-4e23-8d65-8ca93572a1a6"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "b6e3111b-0bd2-4f20-a7ef-815e3e7b73b7"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "9faac5fb-9c7a-400f-ba0f-29ef99da4bda"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "08bca96b-8612-4cfd-97ad-a3a87afeb539"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "42809899-0a32-4ddc-9be8-9aa41266ff57"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "851228f1-1385-4dd8-a683-3e0f7de1bb96"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "ada7e0ac-09fc-4563-84aa-75fb1d5f58cc"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "a18eaf03-fcb4-46ec-8963-61ec96a9a1b9"
+            }
+          ],
+          "id": "pLNUaktmTFKwElehjuiM0w"
+        },
+        "vertical_padding": {
+          "type": "custom",
+          "pos": 22,
+          "id": "0ZarZAk6QoSFmn4AloO8TQ",
+          "description": "Vertical Padding controls the \"empty space\" in the top and bottom parts of a section. \nDefault: 6",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "ae7340a3-3dc0-427d-b3ee-aeb6dea3a270"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "09219d3f-7e57-40aa-9687-5bdc3da6be9a"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "5f53bbf9-409e-41b2-a971-4fecf5c72f2c"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "abb4328a-face-4b53-9f41-7b567816d32a"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "e473bf8b-0f93-419a-b86b-5ab6bdfb9418"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "e8f6139b-f4f0-4090-ae9e-96ed40f026ef"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "aa52174f-fbb6-4569-8af9-b3048916b1b5"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "5468a881-46e5-41b5-aa60-d023040afb20"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "40c8ac06-63e8-4df4-85a6-fe103227ec7e"
+            }
+          ],
+          "tooltip": true
+        },
+        "horizontal_padding": {
+          "type": "custom",
+          "pos": 23,
+          "id": "zgPBcG5KS0O0s3zYswZ_Cw",
+          "description": "Horizontal Padding controls the \"empty space\" on the left and right parts of a section. \nDefault: 2",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "6f722f4d-7fad-4311-9070-8db1d092f30e"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "6d410325-5924-43c5-9947-534fd2966f35"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "57d10f2e-58e4-426a-b1d2-14e63b33469c"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "f1475a2f-a4cf-4da7-ba8e-217de727d6a6"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "df9e30d5-ec2b-4bdb-bb2a-594b5d50f6b6"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "d9f84f2c-4761-4c7d-8ed4-06e0cf7195cc"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "2319d54f-1210-4ebf-b25e-07e524bee1a3"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "b7732147-2754-483e-963a-fa5fc1dddfa6"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "a2049a13-ccb5-4fa1-8378-908c37966f47"
+            }
+          ]
+        },
+        "dimension_overwrites": {
+          "type": "section",
+          "pos": 24,
+          "id": "TAXUaiBFRo2uRwKYb2c_EA",
+          "keys": [
+            "min_height",
+            "min_height_unit",
+            "min_width",
+            "min_width_unit"
+          ]
+        },
+        "min_height": {
+          "type": "custom",
+          "pos": 25,
+          "description": "You may require a minimum height of an element. Make sure to also select the 'minHeightUnit' option.",
+          "display_name": "Min Height",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,250,500,750,1000]",
+              "_uid": "18e87c7d-81e2-4af7-b41a-e827c4c874ce"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "e0966d3b-e2df-423a-ad38-ac2492962ebe"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "66340789-a7f5-4e84-a856-97487bb3e572"
+            },
+            {
+              "name": "maxValue",
+              "value": "1000",
+              "_uid": "2209a3f5-5358-40b5-a29e-a483149c5c9d"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "e42a0e27-40de-4458-8c3a-d3f3d0e4db77"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "a732cb41-7887-4ccb-9e3e-ded57ede6e74"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "eaa285f2-a86d-4dff-8dcd-2cd54d790e80"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "1c9bc2f4-a5b2-43a7-b4a2-481be7be2f76"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "d2c1b76d-1ca4-4b30-91e2-9c82a0c82d1f"
+            }
+          ],
+          "id": "vFbOt5TEQFiSOqOfZCfgXA"
+        },
+        "min_height_unit": {
+          "type": "option",
+          "pos": 26,
+          "use_uuid": true,
+          "description": "This allows us to have more control over the minHeight, by being able to select units like 'vh', 'px' or 'rem' units, we can manipulate the container freely.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "f5ab0f86-5c99-4ad7-a1cc-8975c1c6ca89",
+              "name": "REM Units",
+              "value": "rem"
+            },
+            {
+              "_uid": "a80fe18b-7746-4bb7-8bc2-14d730549350",
+              "value": "em",
+              "name": "EM Units"
+            },
+            {
+              "_uid": "7ad6139b-02ad-4ccc-8f58-91fb7d28a242",
+              "value": "px",
+              "name": "Pixels"
+            },
+            {
+              "_uid": "87ffec8c-0da3-4df9-a571-d63cf1db4bdb",
+              "value": "vh",
+              "name": "Screen Height"
+            },
+            {
+              "_uid": "1f63e79d-f529-4c21-b518-4a5def387d18",
+              "value": "%",
+              "name": "Percentage"
+            }
+          ],
+          "default_value": "",
+          "exclude_empty_option": false,
+          "id": "eyVV3myvTcaRKbVZaIlYDg"
+        },
+        "min_width": {
+          "type": "custom",
+          "pos": 27,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,25,50,75,100]",
+              "_uid": "bc3fb13c-b6e8-4206-9686-efab9449cf8e"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "ad1870f1-3e3d-4c0f-8e2a-67c5bb985717"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "05008ee5-e37f-47ca-b552-c202e339d393"
+            },
+            {
+              "name": "maxValue",
+              "value": "100",
+              "_uid": "cf557478-a6db-4f29-8f4c-13ddb72d0d5f"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "27cc8e2c-cb0e-434e-a8cc-e413f5795f40"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "831d079a-f46e-4f5b-863a-41e852cbcaf0"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "685495c3-e4dc-4b25-90ad-f6205ccf2ba3"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "7f22baac-85af-4ec0-b0bf-b9fe08b5c97b"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "67f508b6-3d2f-454c-8b3d-307f212196cf"
+            }
+          ],
+          "description": "You may require a minimum width of an element. Make sure to also select the 'minWidthUnit' option.",
+          "id": "IGZBP8eLT1iua8ZD9hWigg"
+        },
+        "min_width_unit": {
+          "type": "option",
+          "pos": 28,
+          "use_uuid": true,
+          "description": "This allows us to have more control over the minWidth, by being able to select units like 'vw', 'px' or 'rem' units, we can manipulate the container freely.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "044fa6a3-6446-4c5b-b3c8-c7955f0300af",
+              "name": "REM Units",
+              "value": "rem"
+            },
+            {
+              "_uid": "afb1a7bb-f85e-47dd-ae29-c42bbfbb8c22",
+              "value": "em",
+              "name": "EM Units"
+            },
+            {
+              "_uid": "9bb6d575-78b8-45f5-bdac-e0b50403aed1",
+              "value": "px",
+              "name": "Pixels"
+            },
+            {
+              "_uid": "0bce896b-b3c4-44cd-ad75-66a262e0d195",
+              "value": "vw",
+              "name": "Screen Width"
+            },
+            {
+              "_uid": "86c3fb32-8cd7-469c-8d3f-b84c3cc2ff76",
+              "value": "%",
+              "name": "Percentage"
+            },
+            {
+              "_uid": "44e43019-b539-454d-be8e-3290689edfd7",
+              "value": "none",
+              "name": "None"
+            }
+          ],
+          "default_value": "none",
+          "id": "aNfPzXKEQFSku4wDwBF4gA"
+        },
+        "customStyling": {
+          "type": "textarea",
+          "pos": 29,
+          "id": "3XkzLs65QWWrL0fVRRCBwg",
+          "description": "You can add custom CSS styling here. Ensure it's written as in-line css and every css property/value you add comes with an \" !important \" value as well.",
+          "tooltip": true,
+          "display_name": "Custom Inline CSS"
+        },
+        "overflow": {
+          "type": "option",
+          "pos": 30,
+          "use_uuid": true,
+          "id": "Bf5m2GpiQIaRqVAXjMKP5w",
+          "required": true,
+          "description": "Select what happens when content overflows this section. In most cases the default option will be preferable.\nDefault: Visible",
+          "options": [
+            {
+              "_uid": "f497e42e-41c5-4e11-b74d-27419de5206b",
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "_uid": "98c779d7-cfc4-4173-94ea-839985743ac4",
+              "value": "hidden",
+              "name": "Hidden"
+            },
+            {
+              "_uid": "b5abd200-c7aa-4975-957c-27e2de8302db",
+              "value": "scroll",
+              "name": "Scroll"
+            },
+            {
+              "_uid": "bedd2021-b541-498a-83a6-fff1dc756ffb",
+              "value": "visible",
+              "name": "Visible"
+            }
+          ],
+          "default_value": "visible",
+          "exclude_empty_option": true
+        },
+        "background_color": {
+          "type": "option",
+          "pos": 31,
+          "use_uuid": true,
+          "id": "GEA1nSNeQvmfu0fmhmW1xA",
+          "options": [
+            {
+              "_uid": "df4d702f-bce4-4d2c-a9c4-c3414dc87cb7",
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "_uid": "55f4efd8-9e87-4aba-baff-2c14fe762f3c",
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "_uid": "192bcf87-d34b-4be7-a3c7-bf1a18eaadb8",
+              "value": "primary-50",
+              "name": "Primary 50"
+            },
+            {
+              "_uid": "ffd3316e-45b2-47c6-8668-6b7bcc4cd0a1",
+              "value": "primary-100",
+              "name": "Primary 100"
+            },
+            {
+              "_uid": "0337e1b3-26b1-4280-afb2-75193543c7c3",
+              "value": "primary-200",
+              "name": "Primary 200"
+            },
+            {
+              "_uid": "7fc9cad1-e35b-4804-9a36-66cec3603b81",
+              "value": "primary-300",
+              "name": "Primary 300"
+            },
+            {
+              "_uid": "3601fbb3-0285-452f-a1a9-05c07cba9edc",
+              "value": "primary-400",
+              "name": "Primary 400"
+            },
+            {
+              "_uid": "c904c8cd-f1a1-4717-8730-28d0327d1095",
+              "value": "primary-500",
+              "name": "Primary 500"
+            },
+            {
+              "_uid": "34412d4f-0b29-4c58-895d-9712e72f49b5",
+              "value": "primary-600",
+              "name": "Primary 600"
+            },
+            {
+              "_uid": "585082b8-e3e6-4709-a291-66ce267eb086",
+              "value": "primary-700",
+              "name": "Primary 700"
+            },
+            {
+              "_uid": "04deec4b-d8d8-4a33-800c-bf52c8f301a4",
+              "value": "primary-800",
+              "name": "Primary 800"
+            },
+            {
+              "_uid": "e223ea30-df1e-45d2-83ff-a59d690a25fe",
+              "value": "primary-900",
+              "name": "Primary 900"
+            },
+            {
+              "_uid": "5f62c15b-ee72-4148-ae33-1d9ddf791b57",
+              "value": "primary-950",
+              "name": "Primary 950"
+            },
+            {
+              "_uid": "22b8b8e9-935a-46f4-8df9-3200c9b6c886",
+              "value": "secondary-50",
+              "name": "Secondary 50"
+            },
+            {
+              "_uid": "d282cd2d-dc0b-40ce-b84d-20931c36db4b",
+              "value": "secondary-100",
+              "name": "Secondary 100"
+            },
+            {
+              "_uid": "2be38cb3-e945-41de-8ba1-ed799f45f694",
+              "value": "secondary-200",
+              "name": "Secondary 200"
+            },
+            {
+              "_uid": "4986ad38-da58-4e43-8230-8c98d0e4bd46",
+              "value": "secondary-300",
+              "name": "Secondary 300"
+            },
+            {
+              "_uid": "00f7a977-5dd7-4dd4-ba12-cec649d629d1",
+              "value": "secondary-400",
+              "name": "Secondary 400"
+            },
+            {
+              "_uid": "7c725429-f336-4033-849a-81c44c3e1039",
+              "value": "secondary-500",
+              "name": "Secondary 500"
+            },
+            {
+              "_uid": "3ff83744-8a96-414c-abb9-f61b8c0b359d",
+              "value": "secondary-600",
+              "name": "Secondary 600"
+            },
+            {
+              "_uid": "36b5b562-5e27-4b2d-aeef-70828fe97c6e",
+              "value": "secondary-700",
+              "name": "Secondary 700"
+            },
+            {
+              "_uid": "d7f0e1a4-4a6f-4268-9277-24e6a163ca55",
+              "value": "secondary-800",
+              "name": "Secondary 800"
+            },
+            {
+              "_uid": "6781bacd-6de3-4360-9481-9ff1d8b567d5",
+              "value": "secondary-900",
+              "name": "Secondary 900"
+            },
+            {
+              "_uid": "1bc97f95-d025-46e7-8d67-79783b2afac0",
+              "value": "secondary-950",
+              "name": "Secondary 950"
+            }
+          ],
+          "default_value": "none",
+          "required": true,
+          "exclude_empty_option": true,
+          "description": "Select the background color of the container.",
+          "tooltip": true
+        },
+        "border": {
+          "type": "section",
+          "pos": 32,
+          "id": "zq_fXOCzS-mSmSrRfk7yag",
+          "keys": [
+            "border_radius",
+            "border_color",
+            "border_thickness"
+          ]
+        },
+        "border_radius": {
+          "type": "custom",
+          "pos": 33,
+          "display_name": "Border Radius",
+          "tooltip": true,
+          "description": "Border radius controls how sharp or curved the edges of the link are.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8]",
+              "_uid": "66f50152-538b-45bc-8f6d-00b9bd2a7da1"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "c5829c82-0e36-482f-b3b4-26739cf7c389"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "d35cb673-8807-4f8b-9485-988a1cff0c96"
+            },
+            {
+              "name": "maxValue",
+              "value": "8",
+              "_uid": "33c123ea-ce76-4cf6-8f40-f91aed2dfa9f"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "1bc133db-8f7d-4f39-8ee5-8273d528631e"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "23fc7c6a-753e-4b03-a803-bb929e818fdc"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "621b7527-6ff6-4666-bbb1-03ea737bf002"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "42234c5d-d397-41aa-b452-1a2fe582871f"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "552081b4-b367-41c3-868a-ec9dabb289a0"
+            }
+          ],
+          "id": "RoXzkMyNSCu6h0WtWqeywA"
+        },
+        "border_color": {
+          "type": "option",
+          "pos": 34,
+          "use_uuid": true,
+          "required": true,
+          "description": "Please select what border color you wish to have.",
+          "tooltip": true,
+          "id": "0wMwZVmjQ-SjvRwlKJ6ckA",
+          "display_name": "Border Color",
+          "options": [
+            {
+              "_uid": "8881d1dc-2bcf-4ffd-ba50-c7e18e9870d9",
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "_uid": "5c73747f-d97a-4cc0-a8ad-137e79ec2627",
+              "value": "primary-50",
+              "name": "Primary 50"
+            },
+            {
+              "_uid": "79c29f4e-5c5f-4aa7-8805-4f2666e97d76",
+              "value": "primary-100",
+              "name": "Primary 100"
+            },
+            {
+              "_uid": "3c30cf3c-fb0c-45c3-88a9-3cb900b5acbc",
+              "value": "primary-200",
+              "name": "Primary 200"
+            },
+            {
+              "_uid": "5f7e614d-5826-42ea-8dd6-dc9690d28ea3",
+              "value": "primary-300",
+              "name": "Primary 300"
+            },
+            {
+              "_uid": "10d40fc6-6dc5-4fe8-ae29-5b53e61a7bd9",
+              "value": "primary-400",
+              "name": "Primary 400"
+            },
+            {
+              "_uid": "8188a766-fb99-4fe2-8862-624750144a34",
+              "value": "primary-500",
+              "name": "Primary 500"
+            },
+            {
+              "_uid": "726c3113-44e3-46f9-9a64-cf35fda0218a",
+              "value": "primary-600",
+              "name": "Primary 600"
+            },
+            {
+              "_uid": "b465c5bf-2ffb-4df8-8e87-2f97ae425dcc",
+              "value": "primary-700",
+              "name": "Primary 700"
+            },
+            {
+              "_uid": "c3173ca2-d62a-4de6-bf9a-becb06e8f995",
+              "value": "primary-800",
+              "name": "Primary 800"
+            },
+            {
+              "_uid": "85dd6c6c-b96a-43b7-9161-88d54ccaf154",
+              "value": "primary-900",
+              "name": "Primary 900"
+            },
+            {
+              "_uid": "39f922ea-c3f8-406e-a7b7-b19bbaf65684",
+              "value": "primary-950",
+              "name": "Primary 950"
+            },
+            {
+              "_uid": "e9237b5a-3ad6-4afa-b29e-2fa5eb432113",
+              "value": "secondary-50",
+              "name": "Secondary 50"
+            },
+            {
+              "_uid": "6b26086d-1051-4f60-8ca1-741e7ed8d8c9",
+              "value": "secondary-100",
+              "name": "Secondary 100"
+            },
+            {
+              "_uid": "06cfd4b7-bec8-480f-94ec-524da4296319",
+              "value": "secondary-200",
+              "name": "Secondary 200"
+            },
+            {
+              "_uid": "3e075bd0-510b-4024-9715-1f7df1077e23",
+              "value": "secondary-300",
+              "name": "Secondary 300"
+            },
+            {
+              "_uid": "7bb37094-d3ea-46d4-8a27-30f101d147aa",
+              "value": "secondary-400",
+              "name": "Secondary 400"
+            },
+            {
+              "_uid": "d3d3eb84-c3a2-46d1-90a1-db354a7b758d",
+              "value": "secondary-500",
+              "name": "Secondary 500"
+            },
+            {
+              "_uid": "f1e51b9f-97a5-494d-9fbc-8b741b013202",
+              "value": "secondary-600",
+              "name": "Secondary 600"
+            },
+            {
+              "_uid": "131a8757-f666-4f2c-a42e-ba22056bb562",
+              "value": "secondary-700",
+              "name": "Secondary 700"
+            },
+            {
+              "_uid": "6a63a161-0a6c-420b-8c49-9b0d47166a5c",
+              "value": "secondary-800",
+              "name": "Secondary 800"
+            },
+            {
+              "_uid": "563a7d61-b045-41b0-a727-6d765aaafa8f",
+              "value": "secondary-900",
+              "name": "Secondary 900"
+            },
+            {
+              "_uid": "2394a82b-412b-4651-996b-aa4c5dcf145c",
+              "value": "secondary-950",
+              "name": "Secondary 950"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "none"
+        },
+        "border_thickness": {
+          "type": "custom",
+          "pos": 35,
+          "translatable": false,
+          "description": "Select how thick your border is.",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,1,2,3,4]",
+              "_uid": "e08d3657-8379-4030-aa68-f9ed7b01221e"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "3801bcd6-6f37-4188-951a-09a1c3978630"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "0e2d3270-5cfc-4bbe-a829-241e7cb4d836"
+            },
+            {
+              "name": "maxValue",
+              "value": "4",
+              "_uid": "664743d5-0ec9-4cb8-a90e-c45906354e18"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "d7531da4-77ad-4c3c-8b74-f261737d8a13"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "4f80a681-84cb-4cb9-a165-9b930cc1d63c"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "6eebd937-abd0-446e-85c1-70681a0ea81b"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "a3593da8-ae94-4982-a45d-e87216a9841f"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "14f602f3-8aeb-4af1-add7-c62903c8f50b"
+            }
+          ],
+          "id": "TvJbPEbdS1CSYgEjGZNJaw"
+        },
+        "tab-2228e5f3-f14e-400f-8c5a-f61bf2a33d4d": {
+          "display_name": "Style",
+          "keys": [
+            "background_color",
+            "border_styling",
+            "overflow",
+            "customStyling",
+            "border_radius",
+            "border",
+            "border_thickness",
+            "border_color"
+          ],
+          "pos": 36,
+          "type": "tab",
+          "id": "Iijl8_FOQA-MWvYb8qM9TQ"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/0a3f0712e2/container.png",
+      "preview_field": "storyblok_name",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Container",
+      "component_group_uuid": "3b501dcb-dcf7-4bb7-b596-c02dbd070279",
+      "color": "#dfe3e8",
+      "icon": "block-unlocked",
+      "internal_tags_list": [
+        {
+          "id": 56285,
+          "name": "layout"
+        }
+      ],
+      "internal_tag_ids": [
+        "56285"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "06 - Legacy"
+    },
+    {
       "name": "custom_hero",
       "display_name": null,
       "description": null,
       "created_at": "2025-01-19T14:45:20.578Z",
-      "updated_at": "2025-01-19T15:58:51.271Z",
+      "updated_at": "2025-01-24T14:48:37.965Z",
       "id": 6816913,
       "schema": {
-        "must_haves": {
-          "type": "section",
-          "pos": 0,
-          "id": "TuHNVaVnRq-Gr5dp8F9ebw",
-          "keys": [
-            "hero_section_style",
-            "section_id",
-            "hero_heading",
-            "hero_image",
-            "hero_description",
-            "hero_cta"
-          ]
-        },
         "hero_section_style": {
           "type": "option",
           "pos": 1,
@@ -6391,6 +6378,279 @@
       "component_group_name": "01 - Layout"
     },
     {
+      "name": "divider",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-25T18:31:03.331Z",
+      "updated_at": "2025-01-25T18:55:56.796Z",
+      "id": 6856474,
+      "schema": {
+        "divider_color": {
+          "type": "option",
+          "pos": 0,
+          "use_uuid": true,
+          "id": "-jiv797AQ1ab9YqJUufR0g",
+          "required": true,
+          "tooltip": true,
+          "description": "Select the color of the divider. Basic primary surface 100 by default.",
+          "default_value": "primary-100",
+          "options": [
+            {
+              "_uid": "798825c5-6881-438e-a80e-5e65ecc92e5e",
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "_uid": "eb1c4fc2-f485-4d5e-afdc-fe9da162c9e2",
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "_uid": "7353c892-7cb2-4080-b780-4e6a6a4dbfd9",
+              "value": "secondary-50",
+              "name": "Secondary 50"
+            },
+            {
+              "_uid": "0f38e446-6a27-4a33-ba96-cadac0720d3a",
+              "value": "secondary-100",
+              "name": "Secondary 100"
+            },
+            {
+              "_uid": "ad2a2e68-3046-42ad-8116-aefc1cdad445",
+              "value": "secondary-200",
+              "name": "Secondary 200"
+            },
+            {
+              "_uid": "17f442ea-cfb7-4eed-8c5a-2dd907314796",
+              "value": "secondary-300",
+              "name": "Secondary 300"
+            },
+            {
+              "_uid": "da507ac9-5153-426c-8686-7d216ae4fe0d",
+              "value": "secondary-400",
+              "name": "Secondary 400"
+            },
+            {
+              "_uid": "c68a901e-1698-4469-80f5-7ab5f0329114",
+              "value": "secondary-500",
+              "name": "Secondary 500"
+            },
+            {
+              "_uid": "5952e8ab-0fe8-43a1-ac38-66208ddcd92d",
+              "value": "secondary-600",
+              "name": "Secondary 600"
+            },
+            {
+              "_uid": "74708924-cec7-4626-921f-8e4966a03b22",
+              "value": "secondary-700",
+              "name": "Secondary 700"
+            },
+            {
+              "_uid": "7432386a-77b6-4ea9-86db-25091b3f23a9",
+              "value": "secondary-800",
+              "name": "Secondary 800"
+            },
+            {
+              "_uid": "81df22da-2f97-4be3-8c04-e2c82529b69e",
+              "value": "secondary-900",
+              "name": "Secondary 900"
+            },
+            {
+              "_uid": "ed248b9d-77e7-49a5-87f1-1318c397cd43",
+              "value": "secondary-950",
+              "name": "Secondary 950"
+            },
+            {
+              "_uid": "ceb4e8cf-78b7-4b7e-993c-ffbf9d1323af",
+              "value": "primary-50",
+              "name": "Primary 50"
+            },
+            {
+              "_uid": "eb6c0c92-36f2-449b-a14b-c62919801e36",
+              "value": "primary-100",
+              "name": "Primary 100"
+            },
+            {
+              "_uid": "ade0b8f5-1d15-48e5-968d-f193d03758ae",
+              "value": "primary-200",
+              "name": "Primary 200"
+            },
+            {
+              "_uid": "5d8a8861-fa15-4708-864d-837b58e8f5fd",
+              "value": "primary-300",
+              "name": "Primary 300"
+            },
+            {
+              "_uid": "0d6d22b3-3059-4510-ac63-6d604162f700",
+              "value": "primary-400",
+              "name": "Primary 400"
+            },
+            {
+              "_uid": "32ef1614-f052-424a-a655-9f789e204ded",
+              "value": "primary-500",
+              "name": "Primary 500"
+            },
+            {
+              "_uid": "a9708239-2353-4497-af6f-fde64d502800",
+              "value": "primary-600",
+              "name": "Primary 600"
+            },
+            {
+              "_uid": "9b77f722-8a7e-4ee1-9f3c-d973f3645a1f",
+              "value": "primary-700",
+              "name": "Primary 700"
+            },
+            {
+              "_uid": "4584e9c7-8eae-4cd3-b9e8-1b6874c82113",
+              "value": "primary-800",
+              "name": "Primary 800"
+            },
+            {
+              "_uid": "30668911-4d6e-470a-bf43-6c00062d9342",
+              "value": "primary-900",
+              "name": "Primary 900"
+            },
+            {
+              "_uid": "769d529f-3a37-4091-84f3-2b30b453e2be",
+              "value": "primary-950",
+              "name": "Primary 950"
+            }
+          ],
+          "exclude_empty_option": true
+        },
+        "divider_max_width": {
+          "type": "custom",
+          "pos": 1,
+          "id": "IFWqBbJST6OnjrZQxzHQVw",
+          "description": "Choose the maximum width of this container. \n0 = No Max Width + Width Full\n1-19 = Various sizes based on Tailwind's system\n20 = Max width is 'max-content'",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,2,4,6,8,10,12,14,16,18,20]",
+              "_uid": "a78ee510-243e-4eaa-ab58-e699d5c300b8"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "f5aeefa5-3c88-4e35-9638-1879a0d50a3d"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "8280ee98-daad-4d21-8692-5bcf5fa46d67"
+            },
+            {
+              "name": "maxValue",
+              "value": "20",
+              "_uid": "cd25ea31-461b-404b-9275-8381bbcc1f16"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "12e97437-2b58-488e-a053-f1a8943a9dc8"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "75f1cd3b-170a-48fb-94e3-7c4422ad1d40"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "b155ae68-2922-4391-ac9b-a3ff754d3a7f"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "7a476cb7-dc35-4123-a793-b255b68e7e42"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "d130fd12-b491-4218-8dca-5ae12bf88f70"
+            }
+          ],
+          "tooltip": true
+        },
+        "divider_height": {
+          "type": "custom",
+          "pos": 2,
+          "id": "ljRln8mNSGW5cGt2Vukzsw",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[1,5,10]",
+              "_uid": "199156cd-f1f2-482d-a3e1-cff111cfea55"
+            },
+            {
+              "name": "defaultValue",
+              "value": "1",
+              "_uid": "54e98f27-de70-4d84-94ee-36d5fd51a232"
+            },
+            {
+              "name": "minValue",
+              "value": "1",
+              "_uid": "b583bb12-7063-4379-b37f-75047c4ecd64"
+            },
+            {
+              "name": "maxValue",
+              "value": "10",
+              "_uid": "ba5fdb09-d064-45d3-add0-aa41eec754cf"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "1968914a-a3e5-4dfa-9d29-393b722e3a74"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "eb9d6a6f-a8ca-456d-9470-1e8416a6aa7c"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "d62effa6-0a96-4965-a455-a0f2f6dfecbd"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "f4bf5e14-5a75-4b4e-999c-54973b6beefc"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "00b363dc-4a87-43a9-bc67-c170bbdd1af5"
+            }
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "divider",
+      "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
+      "color": "#374dc3",
+      "icon": "block-text-img-c",
+      "internal_tags_list": [
+        {
+          "id": 56293,
+          "name": "ui"
+        }
+      ],
+      "internal_tag_ids": [
+        "56293"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "02 - UI"
+    },
+    {
       "name": "embed_text",
       "display_name": "Embed Text",
       "description": null,
@@ -6456,23 +6716,173 @@
       "component_group_name": "02 - UI"
     },
     {
+      "name": "footer",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-26T06:18:01.329Z",
+      "updated_at": "2025-01-26T06:31:09.733Z",
+      "id": 6857052,
+      "schema": {
+        "must_haves": {
+          "type": "section",
+          "pos": 0,
+          "keys": [
+            "footer_logo",
+            "footer_columns",
+            "footer_disclaimer"
+          ],
+          "id": "NxHTgEuWQ_qtIy1C4tz0uA"
+        },
+        "footer_logo": {
+          "type": "bloks",
+          "pos": 1,
+          "id": "vyom3C6wSPKppfUV1rp6tw",
+          "description": "Select the logo component.",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "nav_logo"
+          ]
+        },
+        "footer_columns": {
+          "type": "bloks",
+          "pos": 2,
+          "id": "ze6_9q5gQGOSwKjVToIgLQ"
+        },
+        "footer_disclaimer": {
+          "type": "bloks",
+          "pos": 3,
+          "id": "EzxtVy7CRyiMMl9priZ0oA"
+        },
+        "footer_cta": {
+          "type": "section",
+          "pos": 4,
+          "id": "uCqqFjaxQAOoWcwk1LBeUA",
+          "keys": [
+            "footer_cta_bloks",
+            "show_cta"
+          ]
+        },
+        "show_cta": {
+          "type": "boolean",
+          "pos": 5,
+          "id": "O3v_T-kSQnmPFi51D8m52A"
+        },
+        "footer_cta_bloks": {
+          "type": "bloks",
+          "pos": 6,
+          "description": "If you require your footer to have a cta you can add one here.",
+          "tooltip": true,
+          "id": "kF_1M3h-SJ6JI8Fo5zK79Q"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/b9cbaadf9e/footer.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "footer",
+      "component_group_uuid": "da07426c-c55e-47a9-be46-b2eaa8f745a4",
+      "color": "#f5a928",
+      "icon": "block-@",
+      "internal_tags_list": [
+        {
+          "id": 56705,
+          "name": "navigation"
+        }
+      ],
+      "internal_tag_ids": [
+        "56705"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "04 - Navigation"
+    },
+    {
+      "name": "footer_column",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-26T06:23:02.480Z",
+      "updated_at": "2025-01-26T06:38:37.841Z",
+      "id": 6857053,
+      "schema": {
+        "column_label": {
+          "type": "bloks",
+          "pos": 0,
+          "id": "zTWPiXTASGC7CWTLF9i0SA",
+          "required": true,
+          "description": "Select the text that will be on the top of this column of links.",
+          "tooltip": true,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ]
+        },
+        "column_links": {
+          "type": "bloks",
+          "pos": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "nav_link"
+          ],
+          "id": "FGwieHFXRSate_SyZ7xapQ"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/8a6c10c2b7/footer_col.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "footer_column",
+      "component_group_uuid": "da07426c-c55e-47a9-be46-b2eaa8f745a4",
+      "color": "#f5a928",
+      "icon": "block-center-m",
+      "internal_tags_list": [
+        {
+          "id": 56705,
+          "name": "navigation"
+        }
+      ],
+      "internal_tag_ids": [
+        "56705"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "04 - Navigation"
+    },
+    {
       "name": "header",
       "display_name": "Header & Nav",
       "description": "Header & Navigation for the website",
       "created_at": "2025-01-15T16:50:03.999Z",
-      "updated_at": "2025-01-19T07:20:42.447Z",
+      "updated_at": "2025-01-26T06:35:27.787Z",
       "id": 6801246,
       "schema": {
+        "header": {
+          "type": "section",
+          "pos": 0,
+          "keys": [
+            "fixed_to_top",
+            "logo",
+            "nav_links",
+            "button"
+          ],
+          "id": "Wip_wXX7T22YeY0K4wgZCg"
+        },
         "fixed_to_top": {
           "type": "boolean",
-          "pos": 0,
+          "pos": 1,
           "tooltip": true,
           "description": "Toggle this on if you want the navigation to always be visible on the top of your website. Else, leave it off and the user can scroll back up to access navigation.\n\nBoth behaviours are quite normal is it's a matter of personal preference.",
           "id": "4JeOK1oQQsCr_f1EKJy0BQ"
         },
         "logo": {
           "type": "bloks",
-          "pos": 1,
+          "pos": 2,
           "display_name": "Logo",
           "required": true,
           "description": "Please create the logo for your website. You will have a single element as a choice, click on it and fill it in.",
@@ -6488,7 +6898,7 @@
         },
         "nav_links": {
           "type": "bloks",
-          "pos": 2,
+          "pos": 3,
           "required": true,
           "description": "These are the links your users will see on the top of your website.\n\nThis does NOT include the logo or Call to Action button in the top-navigation, just the centre links.",
           "tooltip": true,
@@ -6501,7 +6911,7 @@
         },
         "button": {
           "type": "bloks",
-          "pos": 3,
+          "pos": 4,
           "display_name": "Button",
           "tooltip": true,
           "required": false,
@@ -6512,6 +6922,60 @@
           "component_whitelist": [
             "button"
           ]
+        },
+        "footer": {
+          "type": "section",
+          "pos": 5,
+          "id": "L-VlcQzvR1qWhdMUXV0KJw",
+          "keys": [
+            "footer_logo",
+            "footer_columns",
+            "footer_disclaimer",
+            "footer_show_cta",
+            "footer_cta_bloks"
+          ]
+        },
+        "footer_logo": {
+          "type": "bloks",
+          "pos": 6,
+          "id": "-Ntjk_FjT0astpKbzmRXrA",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "nav_logo"
+          ]
+        },
+        "footer_columns": {
+          "type": "bloks",
+          "pos": 7,
+          "id": "im3ZOgUrRYCsL0gEi4HKKw",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "footer_column"
+          ]
+        },
+        "footer_disclaimer": {
+          "type": "bloks",
+          "pos": 8,
+          "id": "pDOJ5erdTLKO3kP_-ClSzw",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ]
+        },
+        "footer_show_cta": {
+          "type": "boolean",
+          "pos": 9,
+          "id": "o4cXWfh9STm-fwY83n-u_w"
+        },
+        "footer_cta_bloks": {
+          "type": "bloks",
+          "pos": 10,
+          "id": "av9C_rhESRqiLwpjSS5qKA",
+          "restrict_type": "",
+          "restrict_components": false
         }
       },
       "image": "//a.storyblok.com/f/320425/x/54ac6ee8e9/header.png",
@@ -6542,7 +7006,7 @@
       "display_name": "Icon",
       "description": "Use when you need icons!!",
       "created_at": "2025-01-15T17:22:08.987Z",
-      "updated_at": "2025-01-15T17:38:15.065Z",
+      "updated_at": "2025-01-25T07:36:39.310Z",
       "id": 6801314,
       "schema": {
         "icon": {
@@ -6702,6 +7166,270 @@
           "description": "Optional custom css you can add to the <div> containing the svg icon.",
           "tooltip": true,
           "id": "RzjQ7At0QxqjSKK6uwDExA"
+        },
+        "icon_fill": {
+          "type": "option",
+          "pos": 2,
+          "use_uuid": true,
+          "tooltip": true,
+          "description": "Fill your icon with color. Will overwrite any other styling already applied.",
+          "exclude_empty_option": true,
+          "options": [
+            {
+              "_uid": "9fd0c2e4-ded8-4c79-b9c9-74256b8b7bf3",
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "_uid": "64985ae1-41d6-4221-abab-da0ca9c4222e",
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "_uid": "7a44f3c4-1caa-40d5-9e1b-f0d6203acdf1",
+              "value": "primary-50",
+              "name": "Primary 50"
+            },
+            {
+              "_uid": "77aee6c2-7e98-48da-837d-4112758165ab",
+              "value": "primary-100",
+              "name": "Primary 100"
+            },
+            {
+              "_uid": "ae54197e-1437-4bc9-b7a2-3241f82bca38",
+              "value": "primary-200",
+              "name": "Primary 200"
+            },
+            {
+              "_uid": "5037ac7e-1968-42f0-b7c0-3f292ce4ae72",
+              "value": "primary-300",
+              "name": "Primary 300"
+            },
+            {
+              "_uid": "76e489e0-b4e7-4cdf-be2c-ecab2a5c10c8",
+              "value": "primary-400",
+              "name": "Primary 400"
+            },
+            {
+              "_uid": "7b5cee21-70ec-4cef-8176-fb919bed116b",
+              "value": "primary-500",
+              "name": "Primary 500"
+            },
+            {
+              "_uid": "d6f60b42-77d1-416b-931b-59c24472ec6e",
+              "value": "primary-600",
+              "name": "Primary 600"
+            },
+            {
+              "_uid": "92a94b4b-9ff5-49a7-86fd-333e861036ec",
+              "value": "primary-700",
+              "name": "Primary 700"
+            },
+            {
+              "_uid": "7098aae4-e8e6-4d71-ad21-3f0b95c18e5a",
+              "value": "primary-800",
+              "name": "Primary 800"
+            },
+            {
+              "_uid": "17d24ce4-c640-440b-9983-f608a5974de8",
+              "value": "primary-900",
+              "name": "Primary 900"
+            },
+            {
+              "_uid": "cc475905-279d-4510-b21a-ffe16879e48b",
+              "value": "primary-950",
+              "name": "Primary 950"
+            },
+            {
+              "_uid": "eb3d6ce8-0f18-428c-b8fe-60081f1b944d",
+              "value": "secondary-50",
+              "name": "Secondary 50"
+            },
+            {
+              "_uid": "0a83a227-6224-4cc3-b94d-6e2efc1e21d3",
+              "value": "secondary-100",
+              "name": "Secondary 100"
+            },
+            {
+              "_uid": "33f19380-f883-48be-8bf6-1daa171e8591",
+              "value": "secondary-200",
+              "name": "Secondary 200"
+            },
+            {
+              "_uid": "5922dc5d-e061-436e-a6ae-a094f372d9de",
+              "value": "secondary-300",
+              "name": "Secondary 300"
+            },
+            {
+              "_uid": "6b81ec9a-9aaa-47f9-86b8-9392fbc91652",
+              "value": "secondary-400",
+              "name": "Secondary 400"
+            },
+            {
+              "_uid": "bb0a31a3-40dd-453a-872e-bd9fbf2e7d21",
+              "value": "secondary-500",
+              "name": "Secondary 500"
+            },
+            {
+              "_uid": "e426a51a-ea45-4ca4-8f00-5c9ef5c4f06b",
+              "value": "secondary-600",
+              "name": "Secondary 600"
+            },
+            {
+              "_uid": "af896b43-939c-49c3-9181-db78c4b82d80",
+              "value": "secondary-700",
+              "name": "Secondary 700"
+            },
+            {
+              "_uid": "f33368df-957d-4bf3-802d-ca6f2185fcd3",
+              "value": "secondary-800",
+              "name": "Secondary 800"
+            },
+            {
+              "_uid": "9a4fdc82-56bb-4f21-acee-723b35ca96dc",
+              "value": "secondary-900",
+              "name": "Secondary 900"
+            },
+            {
+              "_uid": "0d42a493-5776-411f-a638-277f86fc2f0b",
+              "value": "secondary-950",
+              "name": "Secondary 950"
+            }
+          ],
+          "default_value": "none",
+          "id": "DlVFoWyoQ8KcG6JsPXWjPg"
+        },
+        "icon_stroke": {
+          "type": "option",
+          "pos": 3,
+          "use_uuid": true,
+          "id": "TuuLUQZqR6aHetXBhlXMLA",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "b58f3228-5ad3-4bee-821b-9ce9efcb4811",
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "_uid": "a629b0b7-8fd7-49c6-b708-95252c1e721d",
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "_uid": "b86010fe-f25d-403c-afed-0dd449b7b972",
+              "value": "primary-50",
+              "name": "Primary 50"
+            },
+            {
+              "_uid": "738c1dc5-03b2-4f07-9d08-37e7ca5201da",
+              "value": "primary-100",
+              "name": "Primary 100"
+            },
+            {
+              "_uid": "72618067-9b73-4790-b973-ddbb5b97b136",
+              "value": "primary-200",
+              "name": "Primary 200"
+            },
+            {
+              "_uid": "7eaca045-f875-4193-a32a-7fc75ce4c845",
+              "value": "primary-300",
+              "name": "Primary 300"
+            },
+            {
+              "_uid": "53beabad-508d-49a7-84af-dd9e7421f035",
+              "value": "primary-400",
+              "name": "Primary 400"
+            },
+            {
+              "_uid": "a9a1426a-dda5-4560-83e2-6d51ab8aafbf",
+              "value": "primary-500",
+              "name": "Primary 500"
+            },
+            {
+              "_uid": "330fae5c-e3a2-4a67-b490-d534dfdfc765",
+              "value": "primary-600",
+              "name": "Primary 600"
+            },
+            {
+              "_uid": "f9de419b-ecf9-467f-b13a-6a01e3d82d6f",
+              "value": "primary-700",
+              "name": "Primary 700"
+            },
+            {
+              "_uid": "ba923094-8e2b-4903-b4fe-b3e7ceaeb5fe",
+              "value": "primary-800",
+              "name": "Primary 800"
+            },
+            {
+              "_uid": "20492314-5d48-4f14-84ea-65334fbf6c10",
+              "value": "primary-900",
+              "name": "Primary 900"
+            },
+            {
+              "_uid": "d88da9f0-0edf-4369-9a53-1719232d4177",
+              "value": "primary-950",
+              "name": "Primary 950"
+            },
+            {
+              "_uid": "62f87cd5-757e-4af7-bf7c-18e46d3a49f7",
+              "value": "secondary-50",
+              "name": "Secondary 50"
+            },
+            {
+              "_uid": "8fd7f804-b5fd-4c70-a0d9-bc0c18c86527",
+              "value": "secondary-100",
+              "name": "Secondary 100"
+            },
+            {
+              "_uid": "a144d133-af8c-44cd-a3b3-c5088edea0e5",
+              "value": "secondary-200",
+              "name": "Secondary 200"
+            },
+            {
+              "_uid": "199b2212-fa80-4a13-a223-547782eae24a",
+              "value": "secondary-300",
+              "name": "Secondary 300"
+            },
+            {
+              "_uid": "4fba6990-0357-42f2-a3af-eeba6197a61a",
+              "value": "secondary-400",
+              "name": "Secondary 400"
+            },
+            {
+              "_uid": "ebb23061-34b9-48b7-9c0c-080654adff6c",
+              "value": "secondary-500",
+              "name": "Secondary 500"
+            },
+            {
+              "_uid": "38d8abf9-eeeb-42fe-9863-7799f266c00f",
+              "value": "secondary-600",
+              "name": "Secondary 600"
+            },
+            {
+              "_uid": "cfcc1889-5c67-4996-bdc5-cc17852e3b3b",
+              "value": "secondary-700",
+              "name": "Secondary 700"
+            },
+            {
+              "_uid": "a1dd4140-8f0a-45ef-9b97-52cb2885e966",
+              "value": "secondary-800",
+              "name": "Secondary 800"
+            },
+            {
+              "_uid": "1e5183e6-0ed8-4a5c-b423-d096e3d3f49d",
+              "value": "secondary-900",
+              "name": "Secondary 900"
+            },
+            {
+              "_uid": "a0035876-1b66-4630-a103-18b41d6ef09c",
+              "value": "secondary-950",
+              "name": "Secondary 950"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "none",
+          "description": "Give your icon with a stroke color. Will overwrite any other styling already applied."
         }
       },
       "image": "//a.storyblok.com/f/320425/x/23ffed0b48/icon.png",
@@ -7768,7 +8496,7 @@
       "display_name": "Navigation Header Link",
       "description": "This link should only be used in the Header component, not Footer.",
       "created_at": "2025-01-15T17:08:56.629Z",
-      "updated_at": "2025-01-16T09:15:33.719Z",
+      "updated_at": "2025-01-26T08:07:50.347Z",
       "id": 6801257,
       "schema": {
         "main_link": {
@@ -7792,13 +8520,18 @@
           "tooltip": true
         },
         "link_label": {
-          "type": "text",
+          "type": "bloks",
           "pos": 2,
           "required": true,
           "description": "This is what the website user reads. \n\nSo this should be \"Home\" | \"About\" | \"Services\" | \"Work with Me\" | \"Contact\" etc (without the quotation marks).",
           "tooltip": true,
           "display_name": "Link Label",
-          "id": "xz1mqqW2Sv2zTOk18EN2OQ"
+          "id": "xz1mqqW2Sv2zTOk18EN2OQ",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ]
         },
         "icon": {
           "type": "bloks",
@@ -7866,7 +8599,7 @@
         }
       },
       "image": "//a.storyblok.com/f/320425/x/36b666cbc5/link.png",
-      "preview_field": null,
+      "preview_field": "url",
       "is_root": false,
       "preview_tmpl": null,
       "is_nestable": true,
@@ -7893,7 +8626,7 @@
       "display_name": "Navigation logo",
       "description": "Use this logo only for the Header component.",
       "created_at": "2025-01-15T16:52:21.104Z",
-      "updated_at": "2025-01-15T17:07:20.246Z",
+      "updated_at": "2025-01-26T06:47:49.168Z",
       "id": 6801247,
       "schema": {
         "url": {
@@ -7918,9 +8651,16 @@
           "id": "Wd4sfwebQ2u0iTX31i1JUA"
         },
         "logo_text": {
-          "type": "text",
+          "type": "bloks",
           "pos": 2,
-          "id": "YRJ6At4wQ7qHybPZoRTfhg"
+          "id": "YRJ6At4wQ7qHybPZoRTfhg",
+          "tooltip": true,
+          "description": "Select and input the text you wish to be displayed.",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ]
         },
         "gap": {
           "type": "custom",
@@ -9863,51 +10603,140 @@
       "component_group_name": "02 - UI"
     },
     {
+      "name": "testimonial",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-25T17:18:37.456Z",
+      "updated_at": "2025-01-25T17:59:58.444Z",
+      "id": 6856306,
+      "schema": {
+        "testimonial_title": {
+          "type": "bloks",
+          "pos": 0,
+          "required": true,
+          "tooltip": true,
+          "description": "Give this testimonial a snappy and descriptive title. This will be the 'key' pro of working with you.",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "id": "-vw_uGwJRZahNt4xIubAsg",
+          "maximum": 1
+        },
+        "testimonial_summary": {
+          "type": "bloks",
+          "pos": 1,
+          "id": "moMwIN14R6qVcBqM19nkkg",
+          "required": true,
+          "tooltip": true,
+          "description": "This is the first 3-4 lines of the testimonial.",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "maximum": 1
+        },
+        "testimonial_full_message": {
+          "type": "bloks",
+          "pos": 2,
+          "description": "This is your entire testimonial.",
+          "tooltip": true,
+          "required": true,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "id": "8IxlqpbpSW28bfptbM0lNw",
+          "maximum": 1
+        },
+        "testimonial_name": {
+          "type": "bloks",
+          "pos": 3,
+          "id": "VKrUUhU1Q_uF6JX5w8Pn5A",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "description": "This is the name and title of the person submitting the testimonial to you.",
+          "required": true,
+          "tooltip": true
+        },
+        "testimonial_button_text": {
+          "type": "bloks",
+          "pos": 4,
+          "default_value": "",
+          "description": "This is the text that is shown on the bottom right of the testimonial to signal to the user that the testimonial can be clicked on so someone can read everything. \nBy default it's set to \"Click to read more\"",
+          "tooltip": true,
+          "id": "WasJK716QrGDH2OKHU32rg",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "maximum": 1,
+          "required": true
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/f9b4e38129/testimonial.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "testimonial",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-comment",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
       "name": "text",
       "display_name": null,
       "description": null,
       "created_at": "2025-01-16T15:15:02.349Z",
-      "updated_at": "2025-01-23T15:51:03.412Z",
+      "updated_at": "2025-01-26T06:58:03.786Z",
       "id": 6808303,
       "schema": {
-        "tab-b7637c37-226d-4687-9fa4-3c7d06486b03": {
-          "display_name": "Rich Text",
-          "keys": [
-            "rich_text"
-          ],
-          "pos": 0,
-          "type": "tab",
-          "id": "t2N8NyJtRoefpDx9BkhrAw",
-          "name": "tab-b7637c37-226d-4687-9fa4-3c7d06486b03"
-        },
         "Content": {
           "type": "section",
           "pos": 0,
           "keys": [
             "content",
             "text_id",
-            "text_type"
+            "text_type",
+            "storyblok_name"
           ],
           "id": "X5ECsAEjR1CTfjCVHMAgGg"
         },
-        "tab-6baac447-02bf-4328-99a6-9343cf369378": {
-          "display_name": "Multi Line",
-          "keys": [
-            "multi_line_bloks",
-            "mode"
-          ],
-          "pos": 1,
-          "type": "tab",
-          "id": "a6rERwK_QyiZppNDzzaTeA",
-          "name": "tab-6baac447-02bf-4328-99a6-9343cf369378"
-        },
         "content": {
           "type": "textarea",
-          "pos": 2,
+          "pos": 1,
           "required": false,
           "tooltip": true,
           "description": "Simply write what you want to be shown or read by a screen-reader. (There is an option to select \"Screen Reader\" which means this won't be shown to people who can see the website, but it will be read to individuals using screen readers.)",
           "id": "Fsacr6bCRzy84jmAV0xJ_w"
+        },
+        "storyblok_name": {
+          "type": "text",
+          "pos": 2,
+          "id": "Yellb_yTRnCugHJMRufMLQ",
+          "description": "Use this to give yourself context as to what this text field is for within storyblok. This property does not touch the code side.",
+          "tooltip": true
         },
         "text_id": {
           "type": "text",
@@ -9995,7 +10824,7 @@
           "id": "H1koUR5dSJ6k_tTj5s3Erg",
           "default_value": "paraBase"
         },
-        "Styling": {
+        "core_styles": {
           "type": "section",
           "pos": 5,
           "keys": [
@@ -10003,8 +10832,7 @@
             "text_align",
             "text_color_overwrite",
             "max_width",
-            "customCss",
-            "custom_css"
+            "customCss"
           ],
           "id": "BvnYGYbOTSuoJ1UTt6yHiQ"
         },
@@ -10115,6 +10943,11 @@
               "_uid": "aa87f454-8039-409a-b8e3-f9de84bb5bea",
               "value": "sr",
               "name": "Screen Reader Only"
+            },
+            {
+              "_uid": "cad066ce-efe0-40f2-9ce7-76ca250cdc08",
+              "value": "navLink",
+              "name": "Nav Link"
             }
           ],
           "exclude_empty_option": true,
@@ -10278,9 +11111,164 @@
           "id": "CZSLQ0AOQIGKRdX_P3-FyA",
           "datasource_slug": "slider-0-20-0-0-20-1"
         },
+        "font_weight_overwrites": {
+          "type": "section",
+          "pos": 10,
+          "keys": [
+            "font_weight_set",
+            "font_weight_variable"
+          ],
+          "id": "LqNJAW4ORReHpJo6jYmlvg"
+        },
+        "font_weight_set": {
+          "type": "custom",
+          "pos": 11,
+          "tooltip": true,
+          "description": "If this font is not a variable font, please use this option to set a custom weight on the font. Otherwise, you can use Font Weight Variable (next setting) to set a more precise font weight for variable fonts.",
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,100,200,300,400,500,600,700,800,900]",
+              "_uid": "3f77a35c-4ce4-4b34-b872-7dbae1ce79c9"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "b269e5c0-26a9-4c59-85e1-eafceff19158"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "3373f3c5-e56f-4180-812d-87d44eb7d864"
+            },
+            {
+              "name": "maxValue",
+              "value": "900",
+              "_uid": "4e218aea-6605-4ca3-8f54-ea7915755984"
+            },
+            {
+              "name": "stepSize",
+              "value": "100",
+              "_uid": "4cdb07a1-c265-4b86-8c32-0f76d93d214b"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "5e9dc87f-dfac-4dea-bdaf-0e67ba66d964"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "e7d15b32-d972-4bcf-864e-42d0e9edea8c"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "1aa62b20-ec7b-4cd7-8def-0fe3f01836cf"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "f274c0b8-bb3f-4b4f-bf86-3b828df15b6a"
+            }
+          ],
+          "id": "IlthP4A8R06F6dvU2YHg4g"
+        },
+        "font_weight_variable": {
+          "type": "custom",
+          "pos": 12,
+          "id": "L_T9VB-AQDiZZ8sfg_WO6g",
+          "description": "If this font is a variable font to set a precise font weight for variable fonts. Otherwise, if this option has no results beyond setting divisibles of 100 (100,200,...), then the font is likely not a variable font and you need to use Font Weight Set (previous option to this one).",
+          "tooltip": true,
+          "field_type": "storyblok-slider",
+          "options": [
+            {
+              "name": "marks",
+              "value": "[0,300,600,900]",
+              "_uid": "bdf73c85-2f7f-4c84-8690-e61f5d37c6f2"
+            },
+            {
+              "name": "defaultValue",
+              "value": "0",
+              "_uid": "308f001a-f936-45a6-b042-87950f4ab704"
+            },
+            {
+              "name": "minValue",
+              "value": "0",
+              "_uid": "979cf7ed-d3d1-441d-9c40-da5120af095c"
+            },
+            {
+              "name": "maxValue",
+              "value": "900",
+              "_uid": "db1f31d6-e516-4236-af27-6338380ba7a2"
+            },
+            {
+              "name": "stepSize",
+              "value": "1",
+              "_uid": "d33dfae2-19f2-4d72-965a-ea7e1148a057"
+            },
+            {
+              "name": "minimumSignificantDigits",
+              "value": "",
+              "_uid": "8c23b9bf-9a4d-4350-864d-222cfc43a951"
+            },
+            {
+              "name": "maximumSignificantDigits",
+              "value": "",
+              "_uid": "bfb38e64-982f-463b-9b26-70587ceb5202"
+            },
+            {
+              "name": "style",
+              "value": "",
+              "_uid": "f4fa3355-0fb1-4be2-803f-9fece54aa66a"
+            },
+            {
+              "name": "unit",
+              "value": "",
+              "_uid": "be1a5427-ff4f-48fc-b314-c202fb5f44f4"
+            }
+          ]
+        },
+        "custom_styling": {
+          "type": "section",
+          "pos": 13,
+          "id": "EJebPUjXQMeUpSF-Z9u99A",
+          "keys": [
+            "custom_css"
+          ]
+        },
+        "custom_css": {
+          "type": "textarea",
+          "pos": 14,
+          "id": "sag5KaVRTI2aEiccgSaRxQ",
+          "description": "Optional custom CSS field for inline CSS.\nKeep in mind you can add media queries this way.",
+          "tooltip": true
+        },
+        "tab-b7637c37-226d-4687-9fa4-3c7d06486b03": {
+          "display_name": "Rich Text",
+          "keys": [
+            "rich_text"
+          ],
+          "pos": 15,
+          "type": "tab",
+          "id": "t2N8NyJtRoefpDx9BkhrAw",
+          "name": "tab-b7637c37-226d-4687-9fa4-3c7d06486b03"
+        },
+        "tab-6baac447-02bf-4328-99a6-9343cf369378": {
+          "display_name": "Multi Line",
+          "keys": [
+            "multi_line_bloks",
+            "mode"
+          ],
+          "pos": 16,
+          "type": "tab",
+          "id": "a6rERwK_QyiZppNDzzaTeA",
+          "name": "tab-6baac447-02bf-4328-99a6-9343cf369378"
+        },
         "rich_text": {
           "type": "richtext",
-          "pos": 10,
+          "pos": 17,
           "tooltip": true,
           "description": "You have the option of using this rich text. Be mindful it will overwrite any other text you have in the text_content. \n\nIf you experience any bugs with this please contact Rafal.",
           "customize_toolbar": false,
@@ -10290,16 +11278,9 @@
           "allow_custom_attributes": true,
           "id": "8HVEmVy2QlC5DjE_yATdVQ"
         },
-        "custom_css": {
-          "type": "textarea",
-          "pos": 11,
-          "id": "sag5KaVRTI2aEiccgSaRxQ",
-          "description": "Optional custom CSS field for inline CSS.\nKeep in mind you can add media queries this way.",
-          "tooltip": true
-        },
         "multi_line_bloks": {
           "type": "bloks",
-          "pos": 13,
+          "pos": 18,
           "restrict_type": "",
           "restrict_components": true,
           "component_whitelist": [
@@ -10312,7 +11293,7 @@
         },
         "mode": {
           "type": "option",
-          "pos": 14,
+          "pos": 19,
           "use_uuid": true,
           "required": false,
           "options": [
@@ -10335,7 +11316,7 @@
         }
       },
       "image": "//a.storyblok.com/f/320425/x/d28d5c14bd/text.png",
-      "preview_field": null,
+      "preview_field": "storyblok_name",
       "is_root": false,
       "preview_tmpl": null,
       "is_nestable": true,
@@ -10391,6 +11372,13 @@
       "name": "05 - Data",
       "id": 474759,
       "uuid": "9432a05c-4dfd-47e6-a82e-2a9873ea380b",
+      "parent_id": null,
+      "parent_uuid": null
+    },
+    {
+      "name": "06 - Legacy",
+      "id": 486129,
+      "uuid": "3b501dcb-dcf7-4bb7-b596-c02dbd070279",
       "parent_id": null,
       "parent_uuid": null
     }

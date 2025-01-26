@@ -52,15 +52,19 @@
 	// Add Focal point
 </script>
 
-<div style:min-height={minHeight} class="{containerStyles}
-{customDecorationStyling} z-5" use:storyblokEditable={blok}>
+<div
+	style:min-height={minHeight}
+	class="{containerStyles}
+{customDecorationStyling} z-5"
+	use:storyblokEditable={blok}
+>
 	<picture class="h-full w-full">
 		<!-- Low Quality Placeholder -->
 		{#if isLoading}
 			<img
 				src="{blok.image.filename}/m/300x0"
 				class="h-full w-full
-			border border-red-500 object-cover blur-lg"
+			border object-cover blur-lg"
 				role="presentation"
 				alt={undefined}
 			/>

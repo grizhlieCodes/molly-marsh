@@ -39,101 +39,6 @@ export interface ButtonStoryblok {
 }
 
 export interface ContainerStoryblok {
-  metaData?: any;
-  storyblok_name?: string;
-  blocks: (
-    | ButtonStoryblok
-    | ContainerStoryblok
-    | ContainerTwoStoryblok
-    | CustomHeroStoryblok
-    | EmbedTextStoryblok
-    | HeaderStoryblok
-    | IconStoryblok
-    | ImageStoryblok
-    | NavLinkStoryblok
-    | NavLogoStoryblok
-    | PageStoryblok
-    | SectionStoryblok
-    | SimpleCardStoryblok
-    | SimpleTextStoryblok
-    | SvgDividerStoryblok
-    | TextStoryblok
-  )[];
-  container_id?: string;
-  container_class?: string;
-  layout?: any;
-  content_direction: "row" | "onlyRow" | "column" | "rowReversed" | "columnReversed";
-  justify_content: "start" | "center" | "end" | "stretch" | "between" | "around" | "evenly" | "normal";
-  align_items: "start" | "end" | "center" | "baseline" | "stretch";
-  wrap_content: "wrap" | "noWrap";
-  child_layout?: any;
-  flex: "default" | "flexAuto" | "flexInitial" | "flexNone";
-  align_self: "selfAuto" | "selfStart" | "selfEnd" | "selfCenter" | "selfStretch" | "selfBaseline";
-  external_spacing?: any;
-  dimensions?: any;
-  height: "full" | "max" | "unset";
-  padding?: any;
-  dimension_overwrites?: any;
-  min_height_unit?: "" | "rem" | "em" | "px" | "vh" | "%";
-  min_width_unit?: "" | "rem" | "em" | "px" | "vw" | "%" | "none";
-  customStyling?: string;
-  overflow: "auto" | "hidden" | "scroll" | "visible";
-  background_color:
-    | "none"
-    | "default"
-    | "primary-50"
-    | "primary-100"
-    | "primary-200"
-    | "primary-300"
-    | "primary-400"
-    | "primary-500"
-    | "primary-600"
-    | "primary-700"
-    | "primary-800"
-    | "primary-900"
-    | "primary-950"
-    | "secondary-50"
-    | "secondary-100"
-    | "secondary-200"
-    | "secondary-300"
-    | "secondary-400"
-    | "secondary-500"
-    | "secondary-600"
-    | "secondary-700"
-    | "secondary-800"
-    | "secondary-900"
-    | "secondary-950";
-  border?: any;
-  border_color:
-    | "none"
-    | "primary-50"
-    | "primary-100"
-    | "primary-200"
-    | "primary-300"
-    | "primary-400"
-    | "primary-500"
-    | "primary-600"
-    | "primary-700"
-    | "primary-800"
-    | "primary-900"
-    | "primary-950"
-    | "secondary-50"
-    | "secondary-100"
-    | "secondary-200"
-    | "secondary-300"
-    | "secondary-400"
-    | "secondary-500"
-    | "secondary-600"
-    | "secondary-700"
-    | "secondary-800"
-    | "secondary-900"
-    | "secondary-950";
-  _uid: string;
-  component: "container";
-  [k: string]: any;
-}
-
-export interface ContainerTwoStoryblok {
   layout_options_med_mob?: any;
   content_direction_mm: "row" | "rowReversed" | "column" | "columnReversed" | "none";
   justify_content_mm: "start" | "center" | "end" | "stretch" | "between" | "around" | "evenly" | "normal" | "none";
@@ -212,9 +117,12 @@ export interface ContainerTwoStoryblok {
   blocks: (
     | ButtonStoryblok
     | ContainerStoryblok
-    | ContainerTwoStoryblok
+    | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | DividerStoryblok
     | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -225,6 +133,7 @@ export interface ContainerTwoStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TestimonialStoryblok
     | TextStoryblok
   )[];
   storyblok_name?: string;
@@ -284,12 +193,110 @@ export interface ContainerTwoStoryblok {
     | "secondary-900"
     | "secondary-950";
   _uid: string;
-  component: "container_two";
+  component: "container";
+  [k: string]: any;
+}
+
+export interface ContainerLegacyStoryblok {
+  metaData?: any;
+  storyblok_name?: string;
+  blocks: (
+    | ButtonStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
+  container_id?: string;
+  container_class?: string;
+  layout?: any;
+  content_direction: "row" | "onlyRow" | "column" | "rowReversed" | "columnReversed";
+  justify_content: "start" | "center" | "end" | "stretch" | "between" | "around" | "evenly" | "normal";
+  align_items: "start" | "end" | "center" | "baseline" | "stretch";
+  wrap_content: "wrap" | "noWrap";
+  child_layout?: any;
+  flex: "default" | "flexAuto" | "flexInitial" | "flexNone";
+  align_self: "selfAuto" | "selfStart" | "selfEnd" | "selfCenter" | "selfStretch" | "selfBaseline";
+  external_spacing?: any;
+  dimensions?: any;
+  height: "full" | "max" | "unset";
+  padding?: any;
+  dimension_overwrites?: any;
+  min_height_unit?: "" | "rem" | "em" | "px" | "vh" | "%";
+  min_width_unit?: "" | "rem" | "em" | "px" | "vw" | "%" | "none";
+  customStyling?: string;
+  overflow: "auto" | "hidden" | "scroll" | "visible";
+  background_color:
+    | "none"
+    | "default"
+    | "primary-50"
+    | "primary-100"
+    | "primary-200"
+    | "primary-300"
+    | "primary-400"
+    | "primary-500"
+    | "primary-600"
+    | "primary-700"
+    | "primary-800"
+    | "primary-900"
+    | "primary-950"
+    | "secondary-50"
+    | "secondary-100"
+    | "secondary-200"
+    | "secondary-300"
+    | "secondary-400"
+    | "secondary-500"
+    | "secondary-600"
+    | "secondary-700"
+    | "secondary-800"
+    | "secondary-900"
+    | "secondary-950";
+  border?: any;
+  border_color:
+    | "none"
+    | "primary-50"
+    | "primary-100"
+    | "primary-200"
+    | "primary-300"
+    | "primary-400"
+    | "primary-500"
+    | "primary-600"
+    | "primary-700"
+    | "primary-800"
+    | "primary-900"
+    | "primary-950"
+    | "secondary-50"
+    | "secondary-100"
+    | "secondary-200"
+    | "secondary-300"
+    | "secondary-400"
+    | "secondary-500"
+    | "secondary-600"
+    | "secondary-700"
+    | "secondary-800"
+    | "secondary-900"
+    | "secondary-950";
+  _uid: string;
+  component: "container-legacy";
   [k: string]: any;
 }
 
 export interface CustomHeroStoryblok {
-  must_haves?: any;
   hero_section_style: "fancyColumn";
   section_id?: string;
   section: SectionStoryblok[];
@@ -299,6 +306,37 @@ export interface CustomHeroStoryblok {
   hero_cta?: ButtonStoryblok[];
   _uid: string;
   component: "custom_hero";
+  [k: string]: any;
+}
+
+export interface DividerStoryblok {
+  divider_color:
+    | "none"
+    | "default"
+    | "secondary-50"
+    | "secondary-100"
+    | "secondary-200"
+    | "secondary-300"
+    | "secondary-400"
+    | "secondary-500"
+    | "secondary-600"
+    | "secondary-700"
+    | "secondary-800"
+    | "secondary-900"
+    | "secondary-950"
+    | "primary-50"
+    | "primary-100"
+    | "primary-200"
+    | "primary-300"
+    | "primary-400"
+    | "primary-500"
+    | "primary-600"
+    | "primary-700"
+    | "primary-800"
+    | "primary-900"
+    | "primary-950";
+  _uid: string;
+  component: "divider";
   [k: string]: any;
 }
 
@@ -319,11 +357,123 @@ export interface EmbedTextStoryblok {
   [k: string]: any;
 }
 
+export interface FooterStoryblok {
+  must_haves?: any;
+  footer_logo?: NavLogoStoryblok[];
+  footer_columns?: (
+    | ButtonStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
+  footer_disclaimer?: (
+    | ButtonStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
+  footer_cta?: any;
+  show_cta?: boolean;
+  footer_cta_bloks?: (
+    | ButtonStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
+  _uid: string;
+  component: "footer";
+  [k: string]: any;
+}
+
+export interface FooterColumnStoryblok {
+  column_label: TextStoryblok[];
+  column_links?: NavLinkStoryblok[];
+  _uid: string;
+  component: "footer_column";
+  [k: string]: any;
+}
+
 export interface HeaderStoryblok {
+  header?: any;
   fixed_to_top?: boolean;
   logo: NavLogoStoryblok[];
   nav_links: NavLinkStoryblok[];
   button?: ButtonStoryblok[];
+  footer?: any;
+  footer_logo?: NavLogoStoryblok[];
+  footer_columns?: FooterColumnStoryblok[];
+  footer_disclaimer?: TextStoryblok[];
+  footer_show_cta?: boolean;
+  footer_cta_bloks?: (
+    | ButtonStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
   _uid: string;
   component: "header";
   [k: string]: any;
@@ -361,6 +511,56 @@ export interface IconStoryblok {
     | "user"
     | "userGroup";
   custom_css?: string;
+  icon_fill?:
+    | "none"
+    | "default"
+    | "primary-50"
+    | "primary-100"
+    | "primary-200"
+    | "primary-300"
+    | "primary-400"
+    | "primary-500"
+    | "primary-600"
+    | "primary-700"
+    | "primary-800"
+    | "primary-900"
+    | "primary-950"
+    | "secondary-50"
+    | "secondary-100"
+    | "secondary-200"
+    | "secondary-300"
+    | "secondary-400"
+    | "secondary-500"
+    | "secondary-600"
+    | "secondary-700"
+    | "secondary-800"
+    | "secondary-900"
+    | "secondary-950";
+  icon_stroke?:
+    | "none"
+    | "default"
+    | "primary-50"
+    | "primary-100"
+    | "primary-200"
+    | "primary-300"
+    | "primary-400"
+    | "primary-500"
+    | "primary-600"
+    | "primary-700"
+    | "primary-800"
+    | "primary-900"
+    | "primary-950"
+    | "secondary-50"
+    | "secondary-100"
+    | "secondary-200"
+    | "secondary-300"
+    | "secondary-400"
+    | "secondary-500"
+    | "secondary-600"
+    | "secondary-700"
+    | "secondary-800"
+    | "secondary-900"
+    | "secondary-950";
   _uid: string;
   component: "icon";
   [k: string]: any;
@@ -432,7 +632,7 @@ export interface ImageStoryblok {
 export interface NavLinkStoryblok {
   main_link?: any;
   url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
-  link_label: string;
+  link_label: TextStoryblok[];
   icon?: IconStoryblok[];
   link_description?: string;
   sub_link_data?: any;
@@ -446,7 +646,7 @@ export interface NavLinkStoryblok {
 export interface NavLogoStoryblok {
   url: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
   logo_image?: AssetStoryblok;
-  logo_text?: string;
+  logo_text?: TextStoryblok[];
   _uid: string;
   component: "nav_logo";
   [k: string]: any;
@@ -456,9 +656,12 @@ export interface PageStoryblok {
   blocks: (
     | ButtonStoryblok
     | ContainerStoryblok
-    | ContainerTwoStoryblok
+    | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | DividerStoryblok
     | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -469,6 +672,7 @@ export interface PageStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TestimonialStoryblok
     | TextStoryblok
   )[];
   mainAriaLabel: string;
@@ -487,9 +691,12 @@ export interface SectionStoryblok {
   blocks?: (
     | ButtonStoryblok
     | ContainerStoryblok
-    | ContainerTwoStoryblok
+    | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | DividerStoryblok
     | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -500,6 +707,7 @@ export interface SectionStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TestimonialStoryblok
     | TextStoryblok
   )[];
   layout?: any;
@@ -607,12 +815,24 @@ export interface SvgDividerStoryblok {
   [k: string]: any;
 }
 
+export interface TestimonialStoryblok {
+  testimonial_title: TextStoryblok[];
+  testimonial_summary: TextStoryblok[];
+  testimonial_full_message: TextStoryblok[];
+  testimonial_name: TextStoryblok[];
+  testimonial_button_text: TextStoryblok[];
+  _uid: string;
+  component: "testimonial";
+  [k: string]: any;
+}
+
 export interface TextStoryblok {
   Content?: any;
   content?: string;
+  storyblok_name?: string;
   text_id?: string;
   text_type: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "p" | "span" | "blockquote" | "cite" | "sr";
-  Styling?: any;
+  core_styles?: any;
   text_style:
     | "h1"
     | "h2"
@@ -633,7 +853,8 @@ export interface TextStoryblok {
     | "paraXl"
     | "overline"
     | "quote"
-    | "sr";
+    | "sr"
+    | "navLink";
   text_align: "left" | "center" | "right" | "justify" | "inherit";
   text_color_overwrite?:
     | ""
@@ -649,8 +870,10 @@ export interface TextStoryblok {
     | "redMid"
     | "redLight"
     | "black";
-  rich_text?: RichtextStoryblok;
+  font_weight_overwrites?: any;
+  custom_styling?: any;
   custom_css?: string;
+  rich_text?: RichtextStoryblok;
   multi_line_bloks?: EmbedTextStoryblok[];
   mode?: "text" | "multi-line";
   _uid: string;
