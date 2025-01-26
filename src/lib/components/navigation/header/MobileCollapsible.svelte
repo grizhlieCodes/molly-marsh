@@ -4,6 +4,7 @@
 	import { ChevronDown, X } from 'lucide-svelte';
 	import { Collapsible } from 'bits-ui';
 	import { slide } from 'svelte/transition';
+	import { StoryblokComponent } from '@storyblok/svelte';
 
 	const duration = 300;
 
@@ -31,25 +32,26 @@
 
 <Collapsible.Root
 	bind:open={isOpen}
-	class="flex w-full flex-col items-start justify-start border-b-1
-		border-b-navLink-outline-primary-focus/30"
+	class="border-b-navLink-outline-primary-focus/30 flex w-full flex-col items-start justify-start
+		border-b-1"
 >
 	<Collapsible.Trigger
-		class="collapsible-mobile-nav focus-within flex
-    w-full items-start
-	justify-start
-	transition-all duration-300 [&[data-state='open']_>_*]:bg-navLink-surface-primary-hover [&[data-state='open']_>_*]:text-navlink-text-primary-hover"
+		class="collapsible-mobile-nav focus-within [&[data-state='open']_>_*]:bg-navLink-surface-primary-hover
+    [&[data-state='open']_>_*]:text-navlink-text-primary-hover flex
+	w-full
+	items-start justify-start transition-all duration-300"
 	>
 		<div
-			class="flex w-full cursor-pointer items-center
-        justify-between
-        px-6 py-8 text-3xl font-bold
-        transition-all duration-300 hover:bg-navLink-surface-primary-hover
-        hover:text-navlink-text-primary-hover
-        {isOpen ? `bg-navLink-surface-primary-hover text-navlink-text-primary-hover` : `text-navlink-text-primary`}
+			class="hover:bg-navLink-surface-primary-hover hover:text-navlink-text-primary-hover flex w-full
+        cursor-pointer
+        items-center justify-between px-6 py-8
+        transition-all duration-300 **:!text-3xl
+        **:!font-bold
+        {isOpen ? `bg-navLink-surface-primary-hover *:!text-navlink-text-primary-hover` : `*:!text-navlink-text-primary`}
         "
 		>
-			<p class="w-full text-start">{link.link_label}</p>
+			<StoryblokComponent blok={link.link_label[0]}></StoryblokComponent>
+			<!-- <p class="w-full text-start">{link.link_label}</p> -->
 			<div class="transition-transform duration-300" class:rotate-180={isOpen}>
 				<ChevronDown size="32" />
 			</div>
@@ -63,19 +65,23 @@
 						<a
 							href={sublink.url.url}
 							onclick={toggleMobileMenuActive}
-							class="w-full px-6 py-3
-						font-sans text-xl text-navlink-text-primary
-						italic focus-within:bg-navLink-surface-primary-hover focus-within:outline-1
-						focus-within:outline-lime-500 hover:bg-navLink-surface-primary-hover hover:underline">{sublink.link_label}</a
+							class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover hover:bg-navLink-surface-primary-hover
+						w-full px-6 py-3  *:!text-xl *:!italic focus-within:outline-1 focus-within:outline-lime-500 hover:underline"
 						>
+							<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
+							<!-- {sublink.link_label} -->
+						</a>
 					{:else if sublink?.sub_link_type !== 'mobileMainLink'}
 						<a
 							href={sublink.url.url}
-							class="w-full px-6
-						py-3 font-sans text-xl text-navlink-text-primary
-						focus-within:bg-navLink-surface-primary-hover focus-within:outline-1 focus-within:outline-lime-500
-						hover:bg-navLink-surface-primary-hover hover:underline">{sublink.link_label}</a
+							class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover
+						hover:bg-navLink-surface-primary-hover w-full px-6 py-3
+						 *:!text-xl focus-within:outline-1
+						focus-within:outline-lime-500 hover:underline"
 						>
+							<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
+							<!-- {sublink.link_label} -->
+						</a>
 					{/if}
 				{/each}
 			{/if}

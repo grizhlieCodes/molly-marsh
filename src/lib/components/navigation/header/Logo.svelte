@@ -5,6 +5,7 @@
 	let { blok }: { blok: NavLogoStoryblok } = $props();
 	let logo = $derived(blok);
 	let gap = $state(blok.gap ?? gapOptions[blok.gap]);
+	// $inspect(logo);
 </script>
 
 <div class="">
@@ -17,7 +18,7 @@
 			<img src="{logo.logo_image.filename}/m/300x0" alt={logo.logo_image.alt ?? 'logo'} />
 		{/if}
 		{#if logo.logo_text && logo?.logo_text.length > 0}
-			<span class="font-nav-logo text-logo-primary -translate-y-0.5 text-xl md:text-2xl">{logo.logo_text}</span>
+			<StoryblokComponent blok={logo.logo_text[0]}></StoryblokComponent>
 		{/if}
 	</a>
 </div>
