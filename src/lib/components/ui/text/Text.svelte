@@ -6,6 +6,19 @@
 
 	let { blok }: { blok: TextStoryblok } = $props();
 
+	// Function to handle node rendering
+	function renderNode(node: any) {
+		return renderRichText(
+			{
+				type: 'doc',
+				content: [node]
+			},
+			{
+				schema: customStoryblokRichTextSchema
+			}
+		);
+	}
+
 	const customStoryblokRichTextSchema = {
 		nodes: {
 			...RichTextSchema.nodes,
@@ -18,14 +31,11 @@
 		}
 	};
 
-	// Font Weight
-	// 2 options
-	// Set Font Weight
-	// 100-900
-	// Variable Font Weight
-	// 1-900
-
-	const renderedContent = $derived(renderRichText(blok.rich_text, { schema: customStoryblokRichTextSchema }));
+	const renderedContent = $derived(
+		renderRichText(blok.rich_text, {
+			schema: customStoryblokRichTextSchema
+		})
+	);
 	let renderHTML = $derived(renderedContent !== '');
 
 	let stylesObject = $state({
@@ -39,7 +49,7 @@
 
 	let mode = $state(blok?.mode ? blok?.mode : 'text');
 
-// $inspect(blok);
+	// $inspect(blok);
 	let useVariableFontWeight = $state(blok.font_weight_variable.value > 0 ? true : false);
 	let variableFontWeight = $state(useVariableFontWeight ? `${blok.font_weight_variable.value}` : undefined);
 	let customSetFontWeight = $state(!useVariableFontWeight && blok.font_weight_set && blok.font_weight_set.value > 0 ? ops.fontWeightSetOptions[blok.font_weight_set.value] : '');
@@ -53,7 +63,15 @@
 	{#if mode === 'text' || blok.multi_line_bloks.length === 0}
 		{#if renderHTML}
 			<div class="custom-prose">
-				{@html renderedContent}
+				{#each blok.rich_text.content as node, i}
+					{#if node.type === 'blok'}
+						{#each node.attrs.body as bodyItem}
+							<StoryblokComponent blok={bodyItem} />
+						{/each}
+					{:else}
+						{@html renderNode(node)}
+					{/if}
+				{/each}
 			</div>
 		{:else}
 			{blok.content}
