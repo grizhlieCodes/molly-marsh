@@ -4,7 +4,6 @@
 	import { storyblokEditable, renderRichText, RichTextSchema } from '@storyblok/svelte';
 
 	let { blok }: { blok: any } = $props();
-    // $inspect(blok)
 	const customStoryblokRichTextSchema = {
 		nodes: {
 			...RichTextSchema.nodes,

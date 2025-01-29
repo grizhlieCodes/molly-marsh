@@ -5,7 +5,6 @@
 		fancyColumn: FancyColumnHero
 	};
 	let { blok }: { blok: any } = $props();
-	// $inspect(blok);
 	let blokHasHero = $state(blok.hero_section_style && blok.hero_section_style.length > 0);
 	let HeroSection = $state(blokHasHero ? heroSectionOptions[blok?.hero_section_style] : undefined);
 </script>

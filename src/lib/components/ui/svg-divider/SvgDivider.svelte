@@ -54,7 +54,6 @@
 	let svgPositionStyles = $state(`${svgPositions.top} ${svgPositions.right} ${svgPositions.bottom} ${svgPositions.left} `);
 	let flipHorizontally = $state(`${blok.flip_horizontally ? 'scale: -1;' : ''}`);
 	// let SVG_INLINE_STYLES = $state(`${svgPositionStyles} ${blok.custom_svg_classes} ${flipHorizontally}`);
-	// $effect(() => console.log(blok.y_translate_value));
 </script>
 
 {#if blok.svg && blok.svg.length > 0}

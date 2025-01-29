@@ -10,9 +10,6 @@
 	import Header from '$lib/components/navigation/header/Header.svelte';
 	import Footer from '$lib/components/navigation/footer/Footer.svelte';
 
-	// $effect(() => {
-	// 	console.log('Effect: ', data);
-	// });
 </script>
 
 <DraggingStore></DraggingStore>

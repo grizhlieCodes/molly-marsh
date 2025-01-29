@@ -16,9 +16,7 @@
 		mobileMenuActive = !mobileMenuActive;
 	};
 
-	// $inspect(blok)
-
-	// STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - 
+	// STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING - STYLING -
 
 	const HEADER_BASE_STYLES = `z-30 flex w-full justify-center transition-all md:px-6 md:pt-5`;
 	let HEADER_FIXED_STYLES = $state(isFixed ? `fixed top-0 left-0 ` : '');
@@ -49,7 +47,7 @@
 		{/if}
 
 		<!-- Optional button -->
-		<div class="hidden lt:block">
+		<div class="lt:block hidden">
 			{#if blok.button && blok.button.length > 0}
 				<Button blok={blok.button[0]}></Button>
 			{/if}

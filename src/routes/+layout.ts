@@ -64,7 +64,6 @@ export const load: LayoutServerLoad = async ({ url }) => {
 		version: 'published'
 	});
 
-	// console.log(navData?.data?.story?.content);
 
 	return {
 		url: url.pathname,

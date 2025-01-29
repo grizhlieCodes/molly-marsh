@@ -22,7 +22,6 @@
 	});
 	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius}`);
 
-	// $effect(() => console.log(imageStylesObj.objectPosition));
 
 	let CONTAINER_BASE_STYLES = `relative h-full w-full`;
 	let containerStylesObj = $state({

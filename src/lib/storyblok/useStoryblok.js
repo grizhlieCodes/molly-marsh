@@ -30,5 +30,4 @@ export async function useStoryblok(accessToken = '') {
 
 	// let storyblokApi = await useStoryblokApi();
 
-	// console.log(storyblokApi);
 }

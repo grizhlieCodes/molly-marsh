@@ -36,8 +36,6 @@
 
 	// All styling string
 	let styling = $derived(`${BASE_CLASSES} ${Object.values(styles).join(' ')} ${blok.container_class}`);
-
-	// $effect(() => console.log(minimum_width, minimum_height));
 </script>
 
 <div id={blok.container_id} use:storyblokEditable={blok} class={styling} style:min-height={minimum_height} style:min-width={minimum_width} style={blok.customStyling}>

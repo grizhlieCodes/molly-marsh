@@ -49,7 +49,6 @@
 
 	let mode = $state(blok?.mode ? blok?.mode : 'text');
 
-	// $inspect(blok);
 	let useVariableFontWeight = $state(blok.font_weight_variable.value > 0 ? true : false);
 	let variableFontWeight = $state(useVariableFontWeight ? `${blok.font_weight_variable.value}` : undefined);
 	let customSetFontWeight = $state(!useVariableFontWeight && blok.font_weight_set && blok.font_weight_set.value > 0 ? ops.fontWeightSetOptions[blok.font_weight_set.value] : '');

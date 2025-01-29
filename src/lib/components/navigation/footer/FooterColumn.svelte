@@ -8,7 +8,6 @@
 	let { column_label, column_links } = $derived(blok);
 	// we get a text component here (array of 1)
 	// we also get an array of links (array of many)
-	// $inspect({ column_label, column_links });
 </script>
 
 <div class="flex flex-col gap-3 ">

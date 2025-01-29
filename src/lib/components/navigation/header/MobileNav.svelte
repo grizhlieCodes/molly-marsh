@@ -14,7 +14,6 @@
 		toggleMobileMenuActive: () => void;
 	} = $props();
 
-	// $effect(() => console.log(links));
 </script>
 
 {#if mobileMenuActive}

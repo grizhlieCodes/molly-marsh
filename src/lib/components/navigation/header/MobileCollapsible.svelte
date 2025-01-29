@@ -26,8 +26,6 @@
 		};
 	}
 
-	// $effect(() => console.log("hehe"));
-	// $effect(() => console.log(link));
 </script>
 
 <Collapsible.Root

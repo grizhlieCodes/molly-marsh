@@ -6,7 +6,6 @@
 	let mounted = $state(false);
 	let story = $state(data.story);
 
-	// $inspect('HEREEEEEE ===================================', { data, story: data.story });
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {

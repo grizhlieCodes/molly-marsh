@@ -5,7 +5,6 @@
 	let { blok }: { blok: NavLogoStoryblok } = $props();
 	let logo = $derived(blok);
 	let gap = $state(blok.gap ?? gapOptions[blok.gap]);
-	// $inspect(logo);
 </script>
 
 <div class="">

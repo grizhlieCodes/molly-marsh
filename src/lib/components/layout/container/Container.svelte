@@ -8,7 +8,6 @@
 	// Data from Storyblok
 	let { blok }: { blok: ContainerStoryblok } = $props();
 
-	$inspect(blok);
 
 	// Styling
 	let generalData = $state({
@@ -43,7 +42,6 @@
 		width: getBreakpointOptions(ops.widthOptions, blok.width_default, blok.width_mm, blok.width_lm, blok.width_md, blok.width_lg)
 	});
 
-	// $inspect(breakpointStyles);
 	let minimum_height = $state(blok.min_height_default.value !== 0 ? `${blok.min_height_default.value}${blok.min_height_unit_default}` : undefined);
 	let minimum_width = $state(blok.min_width_default.value !== 0 ? `${blok.min_width_default.value}${blok.min_width_unit_default}` : undefined);
 
