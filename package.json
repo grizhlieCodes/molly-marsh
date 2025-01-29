@@ -49,7 +49,7 @@
 	},
 	"overrides": {
 		"@storyblok/svelte": {
-			"svelte": "^5.19.4"
+			"svelte": "^5.0.0"
 		}
 	}
 }
