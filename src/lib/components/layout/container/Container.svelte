@@ -8,7 +8,7 @@
 	// Data from Storyblok
 	let { blok }: { blok: ContainerStoryblok } = $props();
 
-
+	// $inspect(blok.text_align_default, blok.text_align_mm, blok.text_align_lm, blok.text_align_md, blok.text_align_lg);
 	// Styling
 	let generalData = $state({
 		id: blok?.container_id ?? '',
@@ -39,7 +39,8 @@
 		paddingX: getBreakpointOptions(ops.xPaddingOptions, blok.horizontal_padding_default, blok.horizontal_padding_mm, blok.horizontal_padding_lm, blok.horizontal_padding_md, blok.horizontal_padding_lg),
 		maxWidth: getBreakpointOptions(ops.maxWidthOptions, blok.max_width_default, blok.max_width_mm, blok.max_width_lm, blok.max_width_md, blok.max_width_lg),
 		height: getBreakpointOptions(ops.heightOptions, blok.height_default, blok.width_mm, blok.width_lm, blok.width_md, blok.width_lg),
-		width: getBreakpointOptions(ops.widthOptions, blok.width_default, blok.width_mm, blok.width_lm, blok.width_md, blok.width_lg)
+		width: getBreakpointOptions(ops.widthOptions, blok.width_default, blok.width_mm, blok.width_lm, blok.width_md, blok.width_lg),
+		textAlign: getBreakpointOptions(ops.textAlignOptions, blok.text_align_default, blok.text_align_mm, blok.text_align_lm, blok.text_align_md, blok.text_align_lg)
 	});
 
 	let minimum_height = $state(blok.min_height_default.value !== 0 ? `${blok.min_height_default.value}${blok.min_height_unit_default}` : undefined);
