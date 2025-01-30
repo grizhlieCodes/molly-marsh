@@ -52,7 +52,7 @@
 	let translate = $state(`${svgTranslates.horizontal} ${svgTranslates.vertical}`);
 
 	let svgPositionStyles = $state(`${svgPositions.top} ${svgPositions.right} ${svgPositions.bottom} ${svgPositions.left} `);
-	let flipHorizontally = $state(`${blok.flip_horizontally ? 'scale: -1;' : ''}`);
+	let flipHorizontally = $state(`${blok.flip_horizontally ? 'scale: -100% 100%;' : ''}`);
 	// let SVG_INLINE_STYLES = $state(`${svgPositionStyles} ${blok.custom_svg_classes} ${flipHorizontally}`);
 </script>
 
