@@ -24,7 +24,7 @@ export const textStyles: Type.TextStyleOptions = {
 	h1: 'font-heading font-normal text-5xl md:text-7xl lg:text-9xl text-heading-neutral-800', // 48px -> 72px -> 128px
 	h2: 'font-heading font-normal text-5xl md:text-6xl lg:text-8xl text-heading-neutral-800', // 48px -> 60px -> 96px
 	h3: 'font-heading font-normal text-4xl md:text-5xl lg:text-7xl text-heading-neutral-800', // 36px -> 48px -> 72px
-	h4: 'font-heading font-normal text-3xl md:text-5xl lg:text-6xl text-heading-neutral-800', // 36px -> 48px -> 60px
+	h4: 'font-heading font-normal text-4xl md:text-5xl lg:text-6xl text-heading-neutral-800', // 36px -> 48px -> 60px
 	h5: 'font-heading font-normal text-3xl md:text-4xl lg:text-5xl text-heading-neutral-800', // 30px -> 36px -> 48px
 	h6: 'font-heading font-normal text-3xl md:text-4xl lg:text-4xl text-heading-neutral-800', // 30px -> 36px -> 36px
 	h7: 'font-heading font-normal text-2xl md:text-3xl lg:text-3xl text-heading-neutral-800', // 24px -> 30px -> 30px
