@@ -6,7 +6,6 @@ import basicSsl from '@vitejs/plugin-basic-ssl'; // AND THIS (IF USING STORYBLOK
 export default defineConfig({
 	plugins: [sveltekit(), tailwindcss(), basicSsl()],
 	server: {
-		https: true,
-		rejectUnauthorized: false
+		https: true
 	}
 });

@@ -25,11 +25,11 @@
 
 <form action="?/stripeCheckout" method="POST" class="w-full">
 	<input type="text" class="hidden" hidden value={priceId} name="priceId" id="priceId" />
-	<Button.Root
+	<button
 		type="submit"
 		class="{defaultStyling} {recommendedBasedStyling}
 	{textStyles.para6} font-medium uppercase"
 	>
 		{text}
-	</Button.Root>
+	</button>
 </form>
