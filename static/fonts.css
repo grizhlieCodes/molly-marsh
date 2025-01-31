@@ -1,47 +1,54 @@
 /* PLAYFAIR DISPLAY */
 
-
 @font-face {
-	font-family: 'playfair_displayitalic';
+	font-family: 'Playfair Display';
 	src:
-		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/playfairdisplay-italic-variablefont_wght-webfont.woff2') format('woff2'),
-		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/playfairdisplay-italic-variablefont_wght-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
+		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/PlayfairDisplay-Italic-VariableFont_wght.woff2')
+			format('woff2-variations'),
+		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/PlayfairDisplay-Italic-VariableFont_wght.woff') format('woff');
+	font-weight: 400 900;
+	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
-	font-family: 'playfair_displayregular';
+	font-family: 'Playfair Display';
 	src:
-		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/playfairdisplay-variablefont_wght-webfont.woff2') format('woff2'),
-		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/playfairdisplay-variablefont_wght-webfont.woff') format('woff');
-	font-weight: normal;
+		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/PlayfairDisplay-VariableFont_wght.woff2')
+			format('woff2-variations'),
+		url('https://seerstudio.b-cdn.net/web-fonts/playfair-display/PlayfairDisplay-VariableFont_wght.woff') format('woff');
+	font-weight: 400 900;
 	font-style: normal;
+	font-display: swap;
 }
 
 /* SOURCE SANS 3 */
 @font-face {
 	font-family: 'Source Sans 3';
 	src:
-		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/sourcesans3-italic-variablefont_wght-webfont.woff2') format('woff2'),
-		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/sourcesans3-italic-variablefont_wght-webfont.woff') format('woff');
-	font-weight: 200 900; /* Variable font weight range */
+		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/SourceSans3-Italic-VariableFont_wght.woff2')
+			format('woff2-variations'),
+		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/SourceSans3-Italic-VariableFont_wght.woff') format('woff');
+	font-weight: 200 900;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: 'Source Sans 3';
 	src:
-		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/sourcesans3-variablefont_wght-webfont.woff2') format('woff2'),
-		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/sourcesans3-variablefont_wght-webfont.woff') format('woff');
-	font-weight: 200 900; /* Variable font weight range */
+		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/SourceSans3-VariableFont_wght.woff2') format('woff2-variations'),
+		url('https://seerstudio.b-cdn.net/web-fonts/source-sans-3/SourceSans3-VariableFont_wght.woff') format('woff');
+	font-weight: 200 900;
 	font-style: normal;
+	font-display: swap;
 }
 
 /* LATO */
 @font-face {
 	font-family: 'Lato';
 	src:
+		url('https://seerstudio.b-cdn.net/web-fonts/lato/lato-black-webfont.woff2') format('woff2 supports variations'),
 		url('https://seerstudio.b-cdn.net/web-fonts/lato/lato-black-webfont.woff2') format('woff2'),
 		url('https://seerstudio.b-cdn.net/web-fonts/lato/lato-black-webfont.woff') format('woff');
 	font-weight: 900;

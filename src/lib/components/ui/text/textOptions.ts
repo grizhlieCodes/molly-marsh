@@ -1,26 +1,6 @@
 import type * as Type from './textTypes';
 
 export const textStyles: Type.TextStyleOptions = {
-	// h1: 'font-heading font-normal text-6xl md:text-7xl lg:text-8xl text-heading-neutral-800',
-	// h2: 'font-heading font-normal text-5xl md:text-6xl lg:text-7xl text-heading-neutral-800',
-	// h3: 'font-heading font-normal text-4xl md:text-5xl lg:text-6xl text-heading-neutral-800',
-	// h4: 'font-heading font-normal text-3xl md:text-4xl lg:text-5xl text-heading-neutral-800',
-	// h5: 'font-heading font-normal text-2xl md:text-3xl lg:text-4xl text-heading-neutral-800',
-	// h6: 'font-heading font-normal text-xl md:text-2xl 2xl:text-3xl text-heading-neutral-800',
-	// h7: 'font-heading font-normal text-base md:text-lg lg:text-xl text-heading-neutral-800',
-	// h1: 'font-heading font-normal text-[4.5rem] md:text-[5.25rem] lg:text-[6rem] text-heading-neutral-800', // 72px -> 84px -> 96px
-	// h2: 'font-heading font-normal text-[4rem] md:text-[4.5rem] lg:text-[5.25rem] text-heading-neutral-800', // 64px -> 72px -> 84px
-	// h3: 'font-heading font-normal text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] text-heading-neutral-800', // 56px -> 64px -> 72px
-	// h4: 'font-heading font-normal text-[3rem] md:text-[3.5rem] lg:text-[4rem] text-heading-neutral-800', // 48px -> 56px -> 64px
-	// h5: 'font-heading font-normal text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] text-heading-neutral-800', // 40px -> 48px -> 56px
-	// h6: 'font-heading font-normal text-[2.25rem] md:text-[2.5rem] lg:text-[3rem] text-heading-neutral-800', // 36px -> 40px -> 48px
-	// h7: 'font-heading font-normal text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] text-heading-neutral-800', // 32px -> 36px -> 40px
-	// h8: 'font-heading font-normal text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] text-heading-neutral-800', // 28px -> 32px -> 36px
-	// h9: 'font-heading font-normal text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] text-heading-neutral-800', // 24px -> 28px -> 32px
-	// h10: 'font-heading font-normal text-[1.25rem] md:text-[1.5rem] lg:text-[1.75rem] text-heading-neutral-800', // 20px -> 24px -> 28px
-	// h11: 'font-heading font-normal text-[1.125rem] md:text-[1.25rem] lg:text-[1.5rem] text-heading-neutral-800', // 18px -> 20px -> 24px
-	// h12: 'font-heading font-normal text-base md:text-[1.125rem]
-	// lg:text-[1.25rem] text-heading-neutral-800', // 16px -> 18px -> 20px
 	h1: 'font-heading font-normal text-5xl md:text-7xl lg:text-9xl text-heading-neutral-800', // 48px -> 72px -> 128px
 	h2: 'font-heading font-normal text-5xl md:text-6xl lg:text-8xl text-heading-neutral-800', // 48px -> 60px -> 96px
 	h3: 'font-heading font-normal text-4xl md:text-5xl lg:text-7xl text-heading-neutral-800', // 36px -> 48px -> 72px
@@ -33,11 +13,17 @@ export const textStyles: Type.TextStyleOptions = {
 	h10: 'font-heading font-normal text-base md:text-lg lg:text-lg text-heading-neutral-800', // 16px -> 18px -> 18px
 	h11: 'font-heading font-normal text-sm md:text-base lg:text-base text-heading-neutral-800', // 14px -> 16px -> 16px
 	h12: 'font-heading font-normal text-sm md:text-base lg:text-base text-heading-neutral-800', // 14px -> 16px -> 16px
-	paraXs: 'font-body font-light text-xs leading-4 text-body-neutral-600',
-	paraSm: 'font-body font-light text-sm leading-5 text-body-neutral-600',
-	paraBase: 'font-body font-light text-base leading-7 text-body-neutral-600',
-	paraLg: 'font-body font-light text-lg lg:text-xl leading-7 text-body-neutral-600',
-	paraXl: 'font-body font-light text-lg lg:text-2xl leading-8 text-body-neutral-600',
+	para1: 'font-body font-[350] text-xs leading-4 text-body-neutral-600',
+	para2: 'font-body font-[350] text-xs md:text-sm leading-5 text-body-neutral-600',
+	para3: 'font-body font-[350] text-sm leading-5 text-body-neutral-600',
+	para4: 'font-body font-[350] text-sm md:text-base leading-6 text-body-neutral-600',
+	para5: 'font-body font-[350] text-base leading-6 text-body-neutral-600',
+	paraBase: 'font-body font-[350] text-base md:text-lg leading-7 text-body-neutral-600',
+	para6: 'font-body font-[350] text-lg md:text-xl leading-7 text-body-neutral-600',
+	para7: 'font-body font-[350] text-xl md:text-2xl leading-8 text-body-neutral-600',
+	para8: 'font-body font-[350] text-2xl md:text-3xl leading-8 text-body-neutral-600',
+	para9: 'font-body font-[350] text-3xl md:text-4xl leading-9 text-body-neutral-600',
+	para10: 'font-body font-[350] text-4xl md:text-5xl leading-10 text-body-neutral-600',
 	overline: 'font-heading font-normal text-base md:text-lg lg:text-xl text-body-neutral-300 tracking-[4px] md:tracking-[6px] lg:tracking-[10px]',
 	quote: 'font-heading font-normal text-4xl md:text-5xl lg:text-6xl text-body-neutral-600',
 	sr: 'sr-only',

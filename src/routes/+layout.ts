@@ -23,6 +23,9 @@ import { default as divider } from '$lib/components/ui/divider/Divider.svelte';
 // 03 - UI: Interactive
 import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
 import { default as testimonial } from '$lib/components/ui-interactive/testimonial/Testimonial.svelte';
+import { default as price_card } from '$lib/components/ui-interactive/price-card/PriceCard.svelte';
+import { default as price_card_stripe_btn } from '$lib/components/ui-interactive/price-card/PriceCardStripeBtn.svelte';
+import { default as price_card_url_btn } from '$lib/components/ui-interactive/price-card/PriceCardUrlBtn.svelte';
 
 // 04 - Navigation -> Turns out we don't need to import this into storyblok..?
 // mostly because we are not using it in a page I guess. So it's just data we
@@ -50,7 +53,10 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			divider,
 			// UI: Interactive
 			button,
-			testimonial
+			testimonial,
+			price_card,
+			price_card_stripe_btn,
+			price_card_url_btn
 			// Navigation
 		},
 		apiOptions: {
@@ -63,7 +69,6 @@ export const load: LayoutServerLoad = async ({ url }) => {
 	const navData = await storyblokApi.get('cdn/stories/_navigation', {
 		version: 'published'
 	});
-
 
 	return {
 		url: url.pathname,

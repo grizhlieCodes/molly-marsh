@@ -73,6 +73,9 @@ export interface ContainerStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -225,6 +228,9 @@ export interface ContainerLegacyStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -385,6 +391,9 @@ export interface FooterStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -407,6 +416,9 @@ export interface FooterStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -431,6 +443,9 @@ export interface FooterStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -477,6 +492,9 @@ export interface HeaderStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -678,6 +696,9 @@ export interface PageStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -690,6 +711,35 @@ export interface PageStoryblok {
   _uid: string;
   component: "page";
   uuid?: string;
+  [k: string]: any;
+}
+
+export interface PriceCardStoryblok {
+  card_title: string;
+  card_recommended_option?: boolean;
+  card_price: string;
+  card_price_helper_text?: string;
+  card_description?: string;
+  card_info_points?: SimpleTextStoryblok[];
+  card_button?: (PriceCardStripeBtnStoryblok | PriceCardUrlBtnStoryblok)[];
+  _uid: string;
+  component: "price_card";
+  [k: string]: any;
+}
+
+export interface PriceCardStripeBtnStoryblok {
+  price_id: string;
+  label: string;
+  _uid: string;
+  component: "price_card_stripe_btn";
+  [k: string]: any;
+}
+
+export interface PriceCardUrlBtnStoryblok {
+  url?: Exclude<MultilinkStoryblok, {linktype?: "email"} | {linktype?: "asset"}>;
+  label: string;
+  _uid: string;
+  component: "price_card_url_btn";
   [k: string]: any;
 }
 
@@ -713,6 +763,9 @@ export interface SectionStoryblok {
     | NavLinkStoryblok
     | NavLogoStoryblok
     | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
     | SectionStoryblok
     | SimpleCardStoryblok
     | SimpleTextStoryblok
@@ -856,13 +909,19 @@ export interface TextStoryblok {
     | "h10"
     | "h11"
     | "h12"
-    | "paraXs"
-    | "paraSm"
+    | "para1"
+    | "para2"
+    | "para3"
+    | "para4"
+    | "para5"
     | "paraBase"
-    | "paraLg"
-    | "paraXl"
-    | "overline"
+    | "para6"
+    | "para7"
+    | "para8"
+    | "para9"
+    | "para10"
     | "quote"
+    | "overline"
     | "sr"
     | "navLink";
   text_align: "left" | "center" | "right" | "justify" | "inherit";

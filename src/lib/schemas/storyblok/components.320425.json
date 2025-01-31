@@ -9066,6 +9066,195 @@
       "component_group_name": "01 - Layout"
     },
     {
+      "name": "price_card",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-31T07:18:16.134Z",
+      "updated_at": "2025-01-31T07:38:31.641Z",
+      "id": 6888796,
+      "schema": {
+        "card_title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "tooltip": true,
+          "description": "This is the heading-text of your price card. It will usually be used for telling your customer, in summary, what they are buying.\n\"Single Coaching Session\"\n\"Premium Package\"\n\"Free To Feel\"\netc.",
+          "id": "TyiVvB-RQ5C-9OAKebTLUg"
+        },
+        "card_recommended_option": {
+          "type": "boolean",
+          "pos": 1,
+          "id": "AsF2uajbQUK8M_loIloUJA",
+          "tooltip": true,
+          "description": "Turn this toggle on if this is a recommended package. Only use this once in a single list of cards. It loses its' impact if used multiple times.\n\nIt has no functional difference, it simply stands out more."
+        },
+        "card_price": {
+          "type": "number",
+          "pos": 2,
+          "id": "QEcCmsE-R_OUd-wXn61Ijg",
+          "decimals": 2,
+          "tooltip": true,
+          "description": "Enter the price of this item.\nIf you enter 0 (ZERO), it will be displayed as \"FREE\".",
+          "required": true
+        },
+        "card_price_helper_text": {
+          "type": "text",
+          "pos": 3,
+          "id": "JhkhRr9LSuakwfhNzwtcpg",
+          "tooltip": true,
+          "description": "Optional field to give your price a little bit more context. For example, if the service you're selling is currently on sale or if the package someone is looking at saves them money, you can say \"Save 10%\".\nThis field will be displayed as a small helper text next to the price."
+        },
+        "card_description": {
+          "type": "textarea",
+          "pos": 4,
+          "id": "S_IcgXRbQqeg-ZNUPD_gAA",
+          "tooltip": true,
+          "description": "Small paragraph to fully explain what someone is buying/getting by selecting this 'package'."
+        },
+        "card_info_points": {
+          "type": "bloks",
+          "pos": 5,
+          "id": "B6qUWQFhQfyDESO3h_SWXw",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "simple_text"
+          ],
+          "tooltip": true,
+          "description": "Simply enter the list of 'selling points' of this package/service. \nIf the duration is 60 minutes, if someone is getting 3 sessions, if they get free perks:\n\"3 x 60min\"\n\"Free resources\"\n\"Cool stuff\""
+        },
+        "card_button": {
+          "type": "bloks",
+          "pos": 6,
+          "id": "fjc9S_RrRPSGDfVt4j4ayQ",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "price_card_stripe_btn",
+            "price_card_url_btn"
+          ]
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/cea6f359e3/price-card.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "price_card",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-paycard",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
+      "name": "price_card_stripe_btn",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-31T07:25:27.345Z",
+      "updated_at": "2025-01-31T07:27:51.326Z",
+      "id": 6888830,
+      "schema": {
+        "price_id": {
+          "type": "text",
+          "pos": 0,
+          "description": "This is the price_id of the service/package you are selling. This is required and you can find it within stripe. \nIf unsure, please contact Rafal.",
+          "tooltip": true,
+          "required": true,
+          "regex": "^price_[a-zA-Z0-9]+$",
+          "id": "u24K1DNGTFiePwyC57augQ"
+        },
+        "label": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "tooltip": true,
+          "description": "This is what the user reads on the button that you want them to click on.\n\"Buy Single Session\" or \"Buy Package\" or \"Buy 6 Sessions\" etc.",
+          "id": "KRDN1XQJS8OYY1xd6phL8g"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/4757b6a90b/price-card-url-button-1.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "price_card_stripe_btn",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-arrow-pointer",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
+      "name": "price_card_url_btn",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-31T07:31:27.308Z",
+      "updated_at": "2025-01-31T07:33:27.077Z",
+      "id": 6888833,
+      "schema": {
+        "url": {
+          "type": "multilink",
+          "pos": 0,
+          "tooltip": true,
+          "description": "This is the internal (or external) link you are sending the user to for this service/package.\n\nIf you are using stripe, please use the other component called \"Price Card Stripe Btn\".",
+          "id": "b_xCA6lGTsahy4zkYqtjIQ"
+        },
+        "label": {
+          "type": "text",
+          "pos": 1,
+          "id": "t1JxnSESTkC91iq1RLrw0g",
+          "description": "This is what the user reads on the button that you want them to click on.\n\"Buy Single Session\" or \"Buy Package\" or \"Buy 6 Sessions\" etc.",
+          "tooltip": true,
+          "required": true
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/5128d13c62/price-card-url-button.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "price_card_url_btn",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-arrow-pointer",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
       "name": "section",
       "display_name": "Section",
       "description": null,
@@ -10956,7 +11145,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-01-16T15:15:02.349Z",
-      "updated_at": "2025-01-26T06:58:03.786Z",
+      "updated_at": "2025-01-31T08:38:39.413Z",
       "id": 6808303,
       "schema": {
         "Content": {
@@ -11152,39 +11341,69 @@
               "name": "Heading 12"
             },
             {
-              "_uid": "1250dc3c-3d17-4e00-9f82-c70f43cfab85",
-              "value": "paraXs",
-              "name": "Paragraph - V Small"
+              "_uid": "3f2d86d6-e878-4ede-a40e-ad527c284475",
+              "value": "para1",
+              "name": "Paragraph 1"
             },
             {
-              "_uid": "96209feb-7355-494f-a187-26fdb55c4693",
-              "value": "paraSm",
-              "name": "Paragraph: Small"
+              "_uid": "45101f74-a3a8-47ee-8936-ac89b9658af6",
+              "value": "para2",
+              "name": "Paragraph 2"
             },
             {
-              "_uid": "a38cd68a-8766-4545-a1f3-6f3868b8cb24",
+              "_uid": "c7f69ab1-935d-429b-8529-d419b16d08bb",
+              "value": "para3",
+              "name": "Paragraph 3"
+            },
+            {
+              "_uid": "f4746654-75ea-457e-886d-d113d1f60389",
+              "value": "para4",
+              "name": "Paragraph 4"
+            },
+            {
+              "_uid": "f5066bf2-720f-4541-8037-18d044fd1382",
+              "value": "para5",
+              "name": "Paragraph 5"
+            },
+            {
+              "_uid": "c39737d1-36fd-4bb3-9039-690e6dfca364",
               "value": "paraBase",
-              "name": "Paragraph: Base"
+              "name": "Paragraph Base"
             },
             {
-              "_uid": "e16aebf4-c59e-4422-899b-bde7f3bf55ac",
-              "value": "paraLg",
-              "name": "Paragraph: Large"
+              "_uid": "6d2f187d-4da7-49cc-a300-209ca7c90819",
+              "value": "para6",
+              "name": "Paragraph 6"
             },
             {
-              "_uid": "10ac8e08-7640-46ad-96fe-58020e2febce",
-              "value": "paraXl",
-              "name": "Paragraph: xLarge"
+              "_uid": "233734a6-d7d1-4d4e-9cc4-08511a3ad538",
+              "value": "para7",
+              "name": "Paragraph 7"
             },
             {
-              "_uid": "41d9bd03-e962-4939-973c-bd342f759b96",
-              "value": "overline",
-              "name": "Overline"
+              "_uid": "786c5eb5-3078-4376-90b2-f48df6e2c9bd",
+              "value": "para8",
+              "name": "Paragraph 8"
+            },
+            {
+              "_uid": "50a6a1ac-59ba-406b-b8e0-7e4a747a3eca",
+              "value": "para9",
+              "name": "Paragraph 9"
+            },
+            {
+              "_uid": "f267fc04-e0ad-4448-848a-8cca682e54f9",
+              "value": "para10",
+              "name": "Paragraph 10"
             },
             {
               "_uid": "e8d979d4-7ac5-4708-b7f8-69d8b9947e4d",
               "value": "quote",
               "name": "Quote"
+            },
+            {
+              "_uid": "41d9bd03-e962-4939-973c-bd342f759b96",
+              "value": "overline",
+              "name": "Overline"
             },
             {
               "_uid": "aa87f454-8039-409a-b8e3-f9de84bb5bea",

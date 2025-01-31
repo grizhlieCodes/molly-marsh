@@ -54,12 +54,20 @@
 	let customSetFontWeight = $state(!useVariableFontWeight && blok.font_weight_set && blok.font_weight_set.value > 0 ? ops.fontWeightSetOptions[blok.font_weight_set.value] : '');
 
 	let classStyling = $state(cn(Object.values(stylesObject).join(' '), customSetFontWeight));
+
+	// 	let showListIcon = $state(
+	// 		true
+	// 			? `list-image-[url(<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	// <path d="M6.6 9L8.2 10.6L11.4 7.4M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="#047857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	// </svg>)]`
+	// 			: ``
+	// 	);
 	// let forceBreaks = $state(true ? 'force-breaks' : undefined) // Only used
 	// for headings perhaps -> but then we lose the remaining styling, which sucks
 </script>
 
 <svelte:element this={blok.text_type} class={classStyling} id={blok.text_id} use:storyblokEditable={blok} {style} style:font-weight={variableFontWeight}>
-	{#if mode === 'text' || blok.multi_line_bloks.length === 0}
+	{#if mode === 'text' || blok?.multi_line_bloks?.length === 0}
 		{#if renderHTML}
 			<div class="custom-prose">
 				{#each blok.rich_text.content as node, i}

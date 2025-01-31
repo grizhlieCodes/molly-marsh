@@ -178,7 +178,7 @@
 
 	/* FONT FAMILY */
 	--font-serif: 'Playfair Display', serif;
-	--font-sans: 'Sans Source 3', sans-serif;
+	--font-sans: 'Source Sans 3', sans-serif;
 	--font-special: 'Lato', sans-serif;
 	--font-heading: var(--font-serif);
 	--font-body: var(--font-sans);
