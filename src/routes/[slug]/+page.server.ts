@@ -13,7 +13,7 @@ export const actions = {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ priceId }),
 			// Add this for development only
-			rejectUnauthorized: false
+			// rejectUnauthorized: false
 		}); // session
 
 		if (!response.ok) {
