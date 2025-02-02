@@ -13,6 +13,6 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 			story: dataStory.data.story
 		};
 	} catch (err) {
-		throw redirect(307, '/huh');
+		throw redirect(307, '/404');
 	}
 };

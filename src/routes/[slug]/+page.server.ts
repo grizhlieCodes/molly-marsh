@@ -8,7 +8,7 @@ export const actions = {
 		console.log('FORM DATA: =========== ', priceId); // WORKING TILL HERE
 
 		// Make request to our webhook endpoint
-		const response = await fetch('/api/webhooks/checkout', {
+		const response = await fetch('/api/stripe/checkout', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ priceId }),

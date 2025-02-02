@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { redirect } from '@sveltejs/kit';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
 
-console.log("SECRET KEY HERE ==================", STRIPE_SECRET_KEY)
+console.log('SECRET KEY HERE ==================', STRIPE_SECRET_KEY);
 
 async function createCheckoutSession(priceId: string, origin: string) {
 	// First safety net: validate inputs before even trying Stripe
@@ -24,7 +24,7 @@ async function createCheckoutSession(priceId: string, origin: string) {
 				}
 			],
 			mode: 'payment',
-			success_url: `${origin}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+			success_url: `${origin}/successful-purchase?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${origin}/cancel`,
 			invoice_creation: {
 				enabled: true

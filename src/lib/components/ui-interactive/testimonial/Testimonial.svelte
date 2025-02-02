@@ -37,8 +37,9 @@
 				</div>
 			</Dialog.Trigger>
 			<Dialog.Portal>
-				<Dialog.Overlay transition={fade} transitionConfig={{ duration: 150 }} class="fixed inset-0 z-50 bg-white/90 "></Dialog.Overlay>
-				<Dialog.Content class={dialogContentStyling}>
+				<Dialog.Overlay transition={fade} transitionConfig={{ duration:
+				150 }} class="fixed inset-0 z-50 bg-white/20 backdrop-blur-xl"></Dialog.Overlay>
+				<Dialog.Content class={dialogContentStyling} transition={fly} transitionConfig={{ duration: 450, y: 40 }}>
 					<Dialog.Title>
 						{#if blok.testimonial_title && blok.testimonial_title.length > 0}
 							<div class="max-w-[90%]">
