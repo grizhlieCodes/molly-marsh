@@ -1,34 +1,6 @@
-// import { error, redirect } from '@sveltejs/kit';
-// import type { PageServerLoad } from './$types';
-// import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
-
-// export const load: PageServerLoad = async ({ params, parent }) => {
-// 	// const { storyblokApi } = await parent();
-//     let storyblokApi = await useStoryblokApi();
-// 	console.log('API HERE ===========', await storyblokApi);
-
-// 	// if(!storyblokApi) {
-//     //     let newSbApi = story
-// 	// }
-
-// 	try {
-// 		const dataStory = await storyblokApi.get(`cdn/stories/successful-purchase`, {
-// 			version: 'draft'
-// 		});
-// 	    console.log(dataStory)
-
-// 		return {
-// 			story: dataStory.data.story
-// 		};
-// 	} catch (err) {
-// 		throw redirect(307, '/404');
-// 	}
-// };
-
 import { redirect, error } from '@sveltejs/kit';
 import { z } from 'zod';
 import Stripe from 'stripe';
-// import { Client } from '@notionhq/client';
 import { Client } from '@notionhq/client/build/src';
 import { NOTION_API_TOKEN, NOTION_CLIENTS_DB, NOTION_SESSIONS_DB, STRIPE_SECRET_KEY, NOTION_PACKAGES_DB, NOTION_INVOICES_DB } from '$env/static/private';
 
@@ -132,31 +104,63 @@ const StripeSessionSchema = z
 // Define the type that represents our transformed data
 export type StripeSessionData = z.infer<typeof StripeSessionSchema>;
 
-async function waitForSessionData(sessionId: string, maxAttempts = 5) {
+// async function waitForSessionData(sessionId: string, maxAttempts = 5) {
+// 	const stripe = new Stripe(STRIPE_SECRET_KEY, {
+// 		apiVersion: '2024-11-20.acacia'
+// 	});
+// 	let attempts = 0;
+
+// 	while (attempts < maxAttempts) {
+// 		const session = await stripe.checkout.sessions.retrieve(sessionId, {
+// 			expand: [
+// 				'payment_intent', // Gets the payment details
+// 				'invoice', // Gets the invoice if one was created
+// 				'line_items', // Gets the items that were purchased
+// 				'line_items.data.price.product'
+// 			]
+// 		});
+
+// 		if (session.invoice) {
+// 			return session;
+// 		}
+
+// 		await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
+// 		attempts++;
+// 	}
+
+// 	return null;
+// }
+async function waitForSessionData(sessionId: string, maxAttempts = 10, delayMs = 1000) {
 	const stripe = new Stripe(STRIPE_SECRET_KEY, {
 		apiVersion: '2024-11-20.acacia'
 	});
+
 	let attempts = 0;
+	let lastError = null;
 
 	while (attempts < maxAttempts) {
-		const session = await stripe.checkout.sessions.retrieve(sessionId, {
-			expand: [
-				'payment_intent', // Gets the payment details
-				'invoice', // Gets the invoice if one was created
-				'line_items', // Gets the items that were purchased
-				'line_items.data.price.product'
-			]
-		});
+		try {
+			const session = await stripe.checkout.sessions.retrieve(sessionId, {
+				expand: ['payment_intent', 'invoice', 'line_items', 'line_items.data.price.product']
+			});
 
-		if (session.invoice) {
-			return session;
+			if (session.invoice && session.line_items?.data?.length > 0 && session.customer_details) {
+				return session;
+			}
+
+			console.log(`Attempt ${attempts + 1}/${maxAttempts}: Waiting for complete session data...`);
+		} catch (err) {
+			console.error(`Attempt ${attempts + 1}/${maxAttempts} failed:`, err);
+			lastError = err;
 		}
 
-		await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
+		await new Promise((resolve) => setTimeout(resolve, delayMs));
 		attempts++;
 	}
 
-	return null;
+	throw error(500, {
+		message: `Failed to retrieve complete session data after ${maxAttempts} attempts. ${lastError ? `Last error: ${lastError.message}` : ''}`
+	});
 }
 
 async function returnSessionData(sessionId: string) {
@@ -250,33 +254,39 @@ export async function load(event) {
 
 	const url = event.url.pathname;
 
-	const sessionData = await returnSessionData(sessionId);
-	const clientExists = await findClientInNotion(sessionData.customerEmail);
-	const relatedPackage = await findRelatedPackage(sessionData.itemDescription);
+	try {
+		const sessionData = await returnSessionData(sessionId);
+
+		return {
+			url,
+			sessionId,
+			sessionData
+		};
+	} catch (error) {
+		console.error('Error loading session data:', error);
+		throw error(500, 'Failed to load session data. Please refresh the page.');
+	}
+
+	// const clientExists = await findClientInNotion(sessionData.customerEmail);
+	// const relatedPackage = await findRelatedPackage(sessionData.itemDescription);
 	// console.log({ sessionData, clientExists, relatedPackage });
 
-	if (clientExists && relatedPackage) {
-		// Create New Invoice
-		// Link to Existing Client
-		// Link to Related Package
-		const newInvoice = await createNewInvoice(sessionData, clientExists.id, relatedPackage.id);
-		console.log({ newInvoice });
-	} else if (!clientExists && relatedPackage) {
-		// Create New Client
-		// Find Related Package // packageObject.id
-		// Create New Invoice
-		// Link to New Client
-		// Link to Related Package
-	}
+	// if (clientExists && relatedPackage) {
+	// Create New Invoice
+	// Link to Existing Client
+	// Link to Related Package
+	// const newInvoice = await createNewInvoice(sessionData, clientExists.id, relatedPackage.id);
+	// console.log({ newInvoice });
+	// } else if (!clientExists && relatedPackage) {
+	// Create New Client
+	// Find Related Package // packageObject.id
+	// Create New Invoice
+	// Link to New Client
+	// Link to Related Package
+	// }
 	// if client exists, create new invoice, link with client
 	// if client does not exist, create new client, create new invoice, link
 	// with newly created client
 
 	// console.log(clientExists);
-
-	return {
-		url,
-		sessionId,
-		sessionData
-	};
 }

@@ -19,7 +19,7 @@
 	let recommendedBasedStyling = $state(
 		!recommended
 			? `bg-surface-primary-200 border border-surface-primary-400 hover:bg-surface-primary-600 focus-within:bg-surface-primary-600 text-body-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50`
-			: `bg-surface-primary-800  hover:bg-surface-primary-900 focus-within:bg-surface-primary-900 text-body-primary-50`
+			: `bg-surface-primary-800  hover:bg-surface-primary-950 focus-within:bg-surface-primary-950 text-body-primary-50`
 	);
 </script>
 
@@ -28,7 +28,7 @@
 	<button
 		type="submit"
 		class="{defaultStyling} {recommendedBasedStyling}
-	{textStyles.para6} font-medium uppercase"
+	{textStyles.para6} font-medium uppercase cursor-pointer"
 	>
 		{text}
 	</button>
