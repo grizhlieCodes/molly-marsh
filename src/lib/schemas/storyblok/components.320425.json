@@ -1,6 +1,109 @@
 {
   "components": [
     {
+      "name": "accordion",
+      "display_name": "Accordion Container",
+      "description": "Accordion container",
+      "created_at": "2025-02-02T13:36:56.671Z",
+      "updated_at": "2025-02-02T13:58:51.427Z",
+      "id": 6895732,
+      "schema": {
+        "accordion_items": {
+          "type": "bloks",
+          "pos": 0,
+          "id": "bsMxIb6iTkeZGDGsIWrdDA",
+          "required": true,
+          "description": "Add accordion items to this accordion container. Use them to answer queries and address potential objects/concerns your clients may have.",
+          "tooltip": true,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "accordion_item"
+          ]
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/aec53094b8/accordion.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Accordion Container",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-block",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
+      "name": "accordion_item",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-02T13:37:44.804Z",
+      "updated_at": "2025-02-02T13:42:33.699Z",
+      "id": 6895734,
+      "schema": {
+        "accordion_item_title": {
+          "type": "bloks",
+          "pos": 0,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "description": "Input the text you want to be the \"title\" of your accordion item. This is usually a question that you plan to answer with your accordion_item_content.\n\nThe purpose of most accordions is to diffuse 'doubts' in your client's mind. So think of objections or issues they may have and how your service already takes these into account.",
+          "tooltip": true,
+          "id": "7TqyjvfHSrCqgsBisf_H7w",
+          "required": true
+        },
+        "accordion_item_content": {
+          "type": "bloks",
+          "pos": 1,
+          "id": "Rpukkd_FS_i9Bk2dbrseag",
+          "tooltip": true,
+          "required": true,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ],
+          "description": "This represents the 'content' or 'answer' of your accordion item. This is where you dispel the doubt or answer a common question your clients might have."
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/905d8e1e47/accordionitem.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "accordion_item",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-text-img-c",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
       "name": "button",
       "display_name": null,
       "description": null,

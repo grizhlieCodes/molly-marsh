@@ -1,5 +1,20 @@
 import {StoryblokStory} from 'storyblok-generate-ts'
 
+export interface AccordionStoryblok {
+  accordion_items: AccordionItemStoryblok[];
+  _uid: string;
+  component: "accordion";
+  [k: string]: any;
+}
+
+export interface AccordionItemStoryblok {
+  accordion_item_title: TextStoryblok[];
+  accordion_item_content: TextStoryblok[];
+  _uid: string;
+  component: "accordion_item";
+  [k: string]: any;
+}
+
 export type MultilinkStoryblok =
   | {
       id?: string;
@@ -59,6 +74,8 @@ export interface ContainerStoryblok {
   child_styling_desktop?: any;
   text_align_lg?: "left" | "center" | "right" | "justify" | "none";
   blocks: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -214,6 +231,8 @@ export interface ContainerLegacyStoryblok {
   metaData?: any;
   storyblok_name?: string;
   blocks: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -377,6 +396,8 @@ export interface FooterStoryblok {
   must_haves?: any;
   footer_logo?: NavLogoStoryblok[];
   footer_columns?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -402,6 +423,8 @@ export interface FooterStoryblok {
     | TextStoryblok
   )[];
   footer_disclaimer?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -429,6 +452,8 @@ export interface FooterStoryblok {
   footer_cta?: any;
   show_cta?: boolean;
   footer_cta_bloks?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -478,6 +503,8 @@ export interface HeaderStoryblok {
   footer_disclaimer?: TextStoryblok[];
   footer_show_cta?: boolean;
   footer_cta_bloks?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -682,6 +709,8 @@ export interface NavLogoStoryblok {
 
 export interface PageStoryblok {
   blocks: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
@@ -749,6 +778,8 @@ export interface SectionStoryblok {
   section_labelledby: string;
   type: "section" | "article";
   blocks?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
     | ButtonStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok

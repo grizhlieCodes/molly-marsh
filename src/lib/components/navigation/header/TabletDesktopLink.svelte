@@ -28,15 +28,17 @@
 			focusedInside = false; // Reset for the next cycle
 		}, 0);
 	};
-
 </script>
 
-<li class="tablet-desktop-link group relative list-none " onmouseover={() => (ariaExpanded = true)} onmouseleave={() => (ariaExpanded = false)} onfocus={() => (ariaExpanded = true)} onblur={handleBlur}>
+<li class="tablet-desktop-link group relative list-none" onmouseover={() => (ariaExpanded = true)} onmouseleave={() => (ariaExpanded = false)} onfocus={() => (ariaExpanded = true)} onblur={handleBlur}>
 	<a
 		href={link.url.url}
 		data-sveltekit-preload-data
 		class="bg-navLink-surface-primary-default group-focus-within:bg-navLink-surface-primary-hover group-focus-within:navLink-outline-primary-focus group-hover:bg-navLink-surface-primary-hover m-0 flex flex-row
-    items-center gap-1 rounded-lg px-4 py-3 transition-all duration-500 group-focus-within:outline-1"
+	items-center gap-1 rounded-lg px-4 py-3 transition-all duration-500
+	group-focus-within:outline-1
+		{linkEqualsCurrentPage ? ' *:!font-[600]' : ''}
+	"
 		aria-haspopup={ariaHasPopup}
 		aria-expanded={ariaExpanded}
 		onfocus={handleFocus}
@@ -76,7 +78,9 @@
 							data-sveltekit-preload-data
 							href={sLink.url.url}
 							class=" focus-within:bg-navLink-surface-primary-hover hover:bg-navLink-surface-primary-hover px-6 py-1
-						text-lg outline-0 transition-all duration-500"
+						text-lg outline-0 transition-all duration-500
+						{linkEqualsCurrentPage ? ' *:!font-[600]' : ''}
+						"
 						>
 							<StoryblokComponent blok={sLink.link_label[0]}></StoryblokComponent>
 						</a>

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { Accordion } from 'bits-ui';
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
+	import type { AccordionStoryblok } from '$lib/schemas/storyblok/sbTypes';
 
-	let { blok }: { blok: any } = $props();
+	let { blok }: { blok: AccordionStoryblok } = $props();
 </script>
 
 <div use:storyblokEditable={blok} class="w-full">

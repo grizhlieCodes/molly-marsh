@@ -105,6 +105,16 @@
 				list-style-type: disc;
 				list-style-position: outside;
 			}
+
+			& a {
+				font-weight: 450;
+				text-decoration: underline;
+				color: var(--color-body-primary-600);
+				transition: color 300ms ease;
+				&:hover {
+					color: var(--color-body-primary-900);
+				}
+			}
 		}
 	}
 </style>
