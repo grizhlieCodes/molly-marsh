@@ -148,7 +148,7 @@ async function waitForSessionData(sessionId: string, maxAttempts = 10, delayMs =
 				return session;
 			}
 
-			console.log(`Attempt ${attempts + 1}/${maxAttempts}: Waiting for complete session data...`);
+			// console.log(`Attempt ${attempts + 1}/${maxAttempts}: Waiting for complete session data...`);
 		} catch (err) {
 			console.error(`Attempt ${attempts + 1}/${maxAttempts} failed:`, err);
 			lastError = err;
@@ -173,10 +173,10 @@ async function returnSessionData(sessionId: string) {
 
 	try {
 		// console.log({ checkoutSession, items: checkoutSession?.line_items });
-		console.log('HERE=============================', { session: checkoutSession });
+		// console.log('HERE=============================', { session: checkoutSession });
 		// console.log('HERE=============================', { images: checkoutSession?.line_items.data[0].price?.product.images });
 		const parsedData = StripeSessionSchema.parse(checkoutSession);
-		console.log({ data: parsedData });
+		// console.log({ data: parsedData });
 		return parsedData;
 	} catch (error) {
 		if (error instanceof z.ZodError) {

@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { redirect } from '@sveltejs/kit';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
 
-console.log('SECRET KEY HERE ==================', STRIPE_SECRET_KEY);
+// console.log('SECRET KEY HERE ==================', STRIPE_SECRET_KEY);
 
 async function createCheckoutSession(priceId: string, origin: string) {
 	// First safety net: validate inputs before even trying Stripe

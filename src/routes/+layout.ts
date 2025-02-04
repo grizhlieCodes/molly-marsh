@@ -29,6 +29,11 @@ import { default as price_card_url_btn } from '$lib/components/ui-interactive/pr
 import { default as accordion } from '$lib/components/ui-interactive/accordion/Accordion.svelte';
 import { default as accordion_item } from '$lib/components/ui-interactive/accordion/AccordionItem.svelte';
 
+// 06 - FORM
+import { default as form } from '$lib/components/form/Form.svelte';
+import { default as form_input } from '$lib/components/form/FormInput.svelte';
+import { default as form_textarea } from '$lib/components/form/FormTextarea.svelte';
+
 // 04 - Navigation -> Turns out we don't need to import this into storyblok..?
 // mostly because we are not using it in a page I guess. So it's just data we
 // are grabbing.
@@ -60,8 +65,11 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			price_card_stripe_btn,
 			price_card_url_btn,
 			accordion,
-			accordion_item
-			// Navigation
+			accordion_item,
+			// FORM
+			form,
+			form_input,
+			form_textarea
 		},
 		apiOptions: {
 			https: true

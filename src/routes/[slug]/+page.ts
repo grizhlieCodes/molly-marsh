@@ -1,7 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params, parent }) => {
+export const load: PageServerLoad = async ({ params, parent, data }) => {
 	const { storyblokApi } = await parent();
 	let slug = params.slug;
 	const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
@@ -18,7 +18,8 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 		}
 
 		return {
-			story: dataStory.data.story
+			story: dataStory.data.story,
+			form: data.form
 		};
 	} catch (err) {
 		throw redirect(307, '/404');

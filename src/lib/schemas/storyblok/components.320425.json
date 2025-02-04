@@ -50,7 +50,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-02-02T13:37:44.804Z",
-      "updated_at": "2025-02-02T13:42:33.699Z",
+      "updated_at": "2025-02-02T14:40:46.383Z",
       "id": 6895734,
       "schema": {
         "accordion_item_title": {
@@ -78,6 +78,13 @@
             "text"
           ],
           "description": "This represents the 'content' or 'answer' of your accordion item. This is where you dispel the doubt or answer a common question your clients might have."
+        },
+        "storyblok_name": {
+          "type": "text",
+          "pos": 2,
+          "description": "Internally used name, you can ignore or fill it in. It just helps us identify what this component is for.",
+          "tooltip": true,
+          "id": "lpgioiz1TDymawx3SmHc2g"
         }
       },
       "image": "//a.storyblok.com/f/320425/x/905d8e1e47/accordionitem.png",
@@ -6595,7 +6602,7 @@
         "56285"
       ],
       "content_type_asset_preview": null,
-      "component_group_name": "06 - Legacy"
+      "component_group_name": "099 - Legacy"
     },
     {
       "name": "custom_hero",
@@ -7203,6 +7210,628 @@
       ],
       "content_type_asset_preview": null,
       "component_group_name": "04 - Navigation"
+    },
+    {
+      "name": "form",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-03T10:13:16.672Z",
+      "updated_at": "2025-02-03T14:43:52.598Z",
+      "id": 6899429,
+      "schema": {
+        "form_top_text": {
+          "type": "bloks",
+          "pos": 0,
+          "id": "POTweGFaTsytp7qoNj5yIw",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "text"
+          ]
+        },
+        "form_inputs": {
+          "type": "bloks",
+          "pos": 1,
+          "description": "Select the form inputs you need.",
+          "tooltip": true,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "form_input",
+            "form_textarea"
+          ],
+          "id": "iV4GCYSOTYGG1TMLzYq0Gw"
+        },
+        "form_action": {
+          "type": "text",
+          "pos": 2,
+          "description": "This has to match the server code.",
+          "tooltip": true,
+          "required": true,
+          "id": "0gZHCUZLRMmNvK-tDb2nKg"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "form",
+      "component_group_uuid": "0ffcf69d-6f93-4c93-beec-1f6b8dbaf1cb",
+      "color": "#f4cc48",
+      "icon": "block-block",
+      "internal_tags_list": [
+        {
+          "id": 57992,
+          "name": "form"
+        }
+      ],
+      "internal_tag_ids": [
+        "57992"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "06 - Form"
+    },
+    {
+      "name": "form_input",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-02T18:20:08.518Z",
+      "updated_at": "2025-02-03T14:47:41.967Z",
+      "id": 6896119,
+      "schema": {
+        "basic_data": {
+          "type": "section",
+          "pos": 0,
+          "id": "ftewt_hVTeaa1kmN6Ev0fw",
+          "keys": [
+            "input_name",
+            "input_label",
+            "input_type",
+            "input_autocomplete",
+            "input_placeholder",
+            "input_zod_base_type",
+            "zod_base_type"
+          ]
+        },
+        "zod_base_type": {
+          "type": "option",
+          "pos": 1,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "d308f056-92eb-4d30-a9f7-4625e06d5928",
+              "name": "String",
+              "value": "string"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "string",
+          "required": true,
+          "description": "This is the zod-specific type. Zod has very few primitive types and almost everything we need is in 'string'.",
+          "id": "FaI4Ve3vQEO-Z5KrnJ7avg"
+        },
+        "input_type": {
+          "type": "option",
+          "pos": 2,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "83c9d3f9-30a2-4036-9a77-603afbe36f6a",
+              "name": "Text",
+              "value": "text"
+            },
+            {
+              "_uid": "a3164a91-6756-4152-b8a4-6509729c518f",
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "_uid": "38b81fe8-2cb2-402f-89a8-7c373227a662",
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "_uid": "3e920ded-16e2-452a-852d-f9d6780f86b2",
+              "value": "tel",
+              "name": "Telephone"
+            },
+            {
+              "_uid": "6494a4a0-4a49-498b-8a9c-5d167ca5b4e4",
+              "value": "url",
+              "name": "URL / Link"
+            }
+          ],
+          "default_value": "text",
+          "exclude_empty_option": true,
+          "required": true,
+          "tooltip": true,
+          "description": "This is the field type. This should be used with common sense, but if nothing seems obvious, just ask Rafal to explain it.",
+          "id": "ObiTJQ5RTIy_FfWn3WAqEw"
+        },
+        "input_autocomplete": {
+          "type": "option",
+          "pos": 3,
+          "use_uuid": true,
+          "tooltip": true,
+          "description": "Optional field to allow the browser to communicate what automatic input this field can have. ",
+          "options": [
+            {
+              "_uid": "eac845f5-fd5d-40e2-841a-acd9f0893302",
+              "name": "Name",
+              "value": "name"
+            },
+            {
+              "_uid": "23ea253d-f74c-4eb5-bff0-8fc648040025",
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "_uid": "5cb2b9b6-fd9c-4989-a604-13a6f6935798",
+              "value": "tel",
+              "name": "Telephone"
+            },
+            {
+              "_uid": "0c51eab8-6268-4f19-a843-58b1752a49f3",
+              "value": "given-name",
+              "name": "First Name"
+            },
+            {
+              "_uid": "f25a28b7-7256-4e81-911a-15b3d049f08a",
+              "value": "additional-name",
+              "name": "Last/Sur Name"
+            },
+            {
+              "_uid": "933fcbe6-de92-45c9-b122-aa0a596abca1",
+              "value": "nickname",
+              "name": "Nickname"
+            },
+            {
+              "_uid": "a3db1fda-032b-4a4b-940f-8d2f18cad9f8",
+              "value": "username",
+              "name": "Username"
+            },
+            {
+              "_uid": "720c94e6-2ca9-4db3-9e79-56a69520275b",
+              "value": "new-password",
+              "name": "New Password"
+            },
+            {
+              "_uid": "ce2d3a0e-43fa-4d7f-a694-f19c79efea4a",
+              "value": "current-password",
+              "name": "Current Password"
+            },
+            {
+              "_uid": "f639a81f-56e3-4209-a8a5-ddd86aa848a8",
+              "value": "organization",
+              "name": "Organisation"
+            },
+            {
+              "_uid": "24903844-7920-4fbb-ae26-8c850322a115",
+              "value": "address-line1",
+              "name": "Address Line 1"
+            },
+            {
+              "_uid": "c204fedb-f8a8-437d-baf4-b2b55ce62e54",
+              "value": "address-line2",
+              "name": "Address Line 2"
+            },
+            {
+              "_uid": "4a8dceb2-fbc6-42e3-a356-f0baac8f54c2",
+              "value": "address-line3",
+              "name": "Address Line 3"
+            },
+            {
+              "_uid": "bbbd2149-5d94-455a-9247-2234e3d1cde3",
+              "value": "country",
+              "name": "Country Code"
+            },
+            {
+              "_uid": "e158ab80-1117-4679-a8f6-790717c95f9e",
+              "value": "country-name",
+              "name": "Country Name"
+            },
+            {
+              "_uid": "0dc201a7-cb4b-4888-95d3-6a799fee89c8",
+              "value": "postal-code",
+              "name": "Post Code"
+            },
+            {
+              "_uid": "091bd209-8b79-41c7-8698-3d484ce3af91",
+              "value": "url",
+              "name": "Url / Link"
+            },
+            {
+              "_uid": "87e4688b-9ac3-4f71-9ae6-b18f1fb10380",
+              "value": "sex",
+              "name": "Sex / Gender"
+            }
+          ],
+          "exclude_empty_option": false,
+          "id": "LAzFFvYUSwCy4g2MyHxX6A"
+        },
+        "input_name": {
+          "type": "text",
+          "pos": 4,
+          "id": "RIyepyvYSOC0NAqGRPdeLQ",
+          "tooltip": true,
+          "required": true,
+          "description": "This is the name of this input field. Use it to clarify what it is for, in lowercaps.\nE.g.: \"name\", \"email\", \"message\", etc."
+        },
+        "input_label": {
+          "type": "text",
+          "pos": 5,
+          "required": true,
+          "tooltip": true,
+          "description": "This is what is shown to the user. \"Name\", \"Email\", \"Message\" etc.",
+          "id": "6yKRED8BSzaU0P76ls2wOA"
+        },
+        "input_placeholder": {
+          "type": "text",
+          "pos": 6,
+          "required": false,
+          "tooltip": true,
+          "description": "The placeholder is text that will be automatically shown to the user before they type anything. It has a 'greyed out' appearance. However, it is advised that you leave this empty as the form design will not be helped by this very much.",
+          "id": "sM-s1AH6SqWeDszr6tlIAA",
+          "default_value": " "
+        },
+        "field_validation": {
+          "type": "section",
+          "pos": 7,
+          "id": "wvY9hwREScSJ2fD4aoGKbQ",
+          "keys": [
+            "validation_rules",
+            "required_error",
+            "invalid_type_error"
+          ]
+        },
+        "validation_rules": {
+          "type": "bloks",
+          "pos": 8,
+          "restrict_type": "",
+          "restrict_components": true,
+          "tooltip": true,
+          "description": "Select the types of validation you want this field to contain.",
+          "required": true,
+          "component_whitelist": [
+            "form_input_validation"
+          ],
+          "id": "OezXm0oVS0Ctb3HZLwbwdQ"
+        },
+        "required_error": {
+          "type": "text",
+          "pos": 9,
+          "id": "J_Vy7qEgQOOAWqY5rWvzkQ",
+          "tooltip": true,
+          "required": false,
+          "description": "If this field is required it is best to set a message for it. So when someone tries submitting the form and leaves this field empty, it will show them a message."
+        },
+        "invalid_type_error": {
+          "type": "text",
+          "pos": 10,
+          "id": "YoIJslrgTIKOKuU6E0B-KA",
+          "tooltip": true,
+          "description": "If this field is strictly 'something', like text, you can clarify that someone is submitting the wrong format with a message."
+        },
+        "custom_styling": {
+          "type": "section",
+          "pos": 11,
+          "id": "acTL3yDzR9WFg8C7P7-EkA",
+          "keys": [
+            "custom_error_span_css",
+            "custom_input_css",
+            "custom_label_span_css",
+            "custom_label_css"
+          ]
+        },
+        "custom_label_css": {
+          "type": "textarea",
+          "pos": 12,
+          "tooltip": true,
+          "description": "You can write some inline CSS for the label component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input\n      Span (Error/s)",
+          "id": "7CL-ZRdsT4-klgBfIy1DRg"
+        },
+        "custom_label_span_css": {
+          "type": "textarea",
+          "pos": 13,
+          "description": "You can write some inline CSS for the label-text component.\nOur HTML structure is:\nLabel\n      Span (Label) <--- This one\n      Input\n      Span (Error/s)",
+          "tooltip": true,
+          "id": "dDlLgHxDSUGbKSB4o5U2OA"
+        },
+        "custom_input_css": {
+          "type": "textarea",
+          "pos": 14,
+          "description": "You can write some inline CSS for the Input component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input <--- this one\n      Span (Error/s)",
+          "tooltip": true,
+          "id": "bOWeWDdqT0a1yrnzqQTrVA"
+        },
+        "custom_error_span_css": {
+          "type": "textarea",
+          "pos": 15,
+          "description": "You can write some inline CSS for the Errors-Span component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input\n      Span (Error/s) <---- This one",
+          "tooltip": true,
+          "id": "HOc15BAyQiSh30hcndN8_A"
+        }
+      },
+      "image": null,
+      "preview_field": "input_label",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "form_input",
+      "component_group_uuid": "0ffcf69d-6f93-4c93-beec-1f6b8dbaf1cb",
+      "color": "#f4cc48",
+      "icon": "block-@",
+      "internal_tags_list": [
+        {
+          "id": 57992,
+          "name": "form"
+        }
+      ],
+      "internal_tag_ids": [
+        "57992"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "06 - Form"
+    },
+    {
+      "name": "form_input_validation",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-02T18:32:16.563Z",
+      "updated_at": "2025-02-03T10:51:03.081Z",
+      "id": 6896126,
+      "schema": {
+        "validation_rule_type": {
+          "type": "option",
+          "pos": 0,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "b684966b-797d-48a7-8192-6b8ea3ef3738",
+              "name": "Minimum",
+              "value": "min"
+            },
+            {
+              "_uid": "c0949db1-526f-4949-b30d-ac88ae7bcc94",
+              "value": "max",
+              "name": "Maximum"
+            },
+            {
+              "_uid": "00971413-2018-4dca-80d2-d2e7696fd259",
+              "value": "regex",
+              "name": "Regex"
+            },
+            {
+              "_uid": "501ee10e-54ff-487d-a402-2eca7b14607f",
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "_uid": "fbbedf38-1cd7-4e5d-a821-e234951ddc7f",
+              "value": "url",
+              "name": "URL / Link"
+            },
+            {
+              "_uid": "d61f07d7-52bb-4db8-8fd1-210206ce30dc",
+              "value": "optional",
+              "name": "Optional"
+            }
+          ],
+          "tooltip": true,
+          "description": "Select what kind of validation rule this is.",
+          "id": "_viVSWE9Ss-RND1RQrwCvQ"
+        },
+        "validation_rule_value": {
+          "type": "text",
+          "pos": 1,
+          "tooltip": true,
+          "required": false,
+          "description": "Select the value the validation should have.\nExamples: 5, /*/, 1, tuna.\nNot all fields require a value. Email for example does not. But things like min/max/regex do.",
+          "id": "TlgShmK0Qv2-otjj5zRCmw"
+        },
+        "validation_rule_message": {
+          "type": "text",
+          "pos": 2,
+          "id": "CVPPLigrTE-2vHHBLXcW3Q",
+          "tooltip": true,
+          "required": true,
+          "description": "If the validation rule condition is not met, you can give a specific message to the user:\n\n\"Needs to be at least 5 chars\", \"Needs to be no longer than 10 letters\", \"Can't have numbers\" etc."
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "form_input_validation",
+      "component_group_uuid": "0ffcf69d-6f93-4c93-beec-1f6b8dbaf1cb",
+      "color": "#f4cc48",
+      "icon": "block-shield-2",
+      "internal_tags_list": [
+        {
+          "id": 57992,
+          "name": "form"
+        }
+      ],
+      "internal_tag_ids": [
+        "57992"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "06 - Form"
+    },
+    {
+      "name": "form_textarea",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-03T14:36:46.547Z",
+      "updated_at": "2025-02-03T14:48:59.593Z",
+      "id": 6901395,
+      "schema": {
+        "basic_data": {
+          "type": "section",
+          "pos": 0,
+          "id": "ftewt_hVTeaa1kmN6Ev0fw",
+          "keys": [
+            "input_name",
+            "input_label",
+            "input_placeholder",
+            "input_zod_base_type",
+            "textarea_zod_base_type",
+            "textarea_name",
+            "textarea_label",
+            "textarea_placeholder",
+            "zod_base_type"
+          ]
+        },
+        "zod_base_type": {
+          "type": "option",
+          "pos": 1,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "d308f056-92eb-4d30-a9f7-4625e06d5928",
+              "name": "String",
+              "value": "string"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "string",
+          "required": true,
+          "description": "This is the zod-specific type. Zod has very few primitive types and almost everything we need is in 'string'.",
+          "id": "FaI4Ve3vQEO-Z5KrnJ7avg"
+        },
+        "textarea_name": {
+          "type": "text",
+          "pos": 2,
+          "id": "RIyepyvYSOC0NAqGRPdeLQ",
+          "tooltip": true,
+          "required": true,
+          "description": "This is the name of this input field. Use it to clarify what it is for, in lowercaps.\nE.g.: \"name\", \"email\", \"message\", etc."
+        },
+        "textarea_label": {
+          "type": "text",
+          "pos": 3,
+          "required": true,
+          "tooltip": true,
+          "description": "This is what is shown to the user. \"Name\", \"Email\", \"Message\" etc.",
+          "id": "6yKRED8BSzaU0P76ls2wOA"
+        },
+        "textarea_placeholder": {
+          "type": "text",
+          "pos": 4,
+          "required": false,
+          "tooltip": true,
+          "description": "The placeholder is text that will be automatically shown to the user before they type anything. It has a 'greyed out' appearance. However, it is advised that you leave this empty as the form design will not be helped by this very much.",
+          "id": "sM-s1AH6SqWeDszr6tlIAA",
+          "default_value": " "
+        },
+        "field_validation": {
+          "type": "section",
+          "pos": 5,
+          "id": "wvY9hwREScSJ2fD4aoGKbQ",
+          "keys": [
+            "validation_rules",
+            "required_error",
+            "invalid_type_error"
+          ]
+        },
+        "validation_rules": {
+          "type": "bloks",
+          "pos": 6,
+          "restrict_type": "",
+          "restrict_components": true,
+          "tooltip": true,
+          "description": "Select the types of validation you want this field to contain.",
+          "required": true,
+          "component_whitelist": [
+            "form_input_validation"
+          ],
+          "id": "OezXm0oVS0Ctb3HZLwbwdQ"
+        },
+        "required_error": {
+          "type": "text",
+          "pos": 7,
+          "id": "J_Vy7qEgQOOAWqY5rWvzkQ",
+          "tooltip": true,
+          "required": false,
+          "description": "If this field is required it is best to set a message for it. So when someone tries submitting the form and leaves this field empty, it will show them a message."
+        },
+        "invalid_type_error": {
+          "type": "text",
+          "pos": 8,
+          "id": "YoIJslrgTIKOKuU6E0B-KA",
+          "tooltip": true,
+          "description": "If this field is strictly 'something', like text, you can clarify that someone is submitting the wrong format with a message."
+        },
+        "custom_styling": {
+          "type": "section",
+          "pos": 9,
+          "id": "acTL3yDzR9WFg8C7P7-EkA",
+          "keys": [
+            "custom_error_span_css",
+            "custom_input_css",
+            "custom_label_span_css",
+            "custom_label_css"
+          ]
+        },
+        "custom_label_css": {
+          "type": "textarea",
+          "pos": 10,
+          "tooltip": true,
+          "description": "You can write some inline CSS for the label component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input\n      Span (Error/s)",
+          "id": "7CL-ZRdsT4-klgBfIy1DRg"
+        },
+        "custom_label_span_css": {
+          "type": "textarea",
+          "pos": 11,
+          "description": "You can write some inline CSS for the label-text component.\nOur HTML structure is:\nLabel\n      Span (Label) <--- This one\n      Input\n      Span (Error/s)",
+          "tooltip": true,
+          "id": "dDlLgHxDSUGbKSB4o5U2OA"
+        },
+        "custom_input_css": {
+          "type": "textarea",
+          "pos": 12,
+          "description": "You can write some inline CSS for the Input component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input <--- this one\n      Span (Error/s)",
+          "tooltip": true,
+          "id": "bOWeWDdqT0a1yrnzqQTrVA"
+        },
+        "custom_error_span_css": {
+          "type": "textarea",
+          "pos": 13,
+          "description": "You can write some inline CSS for the Errors-Span component.\nOur HTML structure is:\nLabel\n      Span (Label)\n      Input\n      Span (Error/s) <---- This one",
+          "tooltip": true,
+          "id": "HOc15BAyQiSh30hcndN8_A"
+        }
+      },
+      "image": null,
+      "preview_field": "input_label",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "form_textarea",
+      "component_group_uuid": "0ffcf69d-6f93-4c93-beec-1f6b8dbaf1cb",
+      "color": "#f4cc48",
+      "icon": "block-@",
+      "internal_tags_list": [
+        {
+          "id": 57992,
+          "name": "form"
+        }
+      ],
+      "internal_tag_ids": [
+        "57992"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "06 - Form"
     },
     {
       "name": "header",
@@ -11945,7 +12574,14 @@
       "parent_uuid": null
     },
     {
-      "name": "06 - Legacy",
+      "name": "06 - Form",
+      "id": 492411,
+      "uuid": "0ffcf69d-6f93-4c93-beec-1f6b8dbaf1cb",
+      "parent_id": null,
+      "parent_uuid": null
+    },
+    {
+      "name": "099 - Legacy",
       "id": 486129,
       "uuid": "3b501dcb-dcf7-4bb7-b596-c02dbd070279",
       "parent_id": null,

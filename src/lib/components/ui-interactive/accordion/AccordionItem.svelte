@@ -7,7 +7,7 @@
 
 	let { blok, index }: { blok: AccordionItemStoryblok; index: number | string } = $props();
 
-	let element = $state(null);
+	let element: HTMLButtonElement | undefined = $state();
 
 	let open = $state(false);
 

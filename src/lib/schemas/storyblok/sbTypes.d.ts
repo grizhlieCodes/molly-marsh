@@ -10,6 +10,7 @@ export interface AccordionStoryblok {
 export interface AccordionItemStoryblok {
   accordion_item_title: TextStoryblok[];
   accordion_item_content: TextStoryblok[];
+  storyblok_name?: string;
   _uid: string;
   component: "accordion_item";
   [k: string]: any;
@@ -84,6 +85,10 @@ export interface ContainerStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -241,6 +246,10 @@ export interface ContainerLegacyStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -406,6 +415,10 @@ export interface FooterStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -433,6 +446,10 @@ export interface FooterStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -462,6 +479,10 @@ export interface FooterStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -491,6 +512,85 @@ export interface FooterColumnStoryblok {
   [k: string]: any;
 }
 
+export interface FormStoryblok {
+  form_top_text?: TextStoryblok[];
+  form_inputs?: (FormInputStoryblok | FormTextareaStoryblok)[];
+  form_action: string;
+  _uid: string;
+  component: "form";
+  [k: string]: any;
+}
+
+export interface FormInputStoryblok {
+  basic_data?: any;
+  zod_base_type: "string";
+  input_type: "text" | "email" | "number" | "tel" | "url";
+  input_autocomplete?:
+    | ""
+    | "name"
+    | "email"
+    | "tel"
+    | "given-name"
+    | "additional-name"
+    | "nickname"
+    | "username"
+    | "new-password"
+    | "current-password"
+    | "organization"
+    | "address-line1"
+    | "address-line2"
+    | "address-line3"
+    | "country"
+    | "country-name"
+    | "postal-code"
+    | "url"
+    | "sex";
+  input_name: string;
+  input_label: string;
+  input_placeholder?: string;
+  field_validation?: any;
+  validation_rules: FormInputValidationStoryblok[];
+  required_error?: string;
+  invalid_type_error?: string;
+  custom_styling?: any;
+  custom_label_css?: string;
+  custom_label_span_css?: string;
+  custom_input_css?: string;
+  custom_error_span_css?: string;
+  _uid: string;
+  component: "form_input";
+  [k: string]: any;
+}
+
+export interface FormInputValidationStoryblok {
+  validation_rule_type?: "" | "min" | "max" | "regex" | "email" | "url" | "optional";
+  validation_rule_value?: string;
+  validation_rule_message: string;
+  _uid: string;
+  component: "form_input_validation";
+  [k: string]: any;
+}
+
+export interface FormTextareaStoryblok {
+  basic_data?: any;
+  zod_base_type: "string";
+  textarea_name: string;
+  textarea_label: string;
+  textarea_placeholder?: string;
+  field_validation?: any;
+  validation_rules: FormInputValidationStoryblok[];
+  required_error?: string;
+  invalid_type_error?: string;
+  custom_styling?: any;
+  custom_label_css?: string;
+  custom_label_span_css?: string;
+  custom_input_css?: string;
+  custom_error_span_css?: string;
+  _uid: string;
+  component: "form_textarea";
+  [k: string]: any;
+}
+
 export interface HeaderStoryblok {
   header?: any;
   fixed_to_top?: boolean;
@@ -513,6 +613,10 @@ export interface HeaderStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -719,6 +823,10 @@ export interface PageStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok
@@ -788,6 +896,10 @@ export interface SectionStoryblok {
     | EmbedTextStoryblok
     | FooterStoryblok
     | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
     | HeaderStoryblok
     | IconStoryblok
     | ImageStoryblok

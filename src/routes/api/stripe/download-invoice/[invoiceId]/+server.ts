@@ -46,7 +46,7 @@ async function getInvoicePdf(invoiceId: string) {
 }
 
 export async function GET({ params }) {
-	console.log('Received request with params:', params);
+	// console.log('Received request with params:', params);
 
 	try {
 		const { invoiceId } = params;
@@ -56,7 +56,7 @@ export async function GET({ params }) {
 
 		const response = await getInvoicePdf(invoiceId);
 
-		console.log('Invoice PDF response: ', response);
+		// console.log('Invoice PDF response: ', response);
 
 		return new Response(response.pdfBuffer, {
 			headers: {
