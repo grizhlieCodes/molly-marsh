@@ -12,10 +12,10 @@
 <!-- has-[+*:not(:placeholder-shown)]:scale-75 -->
 <label for="{blok.input_name}" class="{labelCss} group" use:storyblokEditable={blok}>
 	<span
-		class={`translate-y-[2.5rem] font-serif text-2xl text-surface-primary-400
+		class={`translate-y-[2.5rem] font-serif text-2xl text-molly-dark-400
 	transition-all duration-300 group-focus-within:-translate-x-[0.6rem]
 	group-focus-within:translate-y-0 group-focus-within:scale-75
-	group-focus-within:text-surface-primary-600 
+	group-focus-within:text-molly-dark-600 
     has-[+*:not(:placeholder-shown)]:-translate-x-[0.6rem]
     has-[+*:not(:placeholder-shown)]:translate-y-0
     has-[+*:not(:placeholder-shown)]:scale-75
@@ -26,9 +26,9 @@
 		type={blok.input_type}
 		name={blok.input_name}
 		id={blok.input_name}
-		class="w-full rounded-md border-b border-surface-primary-300 bg-surface-primary-50 
+		class="w-full rounded-md border-b border-molly-dark-300 bg-molly-dark-50 
     px-3 py-2.5 outline-none transition-colors font-body text-lg
-    duration-500 focus:border-surface-primary-500 focus:bg-surface-primary-100 text-surface-primary-500 group-focus-within:text-neutral-800"
+    duration-500 focus:border-molly-dark-500 focus:bg-molly-dark-100/70 text-molly-dark-500 group-focus-within:text-neutral-800"
 	placeholder="{`${(blok.input_placeholder && blok.input_placeholder.length === 0) ||
 	blok.input_placeholder === ' ' ? ' ' : blok.input_placeholder}`}"
 		autocomplete={blok.input_autocomplete}

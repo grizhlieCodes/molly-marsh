@@ -19,6 +19,7 @@ import { default as icon } from '$lib/components/ui/icon/Icon.svelte';
 import { default as image } from '$lib/components/ui/image/Image.svelte';
 import { default as svg_divider } from '$lib/components/ui/svg-divider/SvgDivider.svelte';
 import { default as divider } from '$lib/components/ui/divider/Divider.svelte';
+import { default as custom_richtext } from '$lib/components/ui/CustomRichtext.svelte';
 
 // 03 - UI: Interactive
 import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
@@ -58,6 +59,7 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			image,
 			svg_divider,
 			divider,
+			custom_richtext,
 			// UI: Interactive
 			button,
 			testimonial,

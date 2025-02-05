@@ -7,6 +7,7 @@ export const load: PageServerLoad = async ({ params, parent, data }) => {
 	const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
 		version: 'draft'
 	});
+	console.log(dataStory);
 
 	try {
 		const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
@@ -14,14 +15,25 @@ export const load: PageServerLoad = async ({ params, parent, data }) => {
 		});
 
 		if (!dataStory?.data?.story) {
+			console.log('throwing error apparently')
 			throw error(404, 'Story not found');
 		}
 
-		return {
-			story: dataStory.data.story,
-			form: data.form
-		};
+		let formExists = await data?.form
+
+		if (formExists) {
+			return {
+				story: dataStory.data.story,
+				form: data.form
+			};
+		} else {
+			return {
+				story: dataStory.data.story
+			};
+		}
 	} catch (err) {
+		console.log('throwing error apparently as well')
+		console.log("Error message:", err)
 		throw redirect(307, '/404');
 	}
 };

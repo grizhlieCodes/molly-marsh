@@ -10,11 +10,17 @@
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
 	import { contactFormValidation } from '$lib/stores/contactFormValidationStore.svelte';
 
-	let { blok, superformData }: { blok: FormStoryblok; superformData: any } = $props();
+	// let { blok, superformData }: { blok: FormStoryblok; superformData: any } = $props();
+	let { blok }: { blok: FormStoryblok } = $props();
+
+	let superformData: any = getContext('superformData');
+	// let activeSuperformData = $state(superformData())
+	
+
 	let hiddenDataForSchema = $state(JSON.stringify(blok.form_inputs));
 
 	let { form, enhance, errors, message, reset } = $state(
-		superForm(superformData, {
+		superForm(superformData(), {
 			resetForm: false,
 			invalidateAll: false,
 			onResult: ({ result }) => {
@@ -35,8 +41,8 @@
 
 	let formSubmissionButtonState = $state('send'); // send, sent, error, sending
 	const buttonColors: any = {
-		send: 'bg-surface-primary-500 hover:bg-surface-primary-700 focus-within:bg-surface-primary-700',
-		sent: 'bg-surface-primary-500',
+		send: 'bg-molly-dark-500 hover:bg-molly-dark-700 focus-within:bg-molly-dark-700',
+		sent: 'bg-molly-dark-500',
 		error: 'bg-red-500',
 		sending: 'bg-indigo-600'
 	};
@@ -47,7 +53,7 @@
 	use:enhance
 	action="?/sendQuery"
 	method="POST"
-	class="bg-surface-primary-50 flex w-full max-w-3xl flex-col gap-6 p-10"
+	class="bg-molly-dark-50 flex w-full max-w-3xl flex-col gap-6 p-10"
 	oninput={() => {
 		if (formSubmissionButtonState !== 'send') {
 			formSubmissionButtonState = 'send';

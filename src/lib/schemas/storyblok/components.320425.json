@@ -6735,6 +6735,65 @@
       "component_group_name": "01 - Layout"
     },
     {
+      "name": "custom_richtext",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-05T11:33:35.409Z",
+      "updated_at": "2025-02-05T11:41:00.697Z",
+      "id": 6913170,
+      "schema": {
+        "heading_styles": {
+          "type": "option",
+          "pos": 0,
+          "use_uuid": true,
+          "description": "Select whether you want Serif or Sans Serif for your headings.",
+          "tooltip": true,
+          "options": [
+            {
+              "_uid": "6000c9f5-7042-492f-97cf-b4aa4f60cee4",
+              "name": "Serif",
+              "value": "serif"
+            },
+            {
+              "_uid": "60a5c428-f8c6-444e-a520-3d2f5e3d87a6",
+              "value": "sans-serif",
+              "name": "Sans serif"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "serif",
+          "id": "x7vFUvtBSNKzVKNNEKHPJg"
+        },
+        "text": {
+          "type": "richtext",
+          "pos": 1,
+          "id": "oKtTPKdJSUiY4IxDENI-0g"
+        }
+      },
+      "image": "//a.storyblok.com/f/320425/x/60726b13f7/embed_text.png",
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "custom_richtext",
+      "component_group_uuid": "65c910d7-541b-41d6-b635-6fcc2672e0b0",
+      "color": "#374dc3",
+      "icon": "block-@",
+      "internal_tags_list": [
+        {
+          "id": 56293,
+          "name": "ui"
+        }
+      ],
+      "internal_tag_ids": [
+        "56293"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "02 - UI"
+    },
+    {
       "name": "divider",
       "display_name": null,
       "description": null,
@@ -7671,7 +7730,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-02-03T14:36:46.547Z",
-      "updated_at": "2025-02-03T14:48:59.593Z",
+      "updated_at": "2025-02-03T18:53:48.269Z",
       "id": 6901395,
       "schema": {
         "basic_data": {
@@ -7707,7 +7766,7 @@
           "description": "This is the zod-specific type. Zod has very few primitive types and almost everything we need is in 'string'.",
           "id": "FaI4Ve3vQEO-Z5KrnJ7avg"
         },
-        "textarea_name": {
+        "input_name": {
           "type": "text",
           "pos": 2,
           "id": "RIyepyvYSOC0NAqGRPdeLQ",

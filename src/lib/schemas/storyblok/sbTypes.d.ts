@@ -81,6 +81,7 @@ export interface ContainerStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -242,6 +243,7 @@ export interface ContainerLegacyStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -353,6 +355,23 @@ export interface CustomHeroStoryblok {
   [k: string]: any;
 }
 
+export interface RichtextStoryblok {
+  type: string;
+  content?: RichtextStoryblok[];
+  marks?: RichtextStoryblok[];
+  attrs?: any;
+  text?: string;
+  [k: string]: any;
+}
+
+export interface CustomRichtextStoryblok {
+  heading_styles?: "serif" | "sans-serif";
+  text?: RichtextStoryblok;
+  _uid: string;
+  component: "custom_richtext";
+  [k: string]: any;
+}
+
 export interface DividerStoryblok {
   divider_color:
     | "none"
@@ -384,15 +403,6 @@ export interface DividerStoryblok {
   [k: string]: any;
 }
 
-export interface RichtextStoryblok {
-  type: string;
-  content?: RichtextStoryblok[];
-  marks?: RichtextStoryblok[];
-  attrs?: any;
-  text?: string;
-  [k: string]: any;
-}
-
 export interface EmbedTextStoryblok {
   rich_text?: RichtextStoryblok;
   display: "none" | "block" | "inline";
@@ -411,6 +421,7 @@ export interface FooterStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -442,6 +453,7 @@ export interface FooterStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -475,6 +487,7 @@ export interface FooterStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -574,7 +587,7 @@ export interface FormInputValidationStoryblok {
 export interface FormTextareaStoryblok {
   basic_data?: any;
   zod_base_type: "string";
-  textarea_name: string;
+  input_name: string;
   textarea_label: string;
   textarea_placeholder?: string;
   field_validation?: any;
@@ -609,6 +622,7 @@ export interface HeaderStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -819,6 +833,7 @@ export interface PageStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
@@ -892,6 +907,7 @@ export interface SectionStoryblok {
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
+    | CustomRichtextStoryblok
     | DividerStoryblok
     | EmbedTextStoryblok
     | FooterStoryblok
