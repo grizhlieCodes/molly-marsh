@@ -27,7 +27,21 @@
 			blockquote: () => ({ tag: 'span' })
 		},
 		marks: {
-			...RichTextSchema.marks
+			...RichTextSchema.marks,
+			link: (node: any) => ({
+				tag: [
+					{
+						tag: 'a',
+						attrs: {
+							href: node.attrs.href,
+							// Only add target if it's explicitly set to something other than _self
+							...(node.attrs.target && node.attrs.target !== '_self' ? { target: node.attrs.target } : {}),
+							linktype: node.attrs.linktype,
+							...(node.attrs.rel ? { rel: node.attrs.rel } : {})
+						}
+					}
+				]
+			})
 		}
 	};
 
