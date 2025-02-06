@@ -29,7 +29,7 @@
 {blok.button_theme} "
 	style="--before-width: 0px;"
 >
-	<Button.Root {target} href={blok.url.url} class={buttonStyling} data-element="button-link" aria-label={blok.label} data-sveltekit-preload-data>
+	<Button.Root {target} href={blok.url.url} class={buttonStyling} data-element="button-link" aria-label={blok.label} data-sveltekit-preload-data="hover">
 		{#if blok.content && blok.content.length > 0}
 			{#each blok.content as blokk}
 				<StoryblokComponent blok={blokk}></StoryblokComponent>

@@ -80,8 +80,8 @@
 		onclick={() => {
 			formSubmissionButtonState = 'sending';
 		}}
-	class="{buttonSelectedCol} grid w-max rounded-md px-6 py-3 mt-10 font-sans
-	font-semibold text-white uppercase transition-all "
+		class="{buttonSelectedCol} mt-10 grid w-max rounded-md px-6 py-3 font-sans
+	font-semibold text-white uppercase transition-all"
 	>
 		{#if formSubmissionButtonState === 'send'}
 			<div class="col-start-1 row-start-1 flex items-center gap-2">
