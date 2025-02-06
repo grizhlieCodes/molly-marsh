@@ -15,23 +15,26 @@
 
 	let containerWidthStyling = $state(opts.widthStylingOptions[blok.button_width]);
 
-	let target = $state(opts.targetOptions[blok.target]);
+	let target = $state(blok.target === 'none' || !blok.target ? undefined : opts.targetOptions[blok.target]);
 
 	let BASE_CLASSES = 'flex justify-center items-center duration-300 transition-all relative overflow-hidden z-10 rounded-full font-sans cursor-pointer outline-offset-2';
 
 	let buttonStyling = $derived(`${BASE_CLASSES} ${Object.values(buttonStyles).join(' ')}`);
 </script>
 
-<div use:storyblokEditable={blok} use:buttonHoverManager class="button-link-container h-max {containerWidthStyling} group {blok.button_theme}" style="--before-width: 0px;">
-	<Button.Root {target} href={blok.url.url} data-sveltekit-preload-code="" class={buttonStyling} data-element="button-link" aria-label={blok.label}>
+<div
+	use:storyblokEditable={blok}
+	use:buttonHoverManager
+	class="button-link-container h-max {containerWidthStyling} group
+{blok.button_theme} "
+	style="--before-width: 0px;"
+>
+	<Button.Root {target} href={blok.url.url} class={buttonStyling} data-element="button-link" aria-label={blok.label} data-sveltekit-preload-data>
 		{#if blok.content && blok.content.length > 0}
 			{#each blok.content as blokk}
 				<StoryblokComponent blok={blokk}></StoryblokComponent>
 			{/each}
 		{/if}
-		<!-- {#if blok.label && blok.label.length > 0}
-			 <span>{blok.label}</span>
-		{/if} -->
 	</Button.Root>
 </div>
 

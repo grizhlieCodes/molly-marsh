@@ -66,7 +66,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendInternalEmail = async (data) => {
-	console.log({SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS})
+	console.log({ SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS });
 	const mailOptions = {
 		from: SECRET_TRANSPORTER_USER,
 		to: SECRET_TRANSPORTER_USER,
@@ -155,7 +155,7 @@ const sendInternalEmail = async (data) => {
 
 	try {
 		let res = await transporter.sendMail(mailOptions);
-		console.log("Internal email res: ", res)
+		console.log('Internal email res: ', res);
 		return res;
 	} catch (error) {
 		console.log('fucked up', error);
@@ -289,37 +289,48 @@ const sendConfirmationEmail = async (data) => {
 };
 
 export const load: PageServerLoad = async ({ parent, url, params }) => {
-	if (url.pathname.slice(1) === 'contact') {
-		const link = url.pathname.slice(1);
-		let storyblokApi = await useStoryblokApi();
-		// const { storyblokApi } = await parent();
-		// console.log(storyblokApi);
-		// let slug = params.slug;
-		const dataStory = await storyblokApi.get(`cdn/stories/${link}`, {
-			version: 'draft'
-		});
+	const slug = url.pathname.slice(1);
+  console.log(slug)
+	let storyblokApi = await useStoryblokApi();
 
-		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
-		const formInputs = formDataObject ? formDataObject.form_inputs : undefined;
-		// console.log('TEST SUCCESS', dataTest);
+	const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
+		version: 'draft'
+	});
 
-		// const contactFormData = dataStory.data.story.content.blocks[0].blocks[0].blocks[0].form_inputs;
+	// Find form component if it exists
+	const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
 
-		// console.log('FORM INPUTS', contactFormData);
-		// console.log('DATA STORY HERE ============================== ', contactFormData);
+	if (formDataObject) {
+		const formInputs = formDataObject.form_inputs;
 		const formSchema = createFormSchema(formInputs);
-		// console.log('Form One: running on server load: zod schema: ---', formSchema);
-		// const form = await superValidate(zod(formSchema));
-		// return {
-		// 	form,
-		// };
+
+    // Add a small delay
+    await new Promise(resolve => setTimeout(resolve, 100));
 		const form = await superValidate(zod(formSchema));
-		// console.log('Form One: running on server load: super schema: ---', form);
 
 		return {
-			form
+			form,
+			story: dataStory.data.story
 		};
 	}
+
+	return {
+		story: dataStory.data.story
+	};
+	// if (url.pathname.slice(1) === 'contact') {
+	// 	const link = url.pathname.slice(1);
+	// 	let storyblokApi = await useStoryblokApi();
+	// 	const dataStory = await storyblokApi.get(`cdn/stories/${link}`, {
+	// 		version: 'draft'
+	// 	});
+	// 	const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
+	// 	const formInputs = formDataObject ? formDataObject.form_inputs : undefined;
+	// 	const formSchema = createFormSchema(formInputs);
+	// 	const form = await superValidate(zod(formSchema));
+	// 	return {
+	// 		form
+	// 	};
+	// }
 };
 
 export const actions = {
@@ -365,7 +376,7 @@ export const actions = {
 				});
 			}
 
-			console.log("Form data: ", form.data)
+			console.log('Form data: ', form.data);
 
 			const selfEmail = await sendInternalEmail(form.data);
 			const isInternalEmailSuccessful = selfEmail.rejected.length === 0 && selfEmail.accepted.includes(SECRET_TRANSPORTER_USER) && selfEmail.response.startsWith('250');

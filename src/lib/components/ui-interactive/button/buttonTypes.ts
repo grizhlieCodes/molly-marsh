@@ -3,7 +3,7 @@ export interface ButtonStoryblok {
 	content: (IconStoryblok | SimpleTextStoryblok)[];
 	url: Exclude<MultilinkStoryblok, { linktype?: 'email' } | { linktype?: 'asset' }>;
 	label: string;
-	target: 'newTab' | 'currentTab';
+	target: 'newTab' | 'currentTab' | 'none';
 	styling?: any;
 	button_theme: 'primary' | 'secondary';
 	button_width: 'full' | 'max';

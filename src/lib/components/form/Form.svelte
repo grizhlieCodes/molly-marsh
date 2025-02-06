@@ -15,7 +15,6 @@
 
 	let superformData: any = getContext('superformData');
 	// let activeSuperformData = $state(superformData())
-	
 
 	let hiddenDataForSchema = $state(JSON.stringify(blok.form_inputs));
 

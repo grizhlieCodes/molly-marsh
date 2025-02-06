@@ -23,8 +23,9 @@
 		mounted = true;
 	});
 
-	let superFormData = $state(data.form);
-	setContext('superformData', () => superFormData);
+	if (data.form) {
+		setContext('superformData', () => data.form);
+	}
 </script>
 
 {#key story}
