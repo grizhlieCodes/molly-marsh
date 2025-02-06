@@ -7,8 +7,6 @@ import { PUBLIC_STORYBLOK_ACCESS_TOKEN } from '$env/static/public';
 // 	accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN
 // });
 
-
-
 export const load: PageServerLoad = async ({ parent, url, params }) => {
 	const slug = url.pathname.slice(1);
 	let storyblokApi = await useStoryblokApi();

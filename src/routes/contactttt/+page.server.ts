@@ -47,14 +47,14 @@ export const actions = {
 
 			// Consume the original request to get our dynamic schema data
 			const data = await request.formData();
-			console.log("REQUEST DATA:", Object.fromEntries(data.entries()));
+			// console.log("REQUEST DATA:", Object.fromEntries(data.entries()));
 
 			const schemaDataString = JSON.parse(data.get('schemaData'));
 			const formSchema = createFormSchema(schemaDataString);
 
 			// Now pass the cloned request to superValidate so it can read the form data properly
 			const form = await superValidate(reqClone, zod(formSchema));
-			console.log('FORM DATA: ', form);
+			// console.log('FORM DATA: ', form);
 
 			if (!form.valid) {
 				return fail(400, {

@@ -47,7 +47,7 @@
 		{ value: 'alph_a-z', label: 'Alphabetical (A-Z)' },
 		{ value: 'alph_z-a', label: 'Alphabetical (Z-A)' }
 	];
-	$inspect('TAGS =============== ', allTags);
+	// $inspect('TAGS =============== ', allTags);
 	const filterTags = [
 		{
 			content: {

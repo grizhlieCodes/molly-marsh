@@ -3,7 +3,7 @@
 	import { renderRichText, storyblokEditable } from '@storyblok/svelte';
 	let { blok }: { blok: CustomRichtextStoryblok } = $props();
 
-	$inspect(blok);
+	// $inspect(blok);
 	let headingStyle = blok.heading_styles === 'serif' ? 'prose-headings:font-serif' : 'prose-headings:font-sans';
 </script>
 

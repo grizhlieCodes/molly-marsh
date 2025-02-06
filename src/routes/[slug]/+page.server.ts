@@ -53,7 +53,7 @@ function timedDeepFind(data, predicate) {
 	const result = deepFind(data, predicate);
 	const endTime = now();
 	const elapsed = endTime - startTime;
-	console.log(`deepFind took ${elapsed.toFixed(2)} ms to run.`);
+	// console.log(`deepFind took ${elapsed.toFixed(2)} ms to run.`);
 	return result;
 }
 
@@ -66,7 +66,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendInternalEmail = async (data) => {
-	console.log({ SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS });
+	// console.log({ SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS });
 	const mailOptions = {
 		from: SECRET_TRANSPORTER_USER,
 		to: SECRET_TRANSPORTER_USER,

@@ -13,7 +13,7 @@
 
 	const updateOpenState = (element: any, stateVar: boolean) => {
 		const elementDataState = element.dataset.state;
-		console.log(elementDataState);
+		// console.log(elementDataState);
 		if (elementDataState === 'open') {
 			open = true;
 		} else if (elementDataState === 'closed') {

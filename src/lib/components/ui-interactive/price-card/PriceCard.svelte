@@ -37,7 +37,7 @@
 
 	let { textStyles } = $state(textOptions);
 
-	$inspect(blok);
+	// $inspect(blok);
 </script>
 
 <article

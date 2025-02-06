@@ -1,6 +1,6 @@
 <script lang="ts">
 	let { data }: { data: any } = $props();
-	$inspect(data.formVali);
+	// $inspect(data.formVali);
 </script>
 
 <div class="flex min-h-screen w-full flex-col items-center justify-center gap-4">

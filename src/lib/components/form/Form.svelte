@@ -36,7 +36,7 @@
 		})
 	);
 
-	$inspect($errors);
+	// $inspect($errors);
 
 	let formSubmissionButtonState = $state('send'); // send, sent, error, sending
 	const buttonColors: any = {
