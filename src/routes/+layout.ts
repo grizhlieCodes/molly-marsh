@@ -30,6 +30,11 @@ import { default as price_card_url_btn } from '$lib/components/ui-interactive/pr
 import { default as accordion } from '$lib/components/ui-interactive/accordion/Accordion.svelte';
 import { default as accordion_item } from '$lib/components/ui-interactive/accordion/AccordionItem.svelte';
 
+// 05 - Data / Blog / Etc
+import { default as all_articles } from '$lib/components/content/AllArticles.svelte';
+import { default as article } from '$lib/components/content/Article.svelte';
+import { default as article_sort_filter } from '$lib/components/content/ArticleSortFilter.svelte';
+
 // 06 - FORM
 import { default as form } from '$lib/components/form/Form.svelte';
 import { default as form_input } from '$lib/components/form/FormInput.svelte';
@@ -71,7 +76,12 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			// FORM
 			form,
 			form_input,
-			form_textarea
+			form_textarea,
+			// CONTENT / BLOG / ARTICLES`
+			all_articles,
+			article,
+			article_sort_filter
+
 		},
 		apiOptions: {
 			https: true
