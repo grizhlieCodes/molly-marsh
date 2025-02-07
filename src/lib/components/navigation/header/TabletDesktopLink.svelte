@@ -5,7 +5,7 @@
 	import type { NavLinkStoryblok } from './headerTypes';
 	// import { ChevronDown } from 'lucide-svelte';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
-	let { link, linkEqualsCurrentPage }: { link: NavLinkStoryblok; linkEqualsCurrentPage: boolean } = $props();
+	let { link, linkEqualsCurrentPage, isLastLink }: { link: NavLinkStoryblok; linkEqualsCurrentPage: boolean; isLastLink: boolean } = $props();
 	// import { smoother } from '$lib/gsap.svelte.js';
 
 	// State Variables
@@ -31,7 +31,14 @@
 	};
 </script>
 
-<li class="tablet-desktop-link group relative list-none" onmouseover={() => (ariaExpanded = true)} onmouseleave={() => (ariaExpanded = false)} onfocus={() => (ariaExpanded = true)} onblur={handleBlur}>
+<li
+	class="tablet-desktop-link group relative list-none
+{isLastLink ? 'lt:hidden' : ''} "
+	onmouseover={() => (ariaExpanded = true)}
+	onmouseleave={() => (ariaExpanded = false)}
+	onfocus={() => (ariaExpanded = true)}
+	onblur={handleBlur}
+>
 	<a
 		href={link.url.url}
 		data-sveltekit-preload-data

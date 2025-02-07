@@ -1,8 +1,8 @@
 import type * as Type from './buttonTypes';
 
 export const sizeStylingOptions: Type.SizeOptions = {
-	1: 'text-sm px-4 py-2 gap-1.5',
-	2: 'text-base px-5 py-3 gap-1.5',
+	1: 'text-sm lg:text-base px-4 py-2 gap-1.5 ',
+	2: 'text-base lg:text-lg px-5 py-3 gap-1.5 tracking-[-0.1px]',
 	3: 'text-lg px-6 py-4 gap-2',
 	4: 'text-xl px-8 py-5 gap-2.5',
 	5: 'text-2xl px-10 py-6 gap-3'

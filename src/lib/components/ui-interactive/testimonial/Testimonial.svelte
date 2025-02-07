@@ -38,16 +38,8 @@
 				</div>
 			</Dialog.Trigger>
 			<Dialog.Portal>
-				<Dialog.Overlay transition={fade} transitionConfig={{ duration:
-				150 }} class="fixed inset-0 z-50 bg-white/20 backdrop-blur-xl"></Dialog.Overlay>
+				<Dialog.Overlay transition={fade} transitionConfig={{ duration: 150 }} class="fixed inset-0 z-50 bg-white/20 backdrop-blur-xl"></Dialog.Overlay>
 				<Dialog.Content class={dialogContentStyling} transition={fly} transitionConfig={{ duration: 450, y: 40 }}>
-					<Dialog.Title>
-						{#if blok.testimonial_title && blok.testimonial_title.length > 0}
-							<div class="max-w-[90%]">
-								<StoryblokComponent blok={blok.testimonial_title[0]}></StoryblokComponent>
-							</div>
-						{/if}
-					</Dialog.Title>
 					<Dialog.Description>
 						<div class="**:not-last:mb-5 **:not-last:block">
 							{#if blok.testimonial_full_message && blok.testimonial_full_message.length > 0}
@@ -55,8 +47,17 @@
 								<!-- span MARGIN span MARGIN span -->
 							{/if}
 						</div>
+						{#if blok.testimonial_name && blok.testimonial_name.length > 0}
+							<div class="mt-5 w-full">
+								<StoryblokComponent blok={blok.testimonial_name[0]}></StoryblokComponent>
+							</div>
+						{/if}
 					</Dialog.Description>
-					<Dialog.Close class="bg-surface-primary-100 absolute top-5 right-5 rounded-md p-2">
+					<Dialog.Close
+						class="bg-surface-primary-100 absolute
+					top-[2px] right-[2px] cursor-pointer rounded-md p-2
+					"
+					>
 						<div>
 							<X class="size-6"></X>
 							<span class="sr-only">Close</span>

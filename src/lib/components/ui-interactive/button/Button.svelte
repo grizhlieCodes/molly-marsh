@@ -17,7 +17,7 @@
 
 	let target = $state(blok.target === 'none' || !blok.target ? undefined : opts.targetOptions[blok.target]);
 
-	let BASE_CLASSES = 'flex justify-center items-center duration-300 transition-all relative overflow-hidden z-10 rounded-full font-sans cursor-pointer outline-offset-2';
+	let BASE_CLASSES = 'flex justify-center items-center duration-300 transition-all relative overflow-hidden z-10 rounded-full font-sans cursor-pointer outline-offset-2 font-body font-[620] uppercase';
 
 	let buttonStyling = $derived(`${BASE_CLASSES} ${Object.values(buttonStyles).join(' ')}`);
 </script>

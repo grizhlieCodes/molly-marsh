@@ -33,7 +33,13 @@
 					<a
 						href={link.url.url}
 						onclick={toggleMobileMenuActive}
-						class="focus-within hover:bg-navLink-surface-primary-hover hover:text-navlink-text-primary-hover border-b-navLink-outline-primary-focus/30 **:!text-navlink-text-primary flex w-full cursor-pointer items-center justify-between border-b-1 px-6 py-8 **:!text-3xl **:!font-bold transition-all duration-300"
+					class="focus-within hover:bg-navLink-surface-primary-hover
+					hover:text-navlink-text-primary-hover
+					border-b-navLink-outline-primary-focus/30
+					**:!text-navlink-text-primary flex w-full cursor-pointer
+					items-center justify-between border-b-1 px-6 py-8
+					**:!text-3xl **:!font-bold transition-all duration-300 
+					"
 					>
 						<StoryblokComponent blok={link.link_label[0]}></StoryblokComponent>
 					</a>

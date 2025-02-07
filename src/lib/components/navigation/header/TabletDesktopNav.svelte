@@ -7,9 +7,10 @@
 
 <nav class="md:block hidden">
 	<ul class=" flex">
-		{#each links as link}
+		{#each links as link, index}
 			{@const linkEqualsCurrentPage = link.url.url === page.url.pathname}
-			<TabletDesktopLink {link} {linkEqualsCurrentPage} />
+			{@const isLastLink = index === links.length - 1}
+			<TabletDesktopLink {link} {linkEqualsCurrentPage} {isLastLink} />
 		{/each}
 	</ul>
 </nav>

@@ -47,7 +47,7 @@
 		{/if}
 
 		<!-- Optional button -->
-		<div class="lt:block hidden">
+		<div class="lt:block hidden !font-[620] **:has-[span]:text-lg lg:**:has-[span]:text-xl">
 			{#if blok.button && blok.button.length > 0}
 				<Button blok={blok.button[0]}></Button>
 			{/if}
