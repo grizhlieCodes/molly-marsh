@@ -56,7 +56,8 @@
 	use:enhance
 	action="?/sendQuery"
 	method="POST"
-	class="bg-molly-dark-50 flex w-full max-w-3xl flex-col gap-6 p-10"
+class="bg-molly-dark-50 flex w-full max-w-3xl flex-col gap-6 p-5 md:p-7 lg:p-10
+h-full"
 	oninput={() => {
 		if (formSubmissionButtonState !== 'send') {
 			formSubmissionButtonState = 'send';

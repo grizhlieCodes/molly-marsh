@@ -57,7 +57,8 @@
 </script>
 
 {#if blok.svg && blok.svg.length > 0}
-	<div use:storyblokEditable={blok} style={blok.custom_container_css} class="relative min-h-10 w-full">
+	<div use:storyblokEditable={blok} style={blok.custom_container_css}
+	class="relative min-h-10 w-full z-2">
 		<svg xmlns="http://www.w3.org/2000/svg" class={SVG_STYLING} viewBox={VIEW_BOX} style="{svgPositionStyles} {flipHorizontally}" style:translate style:rotate>
 			{@html path}
 		</svg>

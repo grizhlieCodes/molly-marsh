@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
 	import type { NavLinkStoryblok } from './headerTypes';
 	import MobileCollapsible from './MobileCollapsible.svelte';
@@ -14,6 +15,12 @@
 		toggleMobileMenuActive: () => void;
 	} = $props();
 
+	let linkStyling = `focus-within border-b-navLink-outline-primary-focus/30 flex w-full cursor-pointer
+					items-center justify-between border-b-1 px-6 py-8 transition-all duration-300 **:!text-3xl **:!font-bold
+                    data-[active=true]:bg-surface-primary-800 data-[active=true]:**:!text-body-primary-50
+					data-[active=false]:**:!text-navlink-text-primary data-[active=false]:hover:bg-navLink-surface-primary-hover data-[active=false]:hover:text-navlink-text-primary-hover
+					data-[active=false]:focus-within:bg-navLink-surface-primary-hover data-[active=false]:focus-within:text-navlink-text-primary-hover
+	`;
 </script>
 
 {#if mobileMenuActive}
@@ -27,20 +34,11 @@
 		pt-10"
 		>
 			{#each links as link, i}
+				{@const activeLink = page.url.pathname === link.url.url}
 				{#if link.sub_links && link.sub_links.length > 0}
-					<MobileCollapsible {link} {toggleMobileMenuActive} />
+					<MobileCollapsible {link} {toggleMobileMenuActive}  />
 				{:else if link.sub_links && link.sub_links.length === 0}
-					<a
-						href={link.url.url}
-						onclick={toggleMobileMenuActive}
-					class="focus-within hover:bg-navLink-surface-primary-hover
-					hover:text-navlink-text-primary-hover
-					border-b-navLink-outline-primary-focus/30
-					**:!text-navlink-text-primary flex w-full cursor-pointer
-					items-center justify-between border-b-1 px-6 py-8
-					**:!text-3xl **:!font-bold transition-all duration-300 
-					"
-					>
+					<a href={link.url.url} onclick={toggleMobileMenuActive} data-active={activeLink} class={linkStyling}>
 						<StoryblokComponent blok={link.link_label[0]}></StoryblokComponent>
 					</a>
 				{/if}
