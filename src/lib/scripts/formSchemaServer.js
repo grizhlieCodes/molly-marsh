@@ -9,8 +9,6 @@ function buildFieldSchema(fieldData) {
 		...(invalid_type_error && { invalid_type_error })
 	});
 
-	// console.log(schema)
-
 	validation_rules.forEach((rule) => {
 		switch (rule.validation_rule_type) {
 			case 'min':
@@ -45,7 +43,7 @@ export const createFormSchema = (dataFromStoryblok) => {
 	// For each field in our form data, create its validation rules
 	dataFromStoryblok.forEach((fieldData) => {
 		// console.log(fieldData);
-		schemaObject[fieldData.input_name] = buildFieldSchema(fieldData);
+		schemaObject[fieldData.input_name] = buildFieldSchema(fieldData); 
 	});
 
 	// Create a complete form validation schema

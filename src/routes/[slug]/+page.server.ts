@@ -290,7 +290,7 @@ const sendConfirmationEmail = async (data) => {
 
 export const load: PageServerLoad = async ({ parent, url, params }) => {
 	const slug = url.pathname.slice(1);
-  console.log(slug)
+	console.log(slug);
 	let storyblokApi = await useStoryblokApi();
 
 	const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
@@ -304,8 +304,8 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 		const formInputs = formDataObject.form_inputs;
 		const formSchema = createFormSchema(formInputs);
 
-    // Add a small delay
-    await new Promise(resolve => setTimeout(resolve, 100));
+		// Add a small delay
+		await new Promise((resolve) => setTimeout(resolve, 100));
 		const form = await superValidate(zod(formSchema));
 
 		return {
@@ -366,7 +366,7 @@ export const actions = {
 			const schemaDataString = JSON.parse(data.get('schemaData'));
 			const formSchema = createFormSchema(schemaDataString);
 			const form = await superValidate(reqClone, zod(formSchema));
-			console.log('FORM DATA: ', form);
+			// console.log('FORM DATA: ', form);
 
 			if (!form.valid) {
 				return fail(400, {
