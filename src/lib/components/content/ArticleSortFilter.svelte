@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Select } from 'bits-ui';
-	import { ChevronDown, Check } from 'lucide-svelte';
+	// import { ChevronDown, Check } from 'lucide-svelte';
+	import Check from 'lucide-svelte/icons/check';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import { fly } from 'svelte/transition';
 
 	let { sortOptions, sortSelected, sortOpen }: { sortSelected: any; sortOpen: any; sortOptions: any } = $props();

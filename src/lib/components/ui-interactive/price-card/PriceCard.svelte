@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
-	import { CircleCheck, Star } from 'lucide-svelte';
+	// import { CircleCheck, Star } from 'lucide-svelte';
+	import CircleCheck from 'lucide-svelte/icons/circle-check';
+	import Star from 'lucide-svelte/icons/star';
 	import * as textOptions from '$lib/components/ui/text/textOptions';
 
 	// Props

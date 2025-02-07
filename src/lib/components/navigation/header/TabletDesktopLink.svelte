@@ -3,7 +3,8 @@
 
 	// Imports
 	import type { NavLinkStoryblok } from './headerTypes';
-	import { ChevronDown } from 'lucide-svelte';
+	// import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	let { link, linkEqualsCurrentPage }: { link: NavLinkStoryblok; linkEqualsCurrentPage: boolean } = $props();
 	// import { smoother } from '$lib/gsap.svelte.js';
 

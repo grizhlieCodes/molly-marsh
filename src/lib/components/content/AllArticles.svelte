@@ -39,7 +39,10 @@
 	import { flip } from 'svelte/animate';
 	import { fly } from 'svelte/transition';
 	import { Select } from 'bits-ui';
-	import { Check, ChevronDown } from 'lucide-svelte';
+	// import { Check, ChevronDown } from 'lucide-svelte';
+	import Check from 'lucide-svelte/icons/check';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+
 
 	const sorts = [
 		{ value: 'date_newest', label: 'Date (Newest)' },

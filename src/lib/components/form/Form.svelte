@@ -2,7 +2,11 @@
 	// Standard imports
 	import { bounceInOut } from 'svelte/easing';
 	import { fly, slide } from 'svelte/transition';
-	import { SendHorizontal, Check, CircleX, LoaderCircle } from 'lucide-svelte';
+	// import { SendHorizontal, Check, CircleX, LoaderCircle } from 'lucide-svelte';
+	import SendHorizontal from 'lucide-svelte/icons/send-horizontal';
+	import Check from 'lucide-svelte/icons/check';
+	import CircleX from 'lucide-svelte/icons/circle-x';
+	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 	// Superform / ZOD implementation
 	import { superForm } from 'sveltekit-superforms';
 	import type { FormStoryblok } from '$lib/schemas/storyblok/sbTypes';

@@ -2,7 +2,8 @@
 	import { Dialog } from 'bits-ui';
 	import { fade, fly } from 'svelte/transition';
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
-	import { X } from 'lucide-svelte';
+	// import { X } from 'lucide-svelte';
+	import X from 'lucide-svelte/icons/x';
 	import type { TestimonialStoryblok } from '$lib/schemas/storyblok/sbTypes';
 	let { blok }: { blok: TestimonialStoryblok } = $props();
 

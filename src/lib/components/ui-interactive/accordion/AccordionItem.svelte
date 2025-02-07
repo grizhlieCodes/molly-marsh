@@ -2,7 +2,8 @@
 	import type { AccordionItemStoryblok } from '$lib/schemas/storyblok/sbTypes';
 	import { Accordion } from 'bits-ui';
 	import { slide } from 'svelte/transition';
-	import { ChevronDown } from 'lucide-svelte';
+	// import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
 
 	let { blok, index }: { blok: AccordionItemStoryblok; index: number | string } = $props();

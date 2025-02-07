@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { NavLinkStoryblok } from './headerTypes';
 	import { linear } from 'svelte/easing';
-	import { ChevronDown, X } from 'lucide-svelte';
+	// import { ChevronDown, X } from 'lucide-svelte';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import X from 'lucide-svelte/icons/x';
 	import { Collapsible } from 'bits-ui';
 	import { slide } from 'svelte/transition';
 	import { StoryblokComponent } from '@storyblok/svelte';
