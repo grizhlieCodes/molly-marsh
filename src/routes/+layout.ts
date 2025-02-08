@@ -125,6 +125,7 @@ export const load: LayoutLoad = async ({ url }) => {
 	return {
 		url: url.pathname,
 		storyblokApi,
+		initError: initError?.message,
 		navData
 	};
 };
