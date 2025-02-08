@@ -1,5 +1,5 @@
 // IMPORTS
-import type { LayoutServerLoad } from './$types';
+import type { LayoutLoad } from './$types';
 import { PUBLIC_STORYBLOK_ACCESS_TOKEN } from '$env/static/public';
 import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 
@@ -46,55 +46,57 @@ import { default as form_textarea } from '$lib/components/form/FormTextarea.svel
 // import { default as header } from '$lib/components/navigation/header/Header.svelte';
 // import { default as nav_link } from '$lib/components/navigation/header/Link.svelte';
 
-export const load: LayoutServerLoad = async ({ url }) => {
-	storyblokInit({
-		accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // this is actually a preview token, ignore
-		use: [apiPlugin],
-		components: {
-			// Layout
-			page,
-			section,
-			container,
-			custom_hero,
-			// UI
-			simple_text,
-			text,
-			embed_text,
-			icon,
-			image,
-			svg_divider,
-			divider,
-			custom_richtext,
-			// UI: Interactive
-			button,
-			testimonial,
-			price_card,
-			price_card_stripe_btn,
-			price_card_url_btn,
-			accordion,
-			accordion_item,
-			// FORM
-			form,
-			form_input,
-			form_textarea,
-			// CONTENT / BLOG / ARTICLES`
-			all_articles,
-			article,
-			article_sort_filter
-		},
-		apiOptions: {
-			https: true
-		}
-	});
-
-	// let storyblokApi = await useStoryblokApi();
+export const load: LayoutLoad = async ({ url }) => {
 	let storyblokApi; // Declare without immediate assignment
+	let initError = null;
 	try {
+		storyblokInit({
+			accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // this is actually a preview token, ignore
+			use: [apiPlugin],
+			components: {
+				// Layout
+				page,
+				section,
+				container,
+				custom_hero,
+				// UI
+				simple_text,
+				text,
+				embed_text,
+				icon,
+				image,
+				svg_divider,
+				divider,
+				custom_richtext,
+				// UI: Interactive
+				button,
+				testimonial,
+				price_card,
+				price_card_stripe_btn,
+				price_card_url_btn,
+				accordion,
+				accordion_item,
+				// FORM
+				form,
+				form_input,
+				form_textarea,
+				// CONTENT / BLOG / ARTICLES`
+				all_articles,
+				article,
+				article_sort_filter
+			},
+			apiOptions: {
+				https: true
+			}
+		});
 		storyblokApi = await useStoryblokApi();
 	} catch (initializationError) {
 		console.error('Error initializing Storyblok API in +layout.ts:', initializationError);
 		storyblokApi = null; // Set to null in case of initialization failure
+		initError = initializationError;
 	}
+
+	// let storyblokApi = await useStoryblokApi();
 
 	let navData = null; // Initialize navData to null
 
@@ -116,8 +118,6 @@ export const load: LayoutServerLoad = async ({ url }) => {
 		}
 	} else {
 		console.error('Storyblok API was not initialized. Navigation data cannot be fetched in +layout.ts.');
-		// Optionally, handle the case where navigation data cannot be fetched
-		// e.g., set navData to a default empty object or array, or leave it as null
 	}
 
 	// console.log(navData)
