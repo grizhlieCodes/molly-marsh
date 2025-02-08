@@ -46,12 +46,98 @@ import { default as form_textarea } from '$lib/components/form/FormTextarea.svel
 // import { default as header } from '$lib/components/navigation/header/Header.svelte';
 // import { default as nav_link } from '$lib/components/navigation/header/Link.svelte';
 
+// export const load: LayoutLoad = async ({ url }) => {
+// 	let storyblokApi; // Declare without immediate assignment
+// 	let initError = null;
+// 	try {
+// 		storyblokInit({
+// 			accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // this is actually a preview token, ignore
+// 			use: [apiPlugin],
+// 			components: {
+// 				// Layout
+// 				page,
+// 				section,
+// 				container,
+// 				custom_hero,
+// 				// UI
+// 				simple_text,
+// 				text,
+// 				embed_text,
+// 				icon,
+// 				image,
+// 				svg_divider,
+// 				divider,
+// 				custom_richtext,
+// 				// UI: Interactive
+// 				button,
+// 				testimonial,
+// 				price_card,
+// 				price_card_stripe_btn,
+// 				price_card_url_btn,
+// 				accordion,
+// 				accordion_item,
+// 				// FORM
+// 				form,
+// 				form_input,
+// 				form_textarea,
+// 				// CONTENT / BLOG / ARTICLES`
+// 				all_articles,
+// 				article,
+// 				article_sort_filter
+// 			},
+// 			apiOptions: {
+// 				https: true
+// 			}
+// 		});
+// 		storyblokApi = await useStoryblokApi();
+// 	} catch (initializationError) {
+// 		console.error('Error initializing Storyblok API in +layout.ts:', initializationError);
+// 		storyblokApi = null; // Set to null in case of initialization failure
+// 		initError = initializationError;
+// 	}
+
+// 	// let storyblokApi = await useStoryblokApi();
+
+// 	let navData = null; // Initialize navData to null
+
+// 	// const navData = await storyblokApi.get('cdn/stories/_navigation', {
+// 	// 	version: 'published'
+// 	// });
+
+// 	if (storyblokApi) {
+// 		// Check if storyblokApi is valid before using it
+// 		try {
+// 			const navResponse = await storyblokApi.get('cdn/stories/_navigation', {
+// 				version: 'published'
+// 			});
+// 			navData = navResponse?.data?.story?.content;
+// 		} catch (error) {
+// 			console.error('Error fetching navigation data from Storyblok in +layout.ts:', error);
+// 			// Optionally, you could set a default or empty navData here
+// 			// navData = {};
+// 		}
+// 	} else {
+// 		console.error('Storyblok API was not initialized. Navigation data cannot be fetched in +layout.ts.');
+// 	}
+
+// 	// console.log(navData)
+
+// 	return {
+// 		url: url.pathname,
+// 		storyblokApi,
+// 		initError: initError?.message,
+// 		navData
+// 	};
+// };
+
 export const load: LayoutLoad = async ({ url }) => {
-	let storyblokApi; // Declare without immediate assignment
+	let storyblokApi;
 	let initError = null;
+
 	try {
+		// Initialize only once in layout
 		storyblokInit({
-			accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // this is actually a preview token, ignore
+			accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN,
 			use: [apiPlugin],
 			components: {
 				// Layout
@@ -89,43 +175,35 @@ export const load: LayoutLoad = async ({ url }) => {
 				https: true
 			}
 		});
+
+		// Add a small delay to ensure initialization is complete
+		await new Promise((resolve) => setTimeout(resolve, 100));
+
 		storyblokApi = await useStoryblokApi();
 	} catch (initializationError) {
 		console.error('Error initializing Storyblok API in +layout.ts:', initializationError);
-		storyblokApi = null; // Set to null in case of initialization failure
 		initError = initializationError;
 	}
 
-	// let storyblokApi = await useStoryblokApi();
-
-	let navData = null; // Initialize navData to null
-
-	// const navData = await storyblokApi.get('cdn/stories/_navigation', {
-	// 	version: 'published'
-	// });
+	let navData = null;
 
 	if (storyblokApi) {
-		// Check if storyblokApi is valid before using it
 		try {
 			const navResponse = await storyblokApi.get('cdn/stories/_navigation', {
-				version: 'published'
+				version: 'published',
+				cv: Date.now()
 			});
 			navData = navResponse?.data?.story?.content;
 		} catch (error) {
-			console.error('Error fetching navigation data from Storyblok in +layout.ts:', error);
-			// Optionally, you could set a default or empty navData here
-			// navData = {};
+			console.error('Navigation fetch error:', error);
 		}
-	} else {
-		console.error('Storyblok API was not initialized. Navigation data cannot be fetched in +layout.ts.');
 	}
-
-	// console.log(navData)
 
 	return {
 		url: url.pathname,
 		storyblokApi,
 		initError: initError?.message,
-		navData
+		navData,
+		storyblokInitialized: !!storyblokApi // Add this flag
 	};
 };

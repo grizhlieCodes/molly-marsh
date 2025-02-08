@@ -10,7 +10,7 @@
 	import Header from '$lib/components/navigation/header/Header.svelte';
 	import Footer from '$lib/components/navigation/footer/Footer.svelte';
 
-	$inspect(data);
+	// $inspect(data);
 </script>
 
 <DraggingStore></DraggingStore>
