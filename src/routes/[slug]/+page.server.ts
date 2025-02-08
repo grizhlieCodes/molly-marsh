@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { createFormSchema } from '$lib/scripts/formSchemaServer';
 import { useStoryblokApi } from '@storyblok/svelte';
@@ -290,47 +290,73 @@ const sendConfirmationEmail = async (data) => {
 
 export const load: PageServerLoad = async ({ parent, url, params }) => {
 	const slug = url.pathname.slice(1);
-	console.log(slug);
-	let storyblokApi = await useStoryblokApi();
+	// console.log(slug);
+	let storyblokApi; // Declare without immediate assignment
 
-	const dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
-		version: 'draft'
-	});
-
-	// Find form component if it exists
-	const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
-
-	if (formDataObject) {
-		const formInputs = formDataObject.form_inputs;
-		const formSchema = createFormSchema(formInputs);
-
-		// Add a small delay
-		await new Promise((resolve) => setTimeout(resolve, 100));
-		const form = await superValidate(zod(formSchema));
-
-		return {
-			form,
-			story: dataStory.data.story
-		};
+	try {
+		storyblokApi = await useStoryblokApi();
+	} catch (initializationError) {
+		console.error('Error initializing Storyblok API:', initializationError);
+		storyblokApi = null; // Set to null in case of initialization failure
 	}
 
-	return {
-		story: dataStory.data.story
-	};
-	// if (url.pathname.slice(1) === 'contact') {
-	// 	const link = url.pathname.slice(1);
-	// 	let storyblokApi = await useStoryblokApi();
-	// 	const dataStory = await storyblokApi.get(`cdn/stories/${link}`, {
-	// 		version: 'draft'
-	// 	});
-	// 	const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
-	// 	const formInputs = formDataObject ? formDataObject.form_inputs : undefined;
-	// 	const formSchema = createFormSchema(formInputs);
-	// 	const form = await superValidate(zod(formSchema));
-	// 	return {
-	// 		form
-	// 	};
-	// }
+	let dataStory; // Declare dataStory outside try block
+
+	if (storyblokApi) {
+		// Check if storyblokApi is valid before using it
+		try {
+			dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
+				version: 'draft'
+			});
+		} catch (err) {
+			console.error('Error fetching story from Storyblok for slug:', slug, err);
+			throw error(500, {
+				message: 'Failed to load page content',
+				slug: slug
+			});
+		}
+	} else {
+		console.error('Storyblok API was not initialized. Cannot fetch story for slug:', slug);
+		throw error(500, {
+			message: 'Storyblok API initialization failed',
+			slug: slug // You can still pass slug for context in error page
+		});
+		// Alternatively, if you wanted to return an empty story instead of throwing an error:
+		// dataStory = { data: { story: null } }; // Or some default empty story
+		// structure
+	}
+
+	// Find form component if it exists
+	if (dataStory && dataStory.data && dataStory.data.story) {
+		// Check if dataStory and its nested properties are valid
+		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
+
+		if (formDataObject) {
+			const formInputs = formDataObject.form_inputs;
+			const formSchema = createFormSchema(formInputs);
+
+			// Add a small delay
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			const form = await superValidate(zod(formSchema));
+
+			return {
+				form,
+				story: dataStory.data.story
+			};
+		}
+
+		return {
+			story: dataStory.data.story
+		};
+	} else {
+		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful). Slug:', slug);
+		throw error(500, {
+			message: 'Failed to load page content - invalid data structure from API',
+			slug: slug
+		});
+		// Alternatively, return an empty story object:
+		// return { story: null };
+	}
 };
 
 export const actions = {

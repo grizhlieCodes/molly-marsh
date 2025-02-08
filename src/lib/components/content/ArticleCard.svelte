@@ -34,7 +34,7 @@
 {article_title}"
 	class="bg-surface-primary-50 border-surface-primary-200 group hover:bg-surface-primary-100/80 flex w-full max-w-[30rem]
 flex-col gap-0 overflow-hidden rounded-lg border
-transition-all duration-500 hover:scale-105 sm:min-h-[16.25rem] sm:max-w-none
+transition-all duration-500 sm:min-h-[16.25rem] sm:max-w-none
 sm:flex-row"
 >
 	<div

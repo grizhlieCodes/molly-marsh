@@ -81,22 +81,50 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			all_articles,
 			article,
 			article_sort_filter
-
 		},
 		apiOptions: {
 			https: true
 		}
 	});
 
-	let storyblokApi = await useStoryblokApi();
+	// let storyblokApi = await useStoryblokApi();
+	let storyblokApi; // Declare without immediate assignment
+	try {
+		storyblokApi = await useStoryblokApi();
+	} catch (initializationError) {
+		console.error('Error initializing Storyblok API in +layout.ts:', initializationError);
+		storyblokApi = null; // Set to null in case of initialization failure
+	}
 
-	const navData = await storyblokApi.get('cdn/stories/_navigation', {
-		version: 'published'
-	});
+	let navData = null; // Initialize navData to null
+
+	// const navData = await storyblokApi.get('cdn/stories/_navigation', {
+	// 	version: 'published'
+	// });
+
+	if (storyblokApi) {
+		// Check if storyblokApi is valid before using it
+		try {
+			const navResponse = await storyblokApi.get('cdn/stories/_navigation', {
+				version: 'published'
+			});
+			navData = navResponse?.data?.story?.content;
+		} catch (error) {
+			console.error('Error fetching navigation data from Storyblok in +layout.ts:', error);
+			// Optionally, you could set a default or empty navData here
+			// navData = {};
+		}
+	} else {
+		console.error('Storyblok API was not initialized. Navigation data cannot be fetched.');
+		// Optionally, handle the case where navigation data cannot be fetched
+		// e.g., set navData to a default empty object or array, or leave it as null
+	}
+
+	// console.log(navData)
 
 	return {
 		url: url.pathname,
-		storyblokApi: storyblokApi,
-		navData: navData?.data?.story?.content
+		storyblokApi,
+		navData
 	};
 };
