@@ -296,7 +296,7 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 	try {
 		storyblokApi = await useStoryblokApi();
 	} catch (initializationError) {
-		console.error('Error initializing Storyblok API:', initializationError);
+		console.error('Error initializing Storyblok API  in [slug]/+page.server.ts:', initializationError);
 		storyblokApi = null; // Set to null in case of initialization failure
 	}
 
@@ -311,14 +311,14 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 		} catch (err) {
 			console.error('Error fetching story from Storyblok for slug:', slug, err);
 			throw error(500, {
-				message: 'Failed to load page content',
+				message: 'Failed to load page content, have SB api in [slug]/+page.server.ts',
 				slug: slug
 			});
 		}
 	} else {
-		console.error('Storyblok API was not initialized. Cannot fetch story for slug:', slug);
+		console.error('Storyblok API was not initialized. Cannot fetch story for slug in [slug]/+page.server.ts:', slug);
 		throw error(500, {
-			message: 'Storyblok API initialization failed',
+			message: 'Storyblok API initialization failed in [slug]/+page.server.ts',
 			slug: slug // You can still pass slug for context in error page
 		});
 		// Alternatively, if you wanted to return an empty story instead of throwing an error:
@@ -349,9 +349,9 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 			story: dataStory.data.story
 		};
 	} else {
-		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful). Slug:', slug);
+		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful) in [slug]/+page.server.ts. Slug:', slug);
 		throw error(500, {
-			message: 'Failed to load page content - invalid data structure from API',
+			message: 'Failed to load page content - invalid data structure from API in [slug]/+page.server.ts',
 			slug: slug
 		});
 		// Alternatively, return an empty story object:

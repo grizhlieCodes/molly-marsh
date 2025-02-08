@@ -115,7 +115,7 @@ export const load: LayoutServerLoad = async ({ url }) => {
 			// navData = {};
 		}
 	} else {
-		console.error('Storyblok API was not initialized. Navigation data cannot be fetched.');
+		console.error('Storyblok API was not initialized. Navigation data cannot be fetched in +layout.ts.');
 		// Optionally, handle the case where navigation data cannot be fetched
 		// e.g., set navData to a default empty object or array, or leave it as null
 	}
