@@ -330,16 +330,19 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 				}
 			}
 		}
-
-		// If we still don't have an API instance after retries, trigger a reload
-		if (!storyblokApi && !url.searchParams.has('retry')) {
-			const currentUrl = url.pathname + url.search;
-			const separator = currentUrl.includes('?') ? '&' : '?';
-			throw redirect(307, `${currentUrl}${separator}retry=true`);
-		}
 	}
 
 	if (!storyblokApi) {
+		// If we haven't tried a reload yet, do it now
+		if (!url.searchParams.has('retry')) {
+			const currentUrl = url.pathname + url.search;
+			const separator = currentUrl.includes('?') ? '&' : '?';
+			console.log('Triggering reload with retry parameter...');
+			throw redirect(307, `${currentUrl}${separator}retry=true`);
+		}
+
+		// Only throw 500 if we've already tried a reload
+		console.error('Storyblok API initialization failed even after reload attempt');
 		throw error(500, {
 			message: 'Failed to initialize Storyblok API after reload attempt in [slug]/+page.server.ts',
 			slug

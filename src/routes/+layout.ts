@@ -172,7 +172,8 @@ export const load: LayoutLoad = async ({ url }) => {
 				article_sort_filter
 			},
 			apiOptions: {
-				https: true
+				https: true,
+				maxRetries: 2
 			}
 		});
 
