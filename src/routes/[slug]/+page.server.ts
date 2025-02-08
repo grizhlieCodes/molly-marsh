@@ -2,13 +2,11 @@ import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { createFormSchema } from '$lib/scripts/formSchemaServer';
 import { useStoryblokApi } from '@storyblok/svelte';
-import StoryblokClient from 'storyblok-js-client';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS } from '$env/static/private';
 import nodemailer from 'nodemailer';
-import { PUBLIC_STORYBLOK_ACCESS_TOKEN } from '$env/static/public';
 
 function deepFind(data, predicate, visited = new Set()) {
 	// Check for null or non-object values
@@ -292,74 +290,91 @@ const sendConfirmationEmail = async (data) => {
 
 export const load: PageServerLoad = async ({ parent, url, params }) => {
 	const slug = url.pathname.slice(1);
-	let storyblokApi; // For @storyblok/svelte
-	let fallbackStoryblokClient; // For storyblok-js-sdk
+	// console.log(slug);
+	let storyblokApi; // Declare without immediate assignment
+	const maxRetries = 3; // Define max retry attempts
+	let retryCount = 0;
+	let initializationSuccessful = false;
 
-	try {
-		storyblokApi = await useStoryblokApi();
-	} catch (initializationError) {
-		console.error('Error initializing @storyblok/svelte API in [slug]/+page.server.ts:', initializationError);
-		storyblokApi = null; // Set to null as before
-
-		// Fallback attempt using storyblok-js-sdk
-		console.log('Attempting fallback with storyblok-js-sdk...');
+	while (retryCount < maxRetries && !initializationSuccessful) {
+		retryCount++;
 		try {
-			fallbackStoryblokClient = new StoryblokClient({
-				accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN, // Use the same access token
-				https: true // Ensure HTTPS, match your apiOptions
-			});
-			console.log('storyblok-js-sdk initialized successfully as fallback.');
-		} catch (fallbackInitError) {
-			console.error('Error initializing storyblok-js-sdk fallback:', fallbackInitError);
-			fallbackStoryblokClient = null;
+			storyblokApi = await useStoryblokApi();
+			initializationSuccessful = true; // If successful, break the loop
+			console.log(`Storyblok API initialized successfully on attempt ${retryCount} in [slug]/+page.server.ts`);
+		} catch (initializationError) {
+			console.error(`Attempt ${retryCount} to initialize Storyblok API failed in [slug]/+page.server.ts:`, initializationError);
+			if (retryCount < maxRetries) {
+				console.log(`Retrying Storyblok API initialization in [slug]/+page.server.ts after a short delay...`);
+				await new Promise((resolve) => setTimeout(resolve, 1000 * retryCount)); // Wait before retrying (increased delay)
+			}
 		}
 	}
 
-	let dataStory;
+	if (!initializationSuccessful) {
+		storyblokApi = null; // Set to null if all retries failed
+		console.error('Storyblok API initialization failed after multiple retries in [slug]/+page.server.ts.  Failing page load.');
+		throw error(500, {
+			message: 'Storyblok API initialization failed after multiple retries.',
+			slug: slug // You can still pass slug for context in error page
+		});
+	}
+
+	let dataStory; // Declare dataStory outside try block
 
 	if (storyblokApi) {
-		// Use @storyblok/svelte API as primary
+		// Check if storyblokApi is valid before using it
 		try {
 			dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
 				version: 'draft'
 			});
 		} catch (err) {
-			console.error('Error fetching story using @storyblok/svelte API:', err);
-			// Decide how to handle fetch error with primary API
-			throw error(500, { message: 'Failed to load page content', slug });
-		}
-	} else if (fallbackStoryblokClient) {
-		// Use storyblok-js-sdk as fallback if primary API failed to init
-		console.log('Using storyblok-js-sdk fallback to fetch story.');
-		try {
-			const fallbackResponse = await fallbackStoryblokClient.get(`cdn/stories/${slug}`, {
-				version: 'draft' // Or 'published', adjust as needed
+			console.error('Error fetching story from Storyblok for slug:', slug, err);
+			throw error(500, {
+				message: 'Failed to load page content, have SB api in [slug]/+page.server.ts',
+				slug: slug
 			});
-			dataStory = fallbackResponse.data; // JS SDK response structure is slightly different
-		} catch (fallbackFetchError) {
-			console.error('Error fetching story using storyblok-js-sdk fallback:', fallbackFetchError);
-			throw error(500, { message: 'Failed to load page content (fallback attempt)', slug });
 		}
 	} else {
-		// If both primary and fallback API initialization failed
-		console.error('Both @storyblok/svelte and storyblok-js-sdk API initializations failed.');
+		// This block should ideally not be reached now, as initialization failure is handled above with retries and error throwing.
+		// However, leaving it for extra safety.
+		console.error('Storyblok API was unexpectedly not initialized even after retry attempts in [slug]/+page.server.ts. Cannot fetch story for slug:', slug);
 		throw error(500, {
-			message: 'Storyblok API initialization failed (primary and fallback)',
-			slug: slug
+			message: 'Storyblok API was unexpectedly not initialized.',
+			slug: slug // You can still pass slug for context in error page
 		});
 	}
 
-	// ... rest of your load function logic (form handling, etc.) using dataStory
-	if (dataStory && dataStory.story) {
-		// Make sure to check for story property in dataStory now
-		// ... rest of your logic
-		return { story: dataStory.story /* ... */ }; // Access story like this now
+	// Find form component if it exists
+	if (dataStory && dataStory.data && dataStory.data.story) {
+		// Check if dataStory and its nested properties are valid
+		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
+
+		if (formDataObject) {
+			const formInputs = formDataObject.form_inputs;
+			const formSchema = createFormSchema(formInputs);
+
+			// Add a small delay
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			const form = await superValidate(zod(formSchema));
+
+			return {
+				form,
+				story: dataStory.data.story
+			};
+		}
+
+		return {
+			story: dataStory.data.story
+		};
 	} else {
-		console.error('DataStory structure is invalid or missing after API call (even fallback attempt). Slug:', slug);
+		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful) in [slug]/+page.server.ts. Slug:', slug);
 		throw error(500, {
-			message: 'Failed to load page content - invalid data structure from API (even fallback)',
+			message: 'Failed to load page content - invalid data structure from API in [slug]/+page.server.ts',
 			slug: slug
 		});
+		// Alternatively, return an empty story object:
+		// return { story: null };
 	}
 };
 
