@@ -292,12 +292,32 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 	const slug = url.pathname.slice(1);
 	// console.log(slug);
 	let storyblokApi; // Declare without immediate assignment
+	const maxRetries = 3; // Define max retry attempts
+	let retryCount = 0;
+	let initializationSuccessful = false;
 
-	try {
-		storyblokApi = await useStoryblokApi();
-	} catch (initializationError) {
-		console.error('Error initializing Storyblok API  in [slug]/+page.server.ts:', initializationError);
-		storyblokApi = null; // Set to null in case of initialization failure
+	while (retryCount < maxRetries && !initializationSuccessful) {
+		retryCount++;
+		try {
+			storyblokApi = await useStoryblokApi();
+			initializationSuccessful = true; // If successful, break the loop
+			console.log(`Storyblok API initialized successfully on attempt ${retryCount} in [slug]/+page.server.ts`);
+		} catch (initializationError) {
+			console.error(`Attempt ${retryCount} to initialize Storyblok API failed in [slug]/+page.server.ts:`, initializationError);
+			if (retryCount < maxRetries) {
+				console.log(`Retrying Storyblok API initialization in [slug]/+page.server.ts after a short delay...`);
+				await new Promise((resolve) => setTimeout(resolve, 1000 * retryCount)); // Wait before retrying (increased delay)
+			}
+		}
+	}
+
+	if (!initializationSuccessful) {
+		storyblokApi = null; // Set to null if all retries failed
+		console.error('Storyblok API initialization failed after multiple retries in [slug]/+page.server.ts.  Failing page load.');
+		throw error(500, {
+			message: 'Storyblok API initialization failed after multiple retries.',
+			slug: slug // You can still pass slug for context in error page
+		});
 	}
 
 	let dataStory; // Declare dataStory outside try block
@@ -316,14 +336,13 @@ export const load: PageServerLoad = async ({ parent, url, params }) => {
 			});
 		}
 	} else {
-		console.error('Storyblok API was not initialized. Cannot fetch story for slug in [slug]/+page.server.ts:', slug);
+		// This block should ideally not be reached now, as initialization failure is handled above with retries and error throwing.
+		// However, leaving it for extra safety.
+		console.error('Storyblok API was unexpectedly not initialized even after retry attempts in [slug]/+page.server.ts. Cannot fetch story for slug:', slug);
 		throw error(500, {
-			message: 'Storyblok API initialization failed in [slug]/+page.server.ts',
+			message: 'Storyblok API was unexpectedly not initialized.',
 			slug: slug // You can still pass slug for context in error page
 		});
-		// Alternatively, if you wanted to return an empty story instead of throwing an error:
-		// dataStory = { data: { story: null } }; // Or some default empty story
-		// structure
 	}
 
 	// Find form component if it exists
