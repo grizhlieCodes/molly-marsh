@@ -1,6 +1,6 @@
 <script lang="ts">
 	let { data }: { data: any } = $props();
-	let { sessionData, error }: { sessionData: any, error: string } = $derived(data);
+	let { sessionData, error }: { sessionData: any; error: string } = $derived(data);
 	import { formatNoteDate } from '$lib/scripts/utils';
 
 	import * as ops from '$lib/components/ui/text/textOptions';
@@ -112,14 +112,15 @@
 w-full justify-center"
 	>
 		{#if error}
-		<div class="flex flex-col items-center gap-4">
-			<p class="text-red-500">Error: {error}</p>
-			<button 
-				class="font-special text-body-primary-800 bg-surface-primary-100 border-surface-primary-300 hover:bg-surface-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50 focus-within:bg-surface-primary-800 cursor-pointer rounded-md border p-3 text-lg font-medium uppercase transition-colors duration-300"
-				onclick={() => window.location.reload()}>
-				Retry
-			</button>
-		</div>
+			<div class="flex flex-col items-center gap-4">
+				<p class="text-red-500">Error: {error}</p>
+				<button
+					class="font-special text-body-primary-800 bg-surface-primary-100 border-surface-primary-300 hover:bg-surface-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50 focus-within:bg-surface-primary-800 cursor-pointer rounded-md border p-3 text-lg font-medium uppercase transition-colors duration-300"
+					onclick={() => window.location.reload()}
+				>
+					Retry
+				</button>
+			</div>
 		{:else if isLoading}
 			<div>No session data available</div>
 		{:else}

@@ -15,7 +15,6 @@
 
 <DraggingStore></DraggingStore>
 
-<a href="#my-coaching-offers" class="fixed top-1/2 right-0 z-1000 bg-red-500 p-4"> Scroll </a>
 
 {#if data.storyblokApi.accessToken}
 	<!-- content here -->
