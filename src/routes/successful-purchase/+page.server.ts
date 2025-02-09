@@ -130,7 +130,7 @@ export type StripeSessionData = z.infer<typeof StripeSessionSchema>;
 
 // 	return null;
 // }
-async function waitForSessionData(sessionId: string, maxAttempts = 10, delayMs = 1000) {
+async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 750) {
 	const stripe = new Stripe(STRIPE_SECRET_KEY, {
 		apiVersion: '2024-11-20.acacia'
 	});
@@ -139,6 +139,7 @@ async function waitForSessionData(sessionId: string, maxAttempts = 10, delayMs =
 	let lastError = null;
 
 	while (attempts < maxAttempts) {
+
 		try {
 			const session = await stripe.checkout.sessions.retrieve(sessionId, {
 				expand: ['payment_intent', 'invoice', 'line_items', 'line_items.data.price.product']
@@ -262,9 +263,14 @@ export async function load(event) {
 			sessionId,
 			sessionData
 		};
-	} catch (error) {
-		console.error('Error loading session data:', error);
-		throw error(500, 'Failed to load session data. Please refresh the page.');
+	} catch (err) {
+		// console.error('Error loading session data:', err);
+		// throw error(500, 'Failed to load session data. Please refresh the page.');
+		return {
+			url,
+			sessionId,
+			error: err.message || 'Failed to load session data'
+		};
 	}
 
 	// const clientExists = await findClientInNotion(sessionData.customerEmail);

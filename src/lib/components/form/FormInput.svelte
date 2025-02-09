@@ -3,7 +3,7 @@
 	import { storyblokEditable } from '@storyblok/svelte';
 	import { slide } from 'svelte/transition';
 
-	let { blok, input_errors, formBind }: { blok: FormInputStoryblok; input_errors: any; formBind: any; } = $props();
+	let { blok, input_errors, formBind }: { blok: FormInputStoryblok; input_errors?: any; formBind?: any; } = $props();
 
     let labelCss = `flex w-full flex-col items-start gap-2 font-sans`;
 	// let labelStyling = $state(cn(labelCss, className));

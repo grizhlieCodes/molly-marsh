@@ -15,6 +15,8 @@
 
 <DraggingStore></DraggingStore>
 
+<a href="#my-coaching-offers" class="fixed top-1/2 right-0 z-1000 bg-red-500 p-4"> Scroll </a>
+
 {#if data.storyblokApi.accessToken}
 	<!-- content here -->
 	<div
@@ -34,8 +36,7 @@
 		<Footer blok={data.navData}></Footer>
 	</div>
 {:else}
-	<div class="w-full h-screen grid place-items-center">
-		<p class="text-3xl font-serif">Loading...</p>
-	</div>	
-
+	<div class="grid h-screen w-full place-items-center">
+		<p class="font-serif text-3xl">Loading...</p>
+	</div>
 {/if}

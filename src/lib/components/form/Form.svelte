@@ -44,7 +44,7 @@
 
 	let formSubmissionButtonState = $state('send'); // send, sent, error, sending
 	const buttonColors: any = {
-		send: 'bg-molly-dark-500 hover:bg-molly-dark-700 focus-within:bg-molly-dark-700',
+		send: 'bg-molly-dark-500 hover:bg-molly-dark-700',
 		sent: 'bg-molly-dark-500',
 		error: 'bg-red-500',
 		sending: 'bg-indigo-600'

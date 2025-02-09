@@ -574,7 +574,10 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 export const actions = {
 	stripeCheckout: async ({ request, fetch }) => {
 		const formData = await request.formData();
-		const priceId = formData.get('priceId'); // value = price_...
+		const priceId = formData.get('priceId');
+		const email = formData.get('email');
+
+		// value = price_...
 
 		// console.log('FORM DATA: =========== ', priceId); // WORKING TILL HERE
 
@@ -582,7 +585,7 @@ export const actions = {
 		const response = await fetch('/api/stripe/checkout', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ priceId })
+			body: JSON.stringify({ priceId, email })
 			// Add this for development only
 			// rejectUnauthorized: false
 		}); // session

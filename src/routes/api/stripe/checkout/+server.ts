@@ -4,19 +4,46 @@ import { STRIPE_SECRET_KEY } from '$env/static/private';
 
 // console.log('SECRET KEY HERE ==================', STRIPE_SECRET_KEY);
 
-async function createCheckoutSession(priceId: string, origin: string) {
+const stripe = new Stripe(STRIPE_SECRET_KEY, {
+	apiVersion: '2024-11-20.acacia'
+});
+
+// Find existing Stripe customer by email
+async function findCustomerByEmail(email: string) {
+	try {
+		const customers = await stripe.customers.list({ email });
+		if (customers.data.length > 0) {
+			console.log('Found existing customer: ', customers.data[0]);
+		} else {
+			console.log('Found zero existing customer: ', customers.data[0]);
+		}
+		return customers.data.length > 0 ? customers.data[0] : null;
+	} catch (err) {
+		throw new Error(`Failed to find customer: ${err.message}`);
+	}
+}
+
+// Create new Stripe customer
+async function createCustomer(email: string) {
+	try {
+		const newCustomer = await stripe.customers.create({ email });
+		console.log('Created new Customer: ', newCustomer);
+		return newCustomer;
+	} catch (err) {
+		throw new Error(`Failed to create customer: ${err.message}`);
+	}
+}
+
+async function createCheckoutSession(priceId: string, origin: string, customerId: string) {
 	// First safety net: validate inputs before even trying Stripe
 	if (!priceId || !origin) {
 		throw new Error('Missing required parameters: priceId and origin are required');
 	}
 
-	const stripe = new Stripe(STRIPE_SECRET_KEY, {
-		apiVersion: '2024-11-20.acacia'
-	});
-
 	try {
 		// Second safety net: handle Stripe-specific errors
 		return await stripe.checkout.sessions.create({
+			customer: customerId,
 			line_items: [
 				{
 					price: priceId,
@@ -36,6 +63,18 @@ async function createCheckoutSession(priceId: string, origin: string) {
 	}
 }
 
+// Main checkout handler that manages customer creation/lookup
+async function handleCheckout(priceId: string, email: string, origin: string) {
+	// Find or create customer
+	let customer = await findCustomerByEmail(email);
+	if (!customer) {
+		customer = await createCustomer(email);
+	}
+
+	// Create checkout session with customer ID
+	return await createCheckoutSession(priceId, origin, customer.id);
+}
+
 export async function POST({ request }) {
 	try {
 		// Third safety net: handle request parsing errors
@@ -43,9 +82,11 @@ export async function POST({ request }) {
 			throw new Error('Invalid JSON in request body');
 		});
 
-		const { priceId } = data;
-		if (!priceId) {
-			throw new Error('priceId is required');
+		const { priceId, email } = data;
+		console.log({ priceId, email });
+
+		if (!priceId || !email) {
+			throw new Error('priceId and Email are required');
 		}
 
 		const origin = request.headers.get('origin');
@@ -54,7 +95,7 @@ export async function POST({ request }) {
 		}
 
 		// Fourth safety net: handle checkout session creation
-		const session = await createCheckoutSession(priceId, origin);
+		const session = await handleCheckout(priceId, email, origin);
 
 		// If we get here, everything worked!
 		return new Response(JSON.stringify({ url: session.url }), {

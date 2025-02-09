@@ -39,10 +39,10 @@
 			<Accordion.Trigger
 				onclick={() => updateOpenState(element, open)}
 				bind:el={element}
-				class="hover:bg-surface-primary-100 flex w-full flex-1
-			cursor-pointer items-center justify-between p-5
-			text-[15px] font-medium
-			transition-all 
+				class="hover:bg-surface-primary-100 not-active:focus-visible:bg-surface-primary-100 flex w-full
+			flex-1 cursor-pointer items-center justify-between
+			p-5 text-[15px]
+			font-medium transition-all
 			"
 			>
 				{#if blok.accordion_item_title && blok.accordion_item_title.length > 0}
