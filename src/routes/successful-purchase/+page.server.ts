@@ -142,7 +142,7 @@ async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 
 
 		try {
 			const session = await stripe.checkout.sessions.retrieve(sessionId, {
-				expand: ['payment_intent', 'invoice', 'line_items', 'line_items.data.price.product']
+				expand: ['payment_intent', 'payment_intent.latest_charge', 'invoice',  'line_items', 'line_items.data.price.product']
 			});
 
 			if (session.invoice && session.line_items?.data?.length > 0 && session.customer_details) {
@@ -170,6 +170,7 @@ async function returnSessionData(sessionId: string) {
 	}
 
 	const checkoutSession = await waitForSessionData(sessionId);
+	console.log("Session Data Here from Page: ", checkoutSession)
 	// console.log({ checkoutSession });
 
 	try {
@@ -257,6 +258,7 @@ export async function load(event) {
 
 	try {
 		const sessionData = await returnSessionData(sessionId);
+
 
 		return {
 			url,
