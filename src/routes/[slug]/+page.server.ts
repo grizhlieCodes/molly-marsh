@@ -620,33 +620,89 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 // };
 
 export const actions = {
+	// stripeCheckout: async ({ request, fetch }) => {
+	// 	const formData = await request.formData();
+	// 	const priceId = formData.get('priceId');
+	// 	const email = formData.get('email');
+
+	// 	// value = price_...
+
+	// 	// console.log('FORM DATA: =========== ', priceId); // WORKING TILL HERE
+
+	// 	// Make request to our webhook endpoint
+	// 	const response = await fetch('/api/stripe/checkout', {
+	// 		method: 'POST',
+	// 		headers: { 'Content-Type': 'application/json' },
+	// 		body: JSON.stringify({ priceId, email })
+	// 		// Add this for development only
+	// 		// rejectUnauthorized: false
+	// 	}); // session
+
+	// 	if (!response.ok) {
+	// 		const errorData = await response.json();
+	// 		// Handle the error appropriately
+	// 		// console.log(' ERROR RRRRR ================= AINT WORKING');
+	// 		throw new Error(errorData.error);
+	// 	}
+
+	// 	const { url } = await response.json();
+	// 	throw redirect(303, url);
+	// },
 	stripeCheckout: async ({ request, fetch }) => {
-		const formData = await request.formData();
-		const priceId = formData.get('priceId');
-		const email = formData.get('email');
+		try {
+			const formData = await request.formData();
+			const priceId = formData.get('priceId');
+			const email = formData.get('email');
 
-		// value = price_...
+			if (!priceId || !email) {
+				console.error('Missing required fields:', { priceId, email });
+				return fail(400, {
+					success: false,
+					message: 'Missing required fields'
+				});
+			}
 
-		// console.log('FORM DATA: =========== ', priceId); // WORKING TILL HERE
+			const response = await fetch('/api/stripe/checkout', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ priceId, email })
+			});
 
-		// Make request to our webhook endpoint
-		const response = await fetch('/api/stripe/checkout', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ priceId, email })
-			// Add this for development only
-			// rejectUnauthorized: false
-		}); // session
+			if (!response.ok) {
+				let errorMessage = 'Failed to create checkout session';
+				try {
+					const errorData = await response.json();
+					errorMessage = errorData.error || errorMessage;
+				} catch (parseError) {
+					console.error('Failed to parse error response:', parseError);
+				}
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			// Handle the error appropriately
-			// console.log(' ERROR RRRRR ================= AINT WORKING');
-			throw new Error(errorData.error);
+				return fail(response.status, {
+					success: false,
+					message: errorMessage
+				});
+			}
+
+			const data = await response.json();
+			if (!data.url) {
+				return fail(500, {
+					success: false,
+					message: 'Invalid checkout response: missing URL'
+				});
+			}
+
+			throw redirect(303, data.url);
+		} catch (error) {
+			if (error instanceof Response || error.status === 303) {
+				throw error; // Rethrow redirects
+			}
+
+			console.error('Stripe checkout error:', error);
+			return fail(500, {
+				success: false,
+				message: 'Internal server error during checkout'
+			});
 		}
-
-		const { url } = await response.json();
-		throw redirect(303, url);
 	},
 	sendQuery: async ({ request }) => {
 		try {
