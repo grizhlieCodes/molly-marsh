@@ -5,7 +5,7 @@ import { useStoryblokApi } from '@storyblok/svelte';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
-import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS } from '$env/static/private';
+import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY } from '$env/static/private';
 import nodemailer from 'nodemailer';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
 
@@ -167,9 +167,11 @@ const sendInternalEmail = async (data) => {
 // Irrelevant for storyblok
 const sendConfirmationEmail = async (data) => {
 	const mailOptions = {
-		from: SECRET_TRANSPORTER_USER,
+		from: `Molly Marsh <${SECRET_TRANSPORTER_USER}>`,
 		to: data.email,
 		subject: `Thank you for contacting me!`,
+		replyTo: SECRET_TRANSPORTER_USER,
+		priority: 'high',
 		html: `<!doctype html>
 <html>
   <body>
@@ -289,6 +291,8 @@ const sendConfirmationEmail = async (data) => {
 		throw error;
 	}
 };
+
+
 
 // Claude solution
 export const load: PageServerLoad = async ({ parent, params, url }) => {
