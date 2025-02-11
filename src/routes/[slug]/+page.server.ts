@@ -201,7 +201,7 @@ const sendConfirmationEmail = async (data) => {
                 Kind regards,
               </div>
               <div style="font-weight:normal;padding:0px 24px 16px 24px">
-                Adie
+                Molly
               </div>
               <div style="padding:16px 0px 16px 0px">
                 <hr
