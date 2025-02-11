@@ -24,6 +24,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Molly Marsh - {story.name}</title>
+</svelte:head>
+
 {#key story}
 	{#if story && mounted}
 		<StoryblokComponent blok={story.content}></StoryblokComponent>
