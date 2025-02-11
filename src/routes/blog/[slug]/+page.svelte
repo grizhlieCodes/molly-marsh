@@ -5,7 +5,7 @@
 	import { renderRichText } from '@storyblok/svelte';
 	let { data }: { data: any } = $props();
 	let article = $state(data.article.content);
-	$inspect(article);
+	// $inspect(article);
 </script>
 
 <section class="mx-auto w-full max-w-[60rem] px-6 py-24 md:px-8 lg:px-10 2xl:px-0" aria-labelledby="article-container_heading" id="article-container">

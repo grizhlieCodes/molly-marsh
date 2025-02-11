@@ -157,10 +157,10 @@ const sendInternalEmail = async (data) => {
 
 	try {
 		let res = await transporter.sendMail(mailOptions);
-		console.log('Internal email res: ', res);
+		// console.log('Internal email res: ', res);
 		return res;
 	} catch (error) {
-		console.log('fucked up', error);
+		// console.log('fucked up', error);
 		throw error;
 	}
 };
@@ -285,7 +285,7 @@ const sendConfirmationEmail = async (data) => {
 		let res = await transporter.sendMail(mailOptions);
 		return res;
 	} catch (error) {
-		console.log('fucked up', error);
+		// console.log('fucked up', error);
 		throw error;
 	}
 };
@@ -303,7 +303,7 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 			try {
 				storyblokApi = await useStoryblokApi();
 				if (storyblokApi) {
-					console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
+					// console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
 					break;
 				}
 			} catch (error) {
@@ -320,7 +320,7 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		}
 
 		if (!storyblokApi) {
-			console.log('Triggering reload to:', url.pathname);
+			// console.log('Triggering reload to:', url.pathname);
 			throw redirect(307, url.pathname);
 		}
 	}

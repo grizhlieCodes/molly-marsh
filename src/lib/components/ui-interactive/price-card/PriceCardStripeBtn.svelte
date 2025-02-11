@@ -52,22 +52,22 @@
 		} catch (error) {
 			formValid = false
 		}
-		console.log("Schema Validation: ", formValid)
+		// console.log("Schema Validation: ", formValid)
 	}
 
 	$effect(() => {
 		if (mounted) {
-			console.log({ email: emailData.input_value, mounted });
+			// console.log({ email: emailData.input_value, mounted });
 			localStorage.setItem('email', emailData.input_value);
 		}
 	});
 
 	onMount(() => {
 		if (!mounted) {
-			console.log('starting up');
+			// console.log('starting up');
 			let existingEmail: string | null | undefined = localStorage.getItem('email');
 			if (existingEmail) {
-				console.log('Found email: ', emailData.input_value);
+				// console.log('Found email: ', emailData.input_value);
 				emailData.input_value = existingEmail;
 			}
 			validateForm()

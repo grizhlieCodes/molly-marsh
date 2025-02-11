@@ -12,11 +12,11 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, {
 async function findCustomerByEmail(email: string) {
 	try {
 		const customers = await stripe.customers.list({ email });
-		if (customers.data.length > 0) {
-			console.log('Found existing customer: ', customers.data[0]);
-		} else {
-			console.log('Found zero existing customer: ', customers.data[0]);
-		}
+		// if (customers.data.length > 0) {
+		// 	console.log('Found existing customer: ', customers.data[0]);
+		// } else {
+		// 	console.log('Found zero existing customer: ', customers.data[0]);
+		// }
 		return customers.data.length > 0 ? customers.data[0] : null;
 	} catch (err) {
 		throw new Error(`Failed to find customer: ${err.message}`);
@@ -27,7 +27,7 @@ async function findCustomerByEmail(email: string) {
 async function createCustomer(email: string) {
 	try {
 		const newCustomer = await stripe.customers.create({ email });
-		console.log('Created new Customer: ', newCustomer);
+		// console.log('Created new Customer: ', newCustomer);
 		return newCustomer;
 	} catch (err) {
 		throw new Error(`Failed to create customer: ${err.message}`);
@@ -83,7 +83,7 @@ export async function POST({ request }) {
 		});
 
 		const { priceId, email } = data;
-		console.log({ priceId, email });
+		// console.log({ priceId, email });
 
 		if (!priceId || !email) {
 			throw new Error('priceId and Email are required');

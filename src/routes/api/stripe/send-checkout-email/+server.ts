@@ -34,24 +34,24 @@ export async function POST({ request }) {
 
 		if (event.type === 'checkout.session.completed') {
 			session = event.data.object;
-			console.log('Checkout Session Data:', session);
+			// console.log('Checkout Session Data:', session);
 		}
 
 		if (session.customer) {
 			customer = await updateCustomerNameIfMissing(session.customer, session);
-			console.log('Updated Customer or Customer: ', customer);
+			// console.log('Updated Customer or Customer: ', customer);
 		}
 
 		// send email here
 		if (session && customer) {
 			const customer_email = customer.customer.email;
 			const customer_name = customer.customer.name;
-			console.log('HERE ==============================!!!!!!!!!!!!!!==============', {
-				customer_email,
-				customer_name
-			});
+			// console.log('HERE ==============================!!!!!!!!!!!!!!==============', {
+			// 	customer_email,
+			// 	customer_name
+			// });
       const emailRes = await sendConfirmationEmail(customer_name, customer_email)
-      console.log(emailRes)
+      // console.log(emailRes)
 		}
 
 		return json({ received: true });
