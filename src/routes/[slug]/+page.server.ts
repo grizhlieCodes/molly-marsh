@@ -7,6 +7,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS } from '$env/static/private';
 import nodemailer from 'nodemailer';
+import { useStoryblok } from '$lib/storyblok/useStoryblok';
 
 // Irrelevant for storyblok
 function deepFind(data, predicate, visited = new Set()) {
@@ -314,6 +315,15 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		}
 
 		// If we still don't have an API instance after retries, just refresh the current page
+		// if (!storyblokApi) {
+		// 	console.log('Triggering reload to:', url.pathname);
+		// 	throw redirect(307, url.pathname);
+		// }
+		if (!storyblokApi) {
+			await useStoryblok();
+			storyblokApi = await useStoryblokApi();
+		}
+
 		if (!storyblokApi) {
 			console.log('Triggering reload to:', url.pathname);
 			throw redirect(307, url.pathname);
