@@ -8,6 +8,7 @@ import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS } from '$env/static/private';
 import nodemailer from 'nodemailer';
 
+// Irrelevant for storyblok
 function deepFind(data, predicate, visited = new Set()) {
 	// Check for null or non-object values
 	if (data === null || typeof data !== 'object') {
@@ -40,11 +41,11 @@ function deepFind(data, predicate, visited = new Set()) {
 	// If nothing found, return undefined.
 	return undefined;
 }
-
+// Irrelevant for storyblok
 function isComponentForm(item) {
 	return item && typeof item === 'object' && item.component === 'form';
 }
-
+// Irrelevant for storyblok
 function timedDeepFind(data, predicate) {
 	// Use performance.now() if available (e.g. in browsers) or fallback to Date.now()
 	const now = typeof performance !== 'undefined' && performance.now ? performance.now.bind(performance) : Date.now;
@@ -56,7 +57,7 @@ function timedDeepFind(data, predicate) {
 	// console.log(`deepFind took ${elapsed.toFixed(2)} ms to run.`);
 	return result;
 }
-
+// Irrelevant for storyblok
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
@@ -64,7 +65,7 @@ const transporter = nodemailer.createTransport({
 		pass: SECRET_TRANSPORTER_PASS
 	}
 });
-
+// Irrelevant for storyblok
 const sendInternalEmail = async (data) => {
 	// console.log({ SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS });
 	const mailOptions = {
@@ -162,7 +163,7 @@ const sendInternalEmail = async (data) => {
 		throw error;
 	}
 };
-
+// Irrelevant for storyblok
 const sendConfirmationEmail = async (data) => {
 	const mailOptions = {
 		from: SECRET_TRANSPORTER_USER,
@@ -289,113 +290,11 @@ const sendConfirmationEmail = async (data) => {
 };
 
 // Claude solution
-async function withRetry<T>(operation: () => Promise<T>, retries = 3, delay = 1000): Promise<T> {
-	let lastError;
-
-	for (let i = 0; i < retries; i++) {
-		try {
-			return await operation();
-		} catch (error) {
-			console.error(`Attempt ${i + 1} failed:`, error);
-			lastError = error;
-			if (i < retries - 1) {
-				await new Promise((resolve) => setTimeout(resolve, delay * (i + 1)));
-			}
-		}
-	}
-
-	throw lastError;
-}
-
 export const load: PageServerLoad = async ({ parent, params, url }) => {
 	const { storyblokApi: layoutApi } = await parent();
 	const slug = params.slug;
 
 	let storyblokApi = layoutApi;
-
-	// If layout API failed, try to initialize with retries
-	// if (!storyblokApi) {
-	// 	const maxRetries = 3;
-	// 	for (let i = 0; i < maxRetries; i++) {
-	// 		try {
-	// 			storyblokApi = await useStoryblokApi();
-	// 			if (storyblokApi) {
-	// 				console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
-	// 				break;
-	// 			}
-	// 		} catch (error) {
-	// 			console.error(`Attempt ${i + 1} to get API instance failed in [slug]/+page.server.ts:`, error);
-	// 			if (i < maxRetries - 1) {
-	// 				await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// if (!storyblokApi) {
-	// 	// If we haven't tried a reload yet, do it now
-	// 	if (!url.searchParams.has('retry')) {
-	// 		const currentUrl = url.pathname + url.search;
-	// 		const separator = currentUrl.includes('?') ? '&' : '?';
-	// 		console.log('Triggering reload with retry parameter...');
-	// 		throw redirect(307, `${currentUrl}${separator}retry=true`);
-	// 	}
-
-	// 	// Only throw 500 if we've already tried a reload
-	// 	console.error('Storyblok API initialization failed even after reload attempt');
-	// 	throw error(500, {
-	// 		message: 'Failed to initialize Storyblok API after reload attempt in [slug]/+page.server.ts',
-	// 		slug
-	// 	});
-	// }
-
-	// If layout API failed, try to initialize with retries
-	// if (!storyblokApi) {
-	// 	const maxRetries = 3;
-	// 	for (let i = 0; i < maxRetries; i++) {
-	// 		try {
-	// 			storyblokApi = await useStoryblokApi();
-	// 			if (storyblokApi) {
-	// 				console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
-	// 				break;
-	// 			}
-	// 		} catch (error) {
-	// 			console.error(`Attempt ${i + 1} to get API instance failed in [slug]/+page.server.ts:`, error);
-	// 			if (i < maxRetries - 1) {
-	// 				await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
-	// 			}
-	// 		}
-	// 	}
-
-	// 	// If we still don't have an API instance after retries, try a reload
-	// 	if (!storyblokApi) {
-	// 		if (!url.searchParams.has('retry')) {
-	// 			const currentUrl = url.pathname + url.search;
-	// 			const separator = currentUrl.includes('?') ? '&' : '?';
-	// 			console.log('Triggering reload with retry parameter...');
-	// 			throw redirect(307, `${currentUrl}${separator}retry=true`);
-	// 		}
-
-	// 		// Only throw 500 if we've already tried a reload
-	// 		console.error('Storyblok API initialization failed even after reload attempt');
-	// 		throw error(500, {
-	// 			message: 'Failed to initialize Storyblok API after reload attempt in [slug]/+page.server.ts',
-	// 			slug
-	// 		});
-	// 	}
-	// }
-
-	// If we have a working API and the retry parameter is present, clean up the URL
-	// if (storyblokApi && url.searchParams.has('retry')) {
-	// 	// Create a new URL without the retry parameter
-	// 	const cleanUrl = new URL(url.toString());
-	// 	cleanUrl.searchParams.delete('retry');
-
-	// 	// If we have other query params, keep them
-	// 	const newUrl = cleanUrl.searchParams.toString() ? `${url.pathname}?${cleanUrl.searchParams.toString()}` : url.pathname;
-
-	// 	throw redirect(307, newUrl);
-	// }
 
 	if (!storyblokApi) {
 		const maxRetries = 3;
