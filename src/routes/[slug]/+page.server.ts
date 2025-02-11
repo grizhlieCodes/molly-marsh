@@ -350,6 +350,53 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 	// }
 
 	// If layout API failed, try to initialize with retries
+	// if (!storyblokApi) {
+	// 	const maxRetries = 3;
+	// 	for (let i = 0; i < maxRetries; i++) {
+	// 		try {
+	// 			storyblokApi = await useStoryblokApi();
+	// 			if (storyblokApi) {
+	// 				console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
+	// 				break;
+	// 			}
+	// 		} catch (error) {
+	// 			console.error(`Attempt ${i + 1} to get API instance failed in [slug]/+page.server.ts:`, error);
+	// 			if (i < maxRetries - 1) {
+	// 				await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
+	// 			}
+	// 		}
+	// 	}
+
+	// 	// If we still don't have an API instance after retries, try a reload
+	// 	if (!storyblokApi) {
+	// 		if (!url.searchParams.has('retry')) {
+	// 			const currentUrl = url.pathname + url.search;
+	// 			const separator = currentUrl.includes('?') ? '&' : '?';
+	// 			console.log('Triggering reload with retry parameter...');
+	// 			throw redirect(307, `${currentUrl}${separator}retry=true`);
+	// 		}
+
+	// 		// Only throw 500 if we've already tried a reload
+	// 		console.error('Storyblok API initialization failed even after reload attempt');
+	// 		throw error(500, {
+	// 			message: 'Failed to initialize Storyblok API after reload attempt in [slug]/+page.server.ts',
+	// 			slug
+	// 		});
+	// 	}
+	// }
+
+	// If we have a working API and the retry parameter is present, clean up the URL
+	// if (storyblokApi && url.searchParams.has('retry')) {
+	// 	// Create a new URL without the retry parameter
+	// 	const cleanUrl = new URL(url.toString());
+	// 	cleanUrl.searchParams.delete('retry');
+
+	// 	// If we have other query params, keep them
+	// 	const newUrl = cleanUrl.searchParams.toString() ? `${url.pathname}?${cleanUrl.searchParams.toString()}` : url.pathname;
+
+	// 	throw redirect(307, newUrl);
+	// }
+
 	if (!storyblokApi) {
 		const maxRetries = 3;
 		for (let i = 0; i < maxRetries; i++) {
@@ -367,34 +414,11 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 			}
 		}
 
-		// If we still don't have an API instance after retries, try a reload
+		// If we still don't have an API instance after retries, just refresh the current page
 		if (!storyblokApi) {
-			if (!url.searchParams.has('retry')) {
-				const currentUrl = url.pathname + url.search;
-				const separator = currentUrl.includes('?') ? '&' : '?';
-				console.log('Triggering reload with retry parameter...');
-				throw redirect(307, `${currentUrl}${separator}retry=true`);
-			}
-
-			// Only throw 500 if we've already tried a reload
-			console.error('Storyblok API initialization failed even after reload attempt');
-			throw error(500, {
-				message: 'Failed to initialize Storyblok API after reload attempt in [slug]/+page.server.ts',
-				slug
-			});
+			console.log('Triggering reload to:', url.pathname);
+			throw redirect(307, url.pathname);
 		}
-	}
-
-	// If we have a working API and the retry parameter is present, clean up the URL
-	if (storyblokApi && url.searchParams.has('retry')) {
-		// Create a new URL without the retry parameter
-		const cleanUrl = new URL(url.toString());
-		cleanUrl.searchParams.delete('retry');
-
-		// If we have other query params, keep them
-		const newUrl = cleanUrl.searchParams.toString() ? `${url.pathname}?${cleanUrl.searchParams.toString()}` : url.pathname;
-
-		throw redirect(307, newUrl);
 	}
 
 	let dataStory;
