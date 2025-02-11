@@ -8,6 +8,10 @@
 	// $inspect(article);
 </script>
 
+<svelte:head>
+	<title>Molly Marsh - {article.article_title}</title>
+</svelte:head>
+
 <section class="mx-auto w-full max-w-[60rem] px-6 py-24 md:px-8 lg:px-10 2xl:px-0" aria-labelledby="article-container_heading" id="article-container">
 	<article class="flex w-full flex-col items-center overflow-hidden rounded-2xl px-6 py-10 lg:shadow-2xl">
 		<!-- Metadata -->

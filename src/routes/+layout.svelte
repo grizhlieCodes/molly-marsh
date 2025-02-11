@@ -10,8 +10,6 @@
 	import Header from '$lib/components/navigation/header/Header.svelte';
 	import Footer from '$lib/components/navigation/footer/Footer.svelte';
 	import Head from '$lib/data/Head.svelte';
-
-	// $inspect(data);
 </script>
 
 <Head />

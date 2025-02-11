@@ -34,9 +34,11 @@
 			setContext('tags', () => data.tags);
 		}
 	});
-
-
 </script>
+
+<svelte:head>
+	<title>Molly Marsh - {story.name}</title>
+</svelte:head>
 
 {#key story}
 	{#if story && mounted}
