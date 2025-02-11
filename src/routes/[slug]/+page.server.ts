@@ -174,7 +174,7 @@ const sendConfirmationEmail = async (data) => {
 <html>
   <body>
     <div
-      style='background-color:#edfff2;color:#242424;font-family:"Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0.15008px;line-height:1.5;margin:0;padding:32px 0;min-height:100%;width:100%'
+      style='background-color:#EFF8F6;color:#242424;font-family:"Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0.15008px;line-height:1.5;margin:0;padding:32px 0;min-height:100%;width:100%'
     >
       <table
         align="center"
@@ -225,7 +225,7 @@ const sendConfirmationEmail = async (data) => {
                           <div style="padding:16px 0px 16px 36px">
                             <img
                               alt=""
-                              src="https://a.storyblok.com/f/290729/1024x768/4f8990025c/adie-writer-selfie.jpg/m/400x0"
+                              src="https://a.storyblok.com/f/320425/388x388/6d88b78ce7/molly-email-signature-img.png/m/400x0"
                               height="113"
                               width="113"
                               style="outline:none;border:none;text-decoration:none;object-fit:cover;height:113px;width:113px;max-width:100%;display:inline-block;vertical-align:middle;text-align:center;border-radius:113px"
@@ -240,12 +240,12 @@ const sendConfirmationEmail = async (data) => {
                               <h2
                                 style='font-weight:bold;margin:0;font-family:Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;font-size:24px;padding:0px 0px 0px 0px'
                               >
-                                Adie Pascual
+                                Molly Marsh (She/Her)
                               </h2>
                               <div
                                 style="font-weight:normal;padding:0px 0px 0px 0px"
                               >
-                                Profiler, Teacher &amp; Coach
+                                Transformative Life Coach
                               </div>
                               <div style="padding:8px 0px 8px 0px">
                                 <hr
@@ -256,9 +256,9 @@ const sendConfirmationEmail = async (data) => {
                                 style="color:#16A34A;font-size:16px;padding:0px 0px 0px 0px"
                               >
                                 <a
-                                  style="text-decoration: none; color:#15512C;"
-                                  href="https://www.google.com"
-                                  >www.adiepascual.com</a
+                                  style="text-decoration: none; color:#3A6A5F;"
+                                  href="https://www.mollymarshcoaching.com"
+                                  >www.mollymarshcoaching.com</a
                                 >
                               </div>
                             </div>
@@ -314,11 +314,6 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 			}
 		}
 
-		// If we still don't have an API instance after retries, just refresh the current page
-		// if (!storyblokApi) {
-		// 	console.log('Triggering reload to:', url.pathname);
-		// 	throw redirect(307, url.pathname);
-		// }
 		if (!storyblokApi) {
 			await useStoryblok();
 			storyblokApi = await useStoryblokApi();
@@ -371,186 +366,6 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		});
 	}
 };
-
-// export const load: PageServerLoad = async ({ parent, url, params }) => {
-// 	const { storyblokApi, storyblokInitialized } = await parent();
-// 	const slug = url.pathname.slice(1);
-
-// 	// If layout API failed, try to initialize with retries
-// 	if (!storyblokApi && storyblokInitialized) {
-// 		const maxRetries = 3;
-// 		for (let i = 0; i < maxRetries; i++) {
-// 		  try {
-// 			storyblokApi = await useStoryblokApi();
-// 			if (storyblokApi) {
-// 			  console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
-// 			  break;
-// 			}
-// 		  } catch (error) {
-// 			console.error(`Attempt ${i + 1} to get API instance failed in [slug]/+page.server.ts:`, error);
-// 			if (i < maxRetries - 1) {
-// 			  console.log(`Retrying Storyblok API initialization in [slug]/+page.server.ts after a short delay...`);
-// 			  await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
-// 			}
-// 		  }
-// 		}
-// 	  }
-
-// 	  // If we still don't have an API instance, reload the page once
-// 	  if (!storyblokApi) {
-// 		if (typeof window !== 'undefined' && !window.location.search.includes('retry')) {
-// 		  const reloadUrl = `${window.location.pathname}?retry=true`;
-// 		  throw redirect(307, reloadUrl);
-// 		}
-
-// 		console.error('Storyblok API initialization failed after multiple retries in [slug]/+page.server.ts. Failing page load.');
-// 		throw error(500, {
-// 		  message: 'Failed to initialize Storyblok API after reload attempt',
-// 		  slug
-// 		});
-// 	  }
-
-// 	let dataStory;
-
-// 	if (storyblokApi) {
-// 		try {
-// 			dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
-// 				version: 'draft',
-// 				cv: Date.now() // Add cache busting
-// 			});
-// 		} catch (err) {
-// 			console.error('Error fetching story from Storyblok for slug:', slug, err);
-// 			throw error(500, {
-// 				message: 'Failed to load page content, have SB api in [slug]/+page.server.ts',
-// 				slug: slug
-// 			});
-// 		}
-// 	} else {
-// 		console.error('Storyblok API was unexpectedly not initialized even after retry attempts in [slug]/+page.server.ts. Cannot fetch story for slug:', slug);
-// 		throw error(500, {
-// 			message: 'Storyblok API was unexpectedly not initialized.',
-// 			slug: slug
-// 		});
-// 	}
-
-// 	// Rest of your code remains exactly the same
-// 	if (dataStory && dataStory.data && dataStory.data.story) {
-// 		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
-
-// 		if (formDataObject) {
-// 			const formInputs = formDataObject.form_inputs;
-// 			const formSchema = createFormSchema(formInputs);
-// 			await new Promise((resolve) => setTimeout(resolve, 100));
-// 			const form = await superValidate(zod(formSchema));
-
-// 			return {
-// 				form,
-// 				story: dataStory.data.story
-// 			};
-// 		}
-
-// 		return {
-// 			story: dataStory.data.story
-// 		};
-// 	} else {
-// 		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful) in [slug]/+page.server.ts. Slug:', slug);
-// 		throw error(500, {
-// 			message: 'Failed to load page content - invalid data structure from API in [slug]/+page.server.ts',
-// 			slug: slug
-// 		});
-// 	}
-// };
-
-// GEMINI LOAD
-// export const load: PageServerLoad = async ({ parent, url, params }) => {
-// 	const slug = url.pathname.slice(1);
-// 	// console.log(slug);
-// 	let storyblokApi; // Declare without immediate assignment
-// 	const maxRetries = 3; // Define max retry attempts
-// 	let retryCount = 0;
-// 	let initializationSuccessful = false;
-
-// 	while (retryCount < maxRetries && !initializationSuccessful) {
-// 		retryCount++;
-// 		try {
-// 			storyblokApi = await useStoryblokApi();
-// 			initializationSuccessful = true; // If successful, break the loop
-// 			console.log(`Storyblok API initialized successfully on attempt ${retryCount} in [slug]/+page.server.ts`);
-// 		} catch (initializationError) {
-// 			console.error(`Attempt ${retryCount} to initialize Storyblok API failed in [slug]/+page.server.ts:`, initializationError);
-// 			if (retryCount < maxRetries) {
-// 				console.log(`Retrying Storyblok API initialization in [slug]/+page.server.ts after a short delay...`);
-// 				await new Promise((resolve) => setTimeout(resolve, 1000 * retryCount)); // Wait before retrying (increased delay)
-// 			}
-// 		}
-// 	}
-
-// 	if (!initializationSuccessful) {
-// 		storyblokApi = null; // Set to null if all retries failed
-// 		console.error('Storyblok API initialization failed after multiple retries in [slug]/+page.server.ts.  Failing page load.');
-// 		throw error(500, {
-// 			message: 'Storyblok API initialization failed after multiple retries.',
-// 			slug: slug // You can still pass slug for context in error page
-// 		});
-// 	}
-
-// 	let dataStory; // Declare dataStory outside try block
-
-// 	if (storyblokApi) {
-// 		// Check if storyblokApi is valid before using it
-// 		try {
-// 			dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
-// 				version: 'draft'
-// 			});
-// 		} catch (err) {
-// 			console.error('Error fetching story from Storyblok for slug:', slug, err);
-// 			throw error(500, {
-// 				message: 'Failed to load page content, have SB api in [slug]/+page.server.ts',
-// 				slug: slug
-// 			});
-// 		}
-// 	} else {
-// 		// This block should ideally not be reached now, as initialization failure is handled above with retries and error throwing.
-// 		// However, leaving it for extra safety.
-// 		console.error('Storyblok API was unexpectedly not initialized even after retry attempts in [slug]/+page.server.ts. Cannot fetch story for slug:', slug);
-// 		throw error(500, {
-// 			message: 'Storyblok API was unexpectedly not initialized.',
-// 			slug: slug // You can still pass slug for context in error page
-// 		});
-// 	}
-
-// 	// Find form component if it exists
-// 	if (dataStory && dataStory.data && dataStory.data.story) {
-// 		// Check if dataStory and its nested properties are valid
-// 		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
-
-// 		if (formDataObject) {
-// 			const formInputs = formDataObject.form_inputs;
-// 			const formSchema = createFormSchema(formInputs);
-
-// 			// Add a small delay
-// 			await new Promise((resolve) => setTimeout(resolve, 100));
-// 			const form = await superValidate(zod(formSchema));
-
-// 			return {
-// 				form,
-// 				story: dataStory.data.story
-// 			};
-// 		}
-
-// 		return {
-// 			story: dataStory.data.story
-// 		};
-// 	} else {
-// 		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful) in [slug]/+page.server.ts. Slug:', slug);
-// 		throw error(500, {
-// 			message: 'Failed to load page content - invalid data structure from API in [slug]/+page.server.ts',
-// 			slug: slug
-// 		});
-// 		// Alternatively, return an empty story object:
-// 		// return { story: null };
-// 	}
-// };
 
 export const actions = {
 	// stripeCheckout: async ({ request, fetch }) => {
