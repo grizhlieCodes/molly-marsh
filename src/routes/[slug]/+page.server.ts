@@ -227,7 +227,7 @@ const sendConfirmationEmail = async (data) => {
                           <div style="padding:16px 0px 16px 36px">
                             <img
                               alt=""
-                              src="https://a.storyblok.com/f/320425/388x388/6d88b78ce7/molly-email-signature-img.png/m/400x0"
+                              src="https://mollymarshcoaching.com/molly-email-signature-img.webp"
                               height="113"
                               width="113"
                               style="outline:none;border:none;text-decoration:none;object-fit:cover;height:113px;width:113px;max-width:100%;display:inline-block;vertical-align:middle;text-align:center;border-radius:113px"
