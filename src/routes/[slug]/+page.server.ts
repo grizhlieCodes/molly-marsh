@@ -8,6 +8,7 @@ import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY } from '$env/static/private';
 import nodemailer from 'nodemailer';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
+import { signatureImage } from '$lib/data/molly-email-signature-for-nodemailer';
 
 // Irrelevant for storyblok
 function deepFind(data, predicate, visited = new Set()) {
@@ -172,6 +173,13 @@ const sendConfirmationEmail = async (data) => {
 		subject: `Thank you for contacting me!`,
 		replyTo: SECRET_TRANSPORTER_USER,
 		priority: 'high',
+		attachments: [
+			{
+				filename: 'signature.jpg',
+				path: signatureImage,
+				cid: 'unique@signature.img'
+			}
+		],
 		html: `<!doctype html>
 <html>
   <body>
@@ -227,7 +235,7 @@ const sendConfirmationEmail = async (data) => {
                           <div style="padding:16px 0px 16px 36px">
                             <img
                               alt=""
-                              src="https://mollymarshcoaching.com/molly-email-signature-img.webp"
+                              src="cid:unique@signature.img"
                               height="113"
                               width="113"
                               style="outline:none;border:none;text-decoration:none;object-fit:cover;height:113px;width:113px;max-width:100%;display:inline-block;vertical-align:middle;text-align:center;border-radius:113px"
@@ -291,8 +299,6 @@ const sendConfirmationEmail = async (data) => {
 		throw error;
 	}
 };
-
-
 
 // Claude solution
 export const load: PageServerLoad = async ({ parent, params, url }) => {

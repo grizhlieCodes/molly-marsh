@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_SUCCESSFUL_CHECKOUT_SECRET } from '$env/static/private';
+import { signatureImage } from '$lib/data/molly-email-signature-for-nodemailer';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, {
 	apiVersion: '2024-11-20.acacia'
@@ -50,8 +51,8 @@ export async function POST({ request }) {
 			// 	customer_email,
 			// 	customer_name
 			// });
-      const emailRes = await sendConfirmationEmail(customer_name, customer_email)
-      // console.log(emailRes)
+			const emailRes = await sendConfirmationEmail(customer_name, customer_email);
+			// console.log(emailRes)
 		}
 
 		return json({ received: true });
@@ -79,9 +80,18 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
 		from: SECRET_TRANSPORTER_USER,
 		to: client_email,
 		subject: `Book your coaching session`,
+		replyTo: SECRET_TRANSPORTER_USER,
+		priority: 'high',
+		attachments: [
+			{
+				filename: 'signature.jpg',
+				path: signatureImage,
+				cid: 'unique@signature.img'
+			}
+		],
 
 		html: `
-    <!DOCTYPE html>
+      <!DOCTYPE html>
 
 <html
   lang="en"
@@ -240,7 +250,11 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
               cellspacing="0"
               class="row row-1"
               role="presentation"
-              style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
+              style="
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                background-size: auto;
+              "
               width="100%"
             >
               <tbody>
@@ -256,9 +270,11 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                       style="
                         mso-table-lspace: 0pt;
                         mso-table-rspace: 0pt;
-                        background-color: #ffffff;
+                        background-size: auto;
                         color: #000000;
-                        padding: 60px 32px;
+                        border-radius: 0;
+                        background-color: #ffffff;
+                        padding: 60px 32px 10px;
                         width: 640px;
                         margin: 0 auto;
                       "
@@ -274,8 +290,11 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                               font-weight: 400;
                               text-align: left;
                               padding-bottom: 5px;
+                              padding-left: 5px;
+                              padding-right: 5px;
                               padding-top: 5px;
                               vertical-align: top;
+                              border-radius: 0px;
                               border-top: 0px;
                               border-right: 0px;
                               border-bottom: 0px;
@@ -318,7 +337,8 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                                     <span
                                       class="tinyMce-placeholder"
                                       style="word-break: break-word"
-                                      >Thank you for your order ${first_name}.</span
+                                      >Thank you for your order
+                                      ${first_name}.</span
                                     >
                                   </h2>
                                 </td>
@@ -387,10 +407,11 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                                       style="
                                         color: #ffffff;
                                         text-decoration: none;
+                                        cursor: pointer;
                                       "
                                       target="_blank"
                                       >><!--[if mso]>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"  href="${cal_link}"  style="height:44px;width:556px;v-text-anchor:middle;" arcsize="10%" fillcolor="#3a6a5f">
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"  href="${cal_link}"  style="height:44px;width:546px;v-text-anchor:middle;" arcsize="10%" fillcolor="#3a6a5f">
 <v:stroke dashstyle="Solid" weight="0px" color="#3a6a5f"/>
 <w:anchorlock/>
 <v:textbox inset="0px,0px,0px,0px">
@@ -470,21 +491,71 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                                 </td>
                               </tr>
                             </table>
-                            <div
-                              class="spacer_block block-5"
-                              style="
-                                height: 60px;
-                                line-height: 60px;
-                                font-size: 1px;
-                              "
-                            >
-                               
-                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              align="center"
+              border="0"
+              cellpadding="0"
+              cellspacing="0"
+              class="row row-2"
+              role="presentation"
+              style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    <table
+                      align="center"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      class="row-content stack"
+                      role="presentation"
+                      style="
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                        color: #000000;
+                        border-radius: 0;
+                        background-color: #ffffff;
+                        padding-left: 32px;
+                        padding-right: 32px;
+                        width: 640px;
+                        margin: 0 auto;
+                      "
+                      width="640"
+                    >
+                      <tbody>
+                        <tr>
+                          <td
+                            class="column column-1"
+                            style="
+                              mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              font-weight: 400;
+                              text-align: left;
+                              padding-bottom: 5px;
+                              padding-top: 5px;
+                              vertical-align: top;
+                              border-top: 0px;
+                              border-right: 0px;
+                              border-bottom: 0px;
+                              border-left: 0px;
+                            "
+                            width="100%"
+                          >
                             <table
                               border="0"
                               cellpadding="0"
                               cellspacing="0"
-                              class="html_block block-6"
+                              class="html_block block-1"
                               role="presentation"
                               style="
                                 mso-table-lspace: 0pt;
@@ -505,358 +576,189 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
                                       border="0"
                                       cellpadding="0"
                                       cellspacing="0"
-                                      style="
-                                        vertical-align: -webkit-baseline-middle;
-                                        font-size: small;
-                                        font-family: Arial;
-                                      "
+                                      style="background: white"
                                     >
-                                      <tbody>
-                                        <tr>
-                                          <td>
-                                            <table
-                                              border="0"
-                                              cellpadding="0"
-                                              cellspacing="0"
-                                              style="
-                                                vertical-align: -webkit-baseline-middle;
-                                                font-size: small;
-                                                font-family: Arial;
-                                              "
-                                            >
-                                              <tbody>
-                                                <tr>
-                                                  <td
-                                                    style="
-                                                      vertical-align: middle;
-                                                    "
-                                                    width="150"
-                                                  >
-                                                    <span
-                                                      style="
-                                                        margin-right: 20px;
-                                                        display: block;
-                                                      "
-                                                      ><img
-                                                        src="https://a.storyblok.com/f/320425/388x388/6d88b78ce7/molly-email-signature-img.png/m/300x0"
-                                                        style="max-width: 130px"
-                                                        width="130"
-                                                    /></span>
-                                                  </td>
-                                                  <td
-                                                    style="
-                                                      vertical-align: middle;
-                                                    "
-                                                  >
-                                                    <h2
-                                                      style="
-                                                        margin: 0px;
-                                                        font-size: 16px;
-                                                        color: rgb(24, 24, 27);
-                                                        font-weight: 600;
-                                                        text-align: left;
-                                                      "
-                                                    >
-                                                      <span>Molly</span
-                                                      ><span> </span
-                                                      ><span>Marsh</span>
-                                                    </h2>
-                                                    <p
-                                                      style="
-                                                        margin: 0px;
-                                                        color: rgb(24, 24, 27);
-                                                        font-size: 12px;
-                                                        line-height: 20px;
-                                                        text-align: left;
-                                                      "
-                                                    >
-                                                      <span
-                                                        >Transformative Life
-                                                        Coach</span
-                                                      >
-                                                    </p>
-                                                    <div
-                                                      style="
-                                                        margin: 0px;
-                                                        font-weight: 500;
-                                                        color: rgb(24, 24, 27);
-                                                        font-size: 12px;
-                                                        line-height: 20px;
-                                                        text-align: left;
-                                                      "
-                                                    >
-                                                      <span
-                                                        >Molly Marsh
-                                                        Coaching</span
-                                                      >
-                                                    </div>
-                                                  </td>
-                                                  <td width="30">
-                                                    <div
-                                                      style="width: 30px"
-                                                    ></div>
-                                                  </td>
-                                                  <td
-                                                    style="
-                                                      width: 1px;
-                                                      height: auto;
-                                                      border-bottom: none;
-                                                      border-left: 1px solid
-                                                        rgb(58, 106, 95);
-                                                    "
-                                                    width="1"
-                                                  ></td>
-                                                  <td width="30">
-                                                    <div
-                                                      style="width: 30px"
-                                                    ></div>
-                                                  </td>
-                                                  <td
-                                                    style="
-                                                      vertical-align: middle;
-                                                    "
-                                                  >
-                                                    <table
-                                                      border="0"
-                                                      cellpadding="0"
-                                                      cellspacing="0"
-                                                      style="
-                                                        vertical-align: -webkit-baseline-middle;
-                                                        font-size: small;
-                                                        font-family: Arial;
-                                                      "
-                                                    >
-                                                      <tbody>
-                                                        <tr
-                                                          style="
-                                                            vertical-align: middle;
-                                                          "
-                                                        >
-                                                          <td
-                                                            style="
-                                                              vertical-align: middle;
-                                                            "
-                                                            width="30"
-                                                          >
-                                                            <table
-                                                              border="0"
-                                                              cellpadding="0"
-                                                              cellspacing="0"
-                                                              style="
-                                                                vertical-align: -webkit-baseline-middle;
-                                                                font-size: small;
-                                                                font-family: Arial;
-                                                              "
-                                                            >
-                                                              <tbody>
-                                                                <tr>
-                                                                  <td
-                                                                    style="
-                                                                      vertical-align: bottom;
-                                                                    "
-                                                                  >
-                                                                    <span
-                                                                      style="
-                                                                        display: inline-block;
-                                                                        background-color: rgb(
-                                                                          58,
-                                                                          106,
-                                                                          95
-                                                                        );
-                                                                      "
-                                                                      ><img
-                                                                        alt="emailAddress"
-                                                                        src="https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/email-icon-2x.png"
-                                                                        style="
-                                                                          display: block;
-                                                                          background-color: rgb(
-                                                                            58,
-                                                                            106,
-                                                                            95
-                                                                          );
-                                                                        "
-                                                                        width="13"
-                                                                    /></span>
-                                                                  </td>
-                                                                </tr>
-                                                              </tbody>
-                                                            </table>
-                                                          </td>
-                                                          <td
-                                                            style="
-                                                              padding: 0px;
-                                                              text-align: left;
-                                                            "
-                                                          >
-                                                            <a
-                                                              href="mailto:molly@mollymarshcoaching.com"
-                                                              style="
-                                                                text-decoration: none;
-                                                                color: rgb(
-                                                                  24,
-                                                                  24,
-                                                                  27
-                                                                );
-                                                                font-size: 12px;
-                                                              "
-                                                              ><span
-                                                                >molly@mollymarshcoaching.com</span
-                                                              ></a
-                                                            >
-                                                          </td>
-                                                        </tr>
-                                                        <tr
-                                                          style="
-                                                            vertical-align: middle;
-                                                          "
-                                                        >
-                                                          <td
-                                                            style="
-                                                              vertical-align: middle;
-                                                            "
-                                                            width="30"
-                                                          >
-                                                            <table
-                                                              border="0"
-                                                              cellpadding="0"
-                                                              cellspacing="0"
-                                                              style="
-                                                                vertical-align: -webkit-baseline-middle;
-                                                                font-size: small;
-                                                                font-family: Arial;
-                                                              "
-                                                            >
-                                                              <tbody>
-                                                                <tr>
-                                                                  <td
-                                                                    style="
-                                                                      vertical-align: bottom;
-                                                                    "
-                                                                  >
-                                                                    <span
-                                                                      style="
-                                                                        display: inline-block;
-                                                                        background-color: rgb(
-                                                                          58,
-                                                                          106,
-                                                                          95
-                                                                        );
-                                                                      "
-                                                                      ><img
-                                                                        alt="website"
-                                                                        src="https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png"
-                                                                        style="
-                                                                          display: block;
-                                                                          background-color: rgb(
-                                                                            58,
-                                                                            106,
-                                                                            95
-                                                                          );
-                                                                        "
-                                                                        width="13"
-                                                                    /></span>
-                                                                  </td>
-                                                                </tr>
-                                                              </tbody>
-                                                            </table>
-                                                          </td>
-                                                          <td
-                                                            style="
-                                                              padding: 0px;
-                                                              text-align: left;
-                                                            "
-                                                          >
-                                                            <a
-                                                              href="//www.mollymarshcoaching.com"
-                                                              style="
-                                                                text-decoration: none;
-                                                                color: rgb(
-                                                                  24,
-                                                                  24,
-                                                                  27
-                                                                );
-                                                                font-size: 12px;
-                                                              "
-                                                              ><span
-                                                                >www.mollymarshcoaching.com</span
-                                                              ></a
-                                                            >
-                                                          </td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <table
-                                              border="0"
-                                              cellpadding="0"
-                                              cellspacing="0"
-                                              style="
-                                                vertical-align: -webkit-baseline-middle;
-                                                font-size: small;
-                                                font-family: Arial;
-                                                width: 100%;
-                                              "
-                                            >
-                                              <tbody>
-                                                <tr>
-                                                  <td height="30"></td>
-                                                </tr>
-                                                <tr>
-                                                  <td
-                                                    style="
-                                                      width: 100%;
-                                                      height: 1px;
-                                                      border-bottom: 1px solid
-                                                        rgb(58, 106, 95);
-                                                      border-left: none;
-                                                      display: block;
-                                                    "
-                                                    width="auto"
-                                                  ></td>
-                                                </tr>
-                                                <tr>
-                                                  <td height="30"></td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td>
-                                            <table
-                                              border="0"
-                                              cellpadding="0"
-                                              cellspacing="0"
-                                              style="
-                                                vertical-align: -webkit-baseline-middle;
-                                                font-size: small;
-                                                font-family: Arial;
-                                                width: 100%;
-                                              "
-                                            >
-                                              <tbody>
-                                                <tr>
-                                                  <td
-                                                    style="vertical-align: top"
-                                                  ></td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td height="30"></td>
-                                        </tr>
-                                      </tbody>
+                                      <tr>
+                                        <td valign="middle" width="113">
+                                          <img
+                                            alt="Molly Marsh"
+                                            height="113"
+                                            src="cid:unique@signature.img"
+                                            style="
+                                              border-radius: 113px;
+                                              display: block;
+                                            "
+                                            width="113"
+                                          />
+                                        </td>
+                                        <td width="24"></td>
+                                        <td
+                                          style="padding-top: 8px"
+                                          valign="middle"
+                                        >
+                                          <table
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                          >
+                                            <tr>
+                                              <td>
+                                                <span
+                                                  style="
+                                                    font-family: Arial,
+                                                      sans-serif;
+                                                    font-size: 24px;
+                                                    color: #000000;
+                                                    font-weight: 700;
+                                                    text-align: left;
+                                                  "
+                                                  >Molly Marsh</span
+                                                >
+                                                <span
+                                                  style="
+                                                    font-family: Arial,
+                                                      sans-serif;
+                                                    font-size: 12px;
+                                                    color: #000000;
+                                                    font-weight: 400;
+                                                    text-align: left;
+                                                  "
+                                                >
+                                                  (She/Her)</span
+                                                >
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td height="4"></td>
+                                            </tr>
+                                            <tr>
+                                              <td
+                                                style="
+                                                  font-family: Arial, sans-serif;
+                                                  font-size: 16px;
+                                                  color: #000000;
+                                                  font-weight: 400;
+                                                  text-align: left;
+                                                "
+                                              >
+                                                Transformative Life Coach
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td height="8"></td>
+                                            </tr>
+                                            <tr>
+                                              <td
+                                                style="
+                                                  border-top: 1px solid #ccd6cf;
+                                                  font-size: 1px;
+                                                  line-height: 1px;
+                                                "
+                                              >
+                                                 
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td height="8"></td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                                <a
+                                                  href="https://www.mollymarshcoaching.com"
+                                                  style="
+                                                    font-family: Arial,
+                                                      sans-serif;
+                                                    color: #3a6a5f;
+                                                    text-decoration: none;
+                                                    font-size: 14px;
+                                                    text-align: left;
+                                                    cursor: pointer;
+                                                  "
+                                                  >www.mollymarshcoaching.com</a
+                                                >
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
                                     </table>
                                   </div>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table
+              align="center"
+              border="0"
+              cellpadding="0"
+              cellspacing="0"
+              class="row row-3"
+              role="presentation"
+              style="mso-table-lspace: 0pt; mso-table-rspace: 0pt"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    <table
+                      align="center"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      class="row-content stack"
+                      role="presentation"
+                      style="
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                        color: #000000;
+                        border-radius: 0;
+                        background-color: #ffffff;
+                        width: 640px;
+                        margin: 0 auto;
+                      "
+                      width="640"
+                    >
+                      <tbody>
+                        <tr>
+                          <td
+                            class="column column-1"
+                            style="
+                              mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              font-weight: 400;
+                              text-align: left;
+                              padding-bottom: 5px;
+                              padding-top: 5px;
+                              vertical-align: top;
+                              border-top: 0px;
+                              border-right: 0px;
+                              border-bottom: 0px;
+                              border-left: 0px;
+                            "
+                            width="100%"
+                          >
+                            <table
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              class="empty_block block-1"
+                              role="presentation"
+                              style="
+                                mso-table-lspace: 0pt;
+                                mso-table-rspace: 0pt;
+                              "
+                              width="100%"
+                            >
+                              <tr>
+                                <td class="pad">
+                                  <div></div>
                                 </td>
                               </tr>
                             </table>
@@ -875,8 +777,7 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
     <!-- End -->
   </body>
 </html>
-
-    ` // I need to create this template
+    `
 	};
 
 	try {
