@@ -42,22 +42,52 @@
 
 	// $inspect($errors);
 
-	let formSubmissionButtonState = $state('send'); // send, sent, error, sending
-	const buttonColors: any = {
-		send: 'bg-molly-dark-500 hover:bg-molly-dark-700',
-		sent: 'bg-molly-dark-500',
-		error: 'bg-red-500',
-		sending: 'bg-indigo-600'
+	let formSubmissionButtonState: 'send' | 'sent' | 'error' | 'sending' = $state('send');
+
+	let formStyleName: string = $state(blok.form_style && blok.form_style.length > 0 ? blok.form_style : 'basic');
+
+	// Max w 3xl
+	let allFormStyles: any = {
+		basic: {
+			formContainer: `bg-surface-primary-50 border-2 border-surface-primary-200 flex flex-col w-full gap-2 p-5 md:p-7 lg:p-10 lg:min-w-[33rem] rounded-2xl`,
+			formButton: {
+				buttonBase: `mt-10 grid w-full justify-items-center cursor-pointer rounded-md px-6 py-3 font-sans font-semibold text-white uppercase transition-all`,
+				buttonContentContainerStyling: `col-start-1 row-start-1 flex items-center gap-2`,
+				buttonColors: {
+					send: 'bg-surface-primary-800 hover:bg-surface-primary-900',
+					sent: 'bg-surface-primary-600',
+					error: 'bg-red-500',
+					sending: 'bg-indigo-600'
+				}
+			}
+		},
+		fancy: {
+			formContainer: `bg-molly-dark-50 flex h-full w-full flex-col gap-6 p-5 md:p-7 lg:p-10 rounded-2xl`,
+			formButton: {
+				buttonBase: `mt-10 grid w-max cursor-pointer rounded-md px-6 py-3 font-sans font-semibold text-white uppercase transition-all`,
+				buttonContentContainerStyling: `col-start-1 row-start-1 flex items-center gap-2`,
+				buttonColors: {
+					send: 'bg-surface-primary-800 hover:bg-surface-primary-900',
+					sent: 'bg-surface-primary-600',
+					error: 'bg-red-500',
+					sending: 'bg-indigo-600'
+				}
+			}
+		}
 	};
-	let buttonSelectedCol = $derived(buttonColors[formSubmissionButtonState]);
+
+	let formStyling: any = $state(allFormStyles[formStyleName].formContainer);
+	let buttonSelectedCol = $derived(allFormStyles[formStyleName].formButton.buttonColors[formSubmissionButtonState]);
+	let buttonBaseStyling = $derived(allFormStyles[formStyleName].formButton.buttonBase);
+	let buttonContentContainerStyling = $derived(allFormStyles[formStyleName].formButton.buttonContentContainerStyling);
 </script>
 
 <form
+	use:storyblokEditable={blok}
 	use:enhance
 	action="?/sendQuery"
 	method="POST"
-class="bg-molly-dark-50 flex w-full max-w-3xl flex-col gap-6 p-5 md:p-7 lg:p-10
-h-full"
+	class={formStyling}
 	oninput={() => {
 		if (formSubmissionButtonState !== 'send') {
 			formSubmissionButtonState = 'send';
@@ -72,10 +102,10 @@ h-full"
 	{/if}
 	<input name="schemaData" type="hidden" class="hidden" value={hiddenDataForSchema} />
 
-	<div class="flex w-full flex-col gap-4">
+	<div class="flex w-full flex-col gap-4 md:gap-6">
 		{#if blok.form_inputs && blok.form_inputs.length > 0}
 			{#each blok.form_inputs as input, i}
-				<StoryblokComponent blok={input} formBind={$form[input.input_name]} input_errors={$errors[input.input_name]}></StoryblokComponent>
+				<StoryblokComponent blok={input} formBind={$form[input.input_name]} input_errors={$errors[input.input_name]} {formStyleName}></StoryblokComponent>
 			{/each}
 		{/if}
 	</div>
@@ -85,32 +115,31 @@ h-full"
 		onclick={() => {
 			formSubmissionButtonState = 'sending';
 		}}
-		class="{buttonSelectedCol} mt-10 grid w-max rounded-md px-6 py-3 font-sans
-	font-semibold text-white uppercase transition-all"
+		class="{buttonSelectedCol} {buttonBaseStyling}"
 	>
 		{#if formSubmissionButtonState === 'send'}
-			<div class="col-start-1 row-start-1 flex items-center gap-2">
+			<div class={buttonContentContainerStyling}>
 				<span transition:fly={{ x: 15, duration: 225, easing: bounceInOut }}>Send</span>
 				<div transition:fly={{ x: 15, duration: 200, easing: bounceInOut }}>
 					<SendHorizontal class="size-6" />
 				</div>
 			</div>
 		{:else if formSubmissionButtonState === 'sending'}
-			<div class="col-start-1 row-start-1 flex items-center gap-2">
+			<div class={buttonContentContainerStyling}>
 				<div transition:fly={{ x: -15, duration: 225, easing: bounceInOut }} class="animate-spin">
 					<LoaderCircle class="size-6" />
 				</div>
 				<span transition:fly={{ x: -15, duration: 200, easing: bounceInOut }}>Sending...</span>
 			</div>
 		{:else if formSubmissionButtonState === 'sent'}
-			<div class="col-start-1 row-start-1 flex items-center gap-2">
+			<div class={buttonContentContainerStyling}>
 				<div transition:fly={{ x: -15, duration: 225, easing: bounceInOut }}>
 					<Check class="size-6" />
 				</div>
 				<span transition:fly={{ x: -15, duration: 200, easing: bounceInOut }}>Sent!</span>
 			</div>
 		{:else if formSubmissionButtonState === 'error'}
-			<div class="col-start-1 row-start-1 flex items-center gap-2">
+			<div class={buttonContentContainerStyling}>
 				<div transition:fly={{ x: -15, duration: 225, easing: bounceInOut }}>
 					<CircleX class="size-6" />
 				</div>
