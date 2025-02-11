@@ -187,6 +187,10 @@
 	--font-nav-logo: var(--font-serif);
 }
 
+/* html, body {
+	scroll-behavior: smooth !important;
+} */
+
 :root {
 	a,
 	button:not([data-melt-accordion-trigger]) {
