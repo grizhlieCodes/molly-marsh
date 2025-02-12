@@ -61,7 +61,7 @@
 	 </pre>
 {/if} -->
 
-<svelte:head>
+<!-- <svelte:head>
 	<script type="text/javascript">
 		(function (C, A, L) {
 			let p = function (a, ar) {
@@ -104,8 +104,54 @@
 
 		Cal.ns['discovery-call']('ui', { theme: 'light', cssVarsPerTheme: { light: { 'cal-brand': '#389344' }, dark: { 'cal-brand': '#389344' } }, hideEventTypeDetails: false, layout: 'month_view' });
 	</script>
-</svelte:head>
+</svelte:head> -->
 
+<svelte:head>
+	<!-- Cal element-click embed code begins -->
+	<script type="text/javascript">
+		(function (C, A, L) {
+			let p = function (a, ar) {
+				a.q.push(ar);
+			};
+			let d = C.document;
+			C.Cal =
+				C.Cal ||
+				function () {
+					let cal = C.Cal;
+					let ar = arguments;
+					if (!cal.loaded) {
+						cal.ns = {};
+						cal.q = cal.q || [];
+						d.head.appendChild(d.createElement('script')).src = A;
+						cal.loaded = true;
+					}
+					if (ar[0] === L) {
+						const api = function () {
+							p(api, arguments);
+						};
+						const namespace = ar[1];
+						api.q = api.q || [];
+						if (typeof namespace === 'string') {
+							cal.ns[namespace] = cal.ns[namespace] || api;
+							p(cal.ns[namespace], ar);
+							p(cal, ['initNamespace', namespace]);
+						} else p(cal, ar);
+						return;
+					}
+					p(cal, ar);
+				};
+		})(window, 'https://app.cal.com/embed/embed.js', 'init');
+		Cal('init', 'coaching-session', { origin: 'https://cal.com' });
+
+		// Important: Please add the following attributes to the element that should trigger the calendar to open upon clicking.
+		// `data-cal-link="mollymarsh/coaching-session"`
+		// data-cal-namespace="coaching-session"
+		// `data-cal-config='{"layout":"month_view","theme":"light"}'`
+
+		Cal.ns['coaching-session']('ui', { theme: 'light', cssVarsPerTheme: { light: { 'cal-brand': '#3A6A5F' } }, hideEventTypeDetails: false, layout: 'month_view' });
+	</script>
+	<!-- Cal element-click embed code ends -->
+</svelte:head>
 <svelte:boundary>
 	<div
 		class="lm:px-6 lm:py-[6rem] bg-surface-primary-50 lm:bg-transparent flex
@@ -234,8 +280,8 @@ w-full justify-center"
 						class="font-special text-body-primary-50 bg-surface-primary-900 hover:bg-surface-primary-700
 						   focus-within:bg-surface-primary-700 flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border
 						   px-2 py-5 text-xl font-medium uppercase transition-colors duration-300"
-						data-cal-link="rafalseer/discovery-call?email={`${sessionData.customerEmail}`}&name={`${sessionData.customerName}`}"
-						data-cal-namespace="discovery-call"
+						data-cal-link="mollymarsh/coaching-session?email={`${sessionData.customerEmail}`}&name={`${sessionData.customerName}`}"
+						data-cal-namespace="coaching-session"
 						data-cal-config={JSON.stringify({ layout: 'month_view', theme: 'light' })}
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="fill-body-primary-50 size-6">
