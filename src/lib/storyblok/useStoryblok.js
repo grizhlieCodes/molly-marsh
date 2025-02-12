@@ -27,6 +27,7 @@ import { default as price_card_stripe_btn } from '$lib/components/ui-interactive
 import { default as price_card_url_btn } from '$lib/components/ui-interactive/price-card/PriceCardUrlBtn.svelte';
 import { default as accordion } from '$lib/components/ui-interactive/accordion/Accordion.svelte';
 import { default as accordion_item } from '$lib/components/ui-interactive/accordion/AccordionItem.svelte';
+import { default as cal_com_embed } from '$lib/components/ui-interactive/CalEmbed.svelte';
 
 // 05 - Data / Blog / Etc
 import { default as all_articles } from '$lib/components/content/AllArticles.svelte';
@@ -67,6 +68,7 @@ export async function useStoryblok(accessToken = '') {
 			price_card_url_btn,
 			accordion,
 			accordion_item,
+			cal_com_embed,
 			// FORM
 			form,
 			form_input,
@@ -84,5 +86,4 @@ export async function useStoryblok(accessToken = '') {
 			}
 		}
 	});
-	
 }
