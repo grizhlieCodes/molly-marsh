@@ -40,6 +40,10 @@ export const generateUUID = () => {
 	});
 };
 
+export const generateHtmlId = (prefix: string = 'id') => {
+    return prefix + '-' + Math.random().toString(36).substring(2, 15);
+};
+
 /**
  * Creates a breadcrumb navigation array from a URL path
  * @param {string} newUrl - URL path to convert (e.g., "/blog/post-title")
