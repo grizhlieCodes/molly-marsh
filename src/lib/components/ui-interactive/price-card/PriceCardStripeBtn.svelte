@@ -25,8 +25,8 @@
 	let { textStyles } = $state(textOptions);
 	let recommendedBasedStyling = $state(
 		!recommended
-			? `bg-surface-primary-200 border border-surface-primary-400 hover:bg-surface-primary-600 focus-within:bg-surface-primary-600 text-body-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50`
-			: `bg-surface-primary-800  hover:bg-surface-primary-950 focus-within:bg-surface-primary-950 text-body-primary-50`
+			? `bg-surface-primary-200 border border-surface-primary-400 hover:bg-surface-primary-600 focus-within:bg-surface-primary-600 !text-body-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50`
+			: `bg-surface-primary-800  hover:bg-surface-primary-950 focus-within:bg-surface-primary-950 !text-body-primary-50`
 	);
 
 	let stripeButtonSchema = z.object({

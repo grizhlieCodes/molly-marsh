@@ -72,8 +72,8 @@ export type TextStyleOptions = Record<TextStyleValue, string>;
 export type TextAlignValue = 'left' | 'center' | 'right' | 'justify' | 'inherit';
 export type TextAlignOptions = Record<TextAlignValue, string>;
 
-// Text color options
-export type TextColorOverwriteValues = '' | 'primaryDark' | 'primaryDefault' | 'primaryMedium' | 'primaryLight' | 'secondaryDark' | 'secondaryDefault' | 'secondaryMedium' | 'secondaryLight' | 'redDark' | 'redMid' | 'redLight' | 'black';
+export type TextColorOverwriteValues = '' | 'primary-50' | 'primary-100' | 'primary-200' | 'primary-300' | 'primary-400' | 'primary-500' | 'primary-600' | 'primary-700' | 'primary-800' | 'primary-900' | 'primary-950' | 'secondary-50' | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'secondary-800' | 'secondary-900' | 'secondary-950' | 'redDark' | 'redMid' | 'redBase' | 'redLight' | 'redVeryLight' | 'black' | 'white' | 'none';
+
 export type TextColorOverwriteOptions = Record<TextColorOverwriteValues, string>;
 
 // Max width options (similar to SpacingKey)
