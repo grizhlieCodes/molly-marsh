@@ -33,6 +33,8 @@
 	let calView = blok.cal_view && blok.cal_view.length > 0 ? blok.cal_view : 'month_view';
 	let linkHandled = $state(false);
 	let script = $state<HTMLScriptElement>();
+	let nameInput = $state()
+	let calendarEl: any = $state(undefined)
 
 	const handleLink = () => {
 		const calFullLinkString = 'https://cal.com/';
@@ -42,9 +44,10 @@
 		calLink = newLink;
 		calEventName = eventName;
 		console.log({ newLink, originalLink: blok.cal_link, eventName });
-
-		// Fix link if it includes FULL link.
-		// Add email if email present in localStorage
+		let localStorageEmail = localStorage.getItem('email')
+		if(localStorageEmail){
+			calLink = calLink + `?email=${localStorageEmail}`
+		}
 	};
 	$inspect(blok);
 
@@ -87,7 +90,7 @@
 
         Cal.ns['${calEventName}']('inline', {
             elementOrSelector: '#${calId}',
-            config: { layout: '${blok.cal_view}_view', theme: '${calTheme}' },
+            config: { layout: '${blok.cal_view}_view', theme: '${calTheme}', defaultValues: {name: ''} },
             calLink: '${calLink}'
         });
 
@@ -113,6 +116,7 @@
 		document.head.appendChild(script);
 	});
 
+	
 	onDestroy(() => {
 		if (script) {
 			document.head.removeChild(script);
@@ -120,4 +124,8 @@
 	});
 </script>
 
-<div use:storyblokEditable={blok} style="width:100%;height:100%;overflow:scroll" id={calId}></div>
+<div>
+	<p>{calLink}</p>
+</div>
+
+<div bind:this={calendarEl} use:storyblokEditable={blok} style="width:100%;height:100%;overflow:scroll" id={calId}></div>
