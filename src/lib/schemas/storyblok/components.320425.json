@@ -111,6 +111,169 @@
       "component_group_name": "03 - UI: Interactive"
     },
     {
+      "name": "all_articles",
+      "display_name": "Add this wherever you want all articles",
+      "description": "Add this wherever you want all articles",
+      "created_at": "2025-02-06T13:02:37.788Z",
+      "updated_at": "2025-02-06T13:21:55.545Z",
+      "id": 6920232,
+      "schema": {
+        "storyblok_name": {
+          "type": "text",
+          "pos": 0,
+          "description": "Internal use only",
+          "id": "RW6YcH87S3qJJ7PwhB08Bw"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Add this wherever you want all articles",
+      "component_group_uuid": "9432a05c-4dfd-47e6-a82e-2a9873ea380b",
+      "color": "#2db47d",
+      "icon": "block-block",
+      "internal_tags_list": [
+        {
+          "id": 58193,
+          "name": "data"
+        },
+        {
+          "id": 58194,
+          "name": "blog"
+        }
+      ],
+      "internal_tag_ids": [
+        "58193",
+        "58194"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "05 - Data"
+    },
+    {
+      "name": "article",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-06T09:58:09.466Z",
+      "updated_at": "2025-02-06T19:13:12.891Z",
+      "id": 6918935,
+      "schema": {
+        "article_title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "The title of your article, as it will be displayed on the page.",
+          "tooltip": true,
+          "id": "z1hnZmPvTkah8hQAwWXtOg"
+        },
+        "article_date": {
+          "type": "datetime",
+          "pos": 1,
+          "required": true,
+          "tooltip": true,
+          "description": "The date you want this article to have displayed and used for any sorting/filtering.",
+          "disable_time": true,
+          "id": "G5drsBdWTrah5uBzO9AIsg"
+        },
+        "article_tag": {
+          "type": "option",
+          "pos": 2,
+          "use_uuid": true,
+          "required": true,
+          "tooltip": true,
+          "description": "Select the tag your article has.",
+          "allow_advanced_search": true,
+          "folder_slug": "_data/_tags",
+          "filter_content_type": [
+            "Tag",
+            "tag"
+          ],
+          "entry_appearance": "card",
+          "id": "vG9Hmh6gQTGOsRiz_SX0aQ",
+          "options": [
+            {
+              "_uid": "f194a3c8-7375-481a-b13d-aa8a10f01cc6",
+              "name": "test",
+              "value": "test"
+            }
+          ],
+          "source": "internal_stories"
+        },
+        "article_summary": {
+          "type": "textarea",
+          "pos": 3,
+          "required": true,
+          "tooltip": true,
+          "description": "Summarise your article in 1-3 lines. Try keeping each summary similar in length. \nThis will be displayed on the article card that a person clicks on to read the article.",
+          "id": "mum87bShSeCic6XprOgsrQ"
+        },
+        "article_content": {
+          "type": "richtext",
+          "pos": 4,
+          "description": "Write your entire article here.",
+          "required": true,
+          "tooltip": true,
+          "id": "K98g1cP-S9-nRgbSrBUGyw"
+        },
+        "article_cover_image": {
+          "type": "asset",
+          "pos": 5,
+          "required": false,
+          "tooltip": true,
+          "description": "This is the image that will be displayed on the article-card.",
+          "filetypes": [
+            "images"
+          ],
+          "id": "jcCDPe6bTouRgZ7afVPggg"
+        },
+        "additional_data": {
+          "type": "section",
+          "pos": 6,
+          "keys": [
+            "bloks"
+          ],
+          "id": "r4m3PGvbTeuwjaxr09-dnQ"
+        },
+        "bloks": {
+          "type": "bloks",
+          "pos": 7,
+          "id": "Oa2MMQgaTq2xapgixZ_Ggg",
+          "description": "You can add normal bloks below the article if you wish to elaborate on something.",
+          "tooltip": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "article",
+      "component_group_uuid": "9432a05c-4dfd-47e6-a82e-2a9873ea380b",
+      "color": "#2db47d",
+      "icon": "block-buildin",
+      "internal_tags_list": [
+        {
+          "id": 58193,
+          "name": "data"
+        },
+        {
+          "id": 58194,
+          "name": "blog"
+        }
+      ],
+      "internal_tag_ids": [
+        "58193",
+        "58194"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "05 - Data"
+    },
+    {
       "name": "button",
       "display_name": null,
       "description": null,
@@ -317,6 +480,122 @@
       "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
       "color": "#ef6252",
       "icon": "block-arrow-pointer",
+      "internal_tags_list": [
+        {
+          "id": 56709,
+          "name": "ui-interactive"
+        }
+      ],
+      "internal_tag_ids": [
+        "56709"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "03 - UI: Interactive"
+    },
+    {
+      "name": "cal_com_embed",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-12T07:41:44.389Z",
+      "updated_at": "2025-02-12T08:29:37.156Z",
+      "id": 6945149,
+      "schema": {
+        "cal_link": {
+          "type": "text",
+          "pos": 0,
+          "description": "Enter the calendar event link. It can look like...:\n1) rafal-potasz/one-hour-call\n2) www.cal.com/rafal-potasz/one-hour-call",
+          "tooltip": true,
+          "required": true,
+          "id": "tkL5VUdNToudT_narAPKTA"
+        },
+        "cal_view": {
+          "type": "option",
+          "pos": 1,
+          "use_uuid": true,
+          "required": true,
+          "tooltip": true,
+          "default_value": "month",
+          "options": [
+            {
+              "_uid": "8b276956-f628-4a25-8a08-bb13d62f1b59",
+              "name": "Monthly View",
+              "value": "month"
+            },
+            {
+              "_uid": "5c994541-b960-4518-b0e5-9ab0835e4af8",
+              "value": "week",
+              "name": "Weekly View"
+            },
+            {
+              "_uid": "433d1a06-719a-4249-a608-bb1d739b8aae",
+              "value": "col",
+              "name": "Column View"
+            }
+          ],
+          "exclude_empty_option": true,
+          "description": "You can change how your calendar looks like in terms of layout (this changes the design layout but also the information presented to the user).",
+          "id": "493-Cm_iR7KUeLCI4bOq0g",
+          "display_name": "Calendar View"
+        },
+        "cal_color_dark": {
+          "type": "custom",
+          "pos": 2,
+          "display_name": "(Dark Mode) Calendar Theme Color",
+          "tooltip": true,
+          "description": "You can select your brand color here!\nThis is for the \"Dark Mode\" version of the calendar only.",
+          "field_type": "native-color-picker",
+          "options": [],
+          "id": "ellTJVbMQQmVioY0kmf6TQ"
+        },
+        "cal_color_light": {
+          "type": "custom",
+          "pos": 3,
+          "description": "You can select your brand color here!\nThis is for the \"Light Mode\" version of the calendar only.",
+          "tooltip": true,
+          "field_type": "native-color-picker",
+          "options": [],
+          "id": "m8mmecR8S2OPDhQ5XLiVmw"
+        },
+        "cal_theme": {
+          "type": "option",
+          "pos": 4,
+          "use_uuid": true,
+          "tooltip": true,
+          "required": true,
+          "description": "This selects the theme of the calendar. Unless your website has a dedicated dark-mode, I recommend leaving this on the default setting, light mode.",
+          "options": [
+            {
+              "_uid": "d6cdd882-8da6-4953-afa5-01e44e05cf0a",
+              "name": "Light",
+              "value": "light"
+            },
+            {
+              "_uid": "b6317a9c-e0c3-41f7-87ea-28c3b55015ef",
+              "value": "dark",
+              "name": "Dark"
+            },
+            {
+              "_uid": "eeacdf13-cef7-485b-9e97-d1950a72e9aa",
+              "value": "auto",
+              "name": "Auto"
+            }
+          ],
+          "exclude_empty_option": true,
+          "default_value": "light",
+          "id": "nQwlQcJRRk2fx85RDz88SA"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "cal_com_embed",
+      "component_group_uuid": "ea238561-f799-4274-b6c5-dc9e5388ef99",
+      "color": "#ef6252",
+      "icon": "block-wallet",
       "internal_tags_list": [
         {
           "id": 56709,
@@ -7280,7 +7559,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-02-03T10:13:16.672Z",
-      "updated_at": "2025-02-03T14:43:52.598Z",
+      "updated_at": "2025-02-11T12:01:44.754Z",
       "id": 6899429,
       "schema": {
         "form_top_text": {
@@ -7313,6 +7592,28 @@
           "tooltip": true,
           "required": true,
           "id": "0gZHCUZLRMmNvK-tDb2nKg"
+        },
+        "form_style": {
+          "type": "option",
+          "pos": 3,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "8ed5248d-287e-4de6-aa0a-525716710398",
+              "name": "Basic",
+              "value": "basic"
+            },
+            {
+              "_uid": "53c0aeb9-c8e8-4953-87a4-5096d2979e65",
+              "value": "fancy",
+              "name": "Fancy"
+            }
+          ],
+          "default_value": "basic",
+          "required": true,
+          "description": "Try out different form styles.",
+          "tooltip": true,
+          "id": "Gjv4I7_7SQaY9PopuyHjlg"
         }
       },
       "image": null,
@@ -8049,7 +8350,7 @@
       "display_name": "Icon",
       "description": "Use when you need icons!!",
       "created_at": "2025-01-15T17:22:08.987Z",
-      "updated_at": "2025-01-25T07:36:39.310Z",
+      "updated_at": "2025-02-12T06:28:46.999Z",
       "id": 6801314,
       "schema": {
         "icon": {
@@ -8061,6 +8362,11 @@
               "_uid": "a90e1b12-fdcd-45f1-a6b4-c72116e72b77",
               "value": "bars-4",
               "name": "4 Bars"
+            },
+            {
+              "_uid": "edd5756f-c87d-497e-95b1-59f1ec795333",
+              "value": "twoChatBubbles",
+              "name": "2 Chat Bubbles"
             },
             {
               "_uid": "0bea18e1-4ab5-49e5-b18d-4f0c831ac20c",
@@ -8076,6 +8382,11 @@
               "_uid": "b698034c-4dc2-4536-9f04-44446d0961db",
               "value": "beaker",
               "name": "Beaker"
+            },
+            {
+              "_uid": "f0008582-d668-41f6-986f-f11cbc561b58",
+              "value": "brain",
+              "name": "Brain"
             },
             {
               "_uid": "872eef5a-b16b-47fb-aa94-298c6efb96f1",
@@ -11835,11 +12146,67 @@
       "component_group_name": "02 - UI"
     },
     {
+      "name": "tag",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-02-06T09:49:08.684Z",
+      "updated_at": "2025-02-06T11:19:46.612Z",
+      "id": 6918921,
+      "schema": {
+        "tag_full": {
+          "type": "text",
+          "pos": 0,
+          "description": "The full name of your tag. \n\nFor example: \"Backed By Research\"",
+          "required": true,
+          "tooltip": true,
+          "id": "9h4vaUr_QfWnwLWFYH_m5w"
+        },
+        "tag_label_short": {
+          "type": "text",
+          "pos": 1,
+          "id": "Mh7iUUt8Q6Oodr5F-YFVzQ",
+          "description": "Short version of your tag, as a label to be displayed.\nFor example: \"Researched\"",
+          "tooltip": true,
+          "required": true
+        },
+        "tag_data": {
+          "type": "text",
+          "pos": 2,
+          "id": "4fi0bdAHQPmFlWkv9m185g",
+          "required": true,
+          "tooltip": true,
+          "description": "This is how we will 'find' this tag in code.\n\nFor example: \"researched\""
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "tag",
+      "component_group_uuid": "9432a05c-4dfd-47e6-a82e-2a9873ea380b",
+      "color": "#2db47d",
+      "icon": "block-keyboard",
+      "internal_tags_list": [
+        {
+          "id": 58193,
+          "name": "data"
+        }
+      ],
+      "internal_tag_ids": [
+        "58193"
+      ],
+      "content_type_asset_preview": null,
+      "component_group_name": "05 - Data"
+    },
+    {
       "name": "testimonial",
       "display_name": null,
       "description": null,
       "created_at": "2025-01-25T17:18:37.456Z",
-      "updated_at": "2025-01-25T17:59:58.444Z",
+      "updated_at": "2025-02-12T06:18:10.146Z",
       "id": 6856306,
       "schema": {
         "testimonial_title": {
@@ -11862,7 +12229,7 @@
           "id": "moMwIN14R6qVcBqM19nkkg",
           "required": true,
           "tooltip": true,
-          "description": "This is the first 3-4 lines of the testimonial.",
+          "description": "This is the first 3-4 lines of the testimonial, it is shown on the front of the testimonial.",
           "restrict_type": "",
           "restrict_components": true,
           "component_whitelist": [
@@ -11897,9 +12264,17 @@
           "required": true,
           "tooltip": true
         },
+        "hide_name_on_front": {
+          "type": "boolean",
+          "pos": 4,
+          "translatable": false,
+          "tooltip": true,
+          "description": "Toggle on if you want the name to be hidden on the front of the testimonial. It will only be shown if the user clicks on it.",
+          "id": "9iOYDnssSkaXzA9uXa5pqA"
+        },
         "testimonial_button_text": {
           "type": "bloks",
-          "pos": 4,
+          "pos": 5,
           "default_value": "",
           "description": "This is the text that is shown on the bottom right of the testimonial to signal to the user that the testimonial can be clicked on so someone can read everything. \nBy default it's set to \"Click to read more\"",
           "tooltip": true,

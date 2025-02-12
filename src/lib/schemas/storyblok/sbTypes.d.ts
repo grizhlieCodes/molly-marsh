@@ -16,6 +16,89 @@ export interface AccordionItemStoryblok {
   [k: string]: any;
 }
 
+export interface AllArticlesStoryblok {
+  storyblok_name?: string;
+  _uid: string;
+  component: "all_articles";
+  [k: string]: any;
+}
+
+export interface RichtextStoryblok {
+  type: string;
+  content?: RichtextStoryblok[];
+  marks?: RichtextStoryblok[];
+  attrs?: any;
+  text?: string;
+  [k: string]: any;
+}
+
+export interface AssetStoryblok {
+  _uid?: string;
+  id: number;
+  alt?: string;
+  name: string;
+  focus?: string;
+  source?: string;
+  title?: string;
+  filename: string;
+  copyright?: string;
+  fieldtype?: string;
+  meta_data?: null | {
+    [k: string]: any;
+  };
+  is_external_url?: boolean;
+  [k: string]: any;
+}
+
+export interface ArticleStoryblok {
+  article_title: string;
+  article_date: string;
+  article_tag: StoryblokStory<TagStoryblok> | StoryblokStory<TagStoryblok> | string;
+  article_summary: string;
+  article_content: RichtextStoryblok;
+  article_cover_image?: AssetStoryblok;
+  additional_data?: any;
+  bloks?: (
+    | AccordionStoryblok
+    | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
+    | ButtonStoryblok
+    | CalComEmbedStoryblok
+    | ContainerStoryblok
+    | ContainerLegacyStoryblok
+    | CustomHeroStoryblok
+    | CustomRichtextStoryblok
+    | DividerStoryblok
+    | EmbedTextStoryblok
+    | FooterStoryblok
+    | FooterColumnStoryblok
+    | FormStoryblok
+    | FormInputStoryblok
+    | FormInputValidationStoryblok
+    | FormTextareaStoryblok
+    | HeaderStoryblok
+    | IconStoryblok
+    | ImageStoryblok
+    | NavLinkStoryblok
+    | NavLogoStoryblok
+    | PageStoryblok
+    | PriceCardStoryblok
+    | PriceCardStripeBtnStoryblok
+    | PriceCardUrlBtnStoryblok
+    | SectionStoryblok
+    | SimpleCardStoryblok
+    | SimpleTextStoryblok
+    | SvgDividerStoryblok
+    | TagStoryblok
+    | TestimonialStoryblok
+    | TextStoryblok
+  )[];
+  _uid: string;
+  component: "article";
+  [k: string]: any;
+}
+
 export type MultilinkStoryblok =
   | {
       id?: string;
@@ -54,6 +137,15 @@ export interface ButtonStoryblok {
   [k: string]: any;
 }
 
+export interface CalComEmbedStoryblok {
+  cal_link: string;
+  cal_view: "month" | "week" | "col";
+  cal_theme: "light" | "dark" | "auto";
+  _uid: string;
+  component: "cal_com_embed";
+  [k: string]: any;
+}
+
 export interface ContainerStoryblok {
   layout_options_desktop?: any;
   content_direction_lg: "row" | "rowReversed" | "column" | "columnReversed" | "none";
@@ -77,7 +169,10 @@ export interface ContainerStoryblok {
   blocks: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -103,6 +198,7 @@ export interface ContainerStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -239,7 +335,10 @@ export interface ContainerLegacyStoryblok {
   blocks: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -265,6 +364,7 @@ export interface ContainerLegacyStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -355,15 +455,6 @@ export interface CustomHeroStoryblok {
   [k: string]: any;
 }
 
-export interface RichtextStoryblok {
-  type: string;
-  content?: RichtextStoryblok[];
-  marks?: RichtextStoryblok[];
-  attrs?: any;
-  text?: string;
-  [k: string]: any;
-}
-
 export interface CustomRichtextStoryblok {
   heading_styles?: "serif" | "sans-serif";
   text?: RichtextStoryblok;
@@ -417,7 +508,10 @@ export interface FooterStoryblok {
   footer_columns?: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -443,13 +537,17 @@ export interface FooterStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
   footer_disclaimer?: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -475,6 +573,7 @@ export interface FooterStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -483,7 +582,10 @@ export interface FooterStoryblok {
   footer_cta_bloks?: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -509,6 +611,7 @@ export interface FooterStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -529,6 +632,7 @@ export interface FormStoryblok {
   form_top_text?: TextStoryblok[];
   form_inputs?: (FormInputStoryblok | FormTextareaStoryblok)[];
   form_action: string;
+  form_style: "" | "basic" | "fancy";
   _uid: string;
   component: "form";
   [k: string]: any;
@@ -618,7 +722,10 @@ export interface HeaderStoryblok {
   footer_cta_bloks?: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -644,6 +751,7 @@ export interface HeaderStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -656,9 +764,11 @@ export interface IconStoryblok {
   icon:
     | ""
     | "bars-4"
+    | "twoChatBubbles"
     | "users"
     | "arrowRight"
     | "beaker"
+    | "brain"
     | "calendar"
     | "cart"
     | "chatBubble"
@@ -739,24 +849,6 @@ export interface IconStoryblok {
   [k: string]: any;
 }
 
-export interface AssetStoryblok {
-  _uid?: string;
-  id: number;
-  alt?: string;
-  name: string;
-  focus?: string;
-  source?: string;
-  title?: string;
-  filename: string;
-  copyright?: string;
-  fieldtype?: string;
-  meta_data?: null | {
-    [k: string]: any;
-  };
-  is_external_url?: boolean;
-  [k: string]: any;
-}
-
 export interface ImageStoryblok {
   image?: AssetStoryblok;
   figcaption?: string;
@@ -829,7 +921,10 @@ export interface PageStoryblok {
   blocks: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -855,6 +950,7 @@ export interface PageStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -903,7 +999,10 @@ export interface SectionStoryblok {
   blocks?: (
     | AccordionStoryblok
     | AccordionItemStoryblok
+    | AllArticlesStoryblok
+    | ArticleStoryblok
     | ButtonStoryblok
+    | CalComEmbedStoryblok
     | ContainerStoryblok
     | ContainerLegacyStoryblok
     | CustomHeroStoryblok
@@ -929,6 +1028,7 @@ export interface SectionStoryblok {
     | SimpleCardStoryblok
     | SimpleTextStoryblok
     | SvgDividerStoryblok
+    | TagStoryblok
     | TestimonialStoryblok
     | TextStoryblok
   )[];
@@ -1037,11 +1137,21 @@ export interface SvgDividerStoryblok {
   [k: string]: any;
 }
 
+export interface TagStoryblok {
+  tag_full: string;
+  tag_label_short: string;
+  tag_data: string;
+  _uid: string;
+  component: "tag";
+  [k: string]: any;
+}
+
 export interface TestimonialStoryblok {
   testimonial_title: TextStoryblok[];
   testimonial_summary: TextStoryblok[];
   testimonial_full_message: TextStoryblok[];
   testimonial_name: TextStoryblok[];
+  hide_name_on_front?: boolean;
   testimonial_button_text: TextStoryblok[];
   _uid: string;
   component: "testimonial";
