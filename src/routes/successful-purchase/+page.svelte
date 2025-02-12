@@ -214,7 +214,7 @@ w-full justify-center"
 						<img src={sessionData.itemImage} alt="" role="presentation" class="lm:max-w-48 max-h-80 object-cover object-center" />
 						<div class="lm:gap-8 flex w-full flex-col gap-5 p-5 pr-6">
 							<div class="lm:gap-4 flex flex-col gap-6">
-								<p class="!text-body-neutral-800 text-xl font-medium">{sessionData.itemDescription}</p>
+								<p class="!text-body-secondary-800 text-xl font-medium">{sessionData.itemDescription}</p>
 								<div
 									class="lm:flex-row lm:flex-wrap lm:gap-8 lm:*:flex-col
 						 lm:*:gap-3 *: flex w-full flex-col gap-4
@@ -222,31 +222,31 @@ w-full justify-center"
 								>
 									<div>
 										<span
-											class="!text-body-neutral-400
+											class="!text-body-secondary-400
 								 "
 											>Date<span class="lm:hidden">:</span>
 										</span>
 										<span
-											class="!text-body-neutral-700
+											class="!text-body-secondary-700
 								 
 								 font-medium">{formatNoteDate(sessionData.invoiceDate)}</span
 										>
 									</div>
 									<div>
-										<span class="!text-body-neutral-400">Invoice ID<span class="lm:hidden">:</span></span>
+										<span class="!text-body-secondary-400">Invoice ID<span class="lm:hidden">:</span></span>
 										<span
-											class="!text-body-neutral-700
+											class="!text-body-secondary-700
 								 
 								 font-medium">{sessionData.invoiceNumber}</span
 										>
 									</div>
 									<div>
 										<span
-											class="!text-body-neutral-400
+											class="!text-body-secondary-400
 								 ">Amount Paid<span class="lm:hidden">:</span></span
 										>
 										<span
-											class="!text-body-neutral-700
+											class="!text-body-secondary-700
 								 
 								 font-medium">£{(sessionData.itemAmount / 100).toFixed(2)}</span
 										>
@@ -293,7 +293,7 @@ w-full justify-center"
 						</svg>
 						<span> OPEN CALENDAR & BOOK YOUR SESSION </span>
 					</button>
-					<p class="{textStyles.paraBase} text-body-neutral-400 w-full">If you don’t want to book now, not to worry, you should have received an email with the calendar link.</p>
+					<p class="{textStyles.paraBase} text-body-secondary-400 w-full">If you don’t want to book now, not to worry, you should have received an email with the calendar link.</p>
 				</div>
 			</section>
 		{/if}

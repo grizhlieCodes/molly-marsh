@@ -116,7 +116,7 @@
 							id={emailData.input_name}
 							class="w-full rounded-md border-b border-molly-dark-300 bg-molly-dark-50 
 						px-3 py-2.5 outline-none transition-colors font-body text-lg
-						duration-500 focus:border-molly-dark-500 focus:bg-molly-dark-100/70 text-molly-dark-500 group-focus-within:text-neutral-800"
+						duration-500 focus:border-molly-dark-500 focus:bg-molly-dark-100/70 text-molly-dark-500 group-focus-within:text-secondary-800"
 						placeholder="{`${(emailData.input_placeholder && emailData.input_placeholder.length === 0) ||
 						emailData.input_placeholder === ' ' ? ' ' : emailData.input_placeholder}`}"
 							autocomplete="email"
@@ -131,7 +131,7 @@
 					{textStyles.para6} cursor-pointer font-medium uppercase
 					disabled:bg-surface-secondary-300 disabled:border
 					disabled:border-surface-secondary-500
-					disabled:text-body-neutral-600 disabled:cursor-not-allowed"
+					disabled:text-body-secondary-600 disabled:cursor-not-allowed"
 					>
 						Continue to Stripe
 					</button>

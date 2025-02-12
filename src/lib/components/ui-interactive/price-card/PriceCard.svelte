@@ -72,7 +72,7 @@ justify-between gap-8 rounded-lg  p-5
 			</div>
 			<div class="price-container flex items-end gap-4">
 				{#if blok.card_price && blok.card_price.length > 0}
-					<span class="price {textStyles.para9} text-body-neutral-900 font-medium">
+					<span class="price {textStyles.para9} text-body-secondary-900 font-medium">
 						{blok.card_price === '0.00' ? 'FREE' : '£' + blok.card_price}
 						<!-- {blok.card_price} -->
 					</span>
@@ -80,7 +80,7 @@ justify-between gap-8 rounded-lg  p-5
 				{#if blok.card_price_helper_text && blok.card_price_helper_text.length > 0}
 					<span
 						class="price_helper_text {textStyles.para4}
-				-translate-y-[1px] font-[450] text-neutral-400"
+				-translate-y-[1px] font-[450] text-secondary-400"
 					>
 						{blok.card_price_helper_text}
 					</span>
@@ -115,7 +115,7 @@ justify-between gap-8 rounded-lg  p-5
 							</svg>
 						</div>
 
-						<span class="{textStyles.paraBase} !text-body-neutral-500 font-[450]">{point.text}</span>
+						<span class="{textStyles.paraBase} !text-body-secondary-500 font-[450]">{point.text}</span>
 					</li>
 				{/each}
 			{/if}

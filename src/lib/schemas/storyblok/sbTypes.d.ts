@@ -139,8 +139,9 @@ export interface ButtonStoryblok {
 
 export interface CalComEmbedStoryblok {
   cal_link: string;
-  cal_view: "month" | "week" | "col";
+  cal_view: "month_view" | "week_view" | "column_view";
   cal_theme: "light" | "dark" | "auto";
+  cal_id?: string;
   _uid: string;
   component: "cal_com_embed";
   [k: string]: any;

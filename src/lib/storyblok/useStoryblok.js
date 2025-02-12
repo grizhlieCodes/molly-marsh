@@ -8,6 +8,7 @@ import { default as page } from '$lib/components/layout/Page.svelte';
 import { default as section } from '$lib/components/layout/section/Section.svelte';
 import { default as container } from '$lib/components/layout/container/Container.svelte';
 import { default as custom_hero } from '$lib/components/layout/hero/CustomHero.svelte';
+import { default as footer_cta } from '$lib/components/layout/CtaContainer.svelte';
 
 // 02 - UI
 import { default as simple_text } from '$lib/components/ui/SimpleText.svelte';
@@ -51,6 +52,7 @@ export async function useStoryblok(accessToken = '') {
 			section,
 			container,
 			custom_hero,
+			footer_cta,
 			// UI
 			simple_text,
 			text,

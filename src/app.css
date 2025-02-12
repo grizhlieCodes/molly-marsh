@@ -62,31 +62,31 @@
 	--color-surface-primary-950: var(--color-molly-950);
 
 	/* TEXT */
-	/* BODY --> Neutral */
-	--color-body-neutral-50: var(--color-zinc-50);
-	--color-body-neutral-100: var(--color-zinc-100);
-	--color-body-neutral-200: var(--color-zinc-200);
-	--color-body-neutral-300: var(--color-zinc-300);
-	--color-body-neutral-400: var(--color-zinc-400);
-	--color-body-neutral-500: var(--color-zinc-500);
-	--color-body-neutral-600: var(--color-zinc-600);
-	--color-body-neutral-700: var(--color-zinc-700);
-	--color-body-neutral-800: var(--color-zinc-800);
-	--color-body-neutral-900: var(--color-zinc-900);
-	--color-body-neutral-950: var(--color-zinc-950);
+	/* BODY --> secondary */
+	--color-body-secondary-50: var(--color-zinc-50);
+	--color-body-secondary-100: var(--color-zinc-100);
+	--color-body-secondary-200: var(--color-zinc-200);
+	--color-body-secondary-300: var(--color-zinc-300);
+	--color-body-secondary-400: var(--color-zinc-400);
+	--color-body-secondary-500: var(--color-zinc-500);
+	--color-body-secondary-600: var(--color-zinc-600);
+	--color-body-secondary-700: var(--color-zinc-700);
+	--color-body-secondary-800: var(--color-zinc-800);
+	--color-body-secondary-900: var(--color-zinc-900);
+	--color-body-secondary-950: var(--color-zinc-950);
 
 	/* BACKGROUND (SECONDARY) */
-	--color-surface-secondary-50: var(--color-body-neutral-50);
-	--color-surface-secondary-100: var(--color-body-neutral-100);
-	--color-surface-secondary-200: var(--color-body-neutral-200);
-	--color-surface-secondary-300: var(--color-body-neutral-300);
-	--color-surface-secondary-400: var(--color-body-neutral-400);
-	--color-surface-secondary-500: var(--color-body-neutral-500);
-	--color-surface-secondary-600: var(--color-body-neutral-600);
-	--color-surface-secondary-700: var(--color-body-neutral-700);
-	--color-surface-secondary-800: var(--color-body-neutral-800);
-	--color-surface-secondary-900: var(--color-body-neutral-900);
-	--color-surface-secondary-950: var(--color-body-neutral-950);
+	--color-surface-secondary-50: var(--color-body-secondary-50);
+	--color-surface-secondary-100: var(--color-body-secondary-100);
+	--color-surface-secondary-200: var(--color-body-secondary-200);
+	--color-surface-secondary-300: var(--color-body-secondary-300);
+	--color-surface-secondary-400: var(--color-body-secondary-400);
+	--color-surface-secondary-500: var(--color-body-secondary-500);
+	--color-surface-secondary-600: var(--color-body-secondary-600);
+	--color-surface-secondary-700: var(--color-body-secondary-700);
+	--color-surface-secondary-800: var(--color-body-secondary-800);
+	--color-surface-secondary-900: var(--color-body-secondary-900);
+	--color-surface-secondary-950: var(--color-body-secondary-950);
 
 	/* BODY --> Primary */
 	--color-body-primary-50: var(--color-molly-50);
@@ -102,18 +102,18 @@
 	--color-body-primary-950: var(--color-molly-950);
 
 	/* HEADING */
-	/* Heading Neutral */
-	--color-heading-neutral-50: var(--color-zinc-50);
-	--color-heading-neutral-100: var(--color-zinc-100);
-	--color-heading-neutral-200: var(--color-zinc-200);
-	--color-heading-neutral-300: var(--color-zinc-300);
-	--color-heading-neutral-400: var(--color-zinc-400);
-	--color-heading-neutral-500: var(--color-zinc-500);
-	--color-heading-neutral-600: var(--color-zinc-600);
-	--color-heading-neutral-700: var(--color-zinc-700);
-	--color-heading-neutral-800: var(--color-zinc-800);
-	--color-heading-neutral-900: var(--color-zinc-900);
-	--color-heading-neutral-950: var(--color-zinc-950);
+	/* Heading secondary */
+	--color-heading-secondary-50: var(--color-zinc-50);
+	--color-heading-secondary-100: var(--color-zinc-100);
+	--color-heading-secondary-200: var(--color-zinc-200);
+	--color-heading-secondary-300: var(--color-zinc-300);
+	--color-heading-secondary-400: var(--color-zinc-400);
+	--color-heading-secondary-500: var(--color-zinc-500);
+	--color-heading-secondary-600: var(--color-zinc-600);
+	--color-heading-secondary-700: var(--color-zinc-700);
+	--color-heading-secondary-800: var(--color-zinc-800);
+	--color-heading-secondary-900: var(--color-zinc-900);
+	--color-heading-secondary-950: var(--color-zinc-950);
 
 	/* Heading Primary */
 	--color-heading-primary-50: var(--color-molly-50);

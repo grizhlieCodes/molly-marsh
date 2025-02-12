@@ -4,22 +4,23 @@
 		color: string;
 		plugin: 'native-color-picker';
 	}
-
-	interface CalEmbed {
-		_uid: string;
+	interface CalComEmbedStoryblok {
 		cal_link: string;
-		cal_view: 'month_view' | 'week_view' | 'column_view'; // Assuming these are the possible values
+		cal_view: 'month_view' | 'week_view' | 'column_view';
 		cal_theme: 'light' | 'dark' | 'auto';
-		component: 'cal_com_embed';
+		cal_id?: string;
 		cal_color_dark: ColorPicker;
 		cal_color_light: ColorPicker;
-		_editable: string;
+		_uid: string;
+		component: 'cal_com_embed';
+		[k: string]: any;
 	}
-	import type { CalComEmbedStoryblok } from '$lib/schemas/storyblok/sbTypes';
+
 	import { generateHtmlId } from '$lib/scripts/utils';
+	import { storyblokEditable } from '@storyblok/svelte';
 	import { onDestroy, onMount } from 'svelte';
 
-	let { blok }: { blok: CalEmbed } = $props();
+	let { blok }: { blok: CalComEmbedStoryblok } = $props();
 
 	let allDataLoaded = $state(false);
 
@@ -29,7 +30,7 @@
 	let calLightThemeHex = $state(blok?.cal_color_light?.color && blok?.cal_color_light?.color.length > 0 ? blok?.cal_color_light?.color : '#000000');
 	let calDarkThemeHex = $state(blok?.cal_color_dark?.color && blok?.cal_color_dark?.color.length > 0 ? blok?.cal_color_dark?.color : '#FFFFFF');
 	let calTheme = blok.cal_theme && blok.cal_theme.length > 0 ? blok.cal_theme : 'auto';
-	let calView = blok.cal_view && blok.cal_view.length > 0 ? blok.cal_view : 'month_view'
+	let calView = blok.cal_view && blok.cal_view.length > 0 ? blok.cal_view : 'month_view';
 	let linkHandled = $state(false);
 	let script = $state<HTMLScriptElement>();
 
@@ -119,4 +120,4 @@
 	});
 </script>
 
-<div style="width:100%;height:100%;overflow:scroll" id={calId}></div>
+<div use:storyblokEditable={blok} style="width:100%;height:100%;overflow:scroll" id={calId}></div>

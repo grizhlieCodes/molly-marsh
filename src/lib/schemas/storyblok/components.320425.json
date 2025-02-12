@@ -497,7 +497,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2025-02-12T07:41:44.389Z",
-      "updated_at": "2025-02-12T08:29:37.156Z",
+      "updated_at": "2025-02-12T09:32:08.237Z",
       "id": 6945149,
       "schema": {
         "cal_link": {
@@ -506,7 +506,8 @@
           "description": "Enter the calendar event link. It can look like...:\n1) rafal-potasz/one-hour-call\n2) www.cal.com/rafal-potasz/one-hour-call",
           "tooltip": true,
           "required": true,
-          "id": "tkL5VUdNToudT_narAPKTA"
+          "id": "tkL5VUdNToudT_narAPKTA",
+          "regex": "^(?:https?:\\/\\/cal\\.com\\/)?([a-zA-Z0-9-_]+)\\/([a-zA-Z0-9-_]+)$"
         },
         "cal_view": {
           "type": "option",
@@ -519,16 +520,16 @@
             {
               "_uid": "8b276956-f628-4a25-8a08-bb13d62f1b59",
               "name": "Monthly View",
-              "value": "month"
+              "value": "month_view"
             },
             {
               "_uid": "5c994541-b960-4518-b0e5-9ab0835e4af8",
-              "value": "week",
+              "value": "week_view",
               "name": "Weekly View"
             },
             {
               "_uid": "433d1a06-719a-4249-a608-bb1d739b8aae",
-              "value": "col",
+              "value": "column_view",
               "name": "Column View"
             }
           ],
@@ -583,6 +584,14 @@
           "exclude_empty_option": true,
           "default_value": "light",
           "id": "nQwlQcJRRk2fx85RDz88SA"
+        },
+        "cal_id": {
+          "type": "text",
+          "pos": 5,
+          "required": false,
+          "tooltip": true,
+          "description": "Add an ID to this calendar. If you leave it blank an ID will be automatically generated for you.",
+          "id": "OrETe7tLQLajFw2IdR6HnA"
         }
       },
       "image": null,

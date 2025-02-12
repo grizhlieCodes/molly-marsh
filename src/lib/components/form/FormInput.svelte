@@ -13,13 +13,13 @@
 							has-[+*:not(:placeholder-shown)]:translate-y-0 has-[+*:not(:placeholder-shown)]:scale-75 ${input_errors ? '!text-red-500' : ''}`,
 			inputStyles: `border-molly-dark-300 bg-molly-dark-50 font-body focus:border-molly-dark-500 focus:bg-molly-dark-100/70
 						text-molly-dark-500 w-full rounded-md border-b px-3 py-2.5
-						text-lg transition-colors duration-500 outline-none group-focus-within:text-neutral-800`,
+						text-lg transition-colors duration-500 outline-none group-focus-within:text-secondary-800`,
 			errorStyles: `text-sm text-red-400`
 		},
 		basic: {
 			labelStyles: `flex w-full flex-col items-start gap-2 font-sans group`,
-			labelSpanStyles: `${input_errors ? '!text-red-500' : ''} font-body text-body-neutral-500 group-focus-within:text-body-primary-900 transition-colors duration-300`,
-			inputStyles: `w-full bg-white px-2 py-2.5 placeholder:text-body-neutral-400 placeholder:font-light border border-surface-secondary-300 focus-within:border-surface-primary-600 rounded-md outline-0 focus-within:text-body-neutral-800 text-body-neutral-500 font-[350] 
+			labelSpanStyles: `${input_errors ? '!text-red-500' : ''} font-body text-body-secondary-500 group-focus-within:text-body-primary-900 transition-colors duration-300`,
+			inputStyles: `w-full bg-white px-2 py-2.5 placeholder:text-body-secondary-400 placeholder:font-light border border-surface-secondary-300 focus-within:border-surface-primary-600 rounded-md outline-0 focus-within:text-body-secondary-800 text-body-secondary-500 font-[350] 
 			${input_errors ? '!text-red-500' : ''} transition-all duration-300`,
 			errorStyles: `text-sm text-red-400`
 		}

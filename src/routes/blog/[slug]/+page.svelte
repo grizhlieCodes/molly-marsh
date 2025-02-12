@@ -23,7 +23,7 @@
 		>
 			<div class="mb-4 flex gap-2">
 				<span
-					class="bg-surface-secondary-100 border-surface-secondary-200 text-body-neutral-500
+					class="bg-surface-secondary-100 border-surface-secondary-200 text-body-secondary-500
              overflow-hidden rounded-full border px-2
              py-0.5 text-sm"
 				>
@@ -31,7 +31,7 @@
 				</span>
 				<Tooltip.Root openDelay={250}>
 					<Tooltip.Trigger
-						class="bg-surface-secondary-100 border-surface-secondary-200 text-body-neutral-500 overflow-hidden rounded-full border px-2
+						class="bg-surface-secondary-100 border-surface-secondary-200 text-body-secondary-500 overflow-hidden rounded-full border px-2
                     py-0.5 text-sm"
 					>
 						{article.article_tag.content.tag_label_short}
@@ -41,7 +41,7 @@
 							<Tooltip.Arrow class="border-surface-secondary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
 						</div>
 						<div
-							class="text-body-neutral-500 border-surface-secondary-400 bg-surface-secondary-100
+							class="text-body-secondary-500 border-surface-secondary-400 bg-surface-secondary-100
                     flex max-w-96 items-center justify-center
                     rounded-2xl border px-2 py-1 text-center
                     text-base font-medium shadow-md outline-hidden

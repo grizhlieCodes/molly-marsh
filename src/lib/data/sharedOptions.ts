@@ -1,21 +1,21 @@
 import type { Styles, ObjectOfStrings as Options } from '$lib/types';
 
 export const textStyles: Styles = {
-	h1: 'font-serif font-normal text-6xl md:text-7xl lg:text-8xl text-neutral-800',
-	h2: 'font-serif font-normal text-5xl md:text-6xl lg:text-7xl text-neutral-800',
-	h3: 'font-serif font-normal text-4xl md:text-5xl lg:text-6xl text-neutral-800',
-	h4: 'font-serif font-normal text-3xl md:text-4xl lg:text-5xl text-neutral-800',
-	h5: 'font-serif font-normal text-2xl md:text-3xl lg:text-4xl text-neutral-800',
-	h6: 'font-serif font-normal text-xl md:text-2xl 2xl:text-3xl text-neutral-800',
+	h1: 'font-serif font-normal text-6xl md:text-7xl lg:text-8xl text-secondary-800',
+	h2: 'font-serif font-normal text-5xl md:text-6xl lg:text-7xl text-secondary-800',
+	h3: 'font-serif font-normal text-4xl md:text-5xl lg:text-6xl text-secondary-800',
+	h4: 'font-serif font-normal text-3xl md:text-4xl lg:text-5xl text-secondary-800',
+	h5: 'font-serif font-normal text-2xl md:text-3xl lg:text-4xl text-secondary-800',
+	h6: 'font-serif font-normal text-xl md:text-2xl 2xl:text-3xl text-secondary-800',
 	h7: 'font-serif font-normal text-base md:text-lg lg:text-xl',
-	paraXs: 'font-sans font-normal text-xs text-neutral-800',
-	paraSm: 'font-sans font-normal text-sm text-neutral-800',
-	paraBase: 'font-sans font-normal text-base text-neutral-800',
-	paraLg: 'font-sans font-normal text-lg text-neutral-800',
-	paraXl: 'font-sans font-normal text-lg lg:text-xl text-neutral-800',
+	paraXs: 'font-sans font-normal text-xs text-secondary-800',
+	paraSm: 'font-sans font-normal text-sm text-secondary-800',
+	paraBase: 'font-sans font-normal text-base text-secondary-800',
+	paraLg: 'font-sans font-normal text-lg text-secondary-800',
+	paraXl: 'font-sans font-normal text-lg lg:text-xl text-secondary-800',
 	overline:
-		'font-serif font-normal text-base md:text-lg lg:text-xl text-neutral-800 tracking-[4px] md:tracking-[6px] lg:tracking-[10px]',
-	quote: 'font-serif font-normal text-4xl md:text-5xl lg:text-6xl text-neutral-800',
+		'font-serif font-normal text-base md:text-lg lg:text-xl text-secondary-800 tracking-[4px] md:tracking-[6px] lg:tracking-[10px]',
+	quote: 'font-serif font-normal text-4xl md:text-5xl lg:text-6xl text-secondary-800',
 	sr: 'sr-only'
 };
 
