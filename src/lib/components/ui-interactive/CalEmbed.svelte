@@ -8,7 +8,7 @@
 	interface CalEmbed {
 		_uid: string;
 		cal_link: string;
-		cal_view: 'month' | 'week' | 'day'; // Assuming these are the possible values
+		cal_view: 'month_view' | 'week_view' | 'column_view'; // Assuming these are the possible values
 		cal_theme: 'light' | 'dark' | 'auto';
 		component: 'cal_com_embed';
 		cal_color_dark: ColorPicker;
@@ -29,6 +29,7 @@
 	let calLightThemeHex = $state(blok?.cal_color_light?.color && blok?.cal_color_light?.color.length > 0 ? blok?.cal_color_light?.color : '#000000');
 	let calDarkThemeHex = $state(blok?.cal_color_dark?.color && blok?.cal_color_dark?.color.length > 0 ? blok?.cal_color_dark?.color : '#FFFFFF');
 	let calTheme = blok.cal_theme && blok.cal_theme.length > 0 ? blok.cal_theme : 'auto';
+	let calView = blok.cal_view && blok.cal_view.length > 0 ? blok.cal_view : 'month_view'
 	let linkHandled = $state(false);
 	let script = $state<HTMLScriptElement>();
 
@@ -96,7 +97,7 @@
                 dark: { 'cal-brand': '${calDarkThemeHex}' } 
             }, 
             hideEventTypeDetails: false, 
-            layout: '${blok.cal_view}_view'
+            layout: '${calView}'
         });
 	`;
 	};
@@ -118,11 +119,4 @@
 	});
 </script>
 
-<div class="flex flex-col gap-4">
-	<p>{blok.cal_color_dark.color}</p>
-	<p>{blok.cal_color_light.color}</p>
-	<p>{blok.cal_link}, is full link: {blok.cal_link.includes('https://cal.com')}</p>
-	<p>{blok.cal_theme}</p>
-	<p>{blok.cal_view}</p>
-</div>
 <div style="width:100%;height:100%;overflow:scroll" id={calId}></div>
