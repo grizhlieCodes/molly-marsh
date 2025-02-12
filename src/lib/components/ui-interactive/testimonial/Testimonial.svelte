@@ -25,7 +25,8 @@
 					<StoryblokComponent blok={blok.testimonial_summary[0]}></StoryblokComponent>
 				{/if}
 				<div class="flex w-full flex-row flex-wrap justify-between gap-4">
-					{#if blok.testimonial_name && blok.testimonial_name.length > 0}
+					{#if blok.testimonial_name && blok.testimonial_name.length >
+					0 && blok.hide_name_on_front === false}
 						<div class="w-max">
 							<StoryblokComponent blok={blok.testimonial_name[0]}></StoryblokComponent>
 						</div>
