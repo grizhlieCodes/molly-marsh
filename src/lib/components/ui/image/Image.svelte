@@ -63,7 +63,7 @@
 			<img
 				src="{blok.image.filename}/m/300x0"
 				class="h-full w-full
-			border object-cover blur-lg"
+			border object-cover"
 				role="presentation"
 				alt={undefined}
 			/>
