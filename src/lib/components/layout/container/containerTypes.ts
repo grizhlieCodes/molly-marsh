@@ -190,7 +190,7 @@ export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch' | '
 export type WrapType = 'wrap' | 'noWrap' | 'none';
 export type FlexType = 'default' | 'flexAuto' | 'flexInitial' | 'flexNone' | 'none';
 export type AlignSelfType = 'selfAuto' | 'selfStart' | 'selfEnd' | 'selfCenter' | 'selfStretch' | 'selfBaseline' | 'none';
-export type DisplayOption = 'flex' | 'hidden' | 'none';
+export type DisplayOption = 'flex' | 'hidden' | 'block' | 'none';
 
 // Visual types
 export type DimensionType = 'full' | 'max' | 'unset';

@@ -8,8 +8,7 @@
 <section
 	id={section_id}
 	aria-labelledby={section_labelledby}
-	class="mx-auto
-flex w-full max-w-4xl flex-col items-center gap-10 px-6 py-12"
+	class="mx-auto flex w-full max-w-4xl flex-col items-center gap-10 px-6 py-12"
 >
 	<div class="fancy-column-hero__heading w-full">
 		<StoryblokComponent blok={blok.hero_heading[0]}></StoryblokComponent>
@@ -29,7 +28,7 @@ flex w-full max-w-4xl flex-col items-center gap-10 px-6 py-12"
 	</div>
 </section>
 
-<style lang="postcss">
+<!-- <style lang="postcss">
 	:global {
 		.fancy-column-hero__image img {
 			object-position: 60% 40%;
@@ -58,4 +57,4 @@ flex w-full max-w-4xl flex-col items-center gap-10 px-6 py-12"
 			}
 		}
 	}
-</style>
+</style> -->

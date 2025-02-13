@@ -83,11 +83,11 @@ export const borderRadiusOptions: Type.BorderRadiusOptions = {
 // BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS ---
 
 export const displayOptions: Type.DisplayOptions = {
-	def: { flex: 'flex', hidden: 'hidden', none: '' },
-	mm: { flex: 'mm:flex', hidden: 'mm:hidden', none: '' },
-	lm: { flex: 'lm:flex', hidden: 'lm:hidden', none: '' },
-	md: { flex: 'md:flex', hidden: 'md:hidden', none: '' },
-	lg: { flex: 'lg:flex', hidden: 'lg:hidden', none: '' }
+	def: { flex: 'flex', hidden: 'hidden', block: 'block', none: '' },
+	mm: { flex: 'mm:flex', hidden: 'mm:hidden', block: 'mm:block', none: '' },
+	lm: { flex: 'lm:flex', hidden: 'lm:hidden', block: 'lm:block', none: '' },
+	md: { flex: 'md:flex', hidden: 'md:hidden', block: 'md:block', none: '' },
+	lg: { flex: 'lg:flex', hidden: 'lg:hidden', block: 'lg:block', none: '' }
 };
 
 export const directionOptions: Type.DirectionOptions = {
