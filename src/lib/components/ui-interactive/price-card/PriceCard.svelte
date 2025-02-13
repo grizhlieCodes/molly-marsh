@@ -54,10 +54,9 @@ justify-between gap-8 rounded-lg  p-5
 			<div class="flex flex-nowrap justify-between">
 				{#if blok.card_title && blok.card_title.length > 0}
 					<div
-						class="w-max max-w-[80%] {textStyles.para6}
-                text-body-primary-800 font-medium"
+						class="w-max max-w-[80%] {textStyles.para6} font-medium"
 					>
-						<h4>{blok.card_title}</h4>
+						<h4 class="text-body-primary-800">{blok.card_title}</h4>
 					</div>
 				{/if}
 				{#if blok.card_recommended_option}
@@ -71,12 +70,11 @@ justify-between gap-8 rounded-lg  p-5
 				{/if}
 			</div>
 			<div class="price-container flex items-end gap-4">
+
 				{#if blok.card_price && blok.card_price.length > 0}
-					<span class="price {textStyles.para9} text-body-secondary-900 font-medium">
-						{blok.card_price === '0.00' ? 'FREE' : '£' + blok.card_price}
-						<!-- {blok.card_price} -->
-					</span>
+					<StoryblokComponent blok={blok.card_price[0]}></StoryblokComponent>
 				{/if}
+
 				{#if blok.card_price_helper_text && blok.card_price_helper_text.length > 0}
 					<span
 						class="price_helper_text {textStyles.para4}

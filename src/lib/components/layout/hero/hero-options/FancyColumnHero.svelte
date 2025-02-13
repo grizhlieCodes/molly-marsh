@@ -13,7 +13,7 @@
 	<div class="fancy-column-hero__heading w-full">
 		<StoryblokComponent blok={blok.hero_heading[0]}></StoryblokComponent>
 	</div>
-	<div class="fancy-column-hero__image aspect-3/2 w-full">
+	<div class="fancy-column-hero__image w-full">
 		<StoryblokComponent blok={blok.hero_image[0]}></StoryblokComponent>
 	</div>
 	<div class="fancy-column-hero__text w-full max-w-3xl">
