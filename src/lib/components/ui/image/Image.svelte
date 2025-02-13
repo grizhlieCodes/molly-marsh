@@ -3,6 +3,10 @@
 	import * as ops from './imageOptions';
 	import { storyblokEditable } from '@storyblok/svelte';
 
+	const getPositionValue = (value: string | undefined | null) => {
+		return (!value || value.toString() === '') ? undefined : value.trim();
+	}
+
 	let { blok }: { blok: ImageStoryblok } = $props();
 
 	let borderRadius = $state(ops.borderRadiusOptions[blok.border_radius.value] ?? ops.borderRadiusOptions[0]);
@@ -11,7 +15,7 @@
 
 	let IMAGE_BASE_STYLES = `h-full w-full object-cover`;
 	let imageStylesObj = $state({
-		objectPosition: ops.objectPositionOptions[blok.object_position] ?? ops.objectPositionOptions.center,
+		// objectPosition: ops.objectPositionOptions[blok.object_position] ?? ops.objectPositionOptions.center,
 		mixBlendmode: ops.mixBlendModeOptions[blok.mix_blendmode] ?? ops.mixBlendModeOptions.normal,
 		blurFilter: ops.blurFilterOptions[blok.blur_filter.value] ?? ops.blurFilterOptions[0],
 		grayscaleFilter: ops.grayscaleFilterOptions[blok.grayscale_filter.value] ?? ops.grayscaleFilterOptions[0],
@@ -20,8 +24,10 @@
 		saturateFilter: ops.saturateFilterOptions[blok.saturate_filter.value] ?? ops.saturateFilterOptions[0],
 		contrastFilter: ops.contrastFilterOptions[blok.contrast_filter.value] ?? ops.contrastFilterOptions[0]
 	});
-	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius}`);
 
+	let IMG_OBJECT_POSITION = `object-[var(--object-pos-def,_unset)]  object-[var(--object-pos-mm,_var(--object-pos-def))]  object-[var(--object-pos-lm,_var(--object-pos-mm))]  object-[var(--object-pos-md,_var(--object-pos-lm))]  object-[var(--object-pos-lg,_var(--object-pos-md))] `;
+
+	let imageStyles = $state(`${Object.values(imageStylesObj).join(' ')} ${IMAGE_BASE_STYLES} ${borderRadius} ${IMG_OBJECT_POSITION}`);
 
 	let CONTAINER_BASE_STYLES = `relative h-full w-full`;
 	let containerStylesObj = $state({
@@ -46,16 +52,24 @@
 			: undefined
 	);
 
-	// TODO
-	// Add Figcaption
-	// Add Focal point
+	$inspect({
+		def: blok.object_position_default,
+		mm: blok.object_position_mm,
+		lm: blok.object_position_lm,
+		md: blok.object_position_md,
+		lg: blok.object_position_lg
+	});
 </script>
 
 <div
-	style:min-height={minHeight}
-	class="{containerStyles}
-{customDecorationStyling} z-5"
 	use:storyblokEditable={blok}
+	style:min-height={minHeight}
+	class="{containerStyles} {customDecorationStyling} z-5"
+	style:--object-pos-def={getPositionValue(blok.object_position_default) || undefined}
+	style:--object-pos-mm={getPositionValue(blok.object_position_mm) || 'var(--object-pos-def)'}
+	style:--object-pos-lm={getPositionValue(blok.object_position_lm) || 'var(--object-pos-mm)'}
+	style:--object-pos-md={getPositionValue(blok.object_position_md) || 'var(--object-pos-lm)'}
+	style:--object-pos-lg={getPositionValue(blok.object_position_lg) || 'var(--object-pos-md)'}
 >
 	<picture class="h-full w-full">
 		<!-- Low Quality Placeholder -->

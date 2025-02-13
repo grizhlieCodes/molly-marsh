@@ -28,7 +28,7 @@
 	</div>
 </section>
 
-<!-- <style lang="postcss">
+<style lang="postcss">
 	:global {
 		.fancy-column-hero__image img {
 			object-position: 60% 40%;
@@ -57,4 +57,4 @@
 			}
 		}
 	}
-</style> -->
+</style>
