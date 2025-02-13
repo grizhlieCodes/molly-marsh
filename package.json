@@ -23,6 +23,7 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
+		"mjml": "^4.15.3",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"storyblok-generate-ts": "^2.1.0",
@@ -35,6 +36,7 @@
 		"zod": "^3.24.1"
 	},
 	"dependencies": {
+		"@getbrevo/brevo": "^2.2.0",
 		"@notionhq/client": "^2.2.15",
 		"@storyblok/svelte": "^4.0.11",
 		"@stripe/stripe-js": "^5.6.0",
@@ -45,6 +47,7 @@
 		"lucide-svelte": "^0.469.0",
 		"nodemailer": "^6.9.16",
 		"prettier-plugin-tailwindcss": "^0.6.9",
+		"sib-api-v3-sdk": "^8.5.0",
 		"storyblok-js-client": "^6.10.7",
 		"stripe": "^17.6.0",
 		"svelte-sonner": "^0.3.28",
