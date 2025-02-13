@@ -82,12 +82,20 @@ export const borderRadiusOptions: Type.BorderRadiusOptions = {
 
 // BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS --- BREAKPOINT OPTIONS ---
 
+export const displayOptions: Type.DisplayOptions = {
+	def: { flex: 'flex', hidden: 'hidden', none: '' },
+	mm: { flex: 'mm:flex', hidden: 'mm:hidden', none: '' },
+	lm: { flex: 'lm:flex', hidden: 'lm:hidden', none: '' },
+	md: { flex: 'md:flex', hidden: 'md:hidden', none: '' },
+	lg: { flex: 'lg:flex', hidden: 'lg:hidden', none: '' }
+};
+
 export const directionOptions: Type.DirectionOptions = {
-	def: { row: 'flex-row', rowReversed: 'flex-row-reverse', column: 'flex-col', columnReversed: 'flex-col-reverse', none: '' },
-	mm: { row: 'mm:flex-row', rowReversed: 'mm:flex-row-reverse', column: 'mm:flex-col', columnReversed: 'mm:flex-col-reverse', none: '' },
-	lm: { row: 'lm:flex-row', rowReversed: 'lm:flex-row-reverse', column: 'lm:flex-col', columnReversed: 'lm:flex-col-reverse', none: '' },
-	md: { row: 'md:flex-row', rowReversed: 'md:flex-row-reverse', column: 'md:flex-col', columnReversed: 'md:flex-col-reverse', none: '' },
-	lg: { row: 'lg:flex-row', rowReversed: 'lg:flex-row-reverse', column: 'lg:flex-col', columnReversed: 'lg:flex-col-reverse', none: '' }
+	def: { row: 'flex-row', rowReversed: 'flex-row-reverse', column: 'flex-col', columnReversed: 'flex-col-reverse', hidden: 'hidden', none: '' },
+	mm: { row: 'mm:flex-row', rowReversed: 'mm:flex-row-reverse', column: 'mm:flex-col', columnReversed: 'mm:flex-col-reverse', hidden: 'mm:hidden', none: '' },
+	lm: { row: 'lm:flex-row', rowReversed: 'lm:flex-row-reverse', column: 'lm:flex-col', columnReversed: 'lm:flex-col-reverse', hidden: 'lm:hidden', none: '' },
+	md: { row: 'md:flex-row', rowReversed: 'md:flex-row-reverse', column: 'md:flex-col', columnReversed: 'md:flex-col-reverse', hidden: 'md:hidden', none: '' },
+	lg: { row: 'lg:flex-row', rowReversed: 'lg:flex-row-reverse', column: 'lg:flex-col', columnReversed: 'lg:flex-col-reverse', hidden: 'lg:hidden', none: '' }
 };
 
 export const justifyContentOptions: Type.JustifyOptions = {

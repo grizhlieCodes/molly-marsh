@@ -25,6 +25,7 @@
 	});
 
 	let breakpointStyles = $state({
+		display: getBreakpointOptions(ops.displayOptions, blok.display_default, blok.display_mm, blok.display_lm, blok.display_md, blok.display_lg),
 		flexDirections: getBreakpointOptions(ops.directionOptions, blok.content_direction_default, blok.content_direction_mm, blok.content_direction_lm, blok.content_direction_md, blok.content_direction_lg),
 		justifyContent: getBreakpointOptions(ops.justifyContentOptions, blok.justify_content_default, blok.justify_content_mm, blok.justify_content_lm, blok.justify_content_md, blok.justify_content_lg),
 		alignItems: getBreakpointOptions(ops.alignItemsOptions, blok.align_items_default, blok.align_items_mm, blok.align_items_lm, blok.align_items_md, blok.align_items_lg),
@@ -47,12 +48,28 @@
 	let minimum_width = $state(blok.min_width_default.value !== 0 ? `${blok.min_width_default.value}${blok.min_width_unit_default}` : undefined);
 
 	// All styling string
-	let BASE_CLASSES = 'flex';
+	let BASE_CLASSES = `flex aspect-[var(--aspect-def,_var(--aspect-base))] mm:aspect-[var(--aspect-mm,_var(--aspect-def))] lm:aspect-[var(--aspect-lm,_var(--aspect-mm))] md:aspect-[var(--aspect-md,_var(--aspect-lm))] lg:aspect-[var(--aspect-lg,_var(--aspect-md))]`; // Add this here
 	let styling = $derived(`${BASE_CLASSES} ${Object.values(breakpointStyles).join(' ')} ${Object.values(generalStyling).join(' ')} ${generalData.class}`);
 </script>
 
-<div id={generalData.id} use:storyblokEditable={blok} class={styling} style:min-height={minimum_height} style:min-width={minimum_width} style={customCss}>
+<div
+	id={generalData.id}
+	use:storyblokEditable={blok}
+	class={styling}
+	style:min-height={minimum_height}
+	style:min-width={minimum_width}
+	style={customCss}
+	style:--aspect-base={'auto'}
+	style:--aspect-def={blok?.aspect_ratio_default && blok?.aspect_ratio_default.length > 0 ? blok?.aspect_ratio_default : undefined}
+	style:--aspect-mm={blok?.aspect_ratio_mm && blok?.aspect_ratio_mm.length > 0 ? blok?.aspect_ratio_mm : undefined}
+	style:--aspect-lm={blok?.aspect_ratio_lm && blok?.aspect_ratio_lm.length > 0 ? blok?.aspect_ratio_lm : undefined}
+	style:--aspect-md={blok?.aspect_ratio_md && blok?.aspect_ratio_md.length > 0 ? blok?.aspect_ratio_md : undefined}
+	style:--aspect-lg={blok?.aspect_ratio_lg && blok?.aspect_ratio_lg.length > 0 ? blok?.aspect_ratio_lg : undefined}
+>
 	{#each blok.blocks as blokk}
 		<StoryblokComponent blok={blokk} />
 	{/each}
 </div>
+
+<style>
+</style>
