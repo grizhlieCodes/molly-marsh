@@ -5,6 +5,10 @@
 	import * as ops from './containerOptions';
 	import { getBreakpointOptions } from './containerUtilities.svelte';
 
+	const getAspectRatio = (value: string | undefined | null) => {
+		return !value || value.toString() === '' ? undefined : value.trim();
+	};
+
 	// Data from Storyblok
 	let { blok }: { blok: ContainerStoryblok } = $props();
 
@@ -48,8 +52,10 @@
 	let minimum_width = $state(blok.min_width_default.value !== 0 ? `${blok.min_width_default.value}${blok.min_width_unit_default}` : undefined);
 
 	// All styling string
-	let BASE_CLASSES = `flex aspect-[var(--aspect-def,_var(--aspect-base))] mm:aspect-[var(--aspect-mm,_var(--aspect-def))] lm:aspect-[var(--aspect-lm,_var(--aspect-mm))] md:aspect-[var(--aspect-md,_var(--aspect-lm))] lg:aspect-[var(--aspect-lg,_var(--aspect-md))]`; // Add this here
-	let styling = $derived(`${BASE_CLASSES} ${Object.values(breakpointStyles).join(' ')} ${Object.values(generalStyling).join(' ')} ${generalData.class}`);
+	let BASE_CLASSES = `flex`;
+	let ASPECT_RATIO_RULES = `aspect-[var(--aspect-def,_var(--aspect-base))] mm:aspect-[var(--aspect-mm,_var(--aspect-def))] lm:aspect-[var(--aspect-lm,_var(--aspect-mm))] md:aspect-[var(--aspect-md,_var(--aspect-lm))] lg:aspect-[var(--aspect-lg,_var(--aspect-md))]`;
+
+	let styling = $derived(`${BASE_CLASSES} ${ASPECT_RATIO_RULES} ${Object.values(breakpointStyles).join(' ')} ${Object.values(generalStyling).join(' ')} ${generalData.class}`);
 </script>
 
 <div
@@ -59,12 +65,11 @@
 	style:min-height={minimum_height}
 	style:min-width={minimum_width}
 	style={customCss}
-	style:--aspect-base={'auto'}
-	style:--aspect-def={blok?.aspect_ratio_default && blok?.aspect_ratio_default.length > 0 ? blok?.aspect_ratio_default : undefined}
-	style:--aspect-mm={blok?.aspect_ratio_mm && blok?.aspect_ratio_mm.length > 0 ? blok?.aspect_ratio_mm : undefined}
-	style:--aspect-lm={blok?.aspect_ratio_lm && blok?.aspect_ratio_lm.length > 0 ? blok?.aspect_ratio_lm : undefined}
-	style:--aspect-md={blok?.aspect_ratio_md && blok?.aspect_ratio_md.length > 0 ? blok?.aspect_ratio_md : undefined}
-	style:--aspect-lg={blok?.aspect_ratio_lg && blok?.aspect_ratio_lg.length > 0 ? blok?.aspect_ratio_lg : undefined}
+	style:--aspect-def={getAspectRatio(blok?.aspect_ratio_default) || 'none'}
+	style:--aspect-mm={getAspectRatio(blok?.aspect_ratio_mm) || 'var(--aspect-def)'}
+	style:--aspect-lm={getAspectRatio(blok?.aspect_ratio_lm) || 'var(--aspect-mm)'}
+	style:--aspect-md={getAspectRatio(blok?.aspect_ratio_md) || 'var(--aspect-lm)'}
+	style:--aspect-lg={getAspectRatio(blok?.aspect_ratio_lg) || 'var(--aspect-md)'}
 >
 	{#each blok.blocks as blokk}
 		<StoryblokComponent blok={blokk} />
