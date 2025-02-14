@@ -2,87 +2,156 @@ import { json, error } from '@sveltejs/kit';
 import StoryblokClient from 'storyblok-js-client';
 import { renderRichText } from '@storyblok/svelte';
 import { PUBLIC_STORYBLOK_ACCESS_TOKEN } from '$env/static/public';
-import { SECRET_BREVO_KEY } from '$env/static/private';
 import mjml2html from 'mjml';
-// import Brevo from '@getbrevo/brevo'; // Correct import
-// Use require, as per the Brevo example
-// const SibApiV3Sdk = require('sib-api-v3-sdk');
-import SibApiV3Sdk from 'sib-api-v3-sdk';
-// Debug what we get from Brevo
-// console.log('Brevo object:', Brevo);
-// console.log('Brevo keys:', Object.keys(Brevo));
 
+// Brevo
+import { SECRET_BREVO_KEY } from '$env/static/private';
+const BREVO_LIST_ID = 3;
+import SibApiV3Sdk from 'sib-api-v3-sdk';
+
+// Initialize Storyblok client
 const Storyblok = new StoryblokClient({
 	accessToken: PUBLIC_STORYBLOK_ACCESS_TOKEN
 });
 
-// --- Brevo Client Initialization ---
-
-const brevoListId = 3;
-
-// --- Brevo Client Initialization (CORRECTED) ---
-// let defaultClient = Brevo.ApiClient.instance;
-
-// // Configure API key authorization: api-key
-// let apiKey = defaultClient.authentications['api-key'];
-// apiKey.apiKey = SECRET_BREVO_KEY;
-
-// let apiInstance = new Brevo.EmailCampaignsApi();
-
-// Storyblok AWS IPs - Updated list
-const STORYBLOK_IPS = [
-	'3.68.233.63', // EU (Frankfurt)
-	'3.127.108.63', // EU (Frankfurt)
-	'3.67.105.118', // EU (Frankfurt)
-	'63.177.76.6', // Additional Storyblok IP
-	'3.76.34.218'
-];
-
-// Set this to true during development/testing
-const SKIP_IP_VALIDATION = true; // TODO: Set to false in production
-
-function getOriginalIP(request) {
-	const forwardedFor = request.headers.get('x-forwarded-for');
-	if (forwardedFor) {
-		const ips = forwardedFor.split(',').map((ip) => ip.trim());
-		return ips[0];
-	}
-
-	return request.headers.get('cf-connecting-ip') || request.headers.get('x-real-ip') || getClientAddress();
+// Story processing functions
+async function getStoryData(storyId) {
+	const storyRes = await Storyblok.getStory(storyId, {
+		version: 'published'
+	});
+	return storyRes.data.story;
 }
 
-function isValidStoryblokIP(ip) {
-	if (SKIP_IP_VALIDATION) {
-		return true;
-	}
-	return STORYBLOK_IPS.includes(ip);
+function isValidArticle(storyData) {
+	return storyData?.content?.component === 'article';
 }
 
+function createNewsletterData(webhook, storyData) {
+	return {
+		body: webhook,
+		storyId: webhook.story_id,
+		fullSlug: webhook.full_slug,
+		spaceId: webhook.space_id,
+		action: webhook.action,
+		text: webhook.text,
+		title: storyData.name,
+		content: storyData.content
+	};
+}
+
+// Email template functions
+function createMjmlTemplate(title, content) {
+	const renderedHtml = renderRichText(content);
+	return `
+	  <mjml>
+		<mj-head>
+		  <mj-font name="Playfair Display" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
+		  <mj-style>
+			@media only screen and (max-width:480px) {
+			  .mobile-padding div {
+				padding-left: 12px !important;
+				padding-right: 12px !important;
+			  }
+			}
+			h1 {
+			  font-family: 'Playfair Display', serif;
+			  font-size: 42px;
+			  line-height: 1.2;
+			  color: #1a1a1a;
+			  font-weight: 700;
+			  margin-bottom: 20px;
+			  text-align: left;
+			}
+			h2 {
+			  font-family: 'Playfair Display', serif;
+			  font-size: 32px;
+			  line-height: 1.3;
+			  color: #1a1a1a;
+			  font-weight: 700;
+			  margin-top: 40px;
+			  margin-bottom: 20px;
+			}
+			p {
+			  font-size: 16px;
+			  line-height: 1.8;
+			  color: #333333;
+			  margin-bottom: 20px;
+			}
+			a {
+			  color: #2F5851;
+			  text-decoration: underline;
+			}
+			ul, ol {
+			  margin-left: 0;
+			  padding-left: 24px;
+			  margin-bottom: 20px;
+			}
+			li {
+			  margin-bottom: 10px;
+			  line-height: 1.6;
+			  color: #333333;
+			  padding-left: 6px;
+			}
+			blockquote {
+			  border-left: 4px solid #2F5851;
+			  padding-left: 20px;
+			  margin-left: 0;
+			  margin-right: 0;
+			  font-style: italic;
+			}
+		  </mj-style>
+		  <mj-attributes>
+			<mj-all font-family="Arial, sans-serif" />
+			<mj-text font-size="16px" line-height="1.8" color="#333333" />
+			<mj-section padding="40px 20px" />
+			<mj-column padding="0 10px" />
+		  </mj-attributes>
+		</mj-head>
+		<mj-body background-color="#ffffff" width="680px">
+		  <mj-wrapper padding="0" background-color="#ffffff">
+			<!-- Header Section -->
+			<mj-section padding="40px 0 0 0" background-color="#ffffff">
+			  <mj-column css-class="mobile-padding" padding="0 20px" width="100%">
+				<mj-text>
+				  <h1>${title}</h1>
+				</mj-text>
+			  </mj-column>
+			</mj-section>
+			
+			<!-- Content Section -->
+			<mj-section padding="0" background-color="#ffffff">
+			  <mj-column padding="0 20px" width="100%">
+				<mj-text>
+				  ${renderedHtml}
+				</mj-text>
+			  </mj-column>
+			</mj-section>
+			
+			<!-- Footer Section -->
+			<mj-section padding="0 0 40px 0" background-color="#ffffff">
+			  <mj-column padding="0 20px" width="100%">
+				<mj-text align="center" color="#666666" font-size="14px">
+				  <p style="margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px;">
+					© ${new Date().getFullYear()} Molly Marsh Coaching. All rights reserved.
+					<br/>
+					<a href="https://mollymarshcoaching.com" style="color: #2F5851; text-decoration: none;">www.mollymarshcoaching.com</a>
+				  </p>
+				</mj-text>
+			  </mj-column>
+			</mj-section>
+		  </mj-wrapper>
+		</mj-body>
+		  </mj-wrapper>
+		</mj-body>
+	  </mjml>
+	`;
+  }
+
+// Main POST handler
 export async function POST({ request, getClientAddress }) {
 	try {
-		const clientIP = getOriginalIP(request);
-
-		console.log('Received webhook from IP:', clientIP);
-
-		if (!isValidStoryblokIP(clientIP)) {
-			console.warn(`Unauthorized webhook attempt from IP: ${clientIP}`, {
-				headers: Object.fromEntries(request.headers),
-				ip: clientIP
-			});
-			return json({ error: 'Unauthorized' }, { status: 401 });
-		}
-
 		const topic = request.headers.get('x-storyblok-topic');
 		const body = await request.json();
-
-		// console.log('Received webhook:', {
-		//     topic,
-		//     action: body.action,
-		//     spaceId: body.space_id,
-		//     storyId: body.story_id,
-		//     fullSlug: body.full_slug,
-		//     clientIP
-		// });
 
 		if (topic !== 'story.published') {
 			return json({
@@ -90,86 +159,21 @@ export async function POST({ request, getClientAddress }) {
 			});
 		}
 
-		// Extract relevant data for newsletter
-		let newsletterData = {
-			body,
-			storyId: body.story_id,
-			fullSlug: body.full_slug,
-			spaceId: body.space_id,
-			action: body.action,
-			text: body.text
-		};
-
-		const storyRes = await Storyblok.getStory(newsletterData.storyId, {
-			version: 'published'
-		});
-
-		const storyData = storyRes.data.story;
-
-		if (storyData?.content?.component !== 'article') {
-			console.log("Ignoring, received data but not an article")
+		// Get and validate story data
+		const storyData = await getStoryData(body.story_id);
+		if (!isValidArticle(storyData)) {
+			console.log('Ignoring, received data but not an article');
 			return json({
 				message: 'Webhook received but ignored - not an article'
 			});
 		}
 
-
-		newsletterData = {
-			...newsletterData,
-			title: storyData.name,
-			content: storyData.content
-		};
-
-
+		// Create newsletter data
+		const newsletterData = createNewsletterData(body, storyData);
 		console.log('Newsletter data: ', { ...newsletterData });
 
-		const renderedHtml = renderRichText(newsletterData.content.article_content);
-
-		let mjmlTemplate = `
-        <mjml>
-          <mj-head>
-            <mj-style>
-              h1 {
-                font-size: 28px;
-                color: #003366;
-                font-family: Arial, sans-serif;
-                text-align: center; /* Center the title */
-              }
-              p {
-                font-size: 16px;
-                line-height: 1.6;
-              }
-              a {
-                color: #ff6600;
-                text-decoration: underline;
-              }
-            </mj-style>
-             <mj-attributes>
-                <mj-all font-family="Arial, sans-serif" />
-                <mj-text font-size="16px" line-height="1.6" color="#555555" />
-                <mj-section padding="20px 0" />
-                <mj-column padding="0" />
-            </mj-attributes>
-          </mj-head>
-          <mj-body background-color="#f4f4f4">
-            <mj-section>
-              <mj-column>
-                <mj-text>
-                  <h1>${newsletterData.title}</h1>
-                </mj-text>
-              </mj-column>
-            </mj-section>
-            <mj-section>
-              <mj-column>
-                <mj-text>
-                  ${renderedHtml}
-                </mj-text>
-              </mj-column>
-            </mj-section>
-          </mj-body>
-        </mjml>
-        `;
-
+		// Create email template
+		const mjmlTemplate = createMjmlTemplate(newsletterData.title, newsletterData.content.article_content);
 		const { html, errors } = mjml2html(mjmlTemplate);
 
 		if (errors.length > 0) {
@@ -194,7 +198,7 @@ export async function POST({ request, getClientAddress }) {
 		};
 		emailCampaigns.type = 'classic';
 		emailCampaigns.htmlContent = html;
-		emailCampaigns.recipients = { listIds: [brevoListId] };
+		emailCampaigns.recipients = { listIds: [BREVO_LIST_ID] };
 
 		try {
 			const campaignData = await apiInstance.createEmailCampaign(emailCampaigns);
