@@ -107,7 +107,7 @@ function createMjmlTemplate(title, content) {
 			<mj-column padding="0 10px" />
 		  </mj-attributes>
 		</mj-head>
-		<mj-body background-color="#ffffff" width="680px">
+		<mj-body background-color="#EFF8F6" width="680px">
 		  <mj-wrapper padding="0" background-color="#ffffff">
 			<!-- Header Section -->
 			<mj-section padding="40px 0 0 0" background-color="#ffffff">
