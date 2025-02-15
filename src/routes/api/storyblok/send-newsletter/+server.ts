@@ -40,26 +40,137 @@ function createNewsletterData(webhook, storyData) {
 }
 
 // Email template functions
-function createMjmlTemplate(title, content) {
+// function createMjmlTemplate(title, content) {
+// 	const renderedHtml = renderRichText(content);
+// 	return `
+// 	  <mjml>
+// 		<mj-head>
+// 		  <mj-font name="Playfair Display" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
+// 		  <mj-style>
+// 			@media only screen and (max-width:480px) {
+// 			  .mobile-padding div {
+// 				padding-left: 12px !important;
+// 				padding-right: 12px !important;
+// 			  }
+// 			}
+// 			h1 {
+// 			  font-family: 'Playfair Display', serif;
+// 			  font-size: 42px;
+// 			  line-height: 1.2;
+// 			  color: #1a1a1a;
+// 			  font-weight: 700;
+// 			  margin-bottom: 20px;
+// 			  text-align: left;
+// 			}
+// 			h2 {
+// 			  font-family: 'Playfair Display', serif;
+// 			  font-size: 32px;
+// 			  line-height: 1.3;
+// 			  color: #1a1a1a;
+// 			  font-weight: 700;
+// 			  margin-top: 40px;
+// 			  margin-bottom: 20px;
+// 			}
+// 			p {
+// 			  font-size: 16px;
+// 			  line-height: 1.8;
+// 			  color: #333333;
+// 			  margin-bottom: 20px;
+// 			}
+// 			a {
+// 			  color: #2F5851;
+// 			  text-decoration: underline;
+// 			}
+// 			ul, ol {
+// 			  margin-left: 0;
+// 			  padding-left: 24px;
+// 			  margin-bottom: 20px;
+// 			}
+// 			li {
+// 			  margin-bottom: 10px;
+// 			  line-height: 1.6;
+// 			  color: #333333;
+// 			  padding-left: 6px;
+// 			}
+// 			blockquote {
+// 			  border-left: 4px solid #2F5851;
+// 			  padding-left: 20px;
+// 			  margin-left: 0;
+// 			  margin-right: 0;
+// 			  font-style: italic;
+// 			}
+// 		  </mj-style>
+// 		  <mj-attributes>
+// 			<mj-all font-family="Arial, sans-serif" />
+// 			<mj-text font-size="16px" line-height="1.8" color="#333333" />
+// 			<mj-section padding="40px 20px" />
+// 			<mj-column padding="0 10px" />
+// 		  </mj-attributes>
+// 		</mj-head>
+// 		<mj-body background-color="#EFF8F6" width="680px">
+// 		  <mj-wrapper padding="0" background-color="#ffffff">
+// 			<!-- Header Section -->
+// 			<mj-section padding="40px 0 0 0" background-color="#ffffff">
+// 			  <mj-column css-class="mobile-padding" padding="0 20px" width="100%">
+// 				<mj-text>
+// 				  <h1>${title}</h1>
+// 				</mj-text>
+// 			  </mj-column>
+// 			</mj-section>
+
+// 			<!-- Content Section -->
+// 			<mj-section padding="0" background-color="#ffffff">
+// 			  <mj-column padding="0 20px" width="100%">
+// 				<mj-text>
+// 				  ${renderedHtml}
+// 				</mj-text>
+// 			  </mj-column>
+// 			</mj-section>
+
+// 			<!-- Footer Section -->
+// 			<mj-section padding="0 0 40px 0" background-color="#ffffff">
+// 			  <mj-column padding="0 20px" width="100%">
+// 				<mj-text align="center" color="#666666" font-size="14px">
+// 				  <p style="margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px;">
+// 					© ${new Date().getFullYear()} Molly Marsh Coaching. All rights reserved.
+// 					<br/>
+// 					<a href="https://mollymarshcoaching.com" style="color: #2F5851; text-decoration: none;">www.mollymarshcoaching.com</a>
+// 				  </p>
+// 				</mj-text>
+// 			  </mj-column>
+// 			</mj-section>
+// 		  </mj-wrapper>
+// 		</mj-body>
+// 		  </mj-wrapper>
+// 		</mj-body>
+// 	  </mjml>
+// 	`;
+//   }
+
+function createMjmlTemplate(title, content, summary) {
 	const renderedHtml = renderRichText(content);
 	return `
-	  <mjml>
+		<mjml>
 		<mj-head>
-		  <mj-font name="Playfair Display" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
-		  <mj-style>
+			<mj-font name="Playfair Display" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
+			<mj-style>
 			@media only screen and (max-width:480px) {
-			  .mobile-padding div {
-				padding-left: 12px !important;
-				padding-right: 12px !important;
-			  }
+				.mobile-text td {
+				padding: 0 !important;
+				}
+			}
+			@media only screen and (min-width:481px) {
+				.mobile-text td {
+					padding: 0 32px !important;
+				}	
 			}
 			h1 {
 			  font-family: 'Playfair Display', serif;
 			  font-size: 42px;
-			  line-height: 1.2;
+			  line-height: 1;
 			  color: #1a1a1a;
 			  font-weight: 700;
-			  margin-bottom: 20px;
+			  margin-bottom: 12px;
 			  text-align: left;
 			}
 			h2 {
@@ -77,13 +188,20 @@ function createMjmlTemplate(title, content) {
 			  color: #333333;
 			  margin-bottom: 20px;
 			}
+			p.summary {
+				font-size: 18px;
+				font-weight: 500;
+				color: #1a1a1a;
+				line-height: 1.6;
+				font-style: italic;
+			}
 			a {
 			  color: #2F5851;
 			  text-decoration: underline;
 			}
 			ul, ol {
 			  margin-left: 0;
-			  padding-left: 24px;
+			  padding-left: 12px;
 			  margin-bottom: 20px;
 			}
 			li {
@@ -94,58 +212,88 @@ function createMjmlTemplate(title, content) {
 			}
 			blockquote {
 			  border-left: 4px solid #2F5851;
-			  padding-left: 20px;
+			  padding-left: 12px;
 			  margin-left: 0;
 			  margin-right: 0;
 			  font-style: italic;
 			}
-		  </mj-style>
-		  <mj-attributes>
-			<mj-all font-family="Arial, sans-serif" />
-			<mj-text font-size="16px" line-height="1.8" color="#333333" />
-			<mj-section padding="40px 20px" />
-			<mj-column padding="0 10px" />
-		  </mj-attributes>
-		</mj-head>
-		<mj-body background-color="#EFF8F6" width="680px">
-		  <mj-wrapper padding="0" background-color="#ffffff">
-			<!-- Header Section -->
-			<mj-section padding="40px 0 0 0" background-color="#ffffff">
-			  <mj-column css-class="mobile-padding" padding="0 20px" width="100%">
-				<mj-text>
-				  <h1>${title}</h1>
-				</mj-text>
-			  </mj-column>
+		         </mj-style>
+        <mj-attributes>
+          <mj-text padding="0" font-family="Arial, sans-serif" />
+          <mj-section padding="12px 24px" background-color="#ffffff" />
+        </mj-attributes>
+      </mj-head>
+      <mj-body background-color="#EFF8F6">
+        <mj-wrapper padding="0" background-color="#ffffff">
+          <mj-section>
+            <mj-column css-class="mobile-text">
+              <mj-text><h1>${title}</h1></mj-text>
+            </mj-column>
+          </mj-section>
+
+		  <mj-section>
+			<mj-column css-class="mobile-text">
+				<mj-text><p style="font-size: 18px; font-weight: 500; color: #1a1a1a; line-height: 1.6; font-style: italic;">${summary}</p></mj-text>
+			</mj-column>
+		  </mj-section>
+
+		  <mj-section>
+			<mj-column css-class="mobile-text">
+				<mj-divider border-width="1px" border-color="#DDDDDD" />
+			</mj-column>
 			</mj-section>
-			
-			<!-- Content Section -->
-			<mj-section padding="0" background-color="#ffffff">
-			  <mj-column padding="0 20px" width="100%">
-				<mj-text>
-				  ${renderedHtml}
-				</mj-text>
-			  </mj-column>
+          
+          <mj-section>
+            <mj-column css-class="mobile-text">
+              <mj-text>${renderedHtml}</mj-text>
+            </mj-column>
+          </mj-section>
+
+		  <mj-section>
+			<mj-column css-class="mobile-text">
+				<mj-raw>
+				<table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #333333; font-size: 14px; line-height: 1.4; border-collapse: collapse;">
+					<tr>
+					<td style="padding: 20px 0;">
+						<img src="https://a.storyblok.com/f/320425/388x388/6d88b78ce7/molly-email-signature-img.png/m/" alt="Molly Marsh" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 15px;">
+						<div style="margin-bottom: 5px;">
+						<span style="font-size: 16px; font-weight: bold; color: #18181b;">Molly Marsh</span>
+						<span style="color: #46464d; font-size: 13px;"> (She/Her)</span>
+						</div>
+						<div style="color: #46464d; font-weight: medium; margin-bottom: 6px;">
+						Transformative Life Coach
+						</div>
+						<div style="border-top: 1px solid #d4d4d8; margin: 8px 0;"></div>
+						<div>
+						<a href="http://www.mollymarshcoaching.com" style="color: #235247; text-decoration: none;">www.mollymarshcoaching.com</a>
+						</div>
+					</td>
+					</tr>
+				</table>
+				</mj-raw>
+			</mj-column>
+		</mj-section>
+
+		<mj-section>
+			<mj-column css-class="mobile-text">
+				<mj-divider border-width="1px" border-color="#DDDDDD" />
+			</mj-column>
 			</mj-section>
-			
-			<!-- Footer Section -->
-			<mj-section padding="0 0 40px 0" background-color="#ffffff">
-			  <mj-column padding="0 20px" width="100%">
-				<mj-text align="center" color="#666666" font-size="14px">
-				  <p style="margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px;">
-					© ${new Date().getFullYear()} Molly Marsh Coaching. All rights reserved.
-					<br/>
-					<a href="https://mollymarshcoaching.com" style="color: #2F5851; text-decoration: none;">www.mollymarshcoaching.com</a>
-				  </p>
-				</mj-text>
-			  </mj-column>
-			</mj-section>
-		  </mj-wrapper>
-		</mj-body>
-		  </mj-wrapper>
-		</mj-body>
-	  </mjml>
-	`;
-  }
+          
+          <mj-section>
+            <mj-column css-class="mobile-text">
+              <mj-text align="left" color="#666666" font-size="14px">
+                <p>
+                  © ${new Date().getFullYear()} Molly Marsh Coaching. All rights reserved.<br/>
+                </p>
+              </mj-text>
+            </mj-column>
+          </mj-section>
+        </mj-wrapper>
+      </mj-body>
+    </mjml>
+  `;
+}
 
 // Main POST handler
 export async function POST({ request, getClientAddress }) {
@@ -170,10 +318,11 @@ export async function POST({ request, getClientAddress }) {
 
 		// Create newsletter data
 		const newsletterData = createNewsletterData(body, storyData);
-		console.log('Newsletter data: ', { ...newsletterData });
+		// console.log('Newsletter data: ', { ...newsletterData });
 
 		// Create email template
-		const mjmlTemplate = createMjmlTemplate(newsletterData.title, newsletterData.content.article_content);
+		// console.log("Article summary: ", newsletterData.content.article_summary)
+		const mjmlTemplate = createMjmlTemplate(newsletterData.title, newsletterData.content.article_content, newsletterData.content.article_summary);
 		const { html, errors } = mjml2html(mjmlTemplate);
 
 		if (errors.length > 0) {
