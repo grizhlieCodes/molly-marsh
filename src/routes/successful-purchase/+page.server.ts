@@ -80,7 +80,14 @@ const StripeSessionSchema = z
 					})
 				)
 				.min(1) // Ensure at least one line item exists
+		}),
+
+		payment_intent: z.object({
+			latest_charge: z.object({
+				receipt_url: z.string().url()
+			})
 		})
+
 	})
 	.transform((data) => {
 		// Transform the nested data into a flat object
@@ -94,7 +101,8 @@ const StripeSessionSchema = z
 			products: data.line_items,
 			itemAmount: data.line_items.data[0].amount_total,
 			itemDescription: data.line_items.data[0].description,
-			itemImage: data.line_items.data[0].price.product.images[0]
+			itemImage: data.line_items.data[0].price.product.images[0],
+			receipt_url: data.payment_intent.latest_charge.receipt_url
 			// Convert Unix timestamp to ISO string for better readability
 		};
 	});
