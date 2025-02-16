@@ -9,6 +9,7 @@
 	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 	// Superform / ZOD implementation
 	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import type { FormStoryblok } from '$lib/schemas/storyblok/sbTypes';
 	import { getContext } from 'svelte';
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
@@ -17,10 +18,14 @@
 	// let { blok, superformData }: { blok: FormStoryblok; superformData: any } = $props();
 	let { blok }: { blok: FormStoryblok } = $props();
 
-	let superformData: any = getContext('superformData');
+	// $inspect(blok);
+
+	let superformData: any = getContext(blok.form_name);
 	// let activeSuperformData = $state(superformData())
 
 	let hiddenDataForSchema = $state(JSON.stringify(blok.form_inputs));
+
+	let loadError = $state();
 
 	let { form, enhance, errors, message, reset } = $state(
 		superForm(superformData(), {
@@ -81,6 +86,10 @@
 	let buttonBaseStyling = $derived(allFormStyles[formStyleName].formButton.buttonBase);
 	let buttonContentContainerStyling = $derived(allFormStyles[formStyleName].formButton.buttonContentContainerStyling);
 </script>
+
+{#if blok?.form_debug === true}
+	<SuperDebug data={$form}></SuperDebug>
+{/if}
 
 <form
 	use:storyblokEditable={blok}

@@ -8,43 +8,11 @@ import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY } from '$env/static/private';
 import nodemailer from 'nodemailer';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
-import { signatureImage } from '$lib/data/molly-email-signature-for-nodemailer';
-import { insertEmailWithTemplate } from '$lib/data/email-template';
+import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
+import { insertEmailWithTemplate } from '$lib/email/email-template';
+import { deepFind, deepFindAll } from '$lib/scripts/search';
 
-// Irrelevant for storyblok
-function deepFind(data, predicate, visited = new Set()) {
-	// Check for null or non-object values
-	if (data === null || typeof data !== 'object') {
-		return predicate(data) ? data : undefined;
-	}
-
-	// Avoid circular references
-	if (visited.has(data)) return undefined;
-	visited.add(data);
-
-	// If data itself matches, return it.
-	if (predicate(data)) return data;
-
-	// If it's an array, iterate over the items.
-	if (Array.isArray(data)) {
-		for (const item of data) {
-			const found = deepFind(item, predicate, visited);
-			if (found !== undefined) return found;
-		}
-	} else {
-		// It's an object: iterate over its values.
-		for (const key in data) {
-			if (Object.prototype.hasOwnProperty.call(data, key)) {
-				const found = deepFind(data[key], predicate, visited);
-				if (found !== undefined) return found;
-			}
-		}
-	}
-
-	// If nothing found, return undefined.
-	return undefined;
-}
-// Irrelevant for storyblok
+// IF we find a form, we include it.
 function isComponentForm(item) {
 	return item && typeof item === 'object' && item.component === 'form';
 }
@@ -60,6 +28,15 @@ function timedDeepFind(data, predicate) {
 	// console.log(`deepFind took ${elapsed.toFixed(2)} ms to run.`);
 	return result;
 }
+
+function timedDeepFindAll(data, predicate) {
+	const now = typeof performance !== 'undefined' && performance.now ? performance.now.bind(performance) : Date.now;
+	const startTime = now();
+	const results = deepFindAll(data, predicate);
+	const endTime = now();
+	return results;
+}
+
 // Irrelevant for storyblok
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
@@ -223,8 +200,22 @@ const sendConfirmationEmail = async (data) => {
 	}
 };
 
-// Claude solution
+const getForms = async (formObjects) => {
+	const parsedForms = await Promise.all(
+		formObjects.map(async (form, index) => {
+			const tempFormInputs = form.form_inputs;
+			const tempFormSchema = createFormSchema(tempFormInputs);
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			console.log({ index, form });
+			const newForm = await superValidate(zod(tempFormSchema), { id: form.form_name });
+			return newForm;
+		})
+	);
+	return parsedForms;
+};
+
 export const load: PageServerLoad = async ({ parent, params, url }) => {
+	console.log({parent, params, url})
 	const { storyblokApi: layoutApi } = await parent();
 	const slug = params.slug;
 
@@ -236,7 +227,6 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 			try {
 				storyblokApi = await useStoryblokApi();
 				if (storyblokApi) {
-					// console.log(`Storyblok API initialized successfully on attempt ${i + 1} in [slug]/+page.server.ts`);
 					break;
 				}
 			} catch (error) {
@@ -253,7 +243,6 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		}
 
 		if (!storyblokApi) {
-			// console.log('Triggering reload to:', url.pathname);
 			throw redirect(307, url.pathname);
 		}
 	}
@@ -274,16 +263,14 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 	}
 
 	if (dataStory && dataStory.data && dataStory.data.story) {
-		const formDataObject = timedDeepFind(dataStory.data.story.content, isComponentForm);
+		const formsDataObjects = timedDeepFindAll(dataStory.data.story.content, isComponentForm);
 
-		if (formDataObject) {
-			const formInputs = formDataObject.form_inputs;
-			const formSchema = createFormSchema(formInputs);
-			await new Promise((resolve) => setTimeout(resolve, 100));
-			const form = await superValidate(zod(formSchema));
+		if (formsDataObjects.length >= 1) {
+			let parsedForms = [];
+			parsedForms = await getForms(formsDataObjects);
 
 			return {
-				form,
+				forms: parsedForms,
 				story: dataStory.data.story
 			};
 		}
@@ -301,34 +288,6 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 };
 
 export const actions = {
-	// stripeCheckout: async ({ request, fetch }) => {
-	// 	const formData = await request.formData();
-	// 	const priceId = formData.get('priceId');
-	// 	const email = formData.get('email');
-
-	// 	// value = price_...
-
-	// 	// console.log('FORM DATA: =========== ', priceId); // WORKING TILL HERE
-
-	// 	// Make request to our webhook endpoint
-	// 	const response = await fetch('/api/stripe/checkout', {
-	// 		method: 'POST',
-	// 		headers: { 'Content-Type': 'application/json' },
-	// 		body: JSON.stringify({ priceId, email })
-	// 		// Add this for development only
-	// 		// rejectUnauthorized: false
-	// 	}); // session
-
-	// 	if (!response.ok) {
-	// 		const errorData = await response.json();
-	// 		// Handle the error appropriately
-	// 		// console.log(' ERROR RRRRR ================= AINT WORKING');
-	// 		throw new Error(errorData.error);
-	// 	}
-
-	// 	const { url } = await response.json();
-	// 	throw redirect(303, url);
-	// },
 	stripeCheckout: async ({ request, fetch }) => {
 		try {
 			const formData = await request.formData();
@@ -392,7 +351,6 @@ export const actions = {
 			const schemaDataString = JSON.parse(data.get('schemaData'));
 			const formSchema = createFormSchema(schemaDataString);
 			const form = await superValidate(reqClone, zod(formSchema));
-			// console.log('FORM DATA: ', form);
 
 			if (!form.valid) {
 				return fail(400, {
@@ -402,11 +360,11 @@ export const actions = {
 				});
 			}
 
-			console.log('Form data: ', form.data);
+			// console.log('Form data: ', form.data);
 
 			const selfEmail = await sendInternalEmail(form.data);
 			const isInternalEmailSuccessful = selfEmail.rejected.length === 0 && selfEmail.accepted.includes(SECRET_TRANSPORTER_USER) && selfEmail.response.startsWith('250');
-			console.log({ isInternalEmailSuccessful });
+			// console.log({ isInternalEmailSuccessful });
 
 			if (!isInternalEmailSuccessful) {
 				throw new Error('Internal email failed to send');
@@ -415,7 +373,7 @@ export const actions = {
 			// Only send confirmation email if internal email was successful
 			const confirmationEmail = await sendConfirmationEmail(form.data);
 			const isConfirmationEmailSuccessful = confirmationEmail?.rejected.length === 0 && confirmationEmail?.accepted.includes(form.data.email) && confirmationEmail?.response.startsWith('250');
-			console.log({ isConfirmationEmailSuccessful });
+			// console.log({ isConfirmationEmailSuccessful });
 
 			if (!isConfirmationEmailSuccessful) {
 				throw new Error('Confirmation email failed to send');

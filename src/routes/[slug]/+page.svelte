@@ -22,9 +22,10 @@
 		}
 		mounted = true;
 	});
-
-	if (data.form) {
-		setContext('superformData', () => data.form);
+	if (data.forms) {
+		data.forms.forEach((formData: any, index: number) => {
+			setContext(`${formData.id}`, () => formData);
+		});
 	}
 </script>
 
