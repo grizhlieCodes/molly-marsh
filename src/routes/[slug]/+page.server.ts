@@ -11,6 +11,7 @@ import { useStoryblok } from '$lib/storyblok/useStoryblok';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/email/email-template';
 import { deepFind, deepFindAll } from '$lib/scripts/search';
+import { dev } from '$app/environment'; // Import the 'dev' flag
 
 // IF we find a form, we include it.
 function isComponentForm(item) {
@@ -206,7 +207,7 @@ const getForms = async (formObjects) => {
 			const tempFormInputs = form.form_inputs;
 			const tempFormSchema = createFormSchema(tempFormInputs);
 			await new Promise((resolve) => setTimeout(resolve, 100));
-			console.log({ index, form });
+			// console.log({ index, form });
 			const newForm = await superValidate(zod(tempFormSchema), { id: form.form_name });
 			return newForm;
 		})
@@ -215,8 +216,11 @@ const getForms = async (formObjects) => {
 };
 
 export const load: PageServerLoad = async ({ parent, params, url }) => {
-	console.log({parent, params, url})
+	// console.log({parent, params, url})
 	const { storyblokApi: layoutApi } = await parent();
+	const version = dev || url.searchParams.has('_storyblok') ? 'draft' : 'published';
+
+	console.log(version);
 	const slug = params.slug;
 
 	let storyblokApi = layoutApi;
@@ -251,7 +255,7 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 
 	try {
 		dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
-			version: 'draft',
+			version,
 			cv: Date.now()
 		});
 	} catch (err) {
@@ -271,12 +275,14 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 
 			return {
 				forms: parsedForms,
-				story: dataStory.data.story
+				story: dataStory.data.story,
+				version
 			};
 		}
 
 		return {
-			story: dataStory.data.story
+			story: dataStory.data.story,
+			version
 		};
 	} else {
 		console.error('DataStory structure is invalid or missing after API call, even after API initialization was successful (which is unexpected if the API init was truly successful) in [slug]/+page.server.ts. Slug:', slug);

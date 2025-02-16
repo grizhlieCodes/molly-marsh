@@ -27,6 +27,8 @@
 			setContext(`${formData.id}`, () => formData);
 		});
 	}
+
+	$inspect("VERSION:   ========== ", data.version)
 </script>
 
 <svelte:head>

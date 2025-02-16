@@ -2,6 +2,7 @@
 import type { LayoutLoad } from './$types';
 import { useStoryblokApi } from '@storyblok/svelte';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
+import { dev } from '$app/environment'; // Import the 'dev' flag
 
 export const load: LayoutLoad = async ({ url }) => {
 	let storyblokApi;
@@ -16,6 +17,9 @@ export const load: LayoutLoad = async ({ url }) => {
 	}
 
 	let navData = null;
+
+	const version = dev || url.searchParams.has('_storyblok') ? 'draft' : 'published';
+	console.log(version)
 
 	if (storyblokApi) {
 		try {
@@ -34,6 +38,7 @@ export const load: LayoutLoad = async ({ url }) => {
 		storyblokApi,
 		initError: initError?.message,
 		navData,
-		storyblokInitialized: !!storyblokApi // Add this flag
+		storyblokInitialized: !!storyblokApi, // Add this flag
+		version
 	};
 };
