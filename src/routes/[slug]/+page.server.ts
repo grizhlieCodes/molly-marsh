@@ -9,6 +9,7 @@ import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY
 import nodemailer from 'nodemailer';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
+// import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/email/email-template';
 import { deepFind, deepFindAll } from '$lib/scripts/search';
 import { dev } from '$app/environment'; // Import the 'dev' flag

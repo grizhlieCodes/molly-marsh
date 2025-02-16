@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_SUCCESSFUL_CHECKOUT_SECRET } from '$env/static/private';
-import { signatureImage } from '$lib/data/molly-email-signature-for-nodemailer';
+import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/data/email-template.js';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, {
