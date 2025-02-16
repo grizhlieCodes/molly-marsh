@@ -31,9 +31,8 @@
 	let errorStyles = $derived(allInputStyles[formStyleName].errorStyles);
 </script>
 
-<!-- has-[+*:not(:placeholder-shown)]:scale-75 -->
 <label for={blok.input_name} class={labelStyles} use:storyblokEditable={blok}>
-	<span class={labelSpanStyles}>{blok.input_label}</span>
+	<span class={labelSpanStyles}>{blok.input_label}{blok.input_required ? '*' :''}</span>
 	<input
 		type={blok.input_type}
 		name={blok.input_name}

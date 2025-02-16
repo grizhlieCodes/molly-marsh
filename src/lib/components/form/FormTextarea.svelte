@@ -35,7 +35,7 @@
 <!-- has-[+*:not(:placeholder-shown)]:scale-75 -->
 <label for="{blok.input_name}" class="{labelStyles}" use:storyblokEditable={blok}>
 	<span
-		class={labelSpanStyles}>{blok.textarea_label}</span
+		class={labelSpanStyles}>{blok.textarea_label}{blok.textarea_required ? '*':''}</span
 	>
 	<textarea
 		name={blok.input_name}
