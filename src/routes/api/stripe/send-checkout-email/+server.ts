@@ -5,7 +5,7 @@ import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_SUCCESSFUL_CHECKOUT_SECRET } from '$env/static/private';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
-import { insertEmailWithTemplate } from '$lib/data/email-template.js';
+import { insertEmailWithTemplate } from '$lib/email/email-template.js';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, {
 	apiVersion: '2024-11-20.acacia'
