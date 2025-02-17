@@ -53,7 +53,7 @@
 
 	// All styling string
 	let BASE_CLASSES = `flex`;
-	let ASPECT_RATIO_RULES = `aspect-[var(--aspect-def,_var(--aspect-base))] mm:aspect-[var(--aspect-mm,_var(--aspect-def))] lm:aspect-[var(--aspect-lm,_var(--aspect-mm))] md:aspect-[var(--aspect-md,_var(--aspect-lm))] lg:aspect-[var(--aspect-lg,_var(--aspect-md))]`;
+	let ASPECT_RATIO_RULES = `aspect-[var(--aspect-def)] mm:aspect-[var(--aspect-mm,_var(--aspect-def))] lm:aspect-[var(--aspect-lm,_var(--aspect-mm))] md:aspect-[var(--aspect-md,_var(--aspect-lm))] lg:aspect-[var(--aspect-lg,_var(--aspect-md))]`;
 
 	let styling = $derived(`${BASE_CLASSES} ${ASPECT_RATIO_RULES} ${Object.values(breakpointStyles).join(' ')} ${Object.values(generalStyling).join(' ')} ${generalData.class}`);
 </script>
