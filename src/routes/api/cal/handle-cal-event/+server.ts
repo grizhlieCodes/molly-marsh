@@ -75,6 +75,33 @@ const calBookingSchema = z
 		bookingId: data.payload.uid
 	}));
 
+const calRescheduledSchema = z.object({
+	triggerEvent: z.string(),
+	payload: z.object({
+		startTime: z.string(),
+		endTime: z.string()
+		uid: z.string()
+	})
+}).transform((data) => ({
+	triggerEvent: data.triggerEvent,
+	bookingStartTime: data.payload.startTime,
+	bookingEndTime: data.payload.endTime,
+	bookingId: data.payload.uid
+}))
+
+const calMeetEndedSchema = z.object({
+	triggerEvent: z.string(),
+	payload: z.object({
+		videoCallData: z.object({
+			id: z.string()		}),
+		uid: z.string()
+	})
+}).transform((data) => ({
+	triggerEvent: data.triggerEvent,
+	bookingId: data.payload.uid,
+	zoomCallId: data.payload.videoCallData.id,
+}))
+
 const calBookingSchemaType = z.infer<typeof calBookingSchema>;
 
 function verifyCalWebhook(payload: string, signature: string): boolean {
@@ -143,6 +170,13 @@ const bookingCreatedHandler = async (calData, event) => {
 	}
 };
 
+const bookingRescheduledHandler = async(calData, event) => {
+
+}
+const meetingEndedHandler = async(calData, event) => {
+
+}
+
 const calAllEventsHandler = async (calData, event) => {
 	const eventName = <string>calData.triggerEvent;
 	console.log(eventName);
@@ -155,9 +189,11 @@ const calAllEventsHandler = async (calData, event) => {
 			console.log('Booking has been cancelled.');
 			return await bookingCancelledHandler(calData, event);
 		case 'BOOKING_RESCHEDULED':
+
 			console.log('Booking has been rescheduled.');
 			break;
 		case 'MEETING_ENDED':
+
 			console.log('Meeting has ended.');
 			break;
 	}

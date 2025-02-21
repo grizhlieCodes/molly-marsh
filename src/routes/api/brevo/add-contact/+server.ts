@@ -31,6 +31,9 @@ export const POST: RequestHandler = async (event) => {
 		let newContact = new SibApiV3Sdk.CreateContact();
 
 		newContact.email = data.email;
+		newContact.attributes = {
+			'FIRSTNAME': data.name
+		}
 		newContact.listIds = [BREVO_LIST_ID];
 
 		console.log('We shall try to add this now.');

@@ -437,7 +437,9 @@ export const actions = {
 					Authorization: `Bearer ${INTERNAL_API_KEY}`,
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ email: form?.data?.email })
+				body: JSON.stringify({ 
+					name: form?.data?.first_name, 
+					email: form?.data?.email })
 			});
 			console.log('Brevo reply: ', newContact);
 		} catch (error) {}
