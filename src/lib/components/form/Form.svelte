@@ -15,24 +15,15 @@
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
 	import { contactFormValidation } from '$lib/stores/contactFormValidationStore.svelte';
 
-	// let { blok, superformData }: { blok: FormStoryblok; superformData: any } = $props();
 	let { blok }: { blok: FormStoryblok } = $props();
-
-	// $inspect(blok);
-
 	let superformData: any = getContext(blok.form_name);
-	// let activeSuperformData = $state(superformData())
-
 	let hiddenDataForSchema = $state(JSON.stringify(blok.form_inputs));
-
-	let loadError = $state();
 
 	let { form, enhance, errors, message, reset } = $state(
 		superForm(superformData(), {
 			resetForm: false,
 			invalidateAll: false,
 			onResult: ({ result }) => {
-				// console.log(result);
 				if (result.type === 'success') {
 					formSubmissionButtonState = 'sent';
 					return;
@@ -45,16 +36,12 @@
 		})
 	);
 
-	// $inspect($errors);
 
 	let formSubmissionButtonState: 'send' | 'sent' | 'error' | 'sending' = $state('send');
-
 	let formStyleName: string = $state(blok.form_style && blok.form_style.length > 0 ? blok.form_style : 'basic');
-
-	// Max w 3xl
 	let allFormStyles: any = {
 		basic: {
-			formContainer: `bg-surface-primary-50 border-2 border-surface-primary-200 flex flex-col w-full gap-2 p-5 md:p-7 lg:p-10 lg:min-w-[33rem] rounded-2xl`,
+			formContainer: `bg-surface-primary-50 border-2 border-surface-primary-200 flex flex-col w-full gap-2 p-5 md:p-7 lg:p-10 rounded-2xl`,
 			formButton: {
 				buttonBase: `mt-10 grid w-full justify-items-center cursor-pointer rounded-md px-6 py-3 font-sans font-semibold text-white uppercase transition-all`,
 				buttonContentContainerStyling: `col-start-1 row-start-1 flex items-center gap-2`,
@@ -94,7 +81,7 @@
 <form
 	use:storyblokEditable={blok}
 	use:enhance
-	action="?/sendQuery"
+	action="{blok.form_action}"
 	method="POST"
 	class={formStyling}
 	oninput={() => {
@@ -128,7 +115,7 @@
 	>
 		{#if formSubmissionButtonState === 'send'}
 			<div class={buttonContentContainerStyling}>
-				<span transition:fly={{ x: 15, duration: 225, easing: bounceInOut }}>Send</span>
+				<span transition:fly={{ x: 15, duration: 225, easing: bounceInOut }}>{blok.form_button_text}</span>
 				<div transition:fly={{ x: 15, duration: 200, easing: bounceInOut }}>
 					<SendHorizontal class="size-6" />
 				</div>
@@ -156,4 +143,8 @@
 			</div>
 		{/if}
 	</button>
+
+	{#if blok.form_bottom_text && blok.form_bottom_text.length > 0}
+		<StoryblokComponent blok={blok.form_bottom_text[0]}></StoryblokComponent>
+	{/if}
 </form>
