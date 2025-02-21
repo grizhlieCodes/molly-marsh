@@ -5,7 +5,7 @@ import { useStoryblokApi } from '@storyblok/svelte';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
-import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY } from '$env/static/private';
+import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY, INTERNAL_API_KEY } from '$env/static/private';
 import nodemailer from 'nodemailer';
 import { useStoryblok } from '$lib/storyblok/useStoryblok';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
@@ -217,11 +217,9 @@ const getForms = async (formObjects) => {
 };
 
 export const load: PageServerLoad = async ({ parent, params, url }) => {
-	// console.log({parent, params, url})
 	const { storyblokApi: layoutApi } = await parent();
 	const version = dev || url.searchParams.has('_storyblok') ? 'draft' : 'published';
 
-	console.log(version);
 	const slug = params.slug;
 
 	let storyblokApi = layoutApi;
@@ -252,7 +250,9 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		}
 	}
 
-	let dataStory;
+	let dataStory,
+		articles = null,
+		tags = null;
 
 	try {
 		dataStory = await storyblokApi.get(`cdn/stories/${slug}`, {
@@ -267,6 +267,23 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 		});
 	}
 
+	if (slug.includes('blog')) {
+		try {
+			tags = await storyblokApi.get('cdn/stories', {
+				content_type: 'tag',
+				version: 'published'
+			});
+
+			articles = await storyblokApi.get('cdn/stories', {
+				content_type: 'article',
+				version: 'published',
+				resolve_relations: ['article.article_tag']
+			});
+		} catch (err) {
+			console.log('err: ', err);
+		}
+	}
+
 	if (dataStory && dataStory.data && dataStory.data.story) {
 		const formsDataObjects = timedDeepFindAll(dataStory.data.story.content, isComponentForm);
 
@@ -277,12 +294,16 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 			return {
 				forms: parsedForms,
 				story: dataStory.data.story,
+				...(tags?.data?.stories && { tags: tags?.data?.stories }),
+				...(articles?.data?.stories && { articles: articles?.data?.stories }),
 				version
 			};
 		}
 
 		return {
 			story: dataStory.data.story,
+			...(tags?.data?.stories && { tags: tags?.data?.stories }),
+			...(articles?.data?.stories && { articles: articles?.data?.stories }),
 			version
 		};
 	} else {
@@ -367,11 +388,8 @@ export const actions = {
 				});
 			}
 
-			// console.log('Form data: ', form.data);
-
 			const selfEmail = await sendInternalEmail(form.data);
 			const isInternalEmailSuccessful = selfEmail.rejected.length === 0 && selfEmail.accepted.includes(SECRET_TRANSPORTER_USER) && selfEmail.response.startsWith('250');
-			// console.log({ isInternalEmailSuccessful });
 
 			if (!isInternalEmailSuccessful) {
 				throw new Error('Internal email failed to send');
@@ -380,7 +398,6 @@ export const actions = {
 			// Only send confirmation email if internal email was successful
 			const confirmationEmail = await sendConfirmationEmail(form.data);
 			const isConfirmationEmailSuccessful = confirmationEmail?.rejected.length === 0 && confirmationEmail?.accepted.includes(form.data.email) && confirmationEmail?.response.startsWith('250');
-			// console.log({ isConfirmationEmailSuccessful });
 
 			if (!isConfirmationEmailSuccessful) {
 				throw new Error('Confirmation email failed to send');
@@ -394,5 +411,35 @@ export const actions = {
 				message: 'An error occurred processing your submission'
 			});
 		}
+	},
+	saveNewsletterContact: async ({ request, fetch }) => {
+		console.log('Working');
+		try {
+			const reqClone = request.clone();
+			const data = await request.formData();
+			const schemaDataString = JSON.parse(data.get('schemaData'));
+			const formSchema = createFormSchema(schemaDataString);
+			const form = await superValidate(reqClone, zod(formSchema));
+
+			if (!form.valid) {
+				return fail(400, {
+					form,
+					type: 'failure',
+					message: 'Validation failed'
+				});
+			}
+
+			console.log('We have the email boyo ============ ', form.data.email, INTERNAL_API_KEY);
+			// Now lets wait for the brevo api
+			const newContact = await fetch('/api/brevo/add-contact', {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${INTERNAL_API_KEY}`,
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email: form?.data?.email })
+			});
+			console.log('Brevo reply: ', newContact);
+		} catch (error) {}
 	}
 };

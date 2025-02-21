@@ -7,7 +7,7 @@
 		article_summary: string;
 		article_content: {
 			type: string;
-			content: any[]; // You could define this more specifically if needed
+			content: any[];
 		};
 		article_cover_image: {
 			id: number;
@@ -34,15 +34,11 @@
 	let allArticles = $state(articlesData());
 	let tagsData: any = $state(getContext('tags'));
 	let allTags = $state(tagsData());
-
-	// Article Filtering
 	import { flip } from 'svelte/animate';
 	import { fly } from 'svelte/transition';
 	import { Select } from 'bits-ui';
-	// import { Check, ChevronDown } from 'lucide-svelte';
 	import Check from 'lucide-svelte/icons/check';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
-
 
 	const sorts = [
 		{ value: 'date_newest', label: 'Date (Newest)' },
@@ -50,7 +46,6 @@
 		{ value: 'alph_a-z', label: 'Alphabetical (A-Z)' },
 		{ value: 'alph_z-a', label: 'Alphabetical (Z-A)' }
 	];
-	// $inspect('TAGS =============== ', allTags);
 	const filterTags = [
 		{
 			content: {
@@ -66,8 +61,6 @@
 	let filterOpen: any = $state(null);
 	let previousSelected: any = $state({ label: '', value: '' });
 	let sortSelected: any = $state({ value: 'date_newest', label: 'Date (Newest)' });
-
-	// $inspect('Articles run again: ', allArticles);
 
 	// TOGGLE GROUP
 

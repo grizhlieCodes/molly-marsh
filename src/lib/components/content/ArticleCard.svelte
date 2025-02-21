@@ -93,7 +93,7 @@ sm:flex-row"
 
 			<!-- Text Container -->
 			<div class="flex flex-col gap-4 text-left">
-				<h3 class="font-heading text-xl md:text-2xl lg:text-3xl text-emerald-700">{article_title}</h3>
+				<h3 class="font-heading text-xl text-emerald-700 md:text-2xl lg:text-3xl">{article_title}</h3>
 				<p class={ops.textStyles.paraBase}>{article_summary}</p>
 			</div>
 		</div>

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	let { data }: { data: any } = $props();
 	import { useStoryblokBridge, StoryblokComponent, getStoryblokApi } from '@storyblok/svelte';
-	import { setContext } from 'svelte';
+	import { setContext, getContext } from 'svelte';
 
 	let mounted = $state(false);
 	let story = $state(data.story);
@@ -28,7 +28,17 @@
 		});
 	}
 
-	$inspect("VERSION:   ========== ", data.version)
+	$effect(() => {
+		if (data.articles) {
+			setContext('articles', () => data.articles);
+		}
+	});
+
+	$effect(() => {
+		if (data.tags) {
+			setContext('tags', () => data.tags);
+		}
+	});
 </script>
 
 <svelte:head>
