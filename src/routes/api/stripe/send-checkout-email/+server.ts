@@ -73,6 +73,8 @@ const transporter = nodemailer.createTransport({
 		pass: SECRET_TRANSPORTER_PASS
 	}
 });
+
+
 const sendConfirmationEmail = async (client_name: string, client_email: string) => {
 	const cal_link = `https://cal.com/mollymarsh/coaching-session?email=${client_email}&name=${client_name}`;
 	const first_name = client_name && client_name.length > 0 ? client_name.split(' ')[0] : '';

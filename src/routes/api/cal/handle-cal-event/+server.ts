@@ -8,13 +8,13 @@ const calCancellationSchema = z
 	.object({
 		triggerEvent: z.string(),
 		payload: z.object({
-			uid: z.string(),
+			iCalUID: z.string(),
 			cancellationReason: z.string().nullable().optional()
 		})
 	})
 	.transform((data) => ({
 		triggerEvent: data.triggerEvent,
-		bookingId: data.payload.uid,
+		bookingId: data.payload.iCalUID,
 		cancellationReason: data.payload.cancellationReason
 	}));
 
@@ -56,7 +56,7 @@ const calBookingSchema = z
 				id: z.string(),
 				url: z.string().url()
 			}),
-			uid: z.string()
+			iCalUID: z.string()
 		})
 	})
 	.transform((data) => ({
@@ -72,7 +72,7 @@ const calBookingSchema = z
 		bookingNotes: data.payload.responses.notes?.value ?? null,
 		zoomCallId: data.payload.videoCallData.id,
 		zoomCallUrl: data.payload.videoCallData.url,
-		bookingId: data.payload.uid
+		bookingId: data.payload.iCalUID
 	}));
 
 const calRescheduledSchema = z
@@ -81,30 +81,24 @@ const calRescheduledSchema = z
 		payload: z.object({
 			startTime: z.string(),
 			endTime: z.string(),
-			uid: z.string()
+			iCalUID: z.string()
 		})
 	})
 	.transform((data) => ({
 		triggerEvent: data.triggerEvent,
 		bookingStartTime: data.payload.startTime,
 		bookingEndTime: data.payload.endTime,
-		bookingId: data.payload.uid
+		bookingId: data.payload.iCalUID
 	}));
 
 const calMeetEndedSchema = z
 	.object({
 		triggerEvent: z.string(),
-		payload: z.object({
-			videoCallData: z.object({
-				id: z.string()
-			}),
-			uid: z.string()
-		})
+		iCalUID: z.string()
 	})
 	.transform((data) => ({
 		triggerEvent: data.triggerEvent,
-		bookingId: data.payload.uid,
-		zoomCallId: data.payload.videoCallData.id
+		bookingId: data.iCalUID
 	}));
 
 const calBookingSchemaType = z.infer<typeof calBookingSchema>;
@@ -169,18 +163,65 @@ const bookingCreatedHandler = async (calData, event) => {
 		const result = await notionResponse.json();
 
 		return result;
-	} catch (error) {
-		console.error('Error during sending data to notion in cal handler api:', error);
-		throw error;
+	} catch (err) {
+		console.error('Error during sending data to notion in cal handler api:', err);
+		throw err;
 	}
 };
 
-const bookingRescheduledHandler = async (calData, event) => {};
-const meetingEndedHandler = async (calData, event) => {};
+const bookingRescheduledHandler = async (calData, event) => {
+	const parsedRescheduledBooking = calRescheduledSchema.parse(calData);
+	try {
+		const notionResponse = await event.fetch('/api/notion/notion-handler', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${INTERNAL_API_KEY}`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(parsedRescheduledBooking)
+		});
+
+		if (!notionResponse.ok) {
+			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
+		}
+
+		const result = await notionResponse.json();
+
+		return result;
+	} catch (err) {
+		console.error('Error during sending data to notion during booking reschedule:', err);
+		throw err;
+	}
+};
+const meetingEndedHandler = async (calData, event) => {
+	// console.log('Meet ended cal data', calData);
+	const parsedMeetingEnded = calMeetEndedSchema.parse(calData);
+	console.log('meet cal parsed Data', parsedMeetingEnded)
+	try {
+		const notionResponse = await event.fetch('/api/notion/notion-handler', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${INTERNAL_API_KEY}`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(parsedMeetingEnded)
+		});
+
+		if (!notionResponse.ok) {
+			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
+		}
+
+		const result = await notionResponse.json();
+
+		return result;
+	} catch (err) {
+		console.error('Error during sending data to notion during booking reschedule:', err);
+		throw err;
+	}
+};
 
 const calAllEventsHandler = async (calData, event) => {
 	const eventName = <string>calData.triggerEvent;
-	console.log(eventName);
 
 	switch (eventName) {
 		case 'BOOKING_CREATED':
@@ -191,9 +232,10 @@ const calAllEventsHandler = async (calData, event) => {
 			return await bookingCancelledHandler(calData, event);
 		case 'BOOKING_RESCHEDULED':
 			console.log('Booking has been rescheduled.');
-			break;
+			return await bookingRescheduledHandler(calData, event);
 		case 'MEETING_ENDED':
 			console.log('Meeting has ended.');
+			return await meetingEndedHandler(calData, event);
 			break;
 	}
 };
