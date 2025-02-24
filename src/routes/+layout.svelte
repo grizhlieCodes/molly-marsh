@@ -10,10 +10,12 @@
 	import Header from '$lib/components/navigation/header/Header.svelte';
 	import Footer from '$lib/components/navigation/footer/Footer.svelte';
 	import Head from '$lib/data/Head.svelte';
+	import CookieBanner from '$lib/components/ui-interactive/CookieBanner.svelte';
 </script>
 
-<Head />
+<CookieBanner></CookieBanner>
 
+<Head />
 <DraggingStore></DraggingStore>
 
 {#if data.storyblokApi.accessToken}
