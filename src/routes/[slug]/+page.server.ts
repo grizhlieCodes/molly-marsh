@@ -1,6 +1,10 @@
+// PASSED
 import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { createFormSchema } from '$lib/scripts/formSchemaServer';
+
+// REMOVE
+
+import { createFormSchema, getAllFormsDuringLoad, handleFormDuringFormAction } from '$lib/scripts/serverFormHandler';
 import { useStoryblokApi } from '@storyblok/svelte';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -13,208 +17,7 @@ import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer'
 import { insertEmailWithTemplate } from '$lib/email/email-template';
 import { deepFind, deepFindAll } from '$lib/scripts/search';
 import { dev } from '$app/environment'; // Import the 'dev' flag
-
-// IF we find a form, we include it.
-function isComponentForm(item) {
-	return item && typeof item === 'object' && item.component === 'form';
-}
-// Irrelevant for storyblok
-function timedDeepFind(data, predicate) {
-	// Use performance.now() if available (e.g. in browsers) or fallback to Date.now()
-	const now = typeof performance !== 'undefined' && performance.now ? performance.now.bind(performance) : Date.now;
-
-	const startTime = now();
-	const result = deepFind(data, predicate);
-	const endTime = now();
-	const elapsed = endTime - startTime;
-	// console.log(`deepFind took ${elapsed.toFixed(2)} ms to run.`);
-	return result;
-}
-
-function timedDeepFindAll(data, predicate) {
-	const now = typeof performance !== 'undefined' && performance.now ? performance.now.bind(performance) : Date.now;
-	const startTime = now();
-	const results = deepFindAll(data, predicate);
-	const endTime = now();
-	return results;
-}
-
-// Irrelevant for storyblok
-const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: SECRET_TRANSPORTER_USER,
-		pass: SECRET_TRANSPORTER_PASS
-	}
-});
-// Irrelevant for storyblok
-const sendInternalEmail = async (data) => {
-	// console.log({ SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS });
-	const mailOptions = {
-		from: SECRET_TRANSPORTER_USER,
-		to: SECRET_TRANSPORTER_USER,
-		subject: `New Form Submission from: ${data.name}`,
-		html: `<!doctype html>
-        <html>
-        <body>
-            <div
-            style='background-color:#ffffff;color:#242424;font-family:"Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0.15008px;line-height:1.5;margin:0;padding:32px 0;min-height:100%;width:100%'
-            >
-            <table
-                align="center"
-                width="100%"
-                style="margin:0 auto;max-width:600px;background-color:#f2fbff"
-                role="presentation"
-                cellspacing="0"
-                cellpadding="0"
-                border="0"
-            >
-                <tbody>
-                <tr style="width:100%">
-                    <td>
-                    <div style="border-radius:0;padding:16px 24px 16px 24px">
-                        <h2
-                        style="color:#191919;font-weight:bold;text-align:left;margin:0;font-size:24px;padding:16px 24px 28px 24px"
-                        >
-                        New Submission from: ${data.name}
-                        </h2>
-                    </div>
-                    <div style="font-size:16px;padding:16px 24px 16px 24px">
-                        <table
-                        style="width: 100%; border-collapse: collapse; font-size: 16px; font-family: Arial, sans-serif; margin: 20px 0;"
-                        >
-                        <tbody>
-                            <tr>
-                            <th
-                                style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;"
-                            >
-                                Name
-                            </th>
-                            <td style="border: 1px solid #ddd; padding: 8px;">
-                                ${data.name}
-                            </td>
-                            </tr>
-                            <tr>
-                            <th
-                                style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;"
-                            >
-                                Subject
-                            </th>
-                            <td style="border: 1px solid #ddd; padding: 8px;">
-                                ${data.subject}
-                            </td>
-                            </tr>
-                            <tr>
-                            <th
-                                style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;"
-                            >
-                                Email
-                            </th>
-                            <td style="border: 1px solid #ddd; padding: 8px;">
-                                ${data.email}
-                            </td>
-                            </tr>
-                            <tr>
-                            <th
-                                style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;"
-                            >
-                                Message
-                            </th>
-                            <td style="border: 1px solid #ddd; padding: 8px;">
-                            ${data.message}
-                            </td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            </div>
-        </body>
-        </html>` // I need to create this template
-	};
-
-	try {
-		let res = await transporter.sendMail(mailOptions);
-		// console.log('Internal email res: ', res);
-		return res;
-	} catch (error) {
-		// console.log('fucked up', error);
-		throw error;
-	}
-};
-// Irrelevant for storyblok
-const sendConfirmationEmail = async (data) => {
-	const emailContent = `
-		<h2
-			class="mobile-text"
-			style="
-			color: #3a6a5f;
-			font-family: TimesNewRoman, 'Times New Roman', Times,
-				Baskerville, Georgia, serif;
-			font-size: 30px;
-			font-weight: 400;
-			margin: 0 0 20px 0;
-			line-height: 120%;
-			"
-		>
-			Hello ${data.name},
-		</h2>
-
-		<p
-			style="
-			color: #101112;
-			font-family: Arial, Helvetica, sans-serif;
-			font-size: 16px;
-			line-height: 1.5;
-			margin: 0 0 16px 0;
-			"
-		>
-			Thank you for contacting me. I will try getting back to you
-			within 48 hours. Please keep in mind that this only includes
-			working days.
-		</p>
-	`;
-	const mailOptions = {
-		from: `Molly Marsh <${SECRET_TRANSPORTER_USER}>`,
-		to: data.email,
-		subject: `Thank you for contacting me!`,
-		replyTo: SECRET_TRANSPORTER_USER,
-		priority: 'high',
-		attachments: [
-			{
-				filename: 'signature.jpg',
-				path: signatureImage,
-				cid: 'unique@signature.img'
-			}
-		],
-		html: insertEmailWithTemplate(emailContent)
-	};
-
-	try {
-		let res = await transporter.sendMail(mailOptions);
-		return res;
-	} catch (error) {
-		// console.log('fucked up', error);
-		throw error;
-	}
-};
-
-const getForms = async (formObjects) => {
-	const parsedForms = await Promise.all(
-		formObjects.map(async (form, index) => {
-			const tempFormInputs = form.form_inputs;
-			const tempFormSchema = createFormSchema(tempFormInputs);
-			await new Promise((resolve) => setTimeout(resolve, 100));
-			// console.log({ index, form });
-			const newForm = await superValidate(zod(tempFormSchema), { id: form.form_name });
-			return newForm;
-		})
-	);
-	return parsedForms;
-};
+import { sendContactFormContacteeEmail, sendContactFormInternalEmail } from '$lib/email/serverEmailHandler';
 
 export const load: PageServerLoad = async ({ parent, params, url }) => {
 	const { storyblokApi: layoutApi } = await parent();
@@ -285,14 +88,14 @@ export const load: PageServerLoad = async ({ parent, params, url }) => {
 	}
 
 	if (dataStory && dataStory.data && dataStory.data.story) {
-		const formsDataObjects = timedDeepFindAll(dataStory.data.story.content, isComponentForm);
+		function isComponentForm(item) {
+			return item && typeof item === 'object' && item.component === 'form';
+		}
+		const allForms = await getAllFormsDuringLoad(dataStory.data.story.content, isComponentForm);
 
-		if (formsDataObjects.length >= 1) {
-			let parsedForms = [];
-			parsedForms = await getForms(formsDataObjects);
-
+		if (allForms && allForms.length > 0) {
 			return {
-				forms: parsedForms,
+				forms: allForms,
 				story: dataStory.data.story,
 				...(tags?.data?.stories && { tags: tags?.data?.stories }),
 				...(articles?.data?.stories && { articles: articles?.data?.stories }),
@@ -374,9 +177,11 @@ export const actions = {
 	},
 	sendQuery: async ({ request }) => {
 		try {
+			// Move this into an API?
+			// api/forms/contact-form-handler
 			const reqClone = request.clone();
-			const data = await request.formData();
-			const schemaDataString = JSON.parse(data.get('schemaData'));
+			const formData = await request.formData();
+			const schemaDataString = JSON.parse(formData.get('schemaData'));
 			const formSchema = createFormSchema(schemaDataString);
 			const form = await superValidate(reqClone, zod(formSchema));
 
@@ -388,7 +193,7 @@ export const actions = {
 				});
 			}
 
-			const selfEmail = await sendInternalEmail(form.data);
+			const selfEmail = await sendContactFormInternalEmail(form.data);
 			const isInternalEmailSuccessful = selfEmail.rejected.length === 0 && selfEmail.accepted.includes(SECRET_TRANSPORTER_USER) && selfEmail.response.startsWith('250');
 
 			if (!isInternalEmailSuccessful) {
@@ -396,7 +201,7 @@ export const actions = {
 			}
 
 			// Only send confirmation email if internal email was successful
-			const confirmationEmail = await sendConfirmationEmail(form.data);
+			const confirmationEmail = await sendContactFormContacteeEmail(form.data);
 			const isConfirmationEmailSuccessful = confirmationEmail?.rejected.length === 0 && confirmationEmail?.accepted.includes(form.data.email) && confirmationEmail?.response.startsWith('250');
 
 			if (!isConfirmationEmailSuccessful) {
@@ -437,11 +242,38 @@ export const actions = {
 					Authorization: `Bearer ${INTERNAL_API_KEY}`,
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ 
-					name: form?.data?.first_name, 
-					email: form?.data?.email })
+				body: JSON.stringify({
+					name: form?.data?.first_name,
+					email: form?.data?.email
+				})
 			});
 			console.log('Brevo reply: ', newContact);
 		} catch (error) {}
+	},
+	sendErrorReport: async (event) => {
+		console.log('Working baby!!');
+		// const formData = await request.formData();
+		// const reportData = JSON.parse(formData.get('reportData'));
+
+		// try {
+		// 	// Your server-side fetch or email sending logic here
+		// 	const response = await fetch('/api/emails/send-error-email-to-rafal', {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 		},
+		// 		body: JSON.stringify(reportData)
+		// 	});
+
+		// 	if (!response.ok) {
+		// 		return { success: false, message: 'Failed to send report' };
+		// 	}
+
+		// 	return { success: true };
+		// } catch (error) {
+		// 	console.error('Error sending bug report:', error);
+		// 	return { success: false, message: error.message };
+		// }
+		return { success: true };
 	}
 };
