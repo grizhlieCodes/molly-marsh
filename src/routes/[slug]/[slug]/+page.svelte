@@ -3,14 +3,17 @@
 	import { fly } from 'svelte/transition';
 	import { formatNoteDate } from '$lib/scripts/utils';
 	import { renderRichText } from '@storyblok/svelte';
+	import ReportButton from '$lib/components/ui-interactive/report-button/ReportButton.svelte';
 	let { data }: { data: any } = $props();
 	let article = $state(data.article.content);
 	// $inspect(article);
-</script>
 
+</script>
 <svelte:head>
 	<title>Molly Marsh - {article.article_title}</title>
 </svelte:head>
+
+<!-- <ReportButton></ReportButton> -->
 
 <section class="mx-auto w-full max-w-[60rem] px-6 py-24 md:px-8 lg:px-10 2xl:px-0" aria-labelledby="article-container_heading" id="article-container">
 	<article class="flex w-full flex-col items-center overflow-hidden rounded-2xl px-6 py-10 lg:shadow-2xl">

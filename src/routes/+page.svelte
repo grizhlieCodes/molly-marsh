@@ -22,11 +22,14 @@
 		}
 		mounted = true;
 	});
+import ReportButton from '$lib/components/ui-interactive/report-button/ReportButton.svelte';
 </script>
-
+<!-- <ReportButton></ReportButton> -->
 <svelte:head>
 	<title>Molly Marsh - {story.name}</title>
 </svelte:head>
+
+
 
 {#key story}
 	{#if story && mounted}
