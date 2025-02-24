@@ -124,8 +124,4 @@
 	});
 </script>
 
-<div>
-	<p>{calLink}</p>
-</div>
-
 <div bind:this={calendarEl} use:storyblokEditable={blok} style="width:100%;height:100%;overflow:scroll" id={calId}></div>
