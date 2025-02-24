@@ -19,6 +19,9 @@ import { default as image } from '$lib/components/ui/image/Image.svelte';
 import { default as svg_divider } from '$lib/components/ui/svg-divider/SvgDivider.svelte';
 import { default as divider } from '$lib/components/ui/divider/Divider.svelte';
 import { default as custom_richtext } from '$lib/components/ui/CustomRichtext.svelte';
+import { default as table } from '$lib/components/ui/table/Table.svelte';
+import { default as table_row } from '$lib/components/ui/table/TableRow.svelte';
+import { default as table_cell } from '$lib/components/ui/table/TableCell.svelte';
 
 // 03 - UI: Interactive
 import { default as button } from '$lib/components/ui-interactive/button/Button.svelte';
@@ -62,6 +65,9 @@ export async function useStoryblok(accessToken = '') {
 			svg_divider,
 			divider,
 			custom_richtext,
+			table,
+			table_row,
+			table_cell,
 			// UI: Interactive
 			button,
 			testimonial,
