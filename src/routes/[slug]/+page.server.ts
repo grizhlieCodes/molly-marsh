@@ -11,7 +11,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS, SECRET_MAILERLITE_KEY, INTERNAL_API_KEY } from '$env/static/private';
 import nodemailer from 'nodemailer';
-import { useStoryblok } from '$lib/storyblok/useStoryblok';
+import { useStoryblok } from '$lib/integrations/storyblok/useStoryblok';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 // import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/email/email-template';

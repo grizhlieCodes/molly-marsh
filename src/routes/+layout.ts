@@ -1,7 +1,7 @@
 // IMPORTS
 import type { LayoutLoad } from './$types';
 import { useStoryblokApi } from '@storyblok/svelte';
-import { useStoryblok } from '$lib/storyblok/useStoryblok';
+import { useStoryblok } from '$lib/integrations/storyblok/useStoryblok';
 import { dev } from '$app/environment'; // Import the 'dev' flag
 
 export const load: LayoutLoad = async ({ url }) => {
