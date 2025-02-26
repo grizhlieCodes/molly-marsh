@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, STRIPE_SIGNGING_SECRET } from '$env/static/private';
+import { STRIPE_SECRET_KEY, STRIPE_SIGNING_SECRET } from '$env/static/private';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/email/email-template.js';
 
@@ -32,7 +32,7 @@ export async function POST({ request }) {
 		let session = null;
 		let customer = null;
 		// Verify stripe event & unpack data
-		const event = stripe.webhooks.constructEvent(body, signature, STRIPE_SIGNGING_SECRET);
+		const event = stripe.webhooks.constructEvent(body, signature, STRIPE_SIGNING_SECRET);
 
 		if (event.type === 'checkout.session.completed') {
 			session = event.data.object;
