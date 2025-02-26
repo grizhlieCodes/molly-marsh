@@ -26,3 +26,6 @@ vite.config.ts.timestamp-*
 # Other
 ./read.md
 read.md
+
+# Sentry Config File
+.env.sentry-build-plugin
