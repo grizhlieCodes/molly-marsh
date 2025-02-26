@@ -12,11 +12,6 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, {
 async function findCustomerByEmail(email: string) {
 	try {
 		const customers = await stripe.customers.list({ email });
-		// if (customers.data.length > 0) {
-		// 	console.log('Found existing customer: ', customers.data[0]);
-		// } else {
-		// 	console.log('Found zero existing customer: ', customers.data[0]);
-		// }
 		return customers.data.length > 0 ? customers.data[0] : null;
 	} catch (err) {
 		throw new Error(`Failed to find customer: ${err.message}`);
