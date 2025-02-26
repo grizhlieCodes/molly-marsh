@@ -1,6 +1,6 @@
 import { redirect, error, json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, STRIPE_SUCCESSFUL_CHECKOUT_SECRET, INTERNAL_API_KEY } from '$env/static/private';
+import { STRIPE_SECRET_KEY, STRIPE_SIGNGING_SECRET, INTERNAL_API_KEY } from '$env/static/private';
 import { updateCustomerNameIfMissing } from '$lib/stripe/stripe';
 import { sendSuccessfulCheckoutSessionConfirmationEmail } from '$lib/email/serverEmailHandler.js';
 import { z } from 'zod';
@@ -94,7 +94,7 @@ export async function POST(event) {
 	const signature = event.request.headers.get('stripe-signature');
 
 	try {
-		const stripeEvent = stripe.webhooks.constructEvent(body, signature, STRIPE_SUCCESSFUL_CHECKOUT_SECRET);
+		const stripeEvent = stripe.webhooks.constructEvent(body, signature, STRIPE_SIGNGING_SECRET);
 
 		if (stripeEvent.type !== 'checkout.session.completed') {
 			return json({
