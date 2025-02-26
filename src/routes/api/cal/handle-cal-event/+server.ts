@@ -1,244 +1,8 @@
 import { CAL_WEBHOOK_SECRET, INTERNAL_API_KEY } from '$env/static/private';
 import { json, error } from '@sveltejs/kit';
-import { createHmac, timingSafeEqual } from 'crypto';
 import { parse } from 'path';
-import { z } from 'zod';
+import { verifyCalWebhook, handleCalEvent } from '$lib/integrations/cal';
 
-const calCancellationSchema = z
-	.object({
-		triggerEvent: z.string(),
-		payload: z.object({
-			iCalUID: z.string(),
-			cancellationReason: z.string().nullable().optional()
-		})
-	})
-	.transform((data) => ({
-		triggerEvent: data.triggerEvent,
-		bookingId: data.payload.iCalUID,
-		cancellationReason: data.payload.cancellationReason
-	}));
-
-const calBookingSchema = z
-	.object({
-		triggerEvent: z.string(),
-		payload: z.object({
-			type: z.string(),
-			title: z.string(),
-			startTime: z.string(),
-			endTime: z.string(),
-			responses: z.object({
-				name: z.object({
-					value: z.string()
-				}),
-				email: z.object({
-					value: z.string().email()
-				}),
-				instrument: z
-					.object({
-						value: z.string().optional().nullable()
-					})
-					.optional()
-					.nullable(),
-				'performance-type': z
-					.object({
-						value: z.string().optional().nullable()
-					})
-					.optional()
-					.nullable(),
-				notes: z
-					.object({
-						value: z.string().optional().nullable()
-					})
-					.optional()
-					.nullable()
-			}),
-			videoCallData: z.object({
-				id: z.string(),
-				url: z.string().url()
-			}),
-			iCalUID: z.string()
-		})
-	})
-	.transform((data) => ({
-		triggerEvent: data.triggerEvent,
-		bookingType: data.payload.type,
-		bookingTitle: data.payload.title,
-		bookingStartTime: data.payload.startTime,
-		bookingEndTime: data.payload.endTime,
-		clientName: data.payload.responses.name.value,
-		clientEmail: data.payload.responses.email.value,
-		clientInstrument: data.payload.responses.instrument?.value ?? null,
-		clientPerformanceType: data.payload.responses['performance-type']?.value ?? null,
-		bookingNotes: data.payload.responses.notes?.value ?? null,
-		zoomCallId: data.payload.videoCallData.id,
-		zoomCallUrl: data.payload.videoCallData.url,
-		bookingId: data.payload.iCalUID
-	}));
-
-const calRescheduledSchema = z
-	.object({
-		triggerEvent: z.string(),
-		payload: z.object({
-			startTime: z.string(),
-			endTime: z.string(),
-			iCalUID: z.string()
-		})
-	})
-	.transform((data) => ({
-		triggerEvent: data.triggerEvent,
-		bookingStartTime: data.payload.startTime,
-		bookingEndTime: data.payload.endTime,
-		bookingId: data.payload.iCalUID
-	}));
-
-const calMeetEndedSchema = z
-	.object({
-		triggerEvent: z.string(),
-		iCalUID: z.string()
-	})
-	.transform((data) => ({
-		triggerEvent: data.triggerEvent,
-		bookingId: data.iCalUID
-	}));
-
-const calBookingSchemaType = z.infer<typeof calBookingSchema>;
-
-function verifyCalWebhook(payload: string, signature: string): boolean {
-	const hmac = createHmac('sha256', CAL_WEBHOOK_SECRET);
-	const minifiedPayload = JSON.stringify(JSON.parse(payload));
-	hmac.update(minifiedPayload);
-	const calculatedSignature = hmac.digest('hex');
-	try {
-		return timingSafeEqual(Buffer.from(calculatedSignature, 'hex'), Buffer.from(signature, 'hex'));
-	} catch (err) {
-		console.error('Signature comparison error:', err);
-		return false;
-	}
-}
-
-const bookingCancelledHandler = async (calData, event) => {
-	const parsedCancellationData = calCancellationSchema.parse(calData);
-
-	try {
-		const notionResponse = await event.fetch('/api/notion/notion-handler', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(parsedCancellationData)
-		});
-
-		if (!notionResponse.ok) {
-			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
-		}
-
-		const result = await notionResponse.json();
-
-		return result;
-	} catch (error) {
-		console.error('Error during sending data to notion in cal handler api:', error);
-		throw error;
-	}
-};
-
-const bookingCreatedHandler = async (calData, event) => {
-	const parsedCreatedBooking = calBookingSchema.parse(calData);
-	console.log('INTERNAL_API_KEY: ', INTERNAL_API_KEY);
-
-	try {
-		const notionResponse = await event.fetch('/api/notion/notion-handler', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(parsedCreatedBooking)
-		});
-
-		if (!notionResponse.ok) {
-			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
-		}
-
-		const result = await notionResponse.json();
-
-		return result;
-	} catch (err) {
-		console.error('Error during sending data to notion in cal handler api:', err);
-		throw err;
-	}
-};
-
-const bookingRescheduledHandler = async (calData, event) => {
-	const parsedRescheduledBooking = calRescheduledSchema.parse(calData);
-	try {
-		const notionResponse = await event.fetch('/api/notion/notion-handler', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(parsedRescheduledBooking)
-		});
-
-		if (!notionResponse.ok) {
-			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
-		}
-
-		const result = await notionResponse.json();
-
-		return result;
-	} catch (err) {
-		console.error('Error during sending data to notion during booking reschedule:', err);
-		throw err;
-	}
-};
-const meetingEndedHandler = async (calData, event) => {
-	// console.log('Meet ended cal data', calData);
-	const parsedMeetingEnded = calMeetEndedSchema.parse(calData);
-	console.log('meet cal parsed Data', parsedMeetingEnded)
-	try {
-		const notionResponse = await event.fetch('/api/notion/notion-handler', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(parsedMeetingEnded)
-		});
-
-		if (!notionResponse.ok) {
-			throw new Error(`HTTP ERROR at notionResponse! Status:  ${notionResponse.status}`);
-		}
-
-		const result = await notionResponse.json();
-
-		return result;
-	} catch (err) {
-		console.error('Error during sending data to notion during booking reschedule:', err);
-		throw err;
-	}
-};
-
-const calAllEventsHandler = async (calData, event) => {
-	const eventName = <string>calData.triggerEvent;
-
-	switch (eventName) {
-		case 'BOOKING_CREATED':
-			console.log('Booking has been created.');
-			return await bookingCreatedHandler(calData, event);
-		case 'BOOKING_CANCELLED':
-			console.log('Booking has been cancelled.');
-			return await bookingCancelledHandler(calData, event);
-		case 'BOOKING_RESCHEDULED':
-			console.log('Booking has been rescheduled.');
-			return await bookingRescheduledHandler(calData, event);
-		case 'MEETING_ENDED':
-			console.log('Meeting has ended.');
-			return await meetingEndedHandler(calData, event);
-			break;
-	}
-};
 
 export const POST: RequestHandler = async (event) => {
 	const signature = event.request.headers.get('x-cal-signature-256');
@@ -264,11 +28,17 @@ export const POST: RequestHandler = async (event) => {
 
 		const data = JSON.parse(rawBody);
 
-		const eventsHandlerResponse = await calAllEventsHandler(data, event);
+		const handlerResponse = await handleCalEvent(data, event);
 
-		return json({ status: 'success' });
+		return json({ status: 'success', data: handlerResponse });
 	} catch (err) {
 		console.error('Error processing webhook:', err);
-		throw error(500, 'Internal server error');
+    
+		if (err.status) {
+		  // If it's already a SvelteKit error with status, rethrow it
+		  throw err;
+		}
+		
+		throw error(500, err.message || 'Internal server error');
 	}
 };
