@@ -135,9 +135,9 @@ export const sendContactFormContacteeEmail = async (data) => {
             margin: 0 0 16px 0;
             "
         >
-            Thank you for contacting me. I will try getting back to you
-            within 48 hours. Please keep in mind that this only includes
-            working days.
+            Thank you for contacting me. I will do my best to reply to your message within 2 working days.
+            Best wishes,<br>
+            Molly<br>
         </p>
     `;
 	const mailOptions = {
@@ -145,7 +145,6 @@ export const sendContactFormContacteeEmail = async (data) => {
 		to: data.email,
 		subject: `Thank you for contacting me!`,
 		replyTo: SECRET_TRANSPORTER_USER,
-		priority: 'high',
 		attachments: [
 			{
 				filename: 'signature.jpg',

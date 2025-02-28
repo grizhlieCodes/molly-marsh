@@ -92,7 +92,6 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
 		to: client_email,
 		subject: `Book your coaching session`,
 		replyTo: SECRET_TRANSPORTER_USER,
-		priority: 'high',
 		attachments: [
 			{
 				filename: 'signature.jpg',
