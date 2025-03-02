@@ -35,11 +35,20 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 			throw error(400, `HTTP ERROR at stripe checkout notionResponse! Status: ${notionResponse.status}`);
 		}
 
-		await sendSuccessfulCheckoutSessionConfirmationEmail({
-			customer_name: customerData.customer.name,
-			customer_email: customerData.customer.email
-		});
-		return json({ received: true, message: 'Checkout session completed successfully', customer: customerData.customer });
+		const responseData = await notionResponse.json();
+		// console.log(responseData);
+
+		if (responseData?.data?.invoiceStatus === 'invoice-new') {
+			console.log('Emailing client since new invoice.');
+			await sendSuccessfulCheckoutSessionConfirmationEmail({
+				customer_name: customerData.customer.name,
+				customer_email: customerData.customer.email
+			});
+			return json({ received: true, message: 'Checkout session completed successfully', customer: customerData.customer });
+		} else if (responseData?.data?.invoiceStatus === 'invoice-exists') {
+			console.log('Skipping the email, since invoice exists (so the client was already emailed).');
+			return json({ received: true, message: 'Checkout session completed successfully', customer: customerData.customer });
+		}
 	} catch (err) {
 		console.error('Checkout session completion error:', err);
 

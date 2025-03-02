@@ -1,11 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { setupNotionClient } from './client';
-import { 
-  NOTION_CLIENTS_DB, 
-  NOTION_SESSIONS_DB, 
-  NOTION_PACKAGES_DB,
-  NOTION_DASHBOARD_METRICS_DB
-} from '$env/static/private';
+import { NOTION_CLIENTS_DB, NOTION_SESSIONS_DB, NOTION_PACKAGES_DB, NOTION_DASHBOARD_METRICS_DB, NOTION_INVOICES_DB } from '$env/static/private';
 
 /**
  * Finds a client in Notion by email
@@ -13,23 +8,23 @@ import {
  * @returns Client record or null if not found
  */
 export async function findClientInNotion(email: string) {
-  const notion = setupNotionClient();
-  try {
-    const response = await notion.databases.query({
-      database_id: NOTION_CLIENTS_DB,
-      filter: {
-        property: 'Contact Email',
-        email: {
-          equals: email
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const response = await notion.databases.query({
+			database_id: NOTION_CLIENTS_DB,
+			filter: {
+				property: 'Contact Email',
+				email: {
+					equals: email
+				}
+			}
+		});
 
-    return response.results.length > 0 ? response.results[0] : null;
-  } catch (err) {
-    console.error('Error querying Notion:', err);
-    throw error(500, 'Failed to query Notion database');
-  }
+		return response.results.length > 0 ? response.results[0] : null;
+	} catch (err) {
+		console.error('Error querying Notion:', err);
+		throw error(500, 'Failed to query Notion database');
+	}
 }
 
 /**
@@ -38,23 +33,23 @@ export async function findClientInNotion(email: string) {
  * @returns Package ID or null if not found
  */
 export async function findRelatedPackage(item_notion_name: string) {
-  const notion = setupNotionClient();
-  try {
-    const response = await notion.databases.query({
-      database_id: NOTION_PACKAGES_DB,
-      filter: {
-        property: 'Stripe Name',
-        rich_text: {
-          equals: item_notion_name
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const response = await notion.databases.query({
+			database_id: NOTION_PACKAGES_DB,
+			filter: {
+				property: 'Stripe Name',
+				rich_text: {
+					equals: item_notion_name
+				}
+			}
+		});
 
-    return response.results.length > 0 ? response.results[0].id : null;
-  } catch (err) {
-    console.error('Error querying Notion:', err);
-    throw error(500, 'Failed to query Notion database');
-  }
+		return response.results.length > 0 ? response.results[0].id : null;
+	} catch (err) {
+		console.error('Error querying Notion:', err);
+		throw error(500, 'Failed to query Notion database');
+	}
 }
 
 /**
@@ -64,27 +59,27 @@ export async function findRelatedPackage(item_notion_name: string) {
  * @returns Session ID, record, or null if not found
  */
 export async function findSessionInNotion(calSessionId: string, idOnly = true) {
-  const notion = setupNotionClient();
-  try {
-    const res = await notion.databases.query({
-      database_id: NOTION_SESSIONS_DB,
-      filter: {
-        property: 'Cal Booking ID',
-        rich_text: {
-          equals: calSessionId
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const res = await notion.databases.query({
+			database_id: NOTION_SESSIONS_DB,
+			filter: {
+				property: 'Cal Booking ID',
+				rich_text: {
+					equals: calSessionId
+				}
+			}
+		});
 
-    if (res.results.length === 0) {
-      return null;
-    }
-    
-    return idOnly ? res.results[0].id : res.results[0];
-  } catch (err) {
-    console.error('Error querying Notion:', err);
-    throw error(500, 'Failed to query Notion database');
-  }
+		if (res.results.length === 0) {
+			return null;
+		}
+
+		return idOnly ? res.results[0].id : res.results[0];
+	} catch (err) {
+		console.error('Error querying Notion:', err);
+		throw error(500, 'Failed to query Notion database');
+	}
 }
 
 /**
@@ -92,28 +87,28 @@ export async function findSessionInNotion(calSessionId: string, idOnly = true) {
  * @returns Reference page ID for total clients metric
  */
 export async function findTotalClientsMetric() {
-  const notion = setupNotionClient();
-  try {
-    const totalClientsResponse = await notion.databases.query({
-      database_id: NOTION_DASHBOARD_METRICS_DB,
-      filter: {
-        property: 'Name',
-        title: {
-          equals: 'Total Clients'
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const totalClientsResponse = await notion.databases.query({
+			database_id: NOTION_DASHBOARD_METRICS_DB,
+			filter: {
+				property: 'Name',
+				title: {
+					equals: 'Total Clients'
+				}
+			}
+		});
 
-    const totalClientsId = totalClientsResponse.results[0]?.id;
-    if (!totalClientsId) {
-      throw new Error('Could not find Total Clients reference page');
-    }
-    
-    return totalClientsId;
-  } catch (err) {
-    console.error('Error finding total clients metric:', err);
-    throw error(500, 'Failed to find total clients metric');
-  }
+		const totalClientsId = totalClientsResponse.results[0]?.id;
+		if (!totalClientsId) {
+			throw new Error('Could not find Total Clients reference page');
+		}
+
+		return totalClientsId;
+	} catch (err) {
+		console.error('Error finding total clients metric:', err);
+		throw error(500, 'Failed to find total clients metric');
+	}
 }
 
 /**
@@ -121,28 +116,28 @@ export async function findTotalClientsMetric() {
  * @returns Reference page ID for total revenue metric
  */
 export async function findTotalRevenueMetric() {
-  const notion = setupNotionClient();
-  try {
-    const totalRevenueResponse = await notion.databases.query({
-      database_id: NOTION_DASHBOARD_METRICS_DB,
-      filter: {
-        property: 'Name',
-        title: {
-          equals: 'Total Revenue'
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const totalRevenueResponse = await notion.databases.query({
+			database_id: NOTION_DASHBOARD_METRICS_DB,
+			filter: {
+				property: 'Name',
+				title: {
+					equals: 'Total Revenue'
+				}
+			}
+		});
 
-    const totalRevenueMetricsId = totalRevenueResponse.results[0]?.id;
-    if (!totalRevenueMetricsId) {
-      throw new Error('Could not find Total Revenue reference page');
-    }
-    
-    return totalRevenueMetricsId;
-  } catch (err) {
-    console.error('Error finding total revenue metric:', err);
-    throw error(500, 'Failed to find total revenue metric');
-  }
+		const totalRevenueMetricsId = totalRevenueResponse.results[0]?.id;
+		if (!totalRevenueMetricsId) {
+			throw new Error('Could not find Total Revenue reference page');
+		}
+
+		return totalRevenueMetricsId;
+	} catch (err) {
+		console.error('Error finding total revenue metric:', err);
+		throw error(500, 'Failed to find total revenue metric');
+	}
 }
 
 /**
@@ -150,26 +145,49 @@ export async function findTotalRevenueMetric() {
  * @returns Reference page ID for past sessions counter
  */
 export async function findPastSessionsMetric() {
-  const notion = setupNotionClient();
-  try {
-    const pastSessionCounterResponse = await notion.databases.query({
-      database_id: NOTION_DASHBOARD_METRICS_DB,
-      filter: {
-        property: 'Name',
-        title: {
-          equals: 'Past Sessions'
-        }
-      }
-    });
+	const notion = setupNotionClient();
+	try {
+		const pastSessionCounterResponse = await notion.databases.query({
+			database_id: NOTION_DASHBOARD_METRICS_DB,
+			filter: {
+				property: 'Name',
+				title: {
+					equals: 'Past Sessions'
+				}
+			}
+		});
 
-    const pastSessionsId = pastSessionCounterResponse.results[0]?.id;
-    if (!pastSessionsId) {
-      throw new Error('Could not find Past Sessions reference page');
-    }
-    
-    return pastSessionsId;
-  } catch (err) {
-    console.error('Error finding past sessions metric:', err);
-    throw error(500, 'Failed to find past sessions metric');
-  }
+		const pastSessionsId = pastSessionCounterResponse.results[0]?.id;
+		if (!pastSessionsId) {
+			throw new Error('Could not find Past Sessions reference page');
+		}
+
+		return pastSessionsId;
+	} catch (err) {
+		console.error('Error finding past sessions metric:', err);
+		throw error(500, 'Failed to find past sessions metric');
+	}
+}
+
+export async function findInvoice(stripeInvoiceId: string) {
+	const notion = setupNotionClient();
+
+	try {
+		const invoiceResponse = await notion.databases.query({
+			database_id: NOTION_INVOICES_DB,
+			filter: {
+				property: 'Stripe Invoice ID',
+				rich_text: {
+					equals: stripeInvoiceId
+				}
+			}
+		});
+
+		const pastInvoices = invoiceResponse.results;
+
+		return pastInvoices;
+	} catch (err) {
+		console.error('Error finding past sessions metric:', err);
+		throw error(500, 'Failed to find past sessions metric');
+	}
 }
