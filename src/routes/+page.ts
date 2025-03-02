@@ -14,5 +14,6 @@ export const load: PageServerLoad = async ({ url, params, parent }) => {
 
 	return {
 		story: dataStory.data.story
+		
 	};
 };
