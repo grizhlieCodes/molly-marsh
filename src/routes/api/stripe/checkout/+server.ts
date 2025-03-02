@@ -1,74 +1,5 @@
-import Stripe from 'stripe';
-import { redirect } from '@sveltejs/kit';
-import { STRIPE_SECRET_KEY } from '$env/static/private';
-
-// console.log('SECRET KEY HERE ==================', STRIPE_SECRET_KEY);
-
-const stripe = new Stripe(STRIPE_SECRET_KEY, {
-	apiVersion: '2024-11-20.acacia'
-});
-
-// Find existing Stripe customer by email
-async function findCustomerByEmail(email: string) {
-	try {
-		const customers = await stripe.customers.list({ email });
-		return customers.data.length > 0 ? customers.data[0] : null;
-	} catch (err) {
-		throw new Error(`Failed to find customer: ${err.message}`);
-	}
-}
-
-// Create new Stripe customer
-async function createCustomer(email: string) {
-	try {
-		const newCustomer = await stripe.customers.create({ email });
-		// console.log('Created new Customer: ', newCustomer);
-		return newCustomer;
-	} catch (err) {
-		throw new Error(`Failed to create customer: ${err.message}`);
-	}
-}
-
-async function createCheckoutSession(priceId: string, origin: string, customerId: string) {
-	// First safety net: validate inputs before even trying Stripe
-	if (!priceId || !origin) {
-		throw new Error('Missing required parameters: priceId and origin are required');
-	}
-
-	try {
-		// Second safety net: handle Stripe-specific errors
-		return await stripe.checkout.sessions.create({
-			customer: customerId,
-			line_items: [
-				{
-					price: priceId,
-					quantity: 1
-				}
-			],
-			mode: 'payment',
-			success_url: `${origin}/successful-purchase?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${origin}/cancel`,
-			invoice_creation: {
-				enabled: true
-			}
-		});
-	} catch (err) {
-		// Enhance the error with more context
-		throw new Error(`Failed to create Stripe session: ${err.message}`);
-	}
-}
-
-// Main checkout handler that manages customer creation/lookup
-async function handleCheckout(priceId: string, email: string, origin: string) {
-	// Find or create customer
-	let customer = await findCustomerByEmail(email);
-	if (!customer) {
-		customer = await createCustomer(email);
-	}
-
-	// Create checkout session with customer ID
-	return await createCheckoutSession(priceId, origin, customer.id);
-}
+import { handleCheckout } from '$lib/integrations/stripe';
+import { stripeCheckoutInputSchema } from '$lib/integrations/stripe';
 
 export async function POST({ request }) {
 	try {
@@ -77,7 +8,7 @@ export async function POST({ request }) {
 			throw new Error('Invalid JSON in request body');
 		});
 
-		const { priceId, email } = data;
+		const { priceId, email } = stripeCheckoutInputSchema.parse(data);
 		// console.log({ priceId, email });
 
 		if (!priceId || !email) {

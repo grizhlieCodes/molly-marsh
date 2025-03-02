@@ -1,6 +1,7 @@
 <script lang="ts">
 	let { data }: { data: any } = $props();
-	let { sessionData, error }: { sessionData: any; error: string } = $derived(data);
+	import type { StripeSuccessfulCheckoutSession } from '$lib/integrations/stripe/schemas';
+	let { sessionData, error }: { sessionData: StripeSuccessfulCheckoutSession; error: string } = $derived(data);
 	import { formatNoteDate } from '$lib/scripts/utils';
 
 	$inspect(sessionData);
@@ -16,42 +17,6 @@
 			isLoading = false;
 		}
 	});
-
-	// const downloadInvoice = async (invoiceId: string, invoiceNumber: string) => {
-	// 	try {
-	// 		const response = await fetch(`/api/stripe/download-invoice/${invoiceId}`, {
-	// 			method: 'GET',
-	// 			headers: {
-	// 				Accept: 'application/pdf'
-	// 			}
-	// 		});
-
-	// 		if (!response.ok) {
-	// 			const errorData = await response.json();
-	// 			throw new Error(errorData.error || 'Failed to download invoice');
-	// 		}
-
-	// 		const contentType = response.headers.get('content-type');
-	// 		if (contentType && contentType.includes('application/pdf')) {
-	// 			const blob = await response.blob();
-	// 			const url = window.URL.createObjectURL(blob);
-
-	// 			const link = document.createElement('a');
-	// 			link.href = url;
-	// 			link.download = `invoice-${invoiceNumber}.pdf`;
-	// 			document.body.appendChild(link);
-	// 			link.click();
-	// 			document.body.removeChild(link);
-
-	// 			window.URL.revokeObjectURL(url);
-	// 		} else {
-	// 			throw new Error('Invalid response format');
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Error downloading invoice:', error);
-	// 		alert('Failed to download invoice. Please try again later.');
-	// 	}
-	// };
 </script>
 
 <svelte:head>
@@ -146,7 +111,7 @@ w-full justify-center"
 					 w-full lg:text-[1.8rem]"
 							>
 								Thank you for your purchase
-								{sessionData.customerName.split(' ')[0]}!
+								{sessionData?.customer_name?.split(' ')[0]}!
 							</h2>
 							<p class="{textStyles.para6} w-full">Your order has been successfully processed.</p>
 						</div>
@@ -164,7 +129,7 @@ w-full justify-center"
 						class="font-special text-body-primary-50 bg-surface-primary-900 hover:bg-surface-primary-700
 					   focus-within:bg-surface-primary-700 flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border
 					   px-2 py-5 text-xl font-medium uppercase transition-colors duration-300"
-						data-cal-link="mollymarsh/coaching-session?email={`${sessionData.customerEmail}`}&name={`${sessionData.customerName}`}"
+						data-cal-link="mollymarsh/coaching-session?email={`${sessionData?.customer_email}`}&name={`${sessionData.customer_name}`}"
 						data-cal-namespace="coaching-session"
 						data-cal-config={JSON.stringify({ layout: 'month_view', theme: 'light' })}
 					>
@@ -182,17 +147,17 @@ w-full justify-center"
 				<div class="bg-surface-primary-300 h-[1px] w-full"></div>
 				<div class="lm:gap-8 lm:p-8 flex w-full flex-col gap-4 p-4">
 					<p class="{textStyles.paraBase} w-full">
-						We have also sent an email to <b>{sessionData.customerEmail}</b>
+						We have also sent an email to <b>{sessionData.customer_email}</b>
 						with all of the information you will find on this page.
 					</p>
 					<article
 						class="border-molly-200 lm:flex-row flex min-h-48 w-full flex-col
 				 overflow-hidden rounded-lg border bg-white"
 					>
-						<img src={sessionData.itemImage} alt="" role="presentation" class="lm:max-w-48 max-h-80 object-cover object-center" />
+						<img src={sessionData.item_image} alt="" role="presentation" class="lm:max-w-48 max-h-80 object-cover object-center" />
 						<div class="lm:gap-8 flex w-full flex-col gap-5 p-5 pr-6">
 							<div class="lm:gap-4 flex flex-col gap-6">
-								<p class="!text-body-secondary-800 text-xl font-medium">{sessionData.itemDescription}</p>
+								<p class="!text-body-secondary-800 text-xl font-medium">{sessionData.item_description}</p>
 								<div
 									class="lm:flex-row lm:flex-wrap lm:gap-8 lm:*:flex-col
 						 lm:*:gap-3 *: flex w-full flex-col gap-4
@@ -207,7 +172,7 @@ w-full justify-center"
 										<span
 											class="!text-body-secondary-700
 								 
-								 font-medium">{formatNoteDate(sessionData.invoiceDate)}</span
+								 font-medium">{formatNoteDate(sessionData.invoice_date)}</span
 										>
 									</div>
 									<div>
@@ -215,7 +180,7 @@ w-full justify-center"
 										<span
 											class="!text-body-secondary-700
 								 
-								 font-medium">{sessionData.invoiceNumber}</span
+								 font-medium">{sessionData.invoice_number}</span
 										>
 									</div>
 									<div>
@@ -226,7 +191,7 @@ w-full justify-center"
 										<span
 											class="!text-body-secondary-700
 								 
-								 font-medium">£{(sessionData.itemAmount / 100).toFixed(2)}</span
+								 font-medium">£{(sessionData.item_amount_total / 100).toFixed(2)}</span
 										>
 									</div>
 								</div>
@@ -248,7 +213,6 @@ w-full justify-center"
 						</div>
 					</article>
 				</div>
-				
 			</section>
 		{/if}
 	</div>
@@ -267,7 +231,7 @@ w-full justify-center"
 		</div> -->
 		<div class="flex w-full items-center justify-center pt-24">
 			<div class="flex flex-col items-center gap-4">
-				<p class="text-red-500">Error: {err.message}</p>
+				<p class="text-red-500">Error: {err}</p>
 				<button
 					class="font-special text-body-primary-800 bg-surface-primary-100 border-surface-primary-300 hover:bg-surface-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50 focus-within:bg-surface-primary-800 w-full cursor-pointer rounded-md border p-3 text-lg font-medium uppercase transition-colors duration-300"
 					onclick={() => window.location.reload()}
