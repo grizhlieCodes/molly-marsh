@@ -30,7 +30,7 @@ export async function createCheckoutSession(priceId: string, origin: string, cus
 			],
 			mode: 'payment',
 			success_url: `${origin}/successful-purchase?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${origin}/cancel`,
+			cancel_url: `${origin}`,
 			invoice_creation: {
 				enabled: true
 			}
