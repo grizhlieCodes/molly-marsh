@@ -1,10 +1,10 @@
 import Stripe from 'stripe';
 import type { RequestEvent } from '@sveltejs/kit';
 import { INTERNAL_API_KEY } from '$env/static/private';
-import { retrieveCheckoutSession, stripeSuccessfulSessionSchema, updateCustomerNameIfMissing } from '$lib/integrations/stripe';
+import { retrieveCheckoutSession, stripeSuccessfulSessionSchema } from '$lib/integrations/stripe';
 import { updateCustomerNameIfMissing } from './customers';
-import { sendSuccessfulCheckoutSessionConfirmationEmail } from '$lib/email/serverEmailHandler';
 import { json, error } from '@sveltejs/kit';
+import * as Sentry from '@sentry/sveltekit';
 
 export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session, event: RequestEvent) {
 	try {
@@ -40,10 +40,34 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 
 		if (responseData?.data?.invoiceStatus === 'invoice-new') {
 			console.log('Emailing client since new invoice.');
-			await sendSuccessfulCheckoutSessionConfirmationEmail({
-				customer_name: customerData.customer.name,
-				customer_email: customerData.customer.email
+			
+			// Use the new email API endpoint
+			const emailResponse = await event.fetch('/api/email/send-email', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					type: 'checkout-confirmation',
+					data: {
+						customer_name: customerData.customer.name,
+						customer_email: customerData.customer.email
+					}
+				})
 			});
+			
+			if (!emailResponse.ok) {
+				// Log the error but don't fail the whole process
+				console.error('Failed to send checkout confirmation email:', await emailResponse.text());
+				Sentry.captureMessage('Failed to send checkout confirmation email', {
+					level: 'warning',
+					tags: { 
+						component: 'stripe-handler',
+						checkoutSessionId: session.id
+					}
+				});
+			}
+			
 			return json({ received: true, message: 'Checkout session completed successfully', customer: customerData.customer });
 		} else if (responseData?.data?.invoiceStatus === 'invoice-exists') {
 			console.log('Skipping the email, since invoice exists (so the client was already emailed).');

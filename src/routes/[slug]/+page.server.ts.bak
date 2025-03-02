@@ -190,22 +190,19 @@ export const actions = {
 				});
 			}
 
-			// Use the new unified email API for contact form emails
-			const emailResponse = await fetch('/api/email/send-email', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					type: 'contact-form',
-					data: form.data
-				})
-			});
+			const selfEmail = await sendContactFormInternalEmail(form.data);
+			const isInternalEmailSuccessful = selfEmail.rejected.length === 0 && selfEmail.accepted.includes(SECRET_TRANSPORTER_USER) && selfEmail.response.startsWith('250');
 
-			if (!emailResponse.ok) {
-				const errorData = await emailResponse.json();
-				console.error('Email API error:', errorData);
-				throw new Error(errorData.message || 'Failed to send email');
+			if (!isInternalEmailSuccessful) {
+				throw new Error('Internal email failed to send');
+			}
+
+			// Only send confirmation email if internal email was successful
+			const confirmationEmail = await sendContactFormContacteeEmail(form.data);
+			const isConfirmationEmailSuccessful = confirmationEmail?.rejected.length === 0 && confirmationEmail?.accepted.includes(form.data.email) && confirmationEmail?.response.startsWith('250');
+
+			if (!isConfirmationEmailSuccessful) {
+				throw new Error('Confirmation email failed to send');
 			}
 
 			return message(form, 'Form successfully submitted!');

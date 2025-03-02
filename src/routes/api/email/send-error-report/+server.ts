@@ -1,30 +1,50 @@
-import { sendErrorReport } from '$lib/email/serverEmailHandler';
-import { json, error } from '@sveltejs/kit';
+import { json, error, redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import * as Sentry from '@sentry/sveltekit';
 
-export const POST: RequestHandler = async ({ request, getClientAddress }) => {
-	console.log('received some data, lets try sending it to the email function');
+/**
+ * Legacy endpoint - now redirects to the main email endpoint
+ */
+export const POST: RequestHandler = async ({ request, getClientAddress, fetch }) => {
 	try {
 		const clientIp = getClientAddress();
 		const data = await request.json();
 
-		console.log('data: ', data);
-
 		if (!data.url) {
-			console.log('No damn data');
+			console.log('Missing URL in error report');
 			return json({ success: false, message: 'Missing URL' }, { status: 400 });
 		}
 
-		const allData = { ...data, clientIp };
+		// Add timestamp if not provided
+		if (!data.timestamp) {
+			data.timestamp = new Date().toISOString();
+		}
 
-		console.log({ allData });
+		// Forward to the new unified email endpoint
+		const response = await fetch('/api/email/send-email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				type: 'error-report',
+				data: { ...data, clientIp }
+			})
+		});
 
-		const emailSent = await sendErrorReport({ ...data, clientIp });
-
-		// Return a response
-		return json({ success: true });
+		// Return the response from the email endpoint
+		const result = await response.json();
+		return json(result, { status: response.status });
 	} catch (err) {
 		console.error('Error processing bug report:', err);
+		
+		// Log to Sentry
+		Sentry.captureException(err, {
+			tags: {
+				endpoint: 'send-error-report-legacy'
+			}
+		});
+		
 		return json(
 			{
 				success: false,
