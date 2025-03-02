@@ -1,7 +1,8 @@
 import { handleCheckout } from '$lib/integrations/stripe';
 import { stripeCheckoutInputSchema } from '$lib/integrations/stripe';
+import * as Sentry from '@sentry/sveltekit';
 
-export async function POST({ request }) {
+export async function POST({ request, url }) {
 	try {
 		// Third safety net: handle request parsing errors
 		const data = await request.json().catch(() => {
@@ -30,6 +31,19 @@ export async function POST({ request }) {
 	} catch (err) {
 		// Final safety net: convert all errors to proper HTTP responses
 		console.error('Checkout error:', err);
+
+		// Log detailed error to Sentry
+		Sentry.captureException(err, {
+			tags: {
+				endpoint: 'stripe-checkout',
+				url: url.href
+			},
+			extra: {
+				requestHeaders: Object.fromEntries(request.headers),
+				error: err.message,
+				stack: err.stack
+			}
+		});
 
 		return new Response(
 			JSON.stringify({
