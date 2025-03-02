@@ -1,65 +1,46 @@
+import { json } from '@sveltejs/kit';
 import { SECRET_TRANSPORTER_USER, SECRET_TRANSPORTER_PASS } from '$env/static/private';
 import nodemailer from 'nodemailer';
-
-import { json } from '@sveltejs/kit';
-import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, STRIPE_SUCCESSFUL_CHECKOUT_SECRET } from '$env/static/private';
+import { verifyStripeWebhook, isEventType, updateCustomerNameIfMissing } from '$lib/integrations/stripe';
 import { signatureImage } from '$lib/email/molly-email-signature-for-nodemailer';
 import { insertEmailWithTemplate } from '$lib/email/email-template.js';
 
-const stripe = new Stripe(STRIPE_SECRET_KEY, {
-	apiVersion: '2024-11-20.acacia'
-});
-
-const updateCustomerNameIfMissing = async (customer_id, sessionData) => {
-	const customer = await stripe.customers.retrieve(customer_id);
-
-	if (customer && (!customer.name || customer.name === null)) {
-		const updatedCustomer = await stripe.customers.update(customer_id, {
-			name: sessionData.customer_details.name
-		});
-		return { customer: updatedCustomer, status: 'Updated customer name.' };
-	}
-
-	return { customer, status: 'Customer already had a name.' };
-};
+// This webhook handler is deprecated and will be replaced by the main webhook handler
+// It's kept for backwards compatibility
 
 export async function POST({ request }) {
 	const body = await request.text();
 	const signature = request.headers.get('stripe-signature');
 
 	try {
-		let session = null;
-		let customer = null;
-		// Verify stripe event & unpack data
-		const event = stripe.webhooks.constructEvent(body, signature, STRIPE_SUCCESSFUL_CHECKOUT_SECRET);
+		// Verify the webhook
+		const event = verifyStripeWebhook(body, signature);
 
-		if (event.type === 'checkout.session.completed') {
-			session = event.data.object;
-			// console.log('Checkout Session Data:', session);
-		}
-
-		if (session.customer) {
-			customer = await updateCustomerNameIfMissing(session.customer, session);
-			// console.log('Updated Customer or Customer: ', customer);
-		}
-
-		// send email here
-		if (session && customer) {
-			const customer_email = customer.customer.email;
-			const customer_name = customer.customer.name;
-			// console.log('HERE ==============================!!!!!!!!!!!!!!==============', {
-			// 	customer_email,
-			// 	customer_name
-			// });
-			const emailRes = await sendConfirmationEmail(customer_name, customer_email);
-			// console.log(emailRes)
+		// Check event type
+		if (isEventType(event, 'checkout.session.completed')) {
+			const session = event.data.object;
+			
+			// Update customer name if needed
+			if (session.customer) {
+				const customer = await updateCustomerNameIfMissing(
+					session.customer,
+					session.customer_details.name
+				);
+				
+				// Send email
+				if (customer?.customer?.email && customer?.customer?.name) {
+					await sendConfirmationEmail(
+						customer.customer.name,
+						customer.customer.email
+					);
+				}
+			}
 		}
 
 		return json({ received: true });
 	} catch (err) {
 		// Only log if it's not a signature verification error
-		if (!err.message.includes('No signatures found')) {
+		if (!err.message.includes('Invalid webhook signature')) {
 			console.error('Webhook Error:', err.message);
 		}
 		return json({ error: err.message }, { status: 400 });
@@ -73,7 +54,6 @@ const transporter = nodemailer.createTransport({
 		pass: SECRET_TRANSPORTER_PASS
 	}
 });
-
 
 const sendConfirmationEmail = async (client_name: string, client_email: string) => {
 	const cal_link = `https://cal.com/mollymarsh/coaching-session?email=${client_email}&name=${client_name}`;
@@ -107,7 +87,7 @@ const sendConfirmationEmail = async (client_name: string, client_email: string) 
 		let res = await transporter.sendMail(mailOptions);
 		return res;
 	} catch (error) {
-		console.log('fucked up', error);
+		console.error('Email sending error:', error);
 		throw error;
 	}
 };

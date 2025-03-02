@@ -1,4 +1,10 @@
+/**
+ * @deprecated This module is deprecated. Use the new Stripe integration in $lib/integrations/stripe instead.
+ */
+
 export const updateCustomerNameIfMissing = async (stripe, customer_id, session_customer_name) => {
+	console.warn('DEPRECATED: Using legacy stripe.js. Please migrate to $lib/integrations/stripe');
+	
 	const customer = await stripe.customers.retrieve(customer_id);
 
 	if (customer && (!customer.name || customer.name === null)) {

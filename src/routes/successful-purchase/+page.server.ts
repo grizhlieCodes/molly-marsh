@@ -1,9 +1,15 @@
 import { redirect, error } from '@sveltejs/kit';
-import { z } from 'zod';
-import Stripe from 'stripe';
+import { retrieveExpandedSession } from '$lib/integrations/stripe';
+import { stripeSuccessSessionSchema } from '$lib/integrations/stripe/schemas';
+import type { StripeSuccessSession } from '$lib/integrations/stripe/types';
 import { Client } from '@notionhq/client/build/src';
-import { NOTION_API_TOKEN, NOTION_CLIENTS_DB, NOTION_SESSIONS_DB, STRIPE_SECRET_KEY, NOTION_PACKAGES_DB, NOTION_INVOICES_DB } from '$env/static/private';
+import { NOTION_API_TOKEN, NOTION_CLIENTS_DB, NOTION_PACKAGES_DB, NOTION_INVOICES_DB } from '$env/static/private';
 
+/**
+ * Find a client in Notion by email
+ * @param email Client email to search for
+ * @returns Client page object or null if not found
+ */
 async function findClientInNotion(email: string) {
 	const notion = new Client({
 		auth: NOTION_API_TOKEN
@@ -26,6 +32,11 @@ async function findClientInNotion(email: string) {
 	}
 }
 
+/**
+ * Find a package in Notion by name
+ * @param packageName Package name to search for
+ * @returns Package page object or null if not found
+ */
 async function findRelatedPackage(packageName: string) {
 	const notion = new Client({
 		auth: NOTION_API_TOKEN
@@ -48,116 +59,27 @@ async function findRelatedPackage(packageName: string) {
 	}
 }
 
-// First, let's define the schema that matches your requirements
-const StripeSessionSchema = z
-	.object({
-		// Basic customer information from customer_details
-		customer_details: z.object({
-			name: z.string(),
-			email: z.string().email()
-		}),
-
-		// Invoice information
-		invoice: z.object({
-			id: z.string(),
-			number: z.string(),
-			invoice_pdf: z.string().url(),
-			created: z.number()
-		}),
-
-		// Line items information
-		line_items: z.object({
-			data: z
-				.array(
-					z.object({
-						amount_total: z.number(),
-						description: z.string(),
-						price: z.object({
-							product: z.object({
-								images: z.array(z.string())
-							})
-						})
-					})
-				)
-				.min(1) // Ensure at least one line item exists
-		}),
-
-		payment_intent: z.object({
-			latest_charge: z.object({
-				receipt_url: z.string().url()
-			})
-		})
-
-	})
-	.transform((data) => {
-		// Transform the nested data into a flat object
-		return {
-			customerName: data.customer_details.name,
-			customerEmail: data.customer_details.email,
-			invoiceId: data.invoice.id,
-			invoiceNumber: data.invoice.number,
-			invoicePdfUrl: data.invoice.invoice_pdf,
-			invoiceDate: new Date(data.invoice.created * 1000).toISOString(),
-			products: data.line_items,
-			itemAmount: data.line_items.data[0].amount_total,
-			itemDescription: data.line_items.data[0].description,
-			itemImage: data.line_items.data[0].price.product.images[0],
-			receipt_url: data.payment_intent.latest_charge.receipt_url
-			// Convert Unix timestamp to ISO string for better readability
-		};
-	});
-
-// console.log("HERE=============================", {  items: checkoutSession?.line_items.data });
-
-// Define the type that represents our transformed data
-export type StripeSessionData = z.infer<typeof StripeSessionSchema>;
-
-// async function waitForSessionData(sessionId: string, maxAttempts = 5) {
-// 	const stripe = new Stripe(STRIPE_SECRET_KEY, {
-// 		apiVersion: '2024-11-20.acacia'
-// 	});
-// 	let attempts = 0;
-
-// 	while (attempts < maxAttempts) {
-// 		const session = await stripe.checkout.sessions.retrieve(sessionId, {
-// 			expand: [
-// 				'payment_intent', // Gets the payment details
-// 				'invoice', // Gets the invoice if one was created
-// 				'line_items', // Gets the items that were purchased
-// 				'line_items.data.price.product'
-// 			]
-// 		});
-
-// 		if (session.invoice) {
-// 			return session;
-// 		}
-
-// 		await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
-// 		attempts++;
-// 	}
-
-// 	return null;
-// }
-async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 750) {
-	const stripe = new Stripe(STRIPE_SECRET_KEY, {
-		apiVersion: '2024-11-20.acacia'
-	});
-
+/**
+ * Wait for session data with retries
+ * @param sessionId Stripe session ID
+ * @param maxAttempts Maximum number of retry attempts
+ * @param delayMs Delay between retries in milliseconds
+ * @returns Parsed session data
+ */
+async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 750): Promise<StripeSuccessSession> {
 	let attempts = 0;
 	let lastError = null;
 
 	while (attempts < maxAttempts) {
-
 		try {
-			const session = await stripe.checkout.sessions.retrieve(sessionId, {
-				expand: ['payment_intent', 'payment_intent.latest_charge', 'invoice',  'line_items', 'line_items.data.price.product']
-			});
+			// Get expanded session with all needed data
+			const session = await retrieveExpandedSession(sessionId);
 
+			// Check if session has required data
 			if (session.invoice && session.line_items?.data?.length > 0 && session.customer_details) {
-				return session;
+				// Parse and transform the session data
+				return stripeSuccessSessionSchema.parse(session);
 			}
-
-			// console.log(`Attempt ${attempts + 1}/${maxAttempts}: Waiting for complete session data...`);
 		} catch (err) {
 			console.error(`Attempt ${attempts + 1}/${maxAttempts} failed:`, err);
 			lastError = err;
@@ -172,40 +94,20 @@ async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 
 	});
 }
 
-async function returnSessionData(sessionId: string) {
-	if (!sessionId) {
-		throw new Error('Missing required parameters: sessionId');
-	}
-
-	const checkoutSession = await waitForSessionData(sessionId);
-	console.log("Session Data Here from Page: ", checkoutSession)
-	// console.log({ checkoutSession });
-
-	try {
-		// console.log({ checkoutSession, items: checkoutSession?.line_items });
-		// console.log('HERE=============================', { session: checkoutSession });
-		// console.log('HERE=============================', { images: checkoutSession?.line_items.data[0].price?.product.images });
-		const parsedData = StripeSessionSchema.parse(checkoutSession);
-		// console.log({ data: parsedData });
-		return parsedData;
-	} catch (error) {
-		if (error instanceof z.ZodError) {
-			console.error('Validation failed:', error.errors);
-			throw new Error('Invalid session data structure');
-		}
-		throw error;
-	}
-
-	return checkoutSession;
-}
-
-async function createNewInvoice(sessionData: StripeSessionData, clientId: string, relatedPackageId: string) {
+/**
+ * Create a new invoice in Notion
+ * @param sessionData Stripe session data
+ * @param clientId Notion client ID
+ * @param relatedPackageId Notion package ID
+ * @returns Created invoice page
+ */
+async function createNewInvoice(sessionData: StripeSuccessSession, clientId: string, relatedPackageId: string) {
 	const notion = new Client({
 		auth: NOTION_API_TOKEN
 	});
 
 	try {
-		const res = await notion.pages.create({
+		return await notion.pages.create({
 			parent: {
 				database_id: NOTION_INVOICES_DB
 			},
@@ -221,7 +123,7 @@ async function createNewInvoice(sessionData: StripeSessionData, clientId: string
 				},
 				'Payment Date': {
 					date: {
-						start: sessionData.paymentDate
+						start: sessionData.invoiceDate
 					}
 				},
 				'Stripe Invoice ID': {
@@ -247,11 +149,9 @@ async function createNewInvoice(sessionData: StripeSessionData, clientId: string
 				}
 			}
 		});
-
-		return res;
 	} catch (err) {
-		console.error('Error querying Notion:', err);
-		throw error(500, 'Failed to query Notion database');
+		console.error('Error creating Notion invoice:', err);
+		throw error(500, 'Failed to create invoice in Notion');
 	}
 }
 
@@ -265,8 +165,15 @@ export async function load(event) {
 	const url = event.url.pathname;
 
 	try {
-		const sessionData = await returnSessionData(sessionId);
-
+		const sessionData = await waitForSessionData(sessionId);
+		
+		// Note: Notion integration is commented out for now
+		// This could be reactivated later if needed
+		// const clientExists = await findClientInNotion(sessionData.customerEmail);
+		// const relatedPackage = await findRelatedPackage(sessionData.itemDescription);
+		// if (clientExists && relatedPackage) {
+		//   await createNewInvoice(sessionData, clientExists.id, relatedPackage.id);
+		// }
 
 		return {
 			url,
@@ -274,35 +181,10 @@ export async function load(event) {
 			sessionData
 		};
 	} catch (err) {
-		// console.error('Error loading session data:', err);
-		// throw error(500, 'Failed to load session data. Please refresh the page.');
 		return {
 			url,
 			sessionId,
 			error: err.message || 'Failed to load session data'
 		};
 	}
-
-	// const clientExists = await findClientInNotion(sessionData.customerEmail);
-	// const relatedPackage = await findRelatedPackage(sessionData.itemDescription);
-	// console.log({ sessionData, clientExists, relatedPackage });
-
-	// if (clientExists && relatedPackage) {
-	// Create New Invoice
-	// Link to Existing Client
-	// Link to Related Package
-	// const newInvoice = await createNewInvoice(sessionData, clientExists.id, relatedPackage.id);
-	// console.log({ newInvoice });
-	// } else if (!clientExists && relatedPackage) {
-	// Create New Client
-	// Find Related Package // packageObject.id
-	// Create New Invoice
-	// Link to New Client
-	// Link to Related Package
-	// }
-	// if client exists, create new invoice, link with client
-	// if client does not exist, create new client, create new invoice, link
-	// with newly created client
-
-	// console.log(clientExists);
 }
