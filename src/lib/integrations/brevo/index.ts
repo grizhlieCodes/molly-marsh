@@ -1,6 +1,7 @@
 // Client exports
 export { 
-  getBrevoClient, 
+  getBrevoEmailCampaignsClient,
+  getBrevoContactsClient,
   BREVO_NEWSLETTER_LIST_ID, 
   DEFAULT_SENDER 
 } from './client';

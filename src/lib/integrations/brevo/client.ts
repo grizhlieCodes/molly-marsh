@@ -1,29 +1,35 @@
 import SibApiV3Sdk from 'sib-api-v3-sdk';
 import { SECRET_BREVO_KEY } from '$env/static/private';
 
-let apiInstance: SibApiV3Sdk.EmailCampaignsApi | null = null;
+// Setting up API client for authentication
+const defaultClient = SibApiV3Sdk.ApiClient.instance;
+const apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = SECRET_BREVO_KEY;
+
+// API client instances (singletons)
+let campaignsApiInstance: SibApiV3Sdk.EmailCampaignsApi | null = null;
+let contactsApiInstance: SibApiV3Sdk.ContactsApi | null = null;
 
 /**
- * Setup the Brevo API client
- * @returns Configured Brevo API client
+ * Gets a Brevo Campaigns API client instance (creates one if it doesn't exist)
+ * @returns A configured Brevo campaigns API client
  */
-export function setupBrevoClient(): SibApiV3Sdk.EmailCampaignsApi {
-  const defaultClient = SibApiV3Sdk.ApiClient.instance;
-  const apiKey = defaultClient.authentications['api-key'];
-  apiKey.apiKey = SECRET_BREVO_KEY;
-  
-  return new SibApiV3Sdk.EmailCampaignsApi();
+export function getBrevoEmailCampaignsClient(): SibApiV3Sdk.EmailCampaignsApi {
+  if (!campaignsApiInstance) {
+    campaignsApiInstance = new SibApiV3Sdk.EmailCampaignsApi();
+  }
+  return campaignsApiInstance;
 }
 
 /**
- * Gets a Brevo API client instance (creates one if it doesn't exist)
- * @returns A configured Brevo API client
+ * Gets a Brevo Contacts API client instance (creates one if it doesn't exist)
+ * @returns A configured Brevo contacts API client
  */
-export function getBrevoClient(): SibApiV3Sdk.EmailCampaignsApi {
-  if (!apiInstance) {
-    apiInstance = setupBrevoClient();
+export function getBrevoContactsClient(): SibApiV3Sdk.ContactsApi {
+  if (!contactsApiInstance) {
+    contactsApiInstance = new SibApiV3Sdk.ContactsApi();
   }
-  return apiInstance;
+  return contactsApiInstance;
 }
 
 // Contact list ID for newsletter subscribers

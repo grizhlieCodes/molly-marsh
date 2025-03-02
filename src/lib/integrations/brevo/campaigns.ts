@@ -1,5 +1,5 @@
 import SibApiV3Sdk from 'sib-api-v3-sdk';
-import { getBrevoClient, BREVO_NEWSLETTER_LIST_ID, DEFAULT_SENDER } from './client';
+import { getBrevoEmailCampaignsClient, BREVO_NEWSLETTER_LIST_ID, DEFAULT_SENDER } from './client';
 import type { CreateCampaignParams, CampaignResponse } from './types';
 import * as Sentry from '@sentry/sveltekit';
 
@@ -10,7 +10,7 @@ import * as Sentry from '@sentry/sveltekit';
  */
 export async function createCampaign(params: CreateCampaignParams): Promise<CampaignResponse> {
   try {
-    const apiInstance = getBrevoClient();
+    const apiInstance = getBrevoEmailCampaignsClient();
     const emailCampaigns = new SibApiV3Sdk.CreateEmailCampaign();
 
     // Set up email campaign
@@ -60,7 +60,7 @@ export async function createCampaign(params: CreateCampaignParams): Promise<Camp
  */
 export async function getCampaign(campaignId: number) {
   try {
-    const apiInstance = getBrevoClient();
+    const apiInstance = getBrevoEmailCampaignsClient();
     return await apiInstance.getEmailCampaign(campaignId);
   } catch (error) {
     Sentry.captureException(error, {

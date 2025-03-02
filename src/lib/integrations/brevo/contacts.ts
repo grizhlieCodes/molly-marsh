@@ -1,6 +1,5 @@
 import SibApiV3Sdk from 'sib-api-v3-sdk';
-import { SECRET_BREVO_KEY } from '$env/static/private';
-import { BREVO_NEWSLETTER_LIST_ID } from './client';
+import { getBrevoContactsClient, BREVO_NEWSLETTER_LIST_ID } from './client';
 import * as Sentry from '@sentry/sveltekit';
 
 /**
@@ -11,12 +10,8 @@ import * as Sentry from '@sentry/sveltekit';
  */
 export async function addContactToNewsletter(email: string, name?: string) {
   try {
-    // Initialize Brevo contacts API client
-    const defaultClient = SibApiV3Sdk.ApiClient.instance;
-    const apiKey = defaultClient.authentications['api-key'];
-    apiKey.apiKey = SECRET_BREVO_KEY;
-    
-    const apiInstance = new SibApiV3Sdk.ContactsApi();
+    // Get the contacts API client
+    const apiInstance = getBrevoContactsClient();
     const createContact = new SibApiV3Sdk.CreateContact();
     
     // Create contact object
