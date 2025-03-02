@@ -1,5 +1,6 @@
-import { handleCheckout } from '$lib/integrations/stripe';
+import { handleCheckout, isUsingSandbox } from '$lib/integrations/stripe';
 import { stripeCheckoutInputSchema } from '$lib/integrations/stripe/schemas';
+import { dev } from '$app/environment';
 
 export async function POST({ request }) {
 	try {
@@ -25,16 +26,40 @@ export async function POST({ request }) {
 			headers: { 'content-type': 'application/json' }
 		});
 	} catch (err) {
-		// Error handling
-		console.error('Checkout error:', err);
+		// Detailed error logging in development
+		if (dev) {
+			console.error('Checkout error details:', err);
+		} else {
+			console.error('Checkout error:', err.message);
+		}
+
+		// Check for specific error types
+		let errorMessage = 'An unexpected error occurred';
+		let statusCode = 400;
+		
+		if (err.message.includes('Missing Stripe secret key')) {
+			errorMessage = isUsingSandbox() 
+				? 'Stripe sandbox configuration is missing. Please check your environment variables.'
+				: 'Stripe configuration is missing. Please check your environment variables.';
+		} else if (err.message.includes('apiKey')) {
+			errorMessage = 'Stripe API key configuration error. Please check your environment setup.';
+		} else if (err.message.includes('Invalid JSON')) {
+			errorMessage = 'Invalid request format. Please check your input data.';
+		} else if (err.name === 'ZodError') {
+			errorMessage = 'Invalid input data: ' + err.errors?.[0]?.message || 'Validation failed';
+		} else {
+			// Use the actual error message if it exists
+			errorMessage = err.message || errorMessage;
+		}
 
 		return new Response(
 			JSON.stringify({
-				error: err.message || 'An unexpected error occurred',
-				details: process.env.NODE_ENV === 'development' ? err.stack : undefined
+				error: errorMessage,
+				details: dev ? err.stack : undefined,
+				environment: isUsingSandbox() ? 'sandbox' : 'production'
 			}),
 			{
-				status: 400,
+				status: statusCode,
 				headers: { 'content-type': 'application/json' }
 			}
 		);

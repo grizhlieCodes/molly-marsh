@@ -1,7 +1,7 @@
 // Export all public APIs from Stripe integration
 
 // Client
-export { getStripeClient } from './client';
+export { getStripeClient, isUsingSandbox } from './client';
 
 // Types
 export type { 
@@ -38,7 +38,8 @@ export {
 // Webhook verification
 export {
   verifyStripeWebhook,
-  isEventType
+  isEventType,
+  getWebhookSecret
 } from './verification';
 
 // Webhook handlers

@@ -177,7 +177,7 @@ w-full justify-center"
 						</svg>
 						<span> OPEN CALENDAR & BOOK YOUR SESSION </span>
 					</button>
-					<p class="{textStyles.paraBase} text-body-secondary-400 w-full">If you don’t want to book now, not to worry, you should have received an email with the calendar link.</p>
+					<p class="{textStyles.paraBase} text-body-secondary-400 w-full">If you don't want to book now, not to worry, you should have received an email with the calendar link.</p>
 				</div>
 				<div class="bg-surface-primary-300 h-[1px] w-full"></div>
 				<div class="lm:gap-8 lm:p-8 flex w-full flex-col gap-4 p-4">
@@ -234,9 +234,7 @@ w-full justify-center"
 							<a
 								target="_blank"
 								href={sessionData.receipt_url}
-								aria-label="This link takes you to a stripe page
-							where you can download your invoice and your receipt
-							after having paid."
+								aria-label="This link takes you to a stripe page where you can download your invoice and your receipt after having paid."
 								class="font-special text-body-primary-800 bg-surface-primary-100 border-surface-primary-300 hover:bg-surface-primary-800 hover:text-body-primary-50 focus-within:text-body-primary-50
 							 focus-within:bg-surface-primary-800 flex w-full cursor-pointer items-center
 							 justify-center rounded-md border

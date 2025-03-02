@@ -69,24 +69,49 @@ async function findRelatedPackage(packageName: string) {
 async function waitForSessionData(sessionId: string, maxAttempts = 5, delayMs = 750): Promise<StripeSuccessSession> {
 	let attempts = 0;
 	let lastError = null;
+	let rawSession = null;
 
 	while (attempts < maxAttempts) {
+		attempts++;
+		
 		try {
 			// Get expanded session with all needed data
-			const session = await retrieveExpandedSession(sessionId);
+			rawSession = await retrieveExpandedSession(sessionId);
+			
+			// Debug logging for sandbox environment
+			if (attempts === 1) {
+				console.log('Session structure debug:', {
+					hasInvoice: !!rawSession.invoice,
+					hasCustomerDetails: !!rawSession.customer_details,
+					hasLineItems: !!rawSession.line_items?.data?.length,
+					paymentIntentType: typeof rawSession.payment_intent,
+					latestChargeType: rawSession.payment_intent ? typeof rawSession.payment_intent.latest_charge : 'unknown'
+				});
+			}
 
 			// Check if session has required data
-			if (session.invoice && session.line_items?.data?.length > 0 && session.customer_details) {
+			if (rawSession.invoice && rawSession.line_items?.data?.length > 0 && rawSession.customer_details) {
 				// Parse and transform the session data
-				return stripeSuccessSessionSchema.parse(session);
+				return stripeSuccessSessionSchema.parse(rawSession);
+			} else {
+				console.log(`Attempt ${attempts}/${maxAttempts}: Session data incomplete, waiting for more data...`);
 			}
 		} catch (err) {
-			console.error(`Attempt ${attempts + 1}/${maxAttempts} failed:`, err);
+			console.error(`Attempt ${attempts}/${maxAttempts} failed:`, err);
 			lastError = err;
+			
+			// If this is a validation error, log more details to help debug
+			if (err.name === 'ZodError') {
+				console.error('Validation error details:', JSON.stringify(err.issues, null, 2));
+				
+				// If we have the raw session, log the problematic parts
+				if (rawSession && rawSession.payment_intent) {
+					console.log('Raw payment_intent data:', JSON.stringify(rawSession.payment_intent, null, 2));
+				}
+			}
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, delayMs));
-		attempts++;
 	}
 
 	throw error(500, {
