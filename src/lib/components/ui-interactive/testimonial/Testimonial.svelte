@@ -55,8 +55,9 @@
 						{/if}
 					</Dialog.Description>
 					<Dialog.Close
-						class="bg-surface-primary-100 absolute
-					top-[2px] right-[2px] cursor-pointer rounded-md p-2
+						class="bg-surface-primary-100 absolute top-[1px] right-[1px]
+					cursor-pointer rounded-md p-2 hover:bg-surface-primary-300
+					transition-all duration-150
 					"
 					>
 						<div>
