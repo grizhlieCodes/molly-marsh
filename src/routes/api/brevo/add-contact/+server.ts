@@ -1,58 +1,59 @@
 import { json, error } from '@sveltejs/kit';
-import { SECRET_BREVO_KEY, INTERNAL_API_KEY } from '$env/static/private';
-import { z } from 'zod';
-import SibApiV3Sdk from 'sib-api-v3-sdk';
-import { RequestHandler } from '@sveltejs/kit';
+import { INTERNAL_API_KEY } from '$env/static/private';
+import type { RequestHandler } from '@sveltejs/kit';
+import { addContactToNewsletter } from '$lib/integrations/brevo';
+import * as Sentry from '@sentry/sveltekit';
 
-// import { createHmac, timingSafeEqual } from 'crypto';
-// import { parse } from 'path';
 export const POST: RequestHandler = async (event) => {
-	const authHeader = event.request.headers.get('Authorization');
-	const token = authHeader?.replace('Bearer ', '');
+  // Validate authorization
+  const authHeader = event.request.headers.get('Authorization');
+  const token = authHeader?.replace('Bearer ', '');
 
+  if (token !== INTERNAL_API_KEY) {
+    return new Response('Unauthorized in brevo-contact handler', { status: 401 });
+  }
 
+  try {
+    const data = await event.request.json();
+    
+    // Validate required data
+    if (!data.email) {
+      return json({
+        success: false,
+        message: 'Email is required'
+      }, { status: 400 });
+    }
 
-	if (token !== INTERNAL_API_KEY) {
-		return new Response('Unauthorized in brevo-contact handler', { status: 401 });
-	}
-
-	try {
-		const data = await event.request.json();
-
-		const BREVO_LIST_ID = 3; // newsletter
-
-		// Initialise Brevo
-		const defaultClient = SibApiV3Sdk.ApiClient.instance;
-		const apiKey = defaultClient.authentications['api-key'];
-		apiKey.apiKey = SECRET_BREVO_KEY;
-
-		// Clarify what we're doing with brevo sdk
-		let apiInstance = new SibApiV3Sdk.ContactsApi();
-		let newContact = new SibApiV3Sdk.CreateContact();
-
-		newContact.email = data.email;
-		newContact.attributes = {
-			'FIRSTNAME': data.name
-		}
-		newContact.listIds = [BREVO_LIST_ID];
-
-		console.log('We shall try to add this now.');
-		const brevoContact = await apiInstance.createContact(newContact);
-		
-
-		if (!brevoContact.id) {
-			console.log('new contact was not created successfully');
-		}
-
-		console.log('New Brevo Contact created: ', brevoContact);
-
-		return json({
-			message: 'Successfully created contact'
-		});
-
-		return json({ status: 'success' });
-	} catch (err) {
-		console.error('Error processing new brevo contact:', err);
-		throw error(500, 'Internal server error');
-	}
+    // Use the integration to add contact to newsletter
+    const result = await addContactToNewsletter(data.email, data.name);
+    
+    if (!result.success) {
+      return json({
+        success: false,
+        message: result.message
+      }, { status: 400 });
+    }
+    
+    // Log success but don't expose all data
+    console.log('New Brevo Contact created successfully');
+    
+    return json({
+      success: true,
+      message: 'Successfully created contact',
+      alreadyExists: result.alreadyExists
+    });
+  } catch (err) {
+    // Log error to Sentry
+    Sentry.captureException(err, {
+      tags: {
+        endpoint: 'brevo-add-contact'
+      }
+    });
+    
+    console.error('Error processing new brevo contact:', err);
+    return json({
+      success: false,
+      message: err instanceof Error ? err.message : 'Internal server error'
+    }, { status: 500 });
+  }
 };
