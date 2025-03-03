@@ -77,7 +77,7 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 
 			if (responseData?.data?.invoiceStatus === 'invoice-new') {
 				console.log('Emailing client since new invoice.');
-				
+
 				// Use the new email API endpoint
 				const emailResponse = await event.fetch('/api/email/send-email', {
 					method: 'POST',
@@ -93,14 +93,14 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 					}),
 					duplex: 'half'
 				});
-				
+
 				if (!emailResponse.ok) {
 					// Log the error but don't fail the whole process
 					const errorText = await emailResponse.text();
 					console.error('Failed to send checkout confirmation email:', errorText);
 					Sentry.captureMessage('Failed to send checkout confirmation email', {
 						level: 'warning',
-						tags: { 
+						tags: {
 							component: 'stripe-integration',
 							action: 'send-confirmation-email',
 							status: emailResponse.status.toString()
@@ -113,7 +113,7 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 						}
 					});
 				}
-				
+
 				return json({ received: true, message: 'Checkout session completed successfully', customer: customerData.customer });
 			} else if (responseData?.data?.invoiceStatus === 'invoice-exists') {
 				console.log('Skipping the email, since invoice exists (so the client was already emailed).');
@@ -123,7 +123,7 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 			if (err.status) {
 				throw err; // Rethrow SvelteKit errors
 			}
-			
+
 			// Log any other errors to Sentry
 			Sentry.captureException(err, {
 				tags: {
@@ -136,10 +136,10 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 					error: err.message
 				}
 			});
-			
+
 			throw error(500, err.message || 'Error interacting with Notion or email service');
 		}
-		
+
 		// Fallback response if invoice status is neither 'new' nor 'exists'
 		Sentry.captureMessage('Unexpected invoice status', {
 			level: 'warning',
@@ -152,14 +152,13 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 				invoiceStatus: responseData?.data?.invoiceStatus
 			}
 		});
-		
-		return json({ 
-			received: true, 
+
+		return json({
+			received: true,
 			message: 'Checkout session completed but invoice status unrecognized',
 			customer: customerData.customer,
 			invoiceStatus: responseData?.data?.invoiceStatus
 		});
-		
 	} catch (err) {
 		console.error('Checkout session completion error:', err);
 
@@ -213,7 +212,7 @@ export async function handleStripeEvent(stripeEvent: Stripe.Event, event: Reques
 						eventId: stripeEvent.id
 					}
 				});
-				
+
 				return {
 					received: true,
 					message: `Event type ${stripeEvent.type} was received but not processed`
@@ -233,7 +232,7 @@ export async function handleStripeEvent(stripeEvent: Stripe.Event, event: Reques
 				stack: err.stack
 			}
 		});
-		
+
 		throw err; // Re-throw to be handled by the API endpoint
 	}
 }

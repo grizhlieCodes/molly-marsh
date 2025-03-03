@@ -17,8 +17,8 @@ export const stripeSuccessfulSessionSchema = z
 			name: z.string().nullable().optional()
 		}),
 		customer_details: z.object({
-			name: z.string(),
-			email: z.string().email()
+			name: z.string().nullable().optional(),
+			email: z.string().email().nullable().optional()
 		}),
 		invoice: z.object({
 			id: z.string(),
