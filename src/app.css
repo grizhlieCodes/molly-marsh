@@ -200,4 +200,8 @@
 	button[data-melt-accordion-trigger] {
 		@apply not-active:focus-visible:!outline-surface-primary-950/40 outline-2 -outline-offset-2 outline-transparent transition-all ;
 	}
+
+	html {
+		scroll-behavior: smooth;
+	}
 }
