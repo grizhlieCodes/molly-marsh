@@ -1,5 +1,6 @@
 import { getStripeClient } from './client';
 import type Stripe from 'stripe';
+import * as Sentry from '@sentry/sveltekit';
 
 /**
  * Find an existing Stripe customer by email
@@ -15,6 +16,18 @@ export async function findCustomerByEmail(email: string): Promise<Stripe.Custome
 		return customers.data.length > 0 ? customers.data[0] : null;
 	} catch (err) {
 		console.error('Failed to find customer:', err);
+		
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'find-customer-by-email'
+			},
+			extra: {
+				email
+			}
+		});
+		
 		throw new Error(`Failed to find customer: ${err.message}`);
 	}
 }
@@ -37,6 +50,19 @@ export async function createCustomer(email: string, name?: string): Promise<Stri
 		return newCustomer;
 	} catch (err) {
 		console.error('Failed to create customer:', err);
+		
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'create-customer'
+			},
+			extra: {
+				email,
+				name
+			}
+		});
+		
 		throw new Error(`Failed to create customer: ${err.message}`);
 	}
 }
@@ -49,7 +75,7 @@ export const updateCustomerNameIfMissing = async (customer_id: string, session_c
 
 		// wtf is 'in'?
 		if (!('deleted' in customer) && (!customer.name || customer.name === null)) {
-			const updatedCustomer = await stripe.customers.update(customerId, {
+			const updatedCustomer = await stripe.customers.update(customer_id, {
 				name: session_customer_name
 			});
 			return { customer: updatedCustomer, status: 'Updated customer name.' };
@@ -62,6 +88,19 @@ export const updateCustomerNameIfMissing = async (customer_id: string, session_c
 		return { customer, status: 'Customer already had a name.' };
 	} catch (err) {
 		console.error('Failed to update customer name:', err);
+		
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'update-customer-name'
+			},
+			extra: {
+				customer_id,
+				session_customer_name
+			}
+		});
+		
 		throw new Error(`Failed to update customer name: ${err.message}`);
 	}
 };

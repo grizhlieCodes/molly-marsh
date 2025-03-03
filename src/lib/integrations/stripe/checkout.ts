@@ -2,6 +2,7 @@ import { redirect, error } from '@sveltejs/kit';
 import { findCustomerByEmail, stripeSuccessfulSessionSchema } from '$lib/integrations/stripe';
 import { getStripeClient } from './client';
 import type Stripe from 'stripe';
+import * as Sentry from '@sentry/sveltekit';
 /**
  * Create a Stripe checkout session
  * @param priceId Stripe price ID
@@ -37,6 +38,20 @@ export async function createCheckoutSession(priceId: string, origin: string, cus
 		});
 	} catch (err) {
 		console.error('Failed to create Stripe session:', err);
+
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'create-checkout-session'
+			},
+			extra: {
+				priceId,
+				origin,
+				customerId
+			}
+		});
+
 		throw new Error(`Failed to create Stripe session: ${err.message}`);
 	}
 }
@@ -50,14 +65,33 @@ export async function createCheckoutSession(priceId: string, origin: string, cus
  */
 
 export async function handleCheckout(priceId: string, email: string, origin: string): Promise<{ url: string }> {
-	// Find or create customer
-	let customer = await findCustomerByEmail(email);
-	if (!customer) {
-		customer = await createCustomer(email);
-	}
+	try {
+		// Find or create customer
+		let customer = await findCustomerByEmail(email);
+		if (!customer) {
+			customer = await createCustomer(email);
+		}
 
-	// Create checkout session with customer ID
-	return await createCheckoutSession(priceId, origin, customer.id);
+		// Create checkout session with customer ID
+		return await createCheckoutSession(priceId, origin, customer.id);
+	} catch (err) {
+		console.error('Failed to handle checkout:', err);
+
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'handle-checkout'
+			},
+			extra: {
+				priceId,
+				email,
+				origin
+			}
+		});
+
+		throw err; // Re-throw to be handled by the API endpoint
+	}
 }
 
 export async function retrieveCheckoutSession(sessionId: string): Promise<Stripe.Checkout.Session> {
@@ -71,6 +105,18 @@ export async function retrieveCheckoutSession(sessionId: string): Promise<Stripe
 		return sess;
 	} catch (err) {
 		console.error('Failed to retrieve checkout session:', err);
+
+		// Log to Sentry with detailed context
+		Sentry.captureException(err, {
+			tags: {
+				component: 'stripe-integration',
+				action: 'retrieve-checkout-session'
+			},
+			extra: {
+				sessionId
+			}
+		});
+
 		throw new Error(`Failed to retrieve checkout session: ${err.message}`);
 	}
 }
@@ -103,11 +149,40 @@ export async function waitForSessionData(sessionId: string, maxAttempts = 5, del
 		} catch (err) {
 			console.error(`Attempt ${attempts + 1}/${maxAttempts} failed:`, err);
 			lastError = err;
+
+			// Log to Sentry with detailed context
+			Sentry.captureException(err, {
+				tags: {
+					component: 'stripe-integration',
+					action: 'wait-for-session-data',
+					attempt: `${attempts + 1}/${maxAttempts}`
+				},
+				extra: {
+					sessionId,
+					maxAttempts,
+					delayMs
+				}
+			});
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, delayMs));
 		attempts++;
 	}
+
+	// Log to Sentry that all attempts failed
+	Sentry.captureMessage(`Failed to retrieve complete session data after ${maxAttempts} attempts`, {
+		level: 'error',
+		tags: {
+			component: 'stripe-integration',
+			action: 'wait-for-session-data-exhausted'
+		},
+		extra: {
+			sessionId,
+			maxAttempts,
+			delayMs,
+			lastErrorMessage: lastError?.message
+		}
+	});
 
 	throw error(500, {
 		message: `Failed to retrieve complete session data after ${maxAttempts} attempts. ${lastError ? `Last error: ${lastError.message}` : ''}`
