@@ -194,14 +194,15 @@
 :root {
 	a,
 	button:not([data-melt-accordion-trigger]) {
-		@apply not-active:focus-visible:!outline-surface-primary-950/40 !outline-transparent !outline-2 !outline-offset-6 !transition-all !duration-300;
+		@apply not-active:focus-visible:!outline-surface-primary-950/40 !outline-2 !outline-offset-6 !outline-transparent !transition-all !duration-300;
 	}
 
 	button[data-melt-accordion-trigger] {
-		@apply not-active:focus-visible:!outline-surface-primary-950/40 outline-2 -outline-offset-2 outline-transparent transition-all ;
+		@apply not-active:focus-visible:!outline-surface-primary-950/40 outline-2 -outline-offset-2 outline-transparent transition-all;
 	}
+}
 
-	html {
-		scroll-behavior: smooth;
-	}
+html,
+:root {
+	scroll-behavior: smooth;
 }
