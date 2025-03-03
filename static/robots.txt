@@ -1,2 +1,9 @@
+# Allow all crawlers full access
 User-agent: *
 Allow: /
+
+# Specify sitemap location
+Sitemap: https://www.mollymarshcoaching.com/sitemap.xml
+
+# Set crawl rate (optional)
+# Crawl-delay: 10
