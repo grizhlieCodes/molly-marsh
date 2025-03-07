@@ -77,7 +77,15 @@ export async function updateSessionTimeDateInNotion(calData, sessionPageId) {
 export async function updateSessionStatusBasedOnAttendeesInNotion(sessionPageId, attendees) {
   const notion = setupNotionClient();
 
-  const name = attendees?.participants.length >= 2 ? 'Took Place' : 'Client No Show';
+  // Determine meeting status:
+  // - "Session Never Took Place" if attendees is undefined or missing participants
+  // - "Took Place" if 2+ participants
+  // - "Client No Show" if fewer than 2 participants
+  let name = 'Session Never Took Place';
+  
+  if (attendees && attendees.participants) {
+    name = attendees.participants.length >= 2 ? 'Took Place' : 'Client No Show';
+  }
   
   try {
     const res = await notion.pages.update({

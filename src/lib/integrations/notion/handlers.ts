@@ -182,22 +182,25 @@ export async function handleMeetingEnded(calData, event: RequestEvent) {
 		}
 
 		// Get Zoom meeting attendees
-		const zoomAttendeesRes = await event.fetch('/api/zoom/get-meeting-attendees', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ zoomCallId })
-		});
+		let zoomAttendees;
+		try {
+			const zoomAttendeesRes = await event.fetch('/api/zoom/get-meeting-attendees', {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${INTERNAL_API_KEY}`,
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ zoomCallId })
+			});
 
-		const zoomAttendees = await zoomAttendeesRes.json();
-
-		if (!zoomAttendees) {
-			throw error(400, 'Failed to get Zoom attendees data');
+			zoomAttendees = await zoomAttendeesRes.json();
+		} catch (err) {
+			console.error('Error fetching Zoom attendees:', err);
+			// Continue execution instead of throwing an error
 		}
 
-		// Update session status based on attendees
+		// Update session status based on attendees - even if zoomAttendees is undefined
+		// The updater function will handle this case and set "Session Never Took Place"
 		const updatedSession = await updateSessionStatusBasedOnAttendeesInNotion(calSession.id, zoomAttendees);
 
 		return {
