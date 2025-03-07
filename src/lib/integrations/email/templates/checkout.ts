@@ -7,13 +7,13 @@ export function checkoutConfirmationTemplate(data: {
   customer_name: string;
   customer_email: string;
 }): string {
-  const cal_link = `https://cal.com/mollymarsh/coaching-session?email=${data.customer_email}&name=${data.customer_name}`;
-  const first_name = data.customer_name && data.customer_name.length > 0 
-    ? data.customer_name.split(' ')[0] 
-    : '';
+  const cal_link = `https://cal.com/mollymarsh/coaching-session?email=${data.customer_email}`;
+  // const first_name = data.customer_name && data.customer_name.length > 0 
+  //   ? data.customer_name.split(' ')[0] 
+  //   : '';
     
   return `
-    <h2 class="mobile-text" style="color: #3a6a5f; font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif; font-size: 30px; font-weight: 400; margin: 0 0 20px 0; line-height: 120%;">Thank you for your order ${first_name}.</h2>
+    <h2 class="mobile-text" style="color: #3a6a5f; font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif; font-size: 30px; font-weight: 400; margin: 0 0 20px 0; line-height: 120%;">Thank you for your purchase.</h2>
             
     <p style="color: #101112; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; margin: 0 0 16px 0;">You can use the link below to book your session(s).</p>
     
