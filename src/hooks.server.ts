@@ -16,4 +16,5 @@ export const handle: Handle = sequence(Sentry.sentryHandle(), async ({ event, re
 	const response = await resolve(event);
 	return response;
 });
+
 export const handleError = Sentry.handleErrorWithSentry();
