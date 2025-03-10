@@ -1,10 +1,12 @@
 <script>
+	import { page } from '$app/state';
+
 	const pageTitle = `Molly Marsh - Transformative Life Coach`;
-
 	const description = 'Transform your relationship with performance anxiety. Expert coaching for musicians looking to perform with confidence, freedom, and joy. Based in Sheffield, UK, offering online coaching worldwide.';
-	const fullLink = 'https://www.mollymarshcoaching.com';
 
-	const openGraph = [
+	const fullLink = $derived(`https://www.mollymarshcoaching.com${page.url.pathname}`);
+
+	const openGraph = $derived([
 		{
 			property: 'og:type',
 			content: 'website'
@@ -37,17 +39,21 @@
 			property: 'og:site_name',
 			content: pageTitle
 		}
-	];
+	]);
 </script>
 
-<svelte:head>
-	<!-- STANDARD -->
+<div
+	class="fixed top-1/2 right-2 z-1000 flex flex-col items-center justify-center
+bg-red-200 p-2.5"
+>
+	{fullLink}
+</div>
 
+<svelte:head>
 	<!-- ROBOTS -->
 	<meta name="googlebot" content="all" />
 	<meta name="robots" content="all" />
 
-	<!-- CORE -->
 	<!-- <link rel="icon" href={favicon} /> -->
 	<meta name="description" content={description} />
 	<link rel="canonical" href={fullLink} />
@@ -56,6 +62,4 @@
 	{#each openGraph as { property, content }}
 		<meta {property} {content} />
 	{/each}
-
-	<!-- TWITTER - ADD IN FUTURE? -->
 </svelte:head>
