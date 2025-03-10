@@ -42,13 +42,6 @@
 	]);
 </script>
 
-<div
-	class="fixed top-1/2 right-2 z-1000 flex flex-col items-center justify-center
-bg-red-200 p-2.5"
->
-	{fullLink}
-</div>
-
 <svelte:head>
 	<!-- ROBOTS -->
 	<meta name="googlebot" content="all" />
