@@ -47,7 +47,13 @@
 	<meta name="googlebot" content="all" />
 	<meta name="robots" content="all" />
 
-	<!-- <link rel="icon" href={favicon} /> -->
+	<!-- Icons -->
+	<link rel="icon" href="/favicon.ico" sizes="any"/>
+	<link rel="icon" href="/favicon.svg" sizes="image/svg+xml"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"/>
+
+	<!-- OTher -->
 	<meta name="description" content={description} />
 	<link rel="canonical" href={fullLink} />
 
