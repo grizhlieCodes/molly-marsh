@@ -230,6 +230,8 @@ The Visual Editor integration is handled by the Storyblok Bridge, which enables 
 </div>
 ```
 
+> **IMPORTANT**: Storyblok's visual editor functionality (clickable items) works properly **ONLY** when initialized with "draft" mode. If running in "published" mode, the component bridge will not function correctly and items cannot be clicked on in the visual editor. Always ensure that when using the visual editor, the application is initialized with the "draft" version parameter.
+
 This system creates a bidirectional connection between your application and the Storyblok editor, enabling visual editing directly in the context of your site.
 
 ## Route Structure and Content Types
