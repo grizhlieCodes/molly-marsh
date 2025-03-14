@@ -34,7 +34,8 @@ export async function createCheckoutSession(priceId: string, origin: string, cus
 			cancel_url: `${origin}`,
 			invoice_creation: {
 				enabled: true
-			}
+			},
+			allow_promotion_codes: true
 		});
 	} catch (err) {
 		console.error('Failed to create Stripe session:', err);
