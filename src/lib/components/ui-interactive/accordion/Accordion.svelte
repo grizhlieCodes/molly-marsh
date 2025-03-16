@@ -7,7 +7,7 @@
 </script>
 
 <div use:storyblokEditable={blok} class="w-full">
-	<Accordion.Root class="w-full" multiple>
+	<Accordion.Root class="w-full" type="multiple">
 		{#each blok.accordion_items as item, index}
 			<StoryblokComponent blok={item} {index}></StoryblokComponent>
 		{/each}

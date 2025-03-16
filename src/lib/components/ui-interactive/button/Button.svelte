@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { Button } from 'bits-ui';
 	import { buttonHoverManager } from '$lib/scripts/actions';
 	import * as opts from './buttonOptions';

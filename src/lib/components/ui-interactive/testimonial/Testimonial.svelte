@@ -2,9 +2,9 @@
 	import { Dialog } from 'bits-ui';
 	import { fade, fly } from 'svelte/transition';
 	import { StoryblokComponent, storyblokEditable } from '@storyblok/svelte';
-	// import { X } from 'lucide-svelte';
 	import X from 'lucide-svelte/icons/x';
 	import type { TestimonialStoryblok } from '$lib/schemas/storyblok/sbTypes';
+	
 	let { blok }: { blok: TestimonialStoryblok } = $props();
 
 	let dialogTriggerStyling = `bg-surface-primary-50 border-surface-primary-200 group group-hover:bg-surface-primary-100 pointer-events-auto flex w-full max-w-3xl flex-col
@@ -15,7 +15,6 @@
 
 <div use:storyblokEditable={blok} class="testimonial w-full">
 	{#if blok}
-		<!-- content here -->
 		<Dialog.Root>
 			<Dialog.Trigger class={dialogTriggerStyling}>
 				{#if blok.testimonial_title && blok.testimonial_title.length > 0}
@@ -39,32 +38,50 @@
 				</div>
 			</Dialog.Trigger>
 			<Dialog.Portal>
-				<Dialog.Overlay transition={fade} transitionConfig={{ duration: 150 }} class="fixed inset-0 z-50 bg-white/20 backdrop-blur-xl"></Dialog.Overlay>
-				<Dialog.Content class={dialogContentStyling} transition={fly} transitionConfig={{ duration: 450, y: 40 }}>
-					<Dialog.Description>
-						<div class="**:not-last:mb-5 **:not-last:block">
-							{#if blok.testimonial_full_message && blok.testimonial_full_message.length > 0}
-								<StoryblokComponent blok={blok.testimonial_full_message[0]}></StoryblokComponent>
-								<!-- span MARGIN span MARGIN span -->
-							{/if}
-						</div>
-						{#if blok.testimonial_name && blok.testimonial_name.length > 0}
-							<div class="mt-5 w-full">
-								<StoryblokComponent blok={blok.testimonial_name[0]}></StoryblokComponent>
+				<Dialog.Overlay 
+					forceMount 
+					class="fixed inset-0 z-50 bg-white/20 backdrop-blur-xl"
+				>
+					{#snippet child({ props, open })}
+						{#if open}
+							<div {...props} transition:fade={{ duration: 150 }}></div>
+						{/if}
+					{/snippet}
+				</Dialog.Overlay>
+				<Dialog.Content 
+					forceMount 
+					class={dialogContentStyling}
+					restoreScrollDelay={500}
+				>
+					{#snippet child({ props, open })}
+						{#if open}
+							<div {...props} transition:fly={{ duration: 450, y: 40 }}>
+								<Dialog.Description>
+									<div class="**:not-last:mb-5 **:not-last:block">
+										{#if blok.testimonial_full_message && blok.testimonial_full_message.length > 0}
+											<StoryblokComponent blok={blok.testimonial_full_message[0]}></StoryblokComponent>
+										{/if}
+									</div>
+									{#if blok.testimonial_name && blok.testimonial_name.length > 0}
+										<div class="mt-5 w-full">
+											<StoryblokComponent blok={blok.testimonial_name[0]}></StoryblokComponent>
+										</div>
+									{/if}
+								</Dialog.Description>
+								<Dialog.Close
+									class="bg-surface-primary-100 absolute top-[1px] right-[1px]
+									cursor-pointer rounded-md p-2 hover:bg-surface-primary-300
+									transition-all duration-150
+									"
+								>
+									<div>
+										<X class="size-6"></X>
+										<span class="sr-only">Close</span>
+									</div>
+								</Dialog.Close>
 							</div>
 						{/if}
-					</Dialog.Description>
-					<Dialog.Close
-						class="bg-surface-primary-100 absolute top-[1px] right-[1px]
-					cursor-pointer rounded-md p-2 hover:bg-surface-primary-300
-					transition-all duration-150
-					"
-					>
-						<div>
-							<X class="size-6"></X>
-							<span class="sr-only">Close</span>
-						</div>
-					</Dialog.Close>
+					{/snippet}
 				</Dialog.Content>
 			</Dialog.Portal>
 		</Dialog.Root>

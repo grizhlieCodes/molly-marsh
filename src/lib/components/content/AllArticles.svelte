@@ -57,10 +57,9 @@
 		...allTags
 	];
 
-	let sortOpen: any = $state(null);
-	let filterOpen: any = $state(null);
-	let previousSelected: any = $state({ label: '', value: '' });
-	let sortSelected: any = $state({ value: 'date_newest', label: 'Date (Newest)' });
+	let sortOpen: any = $state(false);
+	let filterOpen: any = $state(false);
+	let sortValue: any = $state('date_newest');
 
 	// TOGGLE GROUP
 
@@ -95,7 +94,7 @@
 
 		const sorted = [...filteredArticles];
 
-		switch (sortSelected.value) {
+		switch (sortValue) {
 			case 'date_newest':
 				sorted.sort((a: Article, b: Article) => new Date(b.content.article_date).getTime() - new Date(a.content.article_date).getTime());
 				break;
@@ -116,99 +115,115 @@
 
 <div class="flex w-full flex-col items-center gap-20">
 	<div class="lm:flex-row flex w-full flex-col flex-wrap justify-center gap-2">
-		<Select.Root items={sorts} bind:open={sortOpen} preventScroll={false} bind:selected={sortSelected} closeOnEscape={true}>
+		<Select.Root type="single" bind:value={sortValue} bind:open={sortOpen} items={sorts}>
 			<Select.Trigger
 				class="bg-surface-primary-50 border-surface-primary-100 text-body-primary-700 hover:bg-surface-primary-200 focus-within:bg-surface-primary-200
-			flex cursor-pointer items-center justify-between 
-			gap-1 rounded-xl border px-3 py-2 outline-hidden
-			"
+				flex cursor-pointer items-center justify-between 
+				gap-1 rounded-xl border px-3 py-2 outline-hidden
+				"
 				aria-label="select a sorting option"
 			>
 				<p class="text-lg">Sort</p>
-				<!-- <Select.Value class="text-sm text-slate-500" placeholder="Select sort"></Select.Value> -->
 				<ChevronDown
 					class="w-6 stroke-[0.8px]
                 transition-transform duration-300 {sortOpen ? 'rotate-180' : ''}"
 				></ChevronDown>
 			</Select.Trigger>
-			<Select.Content
-				sameWidth={false}
-				class=" border-surface-primary-200 bg-surface-primary-50 w-[14rem] rounded-xl
+			<Select.Portal>
+				<Select.Content
+					class="border-surface-primary-200 bg-surface-primary-50 w-[14rem] rounded-xl
             border border-solid px-1 py-3 shadow-xl outline-hidden"
-				transition={fly}
-				transitionConfig={{ y: 15, opacity: 0, duration: 200 }}
-				sideOffset={8}
-			>
-				{#each sorts as sort, i}
-					<Select.Item
-						class="data-highlighted:bg-surface-primary-200 flex w-full items-center
-                     justify-between rounded-md px-5 py-3
-                     text-base outline-hidden transition-all duration-200 select-none"
-						value={sort.value}
-						label={sort.label}
-					>
-						{sort.label}
-						<Select.ItemIndicator>
-							<Check class="w-3"></Check>
-						</Select.ItemIndicator>
-					</Select.Item>
-				{/each}
-			</Select.Content>
+					sideOffset={8}
+					forceMount
+				>
+					{#snippet child({ wrapperProps, props, open })}
+						{#if open}
+							<div {...wrapperProps}>
+								<div {...props} transition:fly={{ y: 15, opacity: 0, duration: 200 }}>
+									{#each sorts as sort, i}
+										<Select.Item
+											class="data-highlighted:bg-surface-primary-200 flex w-full items-center
+											justify-between rounded-md px-5 py-3
+											text-base outline-hidden transition-all duration-200 select-none"
+											value={sort.value}
+											label={sort.label}
+										>
+											{#snippet children({ selected })}
+												{sort.label}
+												{#if selected}
+													<div class="ml-auto">
+														<Check class="w-3"></Check>
+													</div>
+												{/if}
+											{/snippet}
+										</Select.Item>
+									{/each}
+								</div>
+							</div>
+						{/if}
+					{/snippet}
+				</Select.Content>
+			</Select.Portal>
 		</Select.Root>
 
 		<ToggleGroup.Root
+			type="multiple"
 			bind:value={groupBind}
 			class="bg-surface-primary-50 border-surface-primary-100 text-body-primary-700 lm:flex-row
-			lm:flex-none flex flex-1 flex-col items-center justify-end gap-1 rounded-xl border px-3 py-2 text-center outline-hidden"
+				lm:flex-none flex flex-1 flex-col items-center justify-end gap-1 rounded-xl border px-3 py-2 text-center outline-hidden"
 		>
 			<ToggleGroup.Item
 				value="all"
-				class="  data-[state=on]:bg-surface-primary-700 flex
-			w-full cursor-pointer items-center justify-center
+				class="data-[state=on]:bg-surface-primary-700 flex
+				w-full cursor-pointer items-center justify-center
                      rounded-md p-2 px-3 py-2 text-base
-			font-[500] outline-hidden transition-all duration-200
-			select-none data-[state=on]:text-white
-			">All</ToggleGroup.Item
-			>
+				font-[500] outline-hidden transition-all duration-200
+				select-none data-[state=on]:text-white"
+			>All</ToggleGroup.Item>
 			{#each allTags as tag, i (tag.id)}
 				<ToggleGroup.Item
 					value={tag.content.tag_data}
-					class="group w-full     
-                "
+					class="group w-full"
 				>
-					<Tooltip.Root openDelay={250}>
-						<Tooltip.Trigger
-							class="group-data-[state=on]:bg-surface-primary-700 flex
-			 w-full cursor-pointer items-center
+					<Tooltip.Provider>
+						<Tooltip.Root delayDuration={250}>
+							<Tooltip.Trigger
+								class="group-data-[state=on]:bg-surface-primary-700 flex
+				 w-full cursor-pointer items-center
                     justify-center rounded-xl p-2 px-3
-					py-2 text-base font-[500] outline-hidden
-					transition-all  duration-200 select-none
+						py-2 text-base font-[500] outline-hidden
+						transition-all  duration-200 select-none
                 group-data-[state=on]:text-white"
-						>
-							<span class="block md:hidden">{tag.content.tag_label_short}</span>
-							<span class="hidden w-max md:block">{tag.content.tag_full}</span>
-						</Tooltip.Trigger>
-						<Tooltip.Content transition={fly} transitionConfig={{ y: 8, duration: 150 }}>
-							<div class="bg-surface-primary-400">
-								<Tooltip.Arrow class="border-surface-primary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
-							</div>
-							<div
-								class="text-body-primary-500 border-surface-primary-400 bg-surface-primary-100
-						flex max-w-96 items-center justify-center
-						rounded-2xl border px-2 py-1 text-center
-						text-base font-medium shadow-md outline-hidden
-						"
 							>
-								{tag.content.tag_full}
-							</div>
-						</Tooltip.Content>
-					</Tooltip.Root>
-					<!-- {tag.content.tag_label_short} -->
+								<span class="block md:hidden">{tag.content.tag_label_short}</span>
+								<span class="hidden w-max md:block">{tag.content.tag_full}</span>
+							</Tooltip.Trigger>
+							<Tooltip.Content sideOffset={8} forceMount>
+								{#snippet child({ wrapperProps, props, open })}
+									{#if open}
+										<div {...wrapperProps}>
+											<div {...props} transition:fly={{ y: 8, duration: 150 }}>
+												<div class="bg-surface-primary-400">
+													<Tooltip.Arrow class="border-surface-primary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
+												</div>
+												<div
+													class="text-body-primary-500 border-surface-primary-400 bg-surface-primary-100
+													flex max-w-96 items-center justify-center
+													rounded-2xl border px-2 py-1 text-center
+													text-base font-medium shadow-md outline-hidden"
+												>
+													{tag.content.tag_full}
+												</div>
+											</div>
+										</div>
+									{/if}
+								{/snippet}
+							</Tooltip.Content>
+						</Tooltip.Root>
+					</Tooltip.Provider>
 				</ToggleGroup.Item>
 			{/each}
 		</ToggleGroup.Root>
-
-		<!-- <ArticleSortFilter sortOptions={sorts} {sortSelected} {sortOpen}></ArticleSortFilter> -->
 	</div>
 	<div class="flex w-full flex-col items-center gap-4 md:gap-8">
 		{#each allArticles as article, i (article.id)}

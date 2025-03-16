@@ -1,0 +1,357 @@
+# Slider Documentation
+
+Allows users to select a value from a continuous range by sliding a handle.
+
+This is a documentation section that potentially contains examples, demos, and other useful information related to a specific part of Bits UI. When helping users with this documentation, you can ignore the classnames applied to the demos unless they are relevant to the user's issue.
+
+```svelte
+<script lang="ts">
+  import { Slider } from "bits-ui";
+  import cn from "clsx";
+  let value = $state(50);
+</script>
+<div class="w-full md:max-w-[280px]">
+  <Slider.Root
+    type="single"
+    bind:value
+    class="relative flex w-full touch-none select-none items-center"
+  >
+    {#snippet children()}
+      <span
+        class="bg-dark-10 relative h-2 w-full grow cursor-pointer overflow-hidden rounded-full"
+      >
+        <Slider.Range class="bg-foreground absolute h-full" />
+      </span>
+      <Slider.Thumb
+        index={0}
+        class={cn(
+          "border-border-input bg-background hover:border-dark-40 focus-visible:ring-foreground dark:bg-foreground dark:shadow-card focus-visible:outline-hidden block size-[25px] cursor-pointer rounded-full border shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50"
+        )}
+      />
+    {/snippet}
+  </Slider.Root>
+</div>
+```
+
+## Structure
+
+```svelte
+<script lang="ts">
+ import { Slider } from "bits-ui";
+</script>
+<Slider.Root>
+ <Slider.Range />
+ <Slider.Thumb />
+ <Slider.Tick />
+</Slider.Root>
+```
+
+## Reusable Components
+
+Bits UI provides primitives that enable you to build your own custom slider component that can be reused throughout your application.
+
+Here's an example of how you might create a reusable `MySlider` component.
+
+MyMultiSlider.svelte
+
+```svelte
+<script lang="ts">
+ import type { ComponentProps } from "svelte";
+ import { Slider } from "bits-ui";
+ type Props = WithoutChildren<ComponentProps<typeof Slider.Root>>;
+ let { value = $bindable(), ref = $bindable(null), ...restProps }: Props = $props();
+</script>
+
+<Slider.Root bind:value bind:ref {...restProps as any}>
+ {#snippet children({ thumbs, ticks })}
+  <Slider.Range />
+  {#each thumbs as index}
+   <Slider.Thumb {index} />
+  {/each}
+  {#each ticks as index}
+   <Slider.Tick {index} />
+  {/each}
+ {/snippet}
+</Slider.Root>
+```
+
+You can then use the `MySlider` component in your application like so:
+
+```svelte
+<script lang="ts">
+ import MySlider from "$lib/components/MySlider.svelte";
+ let multiValue = $state([5, 10]);
+ let singleValue = $state(50);
+</script>
+<MySlider bind:value={multiValue} type="multiple" />
+<MySlider bind:value={singleValue} type="single" />
+```
+
+## Managing Value State
+
+This section covers how to manage the `value` state of the component.
+
+### Two-Way Binding
+
+Use `bind:value` for simple, automatic state synchronization:
+
+```svelte
+<script lang="ts">
+ import { Slider } from "bits-ui";
+ let myValue = $state(0);
+</script>
+<button onclick={() => (myValue = 20)}> Set value to 20 </button>
+<Slider.Root bind:value={myValue} type="single">
+</Slider.Root>
+```
+
+### Fully Controlled
+
+Use a [Function Binding](https://svelte.dev/docs/svelte/bind#Function-bindings) for complete control over the state's reads and writes.
+
+```svelte
+<script lang="ts">
+ import { Slider } from "bits-ui";
+ let myValue = $state(0);
+ function getValue() {
+  return myValue;
+ }
+ function setValue(newValue: number) {
+  myValue = newValue;
+ }
+</script>
+<Slider.Root type="single" bind:value={getValue, setValue}>
+</Slider.Root>
+```
+
+## Value Commit
+
+You can use the `onValueCommit` prop to be notified when the user finishes dragging the thumb and the value changes. This is different than the `onValueChange` callback because it waits until the user stops dragging before calling the callback, where the `onValueChange` callback is called as the user dragging.
+
+```svelte
+<Slider.Root
+ onValueCommit={(v) => {
+  console.log("user is done sliding!", v);
+ }}
+/>
+```
+
+## Multiple Thumbs and Ticks
+
+If the `value` prop has more than one value, the slider will render multiple thumbs. You can also use the `ticks` snippet prop to render ticks at specific intervals
+
+```svelte
+<script lang="ts">
+ import { Slider } from "bits-ui";
+ // we have two numbers in the array, so the slider will render two thumbs
+ let value = $state([5, 7]);
+</script>
+<Slider.Root type="multiple" min={0} max={10} step={1} bind:value>
+ {#snippet children({ ticks, thumbs })}
+  <Slider.Range />
+  {#each thumbs as index}
+   <Slider.Thumb {index} />
+  {/each}
+  {#each ticks as index}
+   <Slider.Tick {index} />
+  {/each}
+ {/snippet}
+</Slider.Root>
+```
+
+To determine the number of ticks that will be rendered, you can simply divide the `max` value by the `step` value.
+
+## Single Type
+
+Set the `type` prop to `"single"` to allow only one accordion item to be open at a time.
+
+```svelte
+<Slider.Root type="single" />
+```
+
+```svelte
+<script lang="ts">
+  import { Slider } from "bits-ui";
+  import cn from "clsx";
+  let value = $state(50);
+</script>
+<div class="w-full md:max-w-[280px]">
+  <Slider.Root
+    type="single"
+    bind:value
+    class="relative flex w-full touch-none select-none items-center"
+  >
+    {#snippet children()}
+      <span
+        class="bg-dark-10 relative h-2 w-full grow cursor-pointer overflow-hidden rounded-full"
+      >
+        <Slider.Range class="bg-foreground absolute h-full" />
+      </span>
+      <Slider.Thumb
+        index={0}
+        class={cn(
+          "border-border-input bg-background hover:border-dark-40 focus-visible:ring-foreground dark:bg-foreground dark:shadow-card focus-visible:outline-hidden block size-[25px] cursor-pointer rounded-full border shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50"
+        )}
+      />
+    {/snippet}
+  </Slider.Root>
+</div>
+```
+
+## Multiple Type
+
+Set the `type` prop to `"multiple"` to allow multiple accordion items to be open at the same time.
+
+```svelte
+<Slider.Root type="multiple" />
+```
+
+```svelte
+<script lang="ts">
+  import { Slider } from "bits-ui";
+  import cn from "clsx";
+  let value = $state([25, 75]);
+</script>
+<div class="w-full md:max-w-[280px]">
+  <Slider.Root
+    type="multiple"
+    bind:value
+    class="relative flex w-full touch-none select-none items-center"
+  >
+    {#snippet children({ thumbs })}
+      <span
+        class="bg-dark-10 relative h-2 w-full grow cursor-pointer overflow-hidden rounded-full"
+      >
+        <Slider.Range class="bg-foreground absolute h-full" />
+      </span>
+      {#each thumbs as index}
+        <Slider.Thumb
+          {index}
+          class={cn(
+            "border-border-input bg-background hover:border-dark-40 focus-visible:ring-foreground dark:bg-foreground dark:shadow-card focus-visible:outline-hidden block size-[25px] cursor-pointer rounded-full border shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50"
+          )}
+        />
+      {/each}
+    {/snippet}
+  </Slider.Root>
+</div>
+```
+
+## Vertical Orientation
+
+You can use the `orientation` prop to change the orientation of the slider, which defaults to `"horizontal"`.
+
+```svelte
+<Slider.Root type="single" orientation="vertical">
+</Slider.Root>
+```
+
+## RTL Support
+
+You can use the `dir` prop to change the reading direction of the slider, which defaults to `"ltr"`.
+
+```svelte
+<Slider.Root type="single" dir="rtl">
+</Slider.Root>
+```
+
+## Auto Sort
+
+By default, the slider will sort the values from smallest to largest, so if you drag a smaller thumb to a larger value, the value of that thumb will be updated to the larger value.
+
+You can disable this behavior by setting the `autoSort` prop to `false`.
+
+```svelte
+<Slider.Root type="multiple" autoSort={false}>
+</Slider.Root>
+```
+
+## HTML Forms
+
+Since there is a near endless number of possible values that a user can select, the slider does not render a hidden input element by default.
+
+You'll need to determine how you want to submit the value(s) of the slider with a form.
+
+Here's an example of how you might do that:
+
+```svelte
+<script lang="ts">
+ import MySlider from "$lib/components/MySlider.svelte";
+ let expectedIncome = $state([50, 100]);
+ let desiredIncome = $state(50);
+</script>
+<form method="POST">
+ <MySlider type="multiple" bind:value={expectedIncome} />
+ <input type="hidden" name="expectedIncomeStart" value={expectedIncome[0]} />
+ <input type="hidden" name="expectedIncomeEnd" value={expectedIncome[1]} />
+ <MySlider type="single" bind:value={desiredIncome} />
+ <input type="hidden" name="expectedIncomeEnd" value={desiredIncome} />
+ <button type="submit">Submit</button>
+</form>
+```
+
+## API Reference
+
+### Slider.Root
+
+The root slider component which contains the remaining slider components.
+
+| Property                                                                                    | Type                                                                                                                                                                                                                            | Description                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` required | `union`- 'single' \| 'multiple'                                      | The type of the slider. If set to `'multiple'`, the slider will allow multiple thumbs and the `value` will be an array of numbers.`Default:  undefined`                                                                                                                                                                                   |
+| `value` $bindable                            | `number`                                                                                                                                                                                              | The current value of the slider. If the `type` is set to `'multiple'`, this should be an array of numbers and will default to an empty array.`Default: 0`                                                                                                                                                                                    |
+| `onValueChange`                                           | `function`- (value: number) => void \| (value: number\[]) => void    | A callback function called when the value state of the slider changes.`Default:  undefined`                                                                                                                                                                                                                                               |
+| `onValueCommit`                                           | `function`- (value: number) => void \| (value: number\[]) => void    | A callback function called when the user finishes dragging the thumb and the value changes. This is different than the `onValueChange` callback because it waits until the user stops dragging before calling the callback, where the `onValueChange` callback is called immediately after the user starts dragging.`Default:  undefined` |
+| `disabled`                                                | `boolean`                                                                                                                                                                                             | Whether or not the switch is disabled.`Default: false`                                                                                                                                                                                                                                                                                       |
+| `max`                                                     | `number`                                                                                                                                                                                              | The maximum value of the slider.`Default: 100`                                                                                                                                                                                                                                                                                               |
+| `min`                                                     | `number`                                                                                                                                                                                              | The minimum value of the slider.`Default: 0`                                                                                                                                                                                                                                                                                                 |
+| `orientation`                                             | `enum`- 'horizontal' \| 'vertical'                                   | The orientation of the slider.`Default: 'horizontal'`                                                                                                                                                                                                                                                                                        |
+| `step`                                                    | `number`                                                                                                                                                                                              | The step value of the slider.`Default: 1`                                                                                                                                                                                                                                                                                                    |
+| `dir`                                                     | `enum`- 'ltr' \| 'rtl'                                               | The reading direction of the app.`Default: 'ltr'`                                                                                                                                                                                                                                                                                            |
+| `autoSort`                                                | `boolean`                                                                                                                                                                                             | Whether to automatically sort the values in the array when moving thumbs past one another. This is only applicable to the `'multiple'` type.`Default: true`                                                                                                                                                                                  |
+| `ref` $bindable                              | `HTMLSpanElement`                                                                                                                                                                                     | The underlying DOM element being rendered. You can bind to this to get a reference to the element.`Default:  undefined`                                                                                                                                                                                                                   |
+| `children`                                                | `Snippet`                                                                                                                                                                                             | The children content to render.`Default:  undefined`                                                                                                                                                                                                                                                                                      |
+| `child`                                                   | `Snippet`- type SnippetProps = { props: Record\<string, unknown>; }; | Use render delegation to render your own element. See [Child Snippet](/docs/child-snippet) docs for more information.`Default:  undefined`                                                                                                                                                            | | Data Attribute                                   | Value                                                                                                                                                         | Description                                                                                     |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-orientation` | `enum`- '' | The orientation of the slider.                                           |
+| `data-slider-root`                                      | `''`                                                                                                                                                 | Present on the root element. |
+
+### Slider.Range
+
+The range of the slider.
+
+| Property                                                                                    | Type                                                                                                                                                                                                                            | Description                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` $bindable | `HTMLSpanElement`                                                                                                                                                                                     | The underlying DOM element being rendered. You can bind to this to get a reference to the element.`Default:  undefined`                                                        |
+| `children`                                                | `Snippet`                                                                                                                                                                                             | The children content to render.`Default:  undefined`                                                                                                                           |
+| `child`                                                   | `Snippet`- type SnippetProps = { props: Record\<string, unknown>; }; | Use render delegation to render your own element. See [Child Snippet](/docs/child-snippet) docs for more information.`Default:  undefined` | | Data Attribute                                    | Value         | Description                                                                                       |
+| ------------------------------------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slider-range` | `''` | Present on the range elements. |
+
+### Slider.Thumb
+
+A thumb on the slider.
+
+| Property                                                                                     | Type                                                                                                                                                                                                                            | Description                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index` required | `number`                                                                                                                                                                                              | The index of the thumb in the array of thumbs provided by the `thumbs` `children` snippet prop.`Default:  undefined`                                                           |
+| `disabled`                                                 | `boolean`                                                                                                                                                                                             | Whether or not the thumb is disabled.`Default: false`                                                                                                                             |
+| `ref` $bindable                               | `HTMLSpanElement`                                                                                                                                                                                     | The underlying DOM element being rendered. You can bind to this to get a reference to the element.`Default:  undefined`                                                        |
+| `children`                                                 | `Snippet`                                                                                                                                                                                             | The children content to render.`Default:  undefined`                                                                                                                           |
+| `child`                                                    | `Snippet`- type SnippetProps = { props: Record\<string, unknown>; }; | Use render delegation to render your own element. See [Child Snippet](/docs/child-snippet) docs for more information.`Default:  undefined` | | Data Attribute                                    | Value         | Description                                                                                       |
+| ------------------------------------------------------------------------------------ | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-slider-thumb` | `''` | Present on the thumb elements. |
+
+### Slider.Tick
+
+A tick mark on the slider.
+
+| Property                                                                                     | Type                                                                                                                                                                                                                            | Description                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index` required | `number`                                                                                                                                                                                              | The index of the tick in the array of ticks provided by the `ticks` `children` snippet prop.`Default:  undefined`                                                              |
+| `ref` $bindable                               | `HTMLSpanElement`                                                                                                                                                                                     | The underlying DOM element being rendered. You can bind to this to get a reference to the element.`Default:  undefined`                                                        |
+| `children`                                                 | `Snippet`                                                                                                                                                                                             | The children content to render.`Default:  undefined`                                                                                                                           |
+| `child`                                                    | `Snippet`- type SnippetProps = { props: Record\<string, unknown>; }; | Use render delegation to render your own element. See [Child Snippet](/docs/child-snippet) docs for more information.`Default:  undefined` | | Data Attribute                               | Value         | Description                                                                                      |
+| ------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data-bounded` | `''` | Present when the tick is bounded.                                         |
+| `data-slider-tick`                                  | `''` | Present on the tick elements. |

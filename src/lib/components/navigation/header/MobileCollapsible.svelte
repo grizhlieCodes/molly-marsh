@@ -57,34 +57,40 @@
 			</div>
 		</div>
 	</Collapsible.Trigger>
-	<Collapsible.Content transition={slide} class="w-full">
-		<ul class="flex h-max w-full flex-col pt-2 pb-8">
-			{#if link.sub_links && link.sub_links.length > 0}
-				{#each link.sub_links as sublink, i}
-					{#if sublink.sub_link_type === 'mobileMainLink' && i === 0}
-						<a
-							href={sublink.url.url}
-							onclick={toggleMobileMenuActive}
-							class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover hover:bg-navLink-surface-primary-hover
-						w-full px-6 py-3  *:!text-xl *:!italic focus-within:outline-1 focus-within:outline-lime-500 hover:underline"
-						>
-							<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
-							<!-- {sublink.link_label} -->
-						</a>
-					{:else if sublink?.sub_link_type !== 'mobileMainLink'}
-						<a
-							href={sublink.url.url}
-							class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover
-						hover:bg-navLink-surface-primary-hover w-full px-6 py-3
-						 *:!text-xl focus-within:outline-1
-						focus-within:outline-lime-500 hover:underline"
-						>
-							<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
-							<!-- {sublink.link_label} -->
-						</a>
-					{/if}
-				{/each}
+	<Collapsible.Content forceMount class="w-full">
+		{#snippet child({ props, open })}
+			{#if open}
+				<div {...props} transition:slide>
+					<ul class="flex h-max w-full flex-col pt-2 pb-8">
+						{#if link.sub_links && link.sub_links.length > 0}
+							{#each link.sub_links as sublink, i}
+								{#if sublink.sub_link_type === 'mobileMainLink' && i === 0}
+									<a
+										href={sublink.url.url}
+										onclick={toggleMobileMenuActive}
+										class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover hover:bg-navLink-surface-primary-hover
+										w-full px-6 py-3  *:!text-xl *:!italic focus-within:outline-1 focus-within:outline-lime-500 hover:underline"
+									>
+										<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
+										<!-- {sublink.link_label} -->
+									</a>
+								{:else if sublink?.sub_link_type !== 'mobileMainLink'}
+									<a
+										href={sublink.url.url}
+										class="*:!text-navlink-text-primary focus-within:bg-navLink-surface-primary-hover
+										hover:bg-navLink-surface-primary-hover w-full px-6 py-3
+										*:!text-xl focus-within:outline-1
+										focus-within:outline-lime-500 hover:underline"
+									>
+										<StoryblokComponent blok={sublink.link_label[0]}></StoryblokComponent>
+										<!-- {sublink.link_label} -->
+									</a>
+								{/if}
+							{/each}
+						{/if}
+					</ul>
+				</div>
 			{/if}
-		</ul>
+		{/snippet}
 	</Collapsible.Content>
 </Collapsible.Root>

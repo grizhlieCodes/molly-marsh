@@ -32,28 +32,38 @@
 				>
 					{formatNoteDate(article.article_date)}
 				</span>
-				<Tooltip.Root openDelay={250}>
-					<Tooltip.Trigger
-						class="bg-surface-secondary-100 border-surface-secondary-200 text-body-secondary-500 overflow-hidden rounded-full border px-2
+				<Tooltip.Provider>
+					<Tooltip.Root delayDuration={250}>
+						<Tooltip.Trigger
+							class="bg-surface-secondary-100 border-surface-secondary-200 text-body-secondary-500 overflow-hidden rounded-full border px-2
                     py-0.5 text-sm"
-					>
-						{article.article_tag.content.tag_label_short}
-					</Tooltip.Trigger>
-					<Tooltip.Content transition={fly} transitionConfig={{ y: 8, duration: 150 }}>
-						<div class="bg-surface-secondary-400">
-							<Tooltip.Arrow class="border-surface-secondary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
-						</div>
-						<div
-							class="text-body-secondary-500 border-surface-secondary-400 bg-surface-secondary-100
+						>
+							{article.article_tag.content.tag_label_short}
+						</Tooltip.Trigger>
+						<Tooltip.Content forceMount sideOffset={8}>
+							{#snippet child({ wrapperProps, props, open })}
+								{#if open}
+									<div {...wrapperProps}>
+										<div {...props} transition:fly={{ y: 8, duration: 150 }}>
+											<div class="bg-surface-secondary-400">
+												<Tooltip.Arrow class="border-surface-secondary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
+											</div>
+											<div
+												class="text-body-secondary-500 border-surface-secondary-400 bg-surface-secondary-100
                     flex max-w-96 items-center justify-center
                     rounded-2xl border px-2 py-1 text-center
                     text-base font-medium shadow-md outline-hidden
                     "
-						>
-							{article.article_tag.content.tag_full}
-						</div>
-					</Tooltip.Content>
-				</Tooltip.Root>
+											>
+												{article.article_tag.content.tag_full}
+											</div>
+										</div>
+									</div>
+								{/if}
+							{/snippet}
+						</Tooltip.Content>
+					</Tooltip.Root>
+				</Tooltip.Provider>
 			</div>
 			<h1 class="font-[550]">{article.article_title}</h1>
 			{@html renderRichText(article.article_content)}

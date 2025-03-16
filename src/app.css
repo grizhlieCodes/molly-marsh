@@ -185,6 +185,29 @@
 	--font-nav: var(--font-special);
 	--font-btn: var(--font-special);
 	--font-nav-logo: var(--font-serif);
+
+	/* Animations for bits-ui */
+
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+
+	@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--bits-accordion-content-height);
+		}
+	}
+
+	@keyframes accordion-up {
+		from {
+			height: var(--bits-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
 }
 
 /* html, body {

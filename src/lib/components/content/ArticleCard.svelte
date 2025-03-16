@@ -33,19 +33,19 @@
 	aria-label="Open the article titled
 {article_title}"
 	class="bg-surface-primary-50 border-surface-primary-200 group hover:bg-surface-primary-100/80 flex w-full max-w-[30rem]
-flex-col gap-0 overflow-hidden rounded-lg border
-transition-all duration-500 sm:min-h-[16.25rem] sm:max-w-none
-sm:flex-row"
+	flex-col gap-0 overflow-hidden rounded-lg border
+	transition-all duration-500 sm:min-h-[16.25rem] sm:max-w-none
+	sm:flex-row"
 >
 	<div
 		class="relative aspect-square w-full bg-red-200
-	sm:max-h-none sm:max-w-[16.25rem]"
+		sm:max-h-none sm:max-w-[16.25rem]"
 	>
 		<img
 			src="{article_cover_image.filename}/m/500x0"
 			alt={article_cover_image.alt}
 			class="absolute inset-0 h-full w-full
-		object-cover object-center"
+			object-cover object-center"
 		/>
 	</div>
 	<div class="flex flex-col justify-between gap-4 px-8 py-5">
@@ -54,41 +54,50 @@ sm:flex-row"
 			<div class="flex gap-2">
 				<span
 					class="bg-surface-primary-100 border-surface-primary-200 text-body-primary-600
-                 overflow-hidden rounded-full border px-2
-                 py-0.5 text-sm"
+	                 overflow-hidden rounded-full border px-2
+	                 py-0.5 text-sm"
 				>
 					{formatNoteDate(article_date)}
 				</span>
 				<!-- <span
 					class="bg-surface-primary-100 border-surface-primary-200 text-body-primary-600
-                overflow-hidden rounded-full border px-2
-                py-0.5 text-sm"
+	                overflow-hidden rounded-full border px-2
+	                py-0.5 text-sm"
 				>
 					{article_tag.content.tag_label_short}
 				</span> -->
-				<Tooltip.Root openDelay={250}>
-					<Tooltip.Trigger
-						class="bg-surface-primary-100 border-surface-primary-200 text-body-primary-600
-                overflow-hidden rounded-full border px-2
-                py-0.5 text-sm"
-					>
-						{article_tag.content.tag_label_short}
-					</Tooltip.Trigger>
-					<Tooltip.Content transition={fly} transitionConfig={{ y: 8, duration: 150 }}>
-						<div class="bg-surface-primary-400">
-							<Tooltip.Arrow class="border-surface-primary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
-						</div>
-						<div
-							class="text-body-primary-500 border-surface-primary-400 bg-surface-primary-100
-						flex max-w-96 items-center justify-center
-						rounded-2xl border px-2 py-1 text-center
-						text-base font-medium shadow-md outline-hidden
-						"
+				<Tooltip.Provider>
+					<Tooltip.Root delayDuration={250}>
+						<Tooltip.Trigger
+							class="bg-surface-primary-100 border-surface-primary-200 text-body-primary-600
+	                overflow-hidden rounded-full border px-2
+	                py-0.5 text-sm"
 						>
-							{article_tag.content.tag_full}
-						</div>
-					</Tooltip.Content>
-				</Tooltip.Root>
+							{article_tag.content.tag_label_short}
+						</Tooltip.Trigger>
+						<Tooltip.Content sideOffset={8} forceMount>
+							{#snippet child({ wrapperProps, props, open })}
+								{#if open}
+									<div {...wrapperProps}>
+										<div {...props} transition:fly={{ y: 8, duration: 150 }}>
+											<div class="bg-surface-primary-400">
+												<Tooltip.Arrow class="border-surface-primary-400 rounded-[2px] border-t border-l"></Tooltip.Arrow>
+											</div>
+											<div
+												class="text-body-primary-500 border-surface-primary-400 bg-surface-primary-100
+												flex max-w-96 items-center justify-center
+												rounded-2xl border px-2 py-1 text-center
+												text-base font-medium shadow-md outline-hidden"
+											>
+												{article_tag.content.tag_full}
+											</div>
+										</div>
+									</div>
+								{/if}
+							{/snippet}
+						</Tooltip.Content>
+					</Tooltip.Root>
+				</Tooltip.Provider>
 			</div>
 
 			<!-- Text Container -->
@@ -100,12 +109,12 @@ sm:flex-row"
 
 		<div
 			class="bg-surface-primary-100 border-surface-primary-200 group-hover:bg-surface-primary-800 w-max rounded-2xl
-		border px-3 py-1 transition-all
-		duration-500"
+			border px-3 py-1 transition-all
+			duration-500"
 		>
 			<span
 				class="font-special text-body-primary-700 text-sm
-			font-[600] transition-colors duration-500 group-hover:text-white"
+				font-[600] transition-colors duration-500 group-hover:text-white"
 			>
 				READ ARTICLE
 			</span>
