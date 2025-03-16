@@ -39,14 +39,18 @@
 				</span>
 			</Accordion.Trigger>
 		</Accordion.Header>
-		<Accordion.Content
-			class="group-data-[state=closed]:animate-accordion-up
-		group-data-[state=open]:animate-accordion-down w-full overflow-hidden
-		 "
-		>
-			<div class="px-5 pb-6 text-sm tracking-[-0.01em]">
-				<StoryblokComponent blok={blok.accordion_item_content[0]}></StoryblokComponent>
-			</div>
+		<Accordion.Content forceMount class="w-full">
+			{#snippet child({ props, open })}
+				{#if open}
+					<div {...props} transition:slide={{ duration: 300 }}>
+						<div class="px-5 pb-6 text-sm tracking-[-0.01em]">
+							{#if blok.accordion_item_content && blok.accordion_item_content.length > 0}
+								<StoryblokComponent blok={blok.accordion_item_content[0]}></StoryblokComponent>
+							{/if}
+						</div>
+					</div>
+				{/if}
+			{/snippet}
 		</Accordion.Content>
 	</Accordion.Item>
 </div>
