@@ -1,5 +1,5 @@
 import { redirect, error } from '@sveltejs/kit';
-import { findCustomerByEmail, stripeSuccessfulSessionSchema } from '$lib/integrations/stripe';
+import { findCustomerByEmail, stripeSuccessfulSessionSchema, createCustomer } from '$lib/integrations/stripe';
 import { getStripeClient } from './client';
 import type Stripe from 'stripe';
 import * as Sentry from '@sentry/sveltekit';
