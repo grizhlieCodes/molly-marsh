@@ -19,11 +19,11 @@
 	>
 		<div class="flex w-full max-w-5xl flex-col items-center gap-8 md:gap-20">
 			<div
-				class="flex w-full flex-col gap-8 items-center
+				class="flex w-full max-w-max flex-col gap-8 items-left
 			md:flex-row md:items-start md:justify-between md:gap-6"
 			>
 				{#if footer_logo && footer_logo.length > 0}
-					<div class="w-max">
+					<div class="w-max hidden md:block">
 						<Logo blok={footer_logo[0]}></Logo>
 					</div>
 				{/if}
