@@ -1,5 +1,8 @@
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_SB_SECRET_KEY } from '$env/static/private';
+// +page.ts -> It will NOT work
+// +page.server.ts -> It will work
+// Vite Sveltekit -> +page.server.ts 
 import { dev } from '$app/environment';
 
 /**
